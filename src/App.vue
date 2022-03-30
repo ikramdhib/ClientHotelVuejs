@@ -1,26 +1,49 @@
+
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<Menu/>
+<body>
+<router-view/>
+</body>
+<Footer/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AOS from 'aos'
+import Footer from './components/Footer.vue'
+import Menu from './components/Menu.vue'
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Footer,
+    Menu
+  },
+   mounted() {
+    AOS.init()
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700");
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i");
+
+@import url("/src/assets/front/css/open-iconic-bootstrap.min.css");
+@import url("/src/assets/front/css/animate.css");
+
+@import url("/src/assets/front/css/owl.carousel.min.css");
+@import url("/src/assets/front/css/owl.theme.default.min.css");
+@import url("/src/assets/front/css/magnific-popup.css");
+
+@import url("/src/assets/front/css/aos.css");
+
+@import url("/src/assets/front/css/ionicons.min.css");
+@import url("/src/assets/front/css/images.css");
+ @import url("/src/assets/front/css/bootstrap-datepicker.css"); 
+@import url("/src/assets/front/css/jquery.timepicker.css");
+
+@import url("/src/assets/front/css/flaticon.css");
+@import url("/src/assets/front/css/icomoon.css");
+@import url("/src/assets/front/css/style.css");
+
+@import url("https://unpkg.com/aos@2.3.1/dist/aos.css");
 </style>

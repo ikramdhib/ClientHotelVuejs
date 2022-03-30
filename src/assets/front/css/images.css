@@ -1,0 +1,54 @@
+#room1 {
+    background-image: url(/src/components/images/room-1.jpg);
+   
+  }
+  #room2 {
+    background-image: url(/src/components/images/room-2.jpg);
+   
+  }
+  #room3 {
+    background-image: url(/src/components/images/room-3.jpg);
+   
+  }
+  #room4 {
+    background-image: url(/src/components/images/room-4.jpg);
+   
+  }
+  #room5 {
+    background-image: url(/src/components/images/room-5.jpg);
+   
+  }
+  #room6 {
+    background-image: url(/src/components/images/room-6.jpg);
+  }
+  #bg2 {
+    background-image: url(/src/components/images/bg_2.jpg);
+  }
+  #bg1 {
+    background-image: url(/src/components/images/bg_1.jpg);
+  }
+  #insta1 {
+    background-image: url(/src/components/images/insta-1.jpg);
+  }
+  #insta2 {
+    background-image: url(/src/components/images/insta-2.jpg);
+  }
+  #insta3 {
+    background-image: url(/src/components/images/insta-3.jpg);
+  }
+  #insta4 {
+    background-image: url(/src/components/images/insta-4.jpg);
+  }
+  #insta5 {
+    background-image: url(/src/components/images/insta-5.jpg);
+  }
+#compte{
+  padding-left: 150px;
+  padding-right: 0;
+  margin-top: 20px;
+}
+#row{
+  margin-left: 20px;
+  position: absolute;
+}
+

@@ -1,0 +1,71 @@
+<template>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	     <router-link to="/" class="navbar-brand">Deluxe</router-link>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item "><router-link class="nav-link" to="/"> Accueil</router-link></li>
+	          <li class="nav-item " v-if="isTokenLogReg"><router-link class="nav-link" to="login"> Login</router-link></li>
+	          <li class="nav-item " v-if="isTokenLogReg"><router-link class="nav-link" to="register"> Register</router-link></li>
+	          <li class="nav-item"><router-link class="nav-link" to="rooms"> Chambres</router-link></li>
+	          <li class="nav-item"><router-link class="nav-link" to="restaurant"> Restaurants</router-link></li>
+	          <li class="nav-item"><router-link class="nav-link" to="about"> About</router-link></li>
+	          <li class="nav-item"><router-link class="nav-link" to="blog"> Blog</router-link></li>
+	          <li class="nav-item"><router-link class="nav-link" to="contact"> Contact</router-link></li>
+				<!--<li v-if="isToken"  class="nav-item"><router-link id="compte" class="nav-link" to="profile"><i class="icon-user"></i> Mon Compte</router-link></li>-->
+				<li v-if="isTokenAccount" id="compte" class="dropdown">
+            <div  class="nav-item"  data-toggle="dropdown"><i class="icon-user"></i> {{ user.firstname }}  {{ user.lastname }} </div>
+            <ul  class="dropdown-menu">
+                <li class="nav-item"><router-link to="profile"> Profile </router-link></li>
+                <li class="nav-item" > <input type="submit" value="Connecter" class="btn btn-primary col-md" v-on:click="logout()"></li>
+            </ul>
+        </li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+</template>
+<script>
+import axios from'axios'
+export default {
+	data(){
+		return{
+			user:{},
+			isTokenAccount:false,
+			isTokenLogReg:true,
+		}
+	},
+	mounted(){
+		if(localStorage.getItem('token_client')){
+			this.isTokenAccount=true;
+			this.isTokenLogReg=false;
+			this.user=JSON.parse(localStorage.getItem('client'))
+		}
+		console.log(this.isToken);
+		console.log(this.user);
+	},
+	methods:{
+		  async logout(){
+			  console.log(localStorage.getItem('token_client'));
+			if(localStorage.getItem('token_client')){
+			await axios.get('http://localhost:8000/api/user/logout',
+				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}})
+				.then(Response=>{
+					localStorage.removeItem('token_client')
+					localStorage.removeItem('client')
+					this.$router.push("login")
+					
+					console.log(Response) 
+				}).catch(e=>{
+					console.warn(e)
+				})
+			}
+		}
+	}
+}
+</script>
