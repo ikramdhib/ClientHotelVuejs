@@ -51,14 +51,14 @@
               <div class="form-group">
                        <div class="row justify-content-center mb-9 pb-2">
           <div class="col-md-10 heading-section text-center">
-           <span> <a href=""> <router-link to="forgetpassword"> de Passe Oublier  ?</router-link> </a></span>
+           <span><router-link to="forgetpassword"> de Passe Oublier  ?</router-link></span>
           </div>
         </div>
               </div>
                 <div class="form-group">
                  <div class="row justify-content-center  pb-2">
           <div class="col-md-10 heading-section text-center">
-           <span>N'avez-vous un Compte ? <a href=""> <router-link to="register">'inscrire</router-link> </a> </span>
+           <span>N'avez-vous un Compte ? <router-link to="register">'inscrire</router-link> </span>
           </div>
         </div>
               </div>

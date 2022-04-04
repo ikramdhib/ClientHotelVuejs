@@ -5,7 +5,7 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
+	            <p class="breadcrumbs mb-2"><span class="mr-2"><router-link to="/">Home</router-link></span> <span>Contact</span></p>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
                  <input type="submit" value="Envoyer" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" v-on:click="updatepass()">
                       </div>
                 <div class="col-md-6"> 
-                   <input type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" value="Annuler" style="background-color: #D3D3D3;" href="#!" >
+                   <input type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" value="Annuler" style="background-color: #D3D3D3;">
                     </div>
               </div>
               </div>
