@@ -69,14 +69,14 @@
                             <hr/>
                             </div>
                         </div>
-                        
                         </div>
+
                         <div class="row block-9">
                         <div class="col-md-6 order-md-last d-flex">
                             <div class="bg-white p-5 contact-form">
                                 <div class="row justify-content-center mb-9 pb-5">
                         <div class="col-md-10 heading-section text-center">
-                            <h2 class="mb-4">Information Personnelles </h2>
+                            <h2 class="mb-4"> Mes Information  </h2>
                         </div>
                         </div>
                             <table class="table table-bordered">
@@ -103,7 +103,7 @@
                                     </tr>
                                     <tr>
                                     <th scope="row">
-                                        <a href="">Cérer Mes Informations Personnelles  <i id="row" class="icon-arrow-right"></i></a>
+                                        <a href="">Gérer Mes Informations Personnelles  <i id="row" class="icon-arrow-right"></i></a>
                                     </th>
                                     </tr>
                                 </tbody>

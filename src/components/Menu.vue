@@ -8,7 +8,7 @@
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
+	        <ul class="navbar-nav ml-auto"> 
 	          <li class="nav-item "><router-link class="nav-link" to="/"> Accueil</router-link></li>
 	          <li class="nav-item " v-if="isTokenLogReg"><router-link class="nav-link" to="login"> Login</router-link></li>
 	          <li class="nav-item " v-if="isTokenLogReg"><router-link class="nav-link" to="register"> Register</router-link></li>
@@ -17,14 +17,20 @@
 	          <li class="nav-item"><router-link class="nav-link" to="about"> About</router-link></li>
 	          <li class="nav-item"><router-link class="nav-link" to="blog"> Blog</router-link></li>
 	          <li class="nav-item"><router-link class="nav-link" to="contact"> Contact</router-link></li>
-				<!--<li v-if="isToken"  class="nav-item"><router-link id="compte" class="nav-link" to="profile"><i class="icon-user"></i> Mon Compte</router-link></li>-->
-				<li v-if="isTokenAccount" id="compte" class="dropdown">
-            <div  class="nav-item"  data-toggle="dropdown"><i class="icon-user"></i> {{ user.firstname }}  {{ user.lastname }} </div>
-            <ul  class="dropdown-menu">
-                <li class="nav-item"><router-link to="profile"> Profile </router-link></li>
-                <li class="nav-item" > <input type="submit" value="Connecter" class="btn btn-primary col-md" v-on:click="logout()"></li>
-            </ul>
-        </li>
+			
+				 <li>
+				   <ul class="nav navbar-nav ms-auto">
+                    <li v-if="isTokenAccount" id="compte" class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="icon-user"></i> {{ user.firstname }}  {{ user.lastname }}</a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a href="#" class="dropdown-item">profile</a>
+                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="#" class="dropdown-item">Quiter</a>
+                        </div>
+                    </li>
+					
+                </ul>
+			  </li>
 	        </ul>
 	      </div>
 	    </div>

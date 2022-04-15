@@ -54,7 +54,7 @@
 			    					</div>
 			    				</div>
 	        			</div>
-	        			<div class="col-md-3 d-flex">
+	        			<div class="col-md-3 d-flex"> 
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Check-out Date</label>

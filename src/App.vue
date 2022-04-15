@@ -46,4 +46,6 @@ export default {
 @import url("/src/assets/front/css/style.css");
 
 @import url("https://unpkg.com/aos@2.3.1/dist/aos.css");
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css");  
 </style>
