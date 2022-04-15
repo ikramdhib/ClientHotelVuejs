@@ -1,13 +1,12 @@
 <template>
-
-    <div class="hero-wrap" style="background-image: url('images/bg_1.jpg');">
+  <div class="hero-wrap" id="bg1" style="background-image">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <p class="breadcrumbs mb-2" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a href="rooms.html">Room</a></span> <span>Room Single</span></p>
-	            <h1 class="mb-4 bread">Room Single</h1>
+	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home</a></span> <span>About</span></p>
+	            <h1 class="mb-4 bread">single Room</h1>
             </div>
           </div>
         </div>
@@ -20,89 +19,35 @@
         <div class="row">
           <div class="col-lg-8">
           	<div class="row">
-          		<div class="col-md-12 ftco-animate">
-          			<h2 class="mb-4">Family Room</h2>
-          			<div class="single-slider owl-carousel">
-          				<div class="item">
-          					<div class="room-img" style="background-image: url(images/room-1.jpg);"></div>
-          				</div>
-          				<div class="item">
-          					<div class="room-img" style="background-image: url(images/room-2.jpg);"></div>
-          				</div>
-          				<div class="item">
-          					<div class="room-img" style="background-image: url(images/room-3.jpg);"></div>
-          				</div>
+           
+          		<div class="col-md-12 ftco-animate" >
+                <template v-for="type in types" :key="type.id">
+                 <div v-if="room.type_id==type.id">
+          			<h2 class="mb-4">{{type.nom_type}}</h2>
           			</div>
-          		</div>
+          		</template>
           		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-    						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+           
+    						<p>Description:{{room.description}}</p>
     						<div class="d-md-flex mt-5 mb-5">
     							<ul class="list">
-	    							<li><span>Max:</span> 3 Persons</li>
-	    							<li><span>Size:</span> 45 m2</li>
-	    						</ul>
-	    						<ul class="list ml-md-5">
-	    							<li><span>View:</span> Sea View</li>
-	    							<li><span>Bed:</span> 1</li>
-	    						</ul>
-    						</div>
-    						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-          		</div>
-          		<div class="col-md-12 room-single ftco-animate mb-5 mt-4">
-          			<h3 class="mb-4">Take A Tour</h3>
-          			<div class="block-16">
-		              <figure>
-		                <img src="images/room-4.jpg" alt="Image placeholder" class="img-fluid">
-		                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
-		              </figure>
-		            </div>
-          		</div>
+                   
 
-          		<div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
-          			<h4 class="mb-4">Review &amp; Ratings</h4>
-          			<div class="row">
-          				<div class="col-md-6">
-          					<form method="post" class="star-rating">
-										  <div class="form-check">
-												<input type="checkbox" class="form-check-input" id="exampleCheck1">
-												<label class="form-check-label" for="exampleCheck1">
-													<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> 100 Ratings</span></p>
-												</label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> 30 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 5 Ratings</span></p>
-									     </label>
-										  </div>
-										  <div class="form-check">
-										    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-										    </label>
-										  </div>
-										</form>
-          				</div>
-          			</div>
-          		</div>
+	    							<li ><span >nombre adult:</span >{{room.nbAdult}}</li>
+                    <li><span>nombre enfant :</span>{{room.nbEnfant}}</li>
+	    					  	<li><span>nombre de lit :</span>{{room.nbBed}}</li>
+	    						</ul>
+	    					
+    					
+
+                </div></div>
+
           		<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
           			<h4 class="mb-4">Available Room</h4>
           			<div class="row">
           				<div class="col-sm col-md-6 ftco-animate">
 				    				<div class="room">
-				    					<a href="rooms.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/room-1.jpg);">
+				    					<a href="rooms.html" class="img img-2 d-flex justify-content-center align-items-center" id="room1" style="background-image: ">
 				    						<div class="icon d-flex justify-content-center align-items-center">
 				    							<span class="icon-search2"></span>
 				    						</div>
@@ -117,7 +62,7 @@
 				    			</div>
 				    			<div class="col-sm col-md-6 ftco-animate">
 				    				<div class="room">
-				    					<a href="rooms.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/room-2.jpg);">
+				    					<a href="rooms.html" class="img img-2 d-flex justify-content-center align-items-center" id="room2" style="background-image:">
 				    						<div class="icon d-flex justify-content-center align-items-center">
 				    							<span class="icon-search2"></span>
 				    						</div>
@@ -132,88 +77,91 @@
 				    			</div>
           			</div>
           		</div>
-
+             </div>
           	</div>
           </div> <!-- .col-md-8 -->
-          <div class="col-lg-4 sidebar ftco-animate">
-            <div class="sidebar-box">
-              <form action="#" class="search-form">
-                <div class="form-group">
-                  <span class="icon fa fa-search"></span>
-                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-                </div>
-              </form>
-            </div>
-            <div class="sidebar-box ftco-animate">
+         <div class="col-lg-3 sidebar">
+	      		<div class="sidebar-wrap bg-light ftco-animate">
               <div class="categories">
-                <h3>Categories</h3>
-                <li><a href="#">Properties <span>(12)</span></a></li>
-                <li><a href="#">Home <span>(22)</span></a></li>
-                <li><a href="#">House <span>(37)</span></a></li>
-                <li><a href="#">Villa <span>(42)</span></a></li>
-                <li><a href="#">Apartment <span>(14)</span></a></li>
-                <li><a href="#">Condominium <span>(140)</span></a></li>
+                   <template v-for="option in options" :key="option.id">
+                        <div v-if="option.room_id==room.id">
+                <li><a href="#">option <span>{{option.nom_option}}</span></a></li>
+                        </div> </template>
+                <li><a href="#">prix <span>(22)</span></a></li>
+               
               </div>
+              
             </div>
+            
+             <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Reserver maintenant</h5>
+   	<div class="col-12 mb-2 lg:col-4 lg:mb-0">
+    
+	  <label for="#">Check-in Date</label>
+		<input type="text" class="form-control " >
+    </div>
+    	<div class="col-12 mb-2 lg:col-4 lg:mb-0">
+    
+	  <label for="#">Check-out Date</label>
+		<input type="text" class="form-control " >
+    </div>
+    	<div class="col-12 mb-2 lg:col-4 lg:mb-0">
+    <label for="#">nombre de chambre</label>
+		<input type="number" class="form-control " >
+    </div>
+    <div class="field col-12 md:col-4">
+<button type="button" class="btn btn-primary">reserver</button>
+ </div>
+  </div>
+</div>
+          
+				
+	
+			
+ 
 
-            <div class="sidebar-box ftco-animate">
-              <h3>Recent Blog</h3>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
-              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">dish</a>
-                <a href="#" class="tag-cloud-link">menu</a>
-                <a href="#" class="tag-cloud-link">food</a>
-                <a href="#" class="tag-cloud-link">sweet</a>
-                <a href="#" class="tag-cloud-link">tasty</a>
-                <a href="#" class="tag-cloud-link">delicious</a>
-                <a href="#" class="tag-cloud-link">desserts</a>
-                <a href="#" class="tag-cloud-link">drinks</a>
+              <div class="col-lg-4 sidebar ftco-animate">
+	      			<h3 class="heading mb-4">Star Rating</h3>
+	      			<form method="post" class="star-rating">
+							  <div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1">
+									<label class="form-check-label" for="exampleCheck1">
+										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
+									</label>
+							  </div>
+							  <div class="form-check">
+						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
+						      </label>
+							  </div>
+							  <div class="form-check">
+						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+						     </label>
+							  </div>
+							  <div class="form-check">
+							    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+						      </label>
+							  </div>
+							  <div class="form-check">
+						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <label class="form-check-label" for="exampleCheck1">
+						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
+							    </label>
+							  </div>
+							</form>
+            </div>
               </div>
-            </div>
-
-            <div class="sidebar-box ftco-animate">
-              <h3>Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
+           
           </div>
-        </div>
-      </div>
+          </div>
+      
     </section> <!-- .section -->
 
 
@@ -226,35 +174,35 @@
         </div>
         <div class="row no-gutters">
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(images/insta-1.jpg);">
+            <a href="images/insta-1.jpg" class="insta-img image-popup"  id="insta1" style="background-image:">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
             </a>
           </div>
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(images/insta-2.jpg);">
+            <a href="images/insta-2.jpg" class="insta-img image-popup" id="insta2" style="background-image: ">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
             </a>
           </div>
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(images/insta-3.jpg);">
+            <a href="images/insta-3.jpg" class="insta-img image-popup"   id="insta3" style="background-image: ">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
             </a>
           </div>
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(images/insta-4.jpg);">
+            <a href="images/insta-4.jpg" class="insta-img image-popup"  id="insta4" style="background-image: ">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
             </a>
           </div>
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(images/insta-5.jpg);">
+            <a href="images/insta-5.jpg" class="insta-img image-popup"  id="insta5" style="background-image:">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
@@ -264,3 +212,96 @@
       </div>
     </section>
 </template>
+<script>
+
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+       
+     
+room:{ 
+					nbBed:0,
+			   description:"",
+			    nbAdult:0,
+         nbEnfant: 0,
+		      type_id:0
+               
+              
+				},
+        option:{
+          room_id:0,
+          nom_option:""
+        },
+        types:[],
+	 options:[],
+    };
+  },
+  
+   
+  mounted(){
+   this.getRoom();
+     this.getType();
+	this.getOption();
+  },
+ 
+	  
+  methods: {       
+  async getRoom(){
+  const id=this.$route.params.id;
+ await axios
+ .get("http://127.0.0.1:8000/api/user/room/"+id, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
+      })
+      .then((res) => {
+		  
+			    this.room=res.data.data;
+         
+           console.log(res.data)
+         
+	  })
+
+	  },
+    async getType(){
+ await axios
+  .get("http://127.0.0.1:8000/api/user/type", {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
+      })
+      .then((res) => {
+     
+ 
+      this.types = res.data.data;
+	  
+
+        console.log(res.data);
+      })
+	
+    
+      },
+       async getOption(){
+ await axios
+  .get("http://127.0.0.1:8000/api/user/option", {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
+      })
+      .then((res) => {
+     
+ 
+      this.options = res.data.data;
+	  
+
+        console.log(res.data);
+      })
+	
+    
+      }
+          
+  },
+
+  
+
+			}
+  
+
+
+</script>

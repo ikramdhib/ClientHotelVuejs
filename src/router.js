@@ -66,11 +66,19 @@ const routes=[
         name:'rooms',
         component: () => import('./components/room/Rooms.vue'),
     },
+    
     {
-        path:'/roomsingle',
+        path:'/roomsingle:id',
         name:'roomsingle',
         component: () => import('./components/room/RoomSingle.vue'),
     },
+    {
+        path:'/BookingRoom',
+        name:'BookingRoom',
+        component: () => import('./components/room/BookingRoom.vue'),
+    },
+   
+    
 ];
 const router = createRouter({
     history: createWebHashHistory(),

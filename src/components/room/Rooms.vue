@@ -1,5 +1,5 @@
 <template>
-   <div class="hero-wrap" id="bg1" style="background-image">
+  <div class="hero-wrap" id="bg1" style="background-image">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
@@ -16,138 +16,45 @@
 
     <section class="ftco-section bg-light">
     	<div class="container">
+				
     		<div class="row">
-	        <div class="col-lg-9">
+			
+	           <div class="col-lg-9">
+				   
 		    		<div class="row">
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+						 
+						<template v-for="room in rooms" :key="room.id">
+		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate" v-if="room.avaibility == 'oui'" >
+							 
 		    				<div class="room">
 		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" id="room1" style="background-image">
 		    						<div class="icon d-flex justify-content-center align-items-center">
 		    							<span class="icon-search2"></span>
 		    						</div>
 		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Suite Room</a></h3>
-		    						<p><span class="price mr-2">$120.00</span> <span class="per">per night</span></p>
+							<div class="text p-3 text-center">
+								<div v-for="type in types" :key="type.id">
+                                        <div v-if="type.id == room.type_id">
+		    						<h3 class="mb-3" ><a href="rooms-single.html">{{type.nom_type}}</a></h3></div></div>
+		    					
 		    						<ul class="list">
-		    							<li><span>Max:</span> 3 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 1</li>
+		    							<li><span>nombre adult:</span>{{room.nbAdult}}</li>
+		    							<li><span>nombre enfant : </span>{{room.nbEnfant}}</li>
+		    							
+		    							<li><span>nombre lit :</span> {{room.nbBed}}</li>
 		    						</ul>
 		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
+		    						<p class="pt-1"> 
+										 <router-link :to="'RoomSingle'+ room.id " class="btn-custom">plus details <span class="icon-long-arrow-right"></span> </router-link>
+										</p>
 		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" id="room2" style="background-image">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Family Room</a></h3>
-		    						<p><span class="price mr-2">$20.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 3 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 1</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" id="room3" style="background-image">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Deluxe Room</a></h3>
-		    						<p><span class="price mr-2">$150.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 5 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 2</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" id="room4" style="background-image">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Classic Room</a></h3>
-		    						<p><span class="price mr-2">$130.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 5 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 2</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" id="room5" style="background-image">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Superior Room</a></h3>
-		    						<p><span class="price mr-2">$300.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 6 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 3</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" id="room6" style="background-image">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Luxury Room</a></h3>
-		    						<p><span class="price mr-2">$500.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 5 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 2</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    		</div>
-		    	</div>
-		    	<div class="col-lg-3 sidebar">
+		    			
+		    			</div></div></template>
+				
+		 
+    	</div>
+			</div>
+		 <div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Advanced Search</h3>
 	      			<form action="#">
@@ -161,42 +68,36 @@
 		              <div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">Room Type</option>
-	                    	<option value="">Suite</option>
-	                      <option value="">Family Room</option>
-	                      <option value="">Deluxe Room</option>
-	                      <option value="">Classic Room</option>
-	                      <option value="">Superior Room</option>
-	                      <option value="">Luxury Room</option>
+	                    <select name="t" id="" class="form-control">
+	                    	<option v-for="type in types" :key="type.id">{{type.nom_type}}</option>
+	                    	
+	                    </select>
+	                  </div>
+		              </div>
+		              <div class="form-group" >
+		                <div class="select-wrap one-third">
+	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+	                   <select name="" id="" class="form-control">
+	                    	<option value="0">0 Adult</option>
+	                    	<option value="1">1 Adult</option>
+							<option value="2">2 Adult</option>
+							<option value="3">3 Adult</option>
+	                  
+	                    
 	                    </select>
 	                  </div>
 		              </div>
 		              <div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">0 Adult</option>
-	                    	<option value="">1 Adult</option>
-	                      <option value="">2 Adult</option>
-	                      <option value="">3 Adult</option>
-	                      <option value="">4 Adult</option>
-	                      <option value="">5 Adult</option>
-	                      <option value="">6 Adult</option>
-	                    </select>
-	                  </div>
-		              </div>
-		              <div class="form-group">
-		                <div class="select-wrap one-third">
-	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">0 Children</option>
-	                    	<option value="">1 Children</option>
-	                      <option value="">2 Children</option>
-	                      <option value="">3 Children</option>
-	                      <option value="">4 Children</option>
-	                      <option value="">5 Children</option>
-	                      <option value="">6 Children</option>
+	                   
+	                    	 <select name="" id="" class="form-control">
+	                    	<option value="0">0 Enfant</option>
+	                    	<option value="1">1 Enfant</option>
+							<option value="2">2 Enfant</option>
+							<option value="3">3 Enfant</option>
+	                  
+	                    
 	                    </select>
 	                  </div>
 		              </div>
@@ -212,7 +113,7 @@
 										</div> 
 		              </div>
 		              <div class="form-group">
-		                <input type="submit" value="Search" class="btn btn-primary py-3 px-5">
+		                <input type="submit" value="Search" v-on:click="searchInput" class="btn btn-primary py-3 px-5">
 		              </div>
 		            </div>
 	            </form>
@@ -254,10 +155,15 @@
 	      		</div>
 	        </div>
 		    </div>
-    	</div>
+			</div>
+			
+    	
     </section>
 
-
+		   
+		   
+		  
+	
     <section class="instagram pt-5">
       <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
@@ -305,3 +211,65 @@
       </div>
     </section>
 </template>
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      rooms: [],
+	  types:[],
+	room_id:[],
+	     id:0,
+    };
+  },
+   computed: {
+    FilteredList() {
+      return this.rooms.filter((room) => {
+       return room.adult.tolowerCase().includes(this.nbAdultselect.tolowerCase())
+            });}
+   },
+   
+  mounted(){
+   this.getRoom();
+    this.getType();
+ 
+	
+  },
+
+   
+	  
+  methods: {       
+  async getRoom(){
+ await axios
+  .get("http://127.0.0.1:8000/api/user/room", {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
+      })
+      .then((res) => {
+		   
+			   this.rooms = res.data.data;
+
+           console.log(this.rooms.length)
+         
+	  })
+
+	  },
+          
+		  
+	 
+	  async getType(){
+ await axios
+  .get("http://127.0.0.1:8000/api/user/type", {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
+      })
+      .then((res) => {
+     
+ 
+      this.types = res.data.data;
+	  
+
+        console.log(res.data);
+      })
+	
+    
+      }}}
+	  </script>

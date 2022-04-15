@@ -63,6 +63,7 @@ export default {
        }
     },
     methods:{
+      
         async forgetpass(){
           await axios.post('http://localhost:8000/api/user/forget-password',{
              email:this.email
