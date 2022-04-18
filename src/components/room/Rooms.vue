@@ -24,10 +24,10 @@
 		    		<div class="row">
 						 
 						<template v-for="room in rooms" :key="room.id">
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate" v-if="room.avaibility == 'oui'" >
+		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate" v-if="room.avaibility == 'OUI'" >
 							 
 		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" id="room1" style="background-image">
+		    					<a  class="img d-flex justify-content-center align-items-center" id="room1" style="background-image">
 		    						<div class="icon d-flex justify-content-center align-items-center">
 		    							<span class="icon-search2"></span>
 		    						</div>

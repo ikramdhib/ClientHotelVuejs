@@ -37,11 +37,10 @@
                     <li><span>nombre enfant :</span>{{room.nbEnfant}}</li>
 	    					  	<li><span>nombre de lit :</span>{{room.nbBed}}</li>
 	    						</ul>
-	    					
-    					
-
                 </div></div>
-
+			             <div class="form-group">
+		                <input id="btn" type="submit" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="goToBooking">
+		              </div>
           		<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
           			<h4 class="mb-4">Available Room</h4>
           			<div class="row">
@@ -92,36 +91,6 @@
               </div>
               
             </div>
-            
-             <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Reserver maintenant</h5>
-   	<div class="col-12 mb-2 lg:col-4 lg:mb-0">
-    
-	  <label for="#">Check-in Date</label>
-		<input type="text" class="form-control " >
-    </div>
-    	<div class="col-12 mb-2 lg:col-4 lg:mb-0">
-    
-	  <label for="#">Check-out Date</label>
-		<input type="text" class="form-control " >
-    </div>
-    	<div class="col-12 mb-2 lg:col-4 lg:mb-0">
-    <label for="#">nombre de chambre</label>
-		<input type="number" class="form-control " >
-    </div>
-    <div class="field col-12 md:col-4">
-<button type="button" class="btn btn-primary">reserver</button>
- </div>
-  </div>
-</div>
-          
-				
-	
-			
- 
-
-
               <div class="col-lg-4 sidebar ftco-animate">
 	      			<h3 class="heading mb-4">Star Rating</h3>
 	      			<form method="post" class="star-rating">
@@ -256,7 +225,7 @@ room:{
       })
       .then((res) => {
 		  
-			    this.room=res.data.data;
+			    this.room=res.data.room;
          
            console.log(res.data)
          
@@ -294,6 +263,9 @@ room:{
       })
 	
     
+      },
+      goToBooking(){
+        this.$router.push('bookingroom')
       }
           
   },
@@ -305,3 +277,8 @@ room:{
 
 
 </script>
+<style scoped>
+#btn{
+  margin-left: 10px;
+}
+</style>

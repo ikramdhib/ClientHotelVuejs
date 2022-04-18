@@ -1,25 +1,19 @@
 <template>
-    <Home v-if="$route.path === '/'" />
-    <Rooms v-else-if="$route.path === '/rooms'" />
-    <About v-else-if="$route.path === '/about'" />
-    <Contact v-else-if="$route.path === '/contact'" />
-    <Blog v-else-if="$route.path === '/blog'" />
+    <BookingRoom v-if="$route.path === '/bookingroom'" />
+    <SelectRoom v-if="$route.path === '/selectroom'" />
+    <App  v-else/>
 </template>
 <script>
-import Home from  './components/Home';
-import Contact from  './components/Contact';
-import About from './components/About';
-import Rooms from './components/Rooms';
-import Blog from './components/Blog';
+import BookingRoom from './components/room/booking/BookingRoom.vue';
+import SelectRoom from './components/room/booking/SelectRoom.vue';
+import App from './App';
 
 export default {
    
     components: {
-        Home,
-        Rooms,
-        About,
-        Blog,
-        Contact
+        App,
+        BookingRoom,
+        SelectRoom,
     }
 }
 </script>

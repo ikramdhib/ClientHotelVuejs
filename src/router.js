@@ -73,11 +73,15 @@ const routes=[
         component: () => import('./components/room/RoomSingle.vue'),
     },
     {
-        path:'/BookingRoom',
-        name:'BookingRoom',
-        component: () => import('./components/room/BookingRoom.vue'),
+        path:'/bookingroom',
+        name:'bookingroom',
+        component: () => import('./components/room/booking/BookingRoom.vue'),
     },
-   
+    {
+        path:'/selectroom',
+        name:'selectroom',
+        component: () => import('./components/room/booking/SelectRoom.vue'),
+    },
     
 ];
 const router = createRouter({
