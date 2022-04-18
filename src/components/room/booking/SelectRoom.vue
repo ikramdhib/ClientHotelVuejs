@@ -36,7 +36,18 @@
                   
                   <tbody>
                     <tr>
-                      <td rowspan="3" id="label">Mark</td>
+                      <td rowspan="3">
+    				<div  class="room">
+              <div id="img">
+    					<a  class="img d-flex justify-content-center align-items-center" id="room1" style="background-image">
+    						<div class="icon d-flex justify-content-center align-items-center">
+    							<span class="icon-search2"></span>
+    						</div>
+    					</a>
+              </div>
+    			</div>
+
+                      </td>
                       <td colspan="2" id="label">Tradition</td>
                     </tr>
                     <tr>
@@ -99,10 +110,6 @@
             </div>
           
           </div>
-
-          <div class="col-md-3 d-flex">
-             
-          </div>
         </div>
       </div>
     </section>
@@ -126,5 +133,8 @@
   font-size: 20px;
 
 }
-#tr { border:0 ; }
+#img{
+  width: 450px;
+}
+
 </style>

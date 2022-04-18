@@ -73,14 +73,24 @@ const routes=[
         component: () => import('./components/room/RoomSingle.vue'),
     },
     {
-        path:'/bookingroom',
-        name:'bookingroom',
-        component: () => import('./components/room/booking/BookingRoom.vue'),
+        path:'/findroom',
+        name:'findroom',
+        component: () => import('./components/room/booking/FindRoom.vue'),
     },
     {
         path:'/selectroom',
         name:'selectroom',
         component: () => import('./components/room/booking/SelectRoom.vue'),
+    },
+    {
+        path:'/bookroom',
+        name:'bookroom',
+        component: () => import('./components/room/booking/BookRoom.vue'),
+    },
+    {
+        path:'/bookingpayment',
+        name:'bookingpayment',
+        component: () => import('./components/room/booking/BookingPayment.vue'),
     },
     
 ];

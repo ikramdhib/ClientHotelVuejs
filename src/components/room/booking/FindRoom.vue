@@ -105,10 +105,6 @@
             </div>
           
           </div>
-
-          <div class="col-md-3 d-flex">
-             
-          </div>
         </div>
       </div>
     </section>

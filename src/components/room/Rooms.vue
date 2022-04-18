@@ -35,7 +35,7 @@
 							<div class="text p-3 text-center">
 								<div v-for="type in types" :key="type.id">
                                         <div v-if="type.id == room.type_id">
-		    						<h3 class="mb-3" ><a href="rooms-single.html">{{type.nom_type}}</a></h3></div></div>
+		    						<h3 class="mb-3"><a href="">{{type.nom_type}}</a></h3></div></div>
 		    					
 		    						<ul class="list">
 		    							<li><span>nombre adult:</span>{{room.nbAdult}}</li>
