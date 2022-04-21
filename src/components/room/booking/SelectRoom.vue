@@ -27,11 +27,11 @@
               
 	            </div>
               </div>
-              <div  class="row">
+              <div  class="row" v-for="room in rooms" :key="room.id">
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
                 
-            <div class="col-md-6"> 
+            <div class="col-md-12"> 
                 <table  class="table table-borderless ">
                   
                   <tbody>
@@ -48,15 +48,15 @@
     			</div>
 
                       </td>
-                      <td colspan="2" id="label">Tradition</td>
+                      <td colspan="2" id="label"> {{ room.type }} </td>
                     </tr>
                     <tr>
-                      <td>Thornton</td>
-                      <td>@fat</td>
+                      <td >Description:</td>
+                      <td>  {{ room.description }} </td>
                     </tr>
                     <tr>
-                      <td>Thornton</td>
-                      <td>@fat</td>
+                      <td>Availablity:</td>
+                      <td>{{ room.avaibility }} </td>
                     </tr>
                   </tbody>
                 </table>
@@ -76,27 +76,17 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row"><i class="icon-user"></i></th>
-                      <td>Mark</td>
+                      <th scope="row" ><i class="icon-user" v-for="icon in room.nbAdult" :key="icon.id"></i></th>
+                      <td> ttyt </td>
                       <td>Otto</td>
                       <td>
                          <div class="form-group">
           <div class="heading-section text-center">
-                <input type="submit" value="Reserver" v-on:click="addUser()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                <input type="submit" :value="room.price" v-on:click="bookNow()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
               </div>
                       </td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><i class="icon-user"></i></th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><i class="icon-user"></i></th>
-                      <td colspan="2">Larry the Bird</td>
-                      <td>@twitter</td>
+                    
                     </tr>
                   </tbody>
                 </table>
@@ -130,16 +120,14 @@ export default {
 ,
 mounted(){
  this.bookgroom=  JSON.parse( localStorage.getItem('bookgroom'));
+ let nuit = (Date.parse(this.bookgroom.end)-Date.parse(this.bookgroom.start))/86400000;
+ console.log("tyhtyh",nuit);
  console.log("hh",this.bookgroom);
  this.selectRoom();
 },
 
 methods:{
   async selectRoom(){
-    
-     // console.log("rr",parseInt(this.bookgroom.nbadult));
-      //console.log("jj",parseInt(this.bookgroom.nbenfant));
-      //console.log("jj",(this.bookgroom.end));
 
     await axios
     .post('http://localhost:8000/api/available-rooms',
@@ -166,6 +154,9 @@ methods:{
     }).catch(error=>{
       console.log(error);
     })
+  },
+  bookNow(){
+    this.$router.push('bookroom')
   }
 }
 }
