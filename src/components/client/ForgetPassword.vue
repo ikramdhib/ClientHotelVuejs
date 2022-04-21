@@ -5,7 +5,7 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <p class="breadcrumbs mb-2"><span class="mr-2"><router-link  to="/">Accueil</router-link></span> <span>Contact</span></p>
+	            <p class="breadcrumbs mb-2"><span class="mr-2"><router-link  to="/">Accueil</router-link></span> <span>Mot de passe oublier</span></p>
             </div>
           </div>
         </div>

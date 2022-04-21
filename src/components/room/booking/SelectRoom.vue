@@ -114,6 +114,65 @@
       </div>
     </section>
 </template>
+
+
+<script>
+import axios from 'axios';
+export default {
+  data(){
+    return{
+      bookgroom:{},
+      rooms:[],
+      tab1:[],
+      tab2:[]
+    }
+  }
+,
+mounted(){
+ this.bookgroom=  JSON.parse( localStorage.getItem('bookgroom'));
+ console.log("hh",this.bookgroom);
+ this.selectRoom();
+},
+
+methods:{
+  async selectRoom(){
+    
+     // console.log("rr",parseInt(this.bookgroom.nbadult));
+      //console.log("jj",parseInt(this.bookgroom.nbenfant));
+      //console.log("jj",(this.bookgroom.end));
+
+    await axios
+    .post('http://localhost:8000/api/available-rooms',
+    { 
+          end:this.bookgroom.end,
+          nbAdult:this.bookgroom.nbadult,
+          nbEnfant:this.bookgroom.nbenfant
+    }
+    )
+    .then(res=>{
+     this.tab1=res.data.available_room
+      if(this.tab1.length !=0){
+        for(let j=0 ; j<res.data.available_room.length ;j++){
+          this.rooms.push(res.data.available_room[j])
+        }
+      }
+      this.tab2=res.data.available_booking
+      if(this.tab2.length !=0){
+        for(let i=0 ; i<res.data.available_booking.length ; i++){
+          this.rooms.push(res.data.available_booking[i]);
+        }
+      }
+      console.log("tyty",this.rooms);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
+}
+}
+</script>
+
+
+
 <style scoped>
 #title{
   margin-top:25px ;

@@ -65,20 +65,6 @@
                   </div>
               </div>
               <hr/>
-               <div class="form-group">
-                  <div class="row justify-content-center mb-9 pb-2">
-          <div class="col-md-10 heading-section text-center"> 
-              <input type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" value="Connecter avec Gmail" style="background-color: #dd4b39;"  >
-              </div>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <div class="row justify-content-center mb-9 pb-2">
-          <div class="col-md-10 heading-section text-center"> 
-              <input type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" value="Connecter avec Facebook" style="background-color: #3b5998;" >
-              </div>
-                  </div>
-              </div>
               <div class="form-group">
                  <div class="row justify-content-center mb-9 pb-2">
           <div class="col-md-10 heading-section text-center">

@@ -1,5 +1,5 @@
 <template>
-    <FindRoom v-if="$route.path === '/bookingroom'" />
+    <FindRoom v-if="$route.path === '/findroom'" />
     <SelectRoom v-else-if="$route.path === '/selectroom'" />
     <BookRoom v-else-if="$route.path === '/bookroom'" />
     <BookingPayment v-else-if="$route.path === '/bookingpayment'" />
