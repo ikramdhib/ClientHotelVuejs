@@ -74,22 +74,23 @@
                       <th scope="col">Nombre de personnes </th>
                       <th scope="col">Condition de vente de tarif</th>
                       <th scope="col">Prix moyen par nuit</th>
-                      <th scope="col">prix par 00 jours</th>
+                      <th scope="col">prix par {{ nuits }} jours</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row" ><i class="icon-user" v-for="icon in room1.nbAdult" :key="icon.id"></i></th>
-                      <td> ttyt </td>
-                      <td>Otto</td>
+                  <tbody  v-for="option in optionsTab" :key="option.id">
+                         <tr v-if="room1.id==option.room_id">
+                      <th scope="row"  ><i class="icon-user" v-for="icon in room1.nbAdult" :key="icon.id"></i></th>
+                      <td > {{ option.nom_option }} </td>
+                      <td> {{room1.price + option.price_option }} </td>
                       <td>
                          <div class="form-group">
           <div class="heading-section text-center">
-                <input type="submit" :value="room1.price" v-on:click="bookNow()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                <input type="submit" :value="(room1.price+option.price_option)*nuits" v-on:click="bookNow()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
+
+                        
               </div>
                       </td>
-                    
                     </tr>
                   </tbody>
                 </table>
@@ -149,15 +150,15 @@
                       <th scope="col">prix par 00 jours</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
+                  <tbody v-for="option2 in optionsTab" :key="option2.id">
+                      <tr v-if="room2.id==option2.room_id">
                       <th scope="row" ><i class="icon-user" v-for="icon in room2.nbAdult" :key="icon.id"></i></th>
-                      <td> ttyt </td>
-                      <td>Otto</td>
+                      <td> {{ option2.nom_option }} </td>
+                      <td>{{room2.price+option2.price_option}}</td>
                       <td>
                          <div class="form-group">
           <div class="heading-section text-center">
-                <input type="submit" :value="room2.price" v-on:click="bookNow()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                <input type="submit" :value="(room2.price+option2.price_option)*nuits" v-on:click="bookNow()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
               </div>
                       </td>
@@ -222,14 +223,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row" ><i class="icon-user" v-for="icon in room.nbAdult" :key="icon.id"></i></th>
-                      <td> ttyt </td>
-                      <td>Otto</td>
-                      <td>
+                    <tr v-for="option in optionsTab" :key="option">
+                      <th scope="row" ><i class="icon-user" v-for="icon in room3.nbAdult" :key="icon.id"></i></th>
+                      <td> {{ option.nom_option }}</td>
+                      <td>{{room3.price+price_option}}</td>
+                      <td> 
                          <div class="form-group">
           <div class="heading-section text-center">
-                <input type="submit" :value="room3.price" v-on:click="bookNow()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                <input type="submit" :value="room3.price*nuits" v-on:click="bookNow()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
               </div>
                       </td>
@@ -272,15 +273,24 @@ export default {
       nbchambre:"",
       whichroom:1,
       nuits:"",
+      message1:"",
+      message2:"",
+      message3:"",
+      optionsTab:[],
+      optionsRoom1:[],
+      optionsRoom2:[],
+      optionsRoom3: [],
     }
   }
 ,
 mounted(){
-this.getRoomsProprities()
 this.getBookinDates();
  this.selectTheFirstRoom();
  this.selectTheSecondRoom();
  this.selectTheThirdRoom();
+ this.getOptions();
+ this.optionsRoom1=this.optionsTab;
+ console.log("rrr",this.optionsRoom1);
  //recuperer le nombre de chambre 
 this.nbchambre=parseInt(localStorage.getItem('nbchambre'));
 
@@ -288,19 +298,10 @@ this.nbchambre=parseInt(localStorage.getItem('nbchambre'));
 },
 
 methods:{
-  getRoomsProprities(){
-    if(localStorage.getItem('bookgroom1') != null){
- this.bookgroom1=  JSON.parse( localStorage.getItem('bookgroom1'));
-  }
-  if(localStorage.getItem('bookgroom2') != null){
- this.bookgroom2=  JSON.parse( localStorage.getItem('bookgroom2'));
-  }
-  if(localStorage.getItem('bookgroom3') != null){
- this.bookgroom3=  JSON.parse( localStorage.getItem('bookgroom3'));
-  }
-
-  },
   async selectTheFirstRoom(){
+    
+       if(localStorage.getItem('bookgroom1') != null){
+       this.bookgroom1=  JSON.parse( localStorage.getItem('bookgroom1'));
 
     await axios
     .post('http://localhost:8000/api/available-rooms',
@@ -323,13 +324,18 @@ methods:{
           this.rooms1.push(res.data.available_booking[i]);
         }
       }
-      console.log("tyty",this.rooms1);
     }).catch(error=>{
       console.log(error);
     })
+       }else{
+         this.message1="Vous devez changer les dates de résérvation"
+       }
   },
    async selectTheSecondRoom(){
-
+     
+  if(localStorage.getItem('bookgroom2') != null){
+ this.bookgroom2=  JSON.parse( localStorage.getItem('bookgroom2'));
+  
     await axios
     .post('http://localhost:8000/api/available-rooms',
     { 
@@ -351,13 +357,18 @@ methods:{
           this.rooms2.push(res.data.available_booking[i]);
         }
       }
-      console.log("tyty",this.rooms);
     }).catch(error=>{
       console.log(error);
     })
+     }else{
+         this.message2="Vous devez changer les dates de résérvation"
+       }
   },
   async selectTheThirdRoom(){
 
+  if(localStorage.getItem('bookgroom3') != null){
+ this.bookgroom3=  JSON.parse( localStorage.getItem('bookgroom3'));
+  
     await axios
     .post('http://localhost:8000/api/available-rooms',
     { 
@@ -379,10 +390,12 @@ methods:{
           this.rooms3.push(res.data.available_booking[i]);
         }
       }
-      console.log("tyty",this.rooms);
     }).catch(error=>{
       console.log(error);
     })
+     }else{
+         this.message3="Vous devez changer les dates de résérvation"
+       }
   },
   bookNow(){
     this.$router.push('bookroom')
@@ -395,7 +408,31 @@ methods:{
     this.bookingDate = JSON.parse(localStorage.getItem('bookingdate'))
     let nuit = (Date.parse(this.bookingDate.end)-Date.parse(this.bookingDate.start))/86400000;
      this.nuits =nuit
-  }
+  },
+    async getOptions(){
+      await axios.get('http://localhost:8000/api/user/option')
+      .then(res=>{
+        this.optionsTab=res.data.data
+        console.log("options",this.optionsTab);
+      })
+    },
+    getRoomOption1(){
+     
+            this.optionsRoom1=this.optionsTab;
+            console.log("tyt",this.optionsRoom1);
+          
+    },
+     getRoomOption2(){
+      for(let i=0 ; i<this.rooms2.length ; i++){
+        for(let j=0 ; j<this.optionsTab.length ; j++){
+          if(this.rooms2[i].id==this.optionsTab[j].room_id){
+            this.optionsRoom2.push(this.optionsTab[j]);
+          }
+        }
+      }
+      console.log("optionroom2",this.optionsRoom2);
+    }
+
 }
 }
 </script>
