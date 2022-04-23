@@ -42,7 +42,7 @@
               <div class="form-group">
                   <div class="row justify-content-center mb-9 pb-2">
           <div class="col-md-10 heading-section text-center">
-                <input type="submit" value="Connecter" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" v-on:click="login()">
+                <input type="button" value="Connecter" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" v-on:click="login()">
               </div>
                   </div>
               </div>
