@@ -30,7 +30,7 @@
           <div class="col-md-3 d-flex">
           </div>
         </div>
-        <div class="row block-9 slide-top">
+        <div class="row block-9 slide-top" >
           <div class="col-md-6 order-md-last d-flex">
             <form  class="bg-white p-5 contact-form">
               <div class="form-group">

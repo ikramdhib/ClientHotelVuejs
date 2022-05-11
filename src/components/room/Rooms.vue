@@ -241,12 +241,12 @@ export default {
   methods: {       
   async getRoom(){
  await axios
-  .get("http://127.0.0.1:8000/api/user/room", {
+  .get("http://127.0.0.1:8000/api/room", {
         headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
       })
       .then((res) => {
 		   
-			   this.rooms = res.data.data;
+			   this.rooms = res.data.room;
 
            console.log(this.rooms.length)
          
@@ -258,7 +258,7 @@ export default {
 	 
 	  async getType(){
  await axios
-  .get("http://127.0.0.1:8000/api/user/type", {
+  .get("http://127.0.0.1:8000/api/type", {
         headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
       })
       .then((res) => {

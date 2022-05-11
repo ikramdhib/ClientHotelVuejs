@@ -8,6 +8,7 @@
           <div class="col-md-10 heading-section text-center">
             <h2 class="mb-4">Résérvez maintement : </h2>
           </div>
+          
         </div>
           <div class="col-md-3 d-flex">
             	
@@ -40,11 +41,11 @@
                   <div class="row">
                   <div class="col-md-5"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label">   Date d'arriver :</label>
-                      <input placeholder="Select date" type="date" id="example" class="form-control" v-model="bookingdate.start">
+                      <input placeholder="Select date" type="date" id="example" class="form-control" :min="dateNow"  v-model="bookingdate.start">
                     </div>
                     <div class="col-md-5"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Date de départ :</label>
-                      <input placeholder="Select date" type="date" id="example" class="form-control" v-model="bookingdate.end">
+                      <input :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" v-model="bookingdate.end">
                     </div>
                      <div class="col-md-2"> 
                        <h6 id="nuit" class="mb-4"> : Ntuis .</h6>
@@ -251,9 +252,22 @@ export default {
         nbbebe:"",
       },
       nbChambre:"" ,
+      dateNow: null,
     }
   },
   mounted(){
+    let d = new Date();
+    let day =(d.getDate()+1)
+    let month =(d.getMonth()+1)
+    let year = d.getFullYear()
+    if(month<10){
+      month="0"+ month
+    }
+    if(day<10){
+      day="0"+ day
+    }
+    this.dateNow= year+"-"+month+"-"+day;
+    console.log("ttttt",this.dateNow);
      let nuit = (Date.parse(this.bookingdate.end)-Date.parse(this.bookingdate.start))/86400000;
      this.nuits=nuit
   },

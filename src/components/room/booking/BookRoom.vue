@@ -8,6 +8,104 @@
           <div class="col-md-10 heading-section text-center">
             <h2 class="mb-4">Résérvez maintement : </h2>
           </div>
+
+          <!-- Button trigger modal 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Launch demo modal
+</button>-->
+
+<!-- Modal 
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" v-if="isLogin==true">
+        <h5 class="modal-title" id="exampleModalLongTitle" >Login</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle" >Register</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div v-if="isRegister==true">
+            <form class="bg-white p-5 contact-form" >
+              <div class="form-group">
+                  <div class="row">
+                  <div class="col-md-6"> <input type="text" class="form-control" placeholder="Nom" ></div>
+                <div class="col-md-6"> <input type="text" class="form-control" placeholder="prenom" ></div>
+              </div>
+              </div>
+              <div class="form-group">
+                  <div class="row">
+                  <div class="col-md-6"> <input type="text" class="form-control" placeholder="Téléphone" ></div>
+                <div class="col-md-6"> <input type="text" class="form-control" placeholder="CIN" ></div>
+              </div>
+              </div>
+              <div class="form-group">
+                  <div class="row">
+                  <div class="col-md-6"> <input type="text" class="form-control" placeholder="Adresse"></div>
+                <div class="col-md-6"> <input type="text" class="form-control" placeholder="Code Postal" ></div>
+              </div>
+              </div>
+              <div class="form-group">
+                  <div class="row">
+                  <div class="col-md-6"> <input type="email" class="form-control" placeholder="Email" ></div>
+                <div class="col-md-6"> <input type="password" class="form-control" placeholder="Mot de Passe" ></div>
+              </div>
+              </div>
+              <div class="form-group">
+                  <div class="row justify-content-center mb-9 pb-2">
+          <div class="col-md-10 heading-section text-center">
+                <input type="submit" value="Connecter" v-on:click="addUser()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
+              </div>
+                  </div>
+              </div>
+              <hr/>
+              <div class="form-group">
+                 <div class="row justify-content-center mb-9 pb-2">
+          <div class="col-md-10 heading-section text-center">
+           <span>  Vous-avez déja un Compte ? <router-link to="login" > Se Connecter</router-link></span>
+          </div>
+        </div>
+              </div>
+            </form>
+            </div>
+          <div v-if="isLogin==true">
+           <form  class="bg-white p-5 contact-form">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Adresse E-mail">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Mots de Passe" >
+              </div>
+              <div class="form-group">
+                  <div class="row justify-content-center mb-9 pb-2">
+          <div class="col-md-10 heading-section text-center">
+                <input type="button" value="Connecter" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" v-on:click="login()">
+              </div>
+                  </div>
+              </div>
+              <hr/>
+            
+              <div class="form-group">
+                       <div class="row justify-content-center mb-9 pb-2">
+          <div class="col-md-10 heading-section text-center">
+           <span><router-link to="forgetpassword"> Mot de Passe Oublier  ?</router-link></span>
+          </div>
+        </div>
+              </div>
+                <div class="form-group">
+                 <div class="row justify-content-center  pb-2">
+          <div class="col-md-10 heading-section text-center">
+           <span>N'avez-vous un Compte ? <router-link to="register">'inscrire</router-link> </span>
+          </div>
+        </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>-->
         </div>
           <div class="col-md-3 d-flex">
             	
@@ -47,7 +145,7 @@
 	            </div>
               </div>
               </div>
-              <div  class="row">
+                   <div  class="row">
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
                   <div class="row">
@@ -62,13 +160,13 @@
 	                  </div>
                     </div>
                     <div class="col-md-4"> 
-                  <i class="icon-circle-arrow-right"></i>  <label id="label" >   Prénom :</label><span>*</span>
-                   <input type="text" class="form-control">
+                   <label id="label" >   Prénom :</label><span>*</span>
+                   <input type="text" class="form-control" v-model="user.firstname">
 
                     </div>
                      <div class="col-md-4"> 
-                  <i class="icon-circle-arrow-right"></i>  <label id="label" > Nom :</label> <span>*</span>
-                   <input type="text" class="form-control" >
+                 <label id="label" > Nom :</label> <span>*</span>
+                   <input type="text" class="form-control" v-model="user.lastname" >
 
                     </div>
                  </div>
@@ -77,180 +175,250 @@
                   <div class="row">
                      <div class="col-md-4"> 
                   <label id="label" >   Email :</label><span>*</span>
-                 <input type="email" class="form-control" >
+                 <input type="email" class="form-control"  v-model="user.email">
                     </div>
                     <div class="col-md-4"> 
                  <label id="label" >   Téléphone :</label><span>*</span>
-                 <input type="email" class="form-control" >
+                 <input type="text" class="form-control" v-model="user.phone" >
                     </div>
                     <div class="col-md-4"> 
                        <label id="label" >   Pays de résidance :</label><span>*</span>
-                      <input type="email" class="form-control" >
+                      <input type="text" class="form-control" v-model="user.country">
                     </div>
-              </div>
-              </div>
-            </form>
-            <div class="row">
-                  <div class="ml-md-0">
-                 <div class="col-md-6 d-flex align-self-stretch ">
-            <div id="titre" class="media block-6 services  text-center">
-              <!--	<div class="icon d-flex align-items-center justify-content-center">
-              		<span class="flaticon-airplane49" ></span> 
-              	</div>-->
-                 <h6 id="titre" class="mb-4">Nombre de personnes par chambre </h6>
-            </div>
-                 </div>
-              
-	            </div>
-              </div>
-             <div  class="row">
-                <form class="bg-light p-5 contact-form">
-                   <div class="form-group">
-                  <div class="row">
-                  <div class="col-md-2"> 
-                 <h6 id="sous-titre">Chambre : </h6>
-                    </div>
-                    <div class="col-md-6">
-                      <span> Chambre N°1 - 2 Personnes Maximum</span>
-                    </div>
-                 </div>
-              </div>
-              <div class="form-group">
-                  <div class="row">
-                  <div class="col-md-2"> 
-                   <label id="label" >   Titre : </label>
-		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">M. </option>
-	                      <option value="">Mme. </option>
-	                      <option value="">Mlle. </option>
-	                    </select>
-	                  </div>
-                    </div>
-                    <div class="col-md-4"> 
-                   <label id="label" >   Prénom :</label>
-                   <input type="text" class="form-control">
-
-                    </div>
-                     <div class="col-md-4"> 
-                  <label id="label" > Nom :</label> 
-                   <input type="text" class="form-control" >
-
-                    </div>
-                      <div class="col-md-2"> 
-                   <label id="label" >   Age : </label><span>*</span>
-		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">Adult </option>
-	                      <option value="">Bébé </option>
-	                      <option value="">enfant (3ans) </option>
-	                      <option value="">enfant (4ans) </option>
-	                      <option value="">enfant (5ans) </option>
-	                      <option value="">enfant (6ans) </option>
-	                      <option value="">enfant (7ans) </option>
-	                      <option value="">enfant (8ans) </option>
-	                      <option value="">enfant (9ans) </option>
-	                      <option value="">enfant (10ans) </option>
-	                      <option value="">enfant (11ans) </option>
-	                      <option value="">enfant (1ans) </option>
-	                    </select>
-	                  </div>
-                    </div>
-                 </div>
-              </div>
-              <hr/>
-              <div class="form-group">
-                  <div class="row">
-                  <div class="col-md-2"> 
-                 <h6 id="sous-titre">Chambre : </h6>
-                    </div>
-                    <div class="col-md-6">
-                      <span> Chambre N°1 - 2 Personnes Maximum</span>
-                    </div>
-                     </div>
-              </div>
-              <div class="form-group">
-                  <div class="row">
-                  <div class="col-md-2"> 
-                   <label id="label" >   Titre : </label>
-		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">M. </option>
-	                      <option value="">Mme. </option>
-	                      <option value="">Mlle. </option>
-	                    </select>
-	                  </div>
-                    </div>
-                    <div class="col-md-4"> 
-                   <label id="label" >   Prénom :</label>
-                   <input type="text" class="form-control">
-
-                    </div>
-                     <div class="col-md-4"> 
-                  <label id="label" > Nom :</label>
-                   <input type="text" class="form-control" >
-
-                    </div>
-                      <div class="col-md-2"> 
-		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">Adult </option>
-	                      <option value="">Bébé </option>
-	                      <option value="">enfant (3ans) </option>
-	                      <option value="">enfant (4ans) </option>
-	                      <option value="">enfant (5ans) </option>
-	                      <option value="">enfant (6ans) </option>
-	                      <option value="">enfant (7ans) </option>
-	                      <option value="">enfant (8ans) </option>
-	                      <option value="">enfant (9ans) </option>
-	                      <option value="">enfant (10ans) </option>
-	                      <option value="">enfant (11ans) </option>
-	                      <option value="">enfant (1ans) </option>
-	                    </select>
-	                  </div>
-                    </div>
-              </div>
-              </div>
-              <hr/>
-              <div class="form-group">
-                  <div class="row">
-                  <div class="col-md-3"> 
-                 <h6 id="sous-titre">Demande spécial : </h6>
-                    </div>
-                    <div class="col-md-8">
-                      <span id="span"> Vous pouvez décrire toute demande particulière. Les demandes spéciales ne peuvent être garanties, mais nous ferons tout notre possible pour les satisfaire.</span>
-                    </div>
-                     </div>
-              </div>
-              <div class="form-group">
-                  <div class="row">
-                    <div class="col-md-6"> 
-                   <textarea type="textarea" class="form-control" rows="5" cols="33">
-                   </textarea>
-                    </div>
-              </div>
-              </div>
-                <div class="form-group">
-                  <div class="row">
-                  <div class="col-md-4">
-          <div class="heading-section text-center py-4">
-                <input type="submit" value="Confirmer ma résérvation" v-on:click="addUser()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
-              </div>
-                </div>
                   </div>
               </div>
+                    <div class="form-group">
+                      <div class="row">
+                    <div class="col-md-4"> 
+                       <label id="label" > CIN / Passport :</label><span>*</span>
+                      <input type="text" class="form-control" v-model="user.cin">
+                    </div>
+                    <div class="col-md-4 py-4"> 
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" value="1" name="flexRadioDefault" id="rd"  v-model="isEnLigne"  checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                         Payement en ligne 
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" value="0" name="flexRadioDefault" id="rd"  v-model="isEnLigne" >
+                        <label class="form-check-label" for="flexRadioDefault2">
+                          Payement à l'Hotel
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-4 py-4"> 
+                      <div class="form-group">
+		                <input id="btn" type="submit" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="BookNow()">
+		               </div>
+                    </div>
+                    </div>
+                    </div>
             </form>
-            </div>
+              </div>
+              <div  class="row py-4">
+                <form class="bg-light p-5 contact-form">
+              <div class="form-group">
+                  <div class="row">
+                  <div class="col-md-2"> 
+                  <i class="icon-circle-arrow-right"></i>  <label id="label" >   Titre : </label><span>*</span>
+		                <div class="select-wrap one-third">
+	                    <select name="" id="" class="form-control">
+	                    	<option value="">M. </option>
+	                      <option value="">Mme. </option>
+	                      <option value="">Mlle. </option>
+	                    </select>
+	                  </div>
+                    </div>
+                    <div class="col-md-4"> 
+                   <label id="label" >   Prénom :</label><span>*</span>
+                   <input type="text" class="form-control" v-model="user.firstname">
+
+                    </div>
+                     <div class="col-md-4"> 
+                 <label id="label" > Nom :</label> <span>*</span>
+                   <input type="text" class="form-control" v-model="user.lastname" >
+
+                    </div>
+                 </div>
+              </div>
+              <div class="form-group">
+                  <div class="row">
+                     <div class="col-md-4"> 
+                  <label id="label" >   Email :</label><span>*</span>
+                 <input type="email" class="form-control"  v-model="user.email">
+                    </div>
+                    <div class="col-md-4"> 
+                 <label id="label" >   Téléphone :</label><span>*</span>
+                 <input type="text" class="form-control" v-model="user.phone" >
+                    </div>
+                    <div class="col-md-4"> 
+                       <label id="label" >   Pays de résidance :</label><span>*</span>
+                      <input type="text" class="form-control" v-model="user.country">
+                    </div>
+                  </div>
+              </div>
+                    <div class="form-group">
+                      <div class="row">
+                    <div class="col-md-4"> 
+                       <label id="label" > CIN / Passport :</label><span>*</span>
+                      <input type="text" class="form-control" v-model="user.cin">
+                    </div>
+                    <div class="col-md-4 py-4"> 
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" value="1" name="flexRadioDefault" id="rd"  v-model="isEnLigne"  checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                         Payement en ligne 
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" value="0" name="flexRadioDefault" id="rd"  v-model="isEnLigne" >
+                        <label class="form-check-label" for="flexRadioDefault2">
+                          Payement à l'Hotel
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-4 py-4"> 
+                      <div class="form-group">
+		                <input id="btn" type="submit" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="BookNow()">
+		               </div>
+                    </div>
+                    </div>
+                    </div>
+            </form>
               </div>
               </div>
             </div>
-          
+            
           </div>
 
         </div>
       </div>
     </section>
 </template>
+<script>
+import axios from 'axios';
+export default {
+  data(){
+    return{
+    	user:{
+				firstname:"",
+				lastname:"",
+				phone:"",
+				country:"",
+        zipcode:"",
+        cin:"",
+        img:"",
+				role:"",
+				email:"",
+        password:""
+      },
+       isLogin:false,
+      isRegister:true,
+      bookingDate:null,
+      nuits:null,
+      rooms:null,
+     isEnLigne:null,
+		}
+    },
+     mounted(){
+    this.isLogin=true;
+    console.log(this.isLogin);
+      if(localStorage.getItem('client')){
+                    try{
+                        this.user = JSON.parse(localStorage.getItem('client'));
+                    }catch(e){
+                        console.log(e);
+                    }
+                }
+                console.log(this.user);
+                 this.bookingDate = JSON.parse(localStorage.getItem('bookingdate'))
+                  let nuit = (Date.parse(this.bookingDate.end)-Date.parse(this.bookingDate.start))/86400000;
+                  this.nuits =nuit
+                  console.log(this.bookingDate);
+                  console.log(this.nuits)
+
+                  this.rooms=JSON.parse(localStorage.getItem('roomBooked'));
+                  console.log(this.rooms);
+
+  },
+  methods :{
+
+   BookNow(){
+     
+     if( localStorage.getItem('token_client')!=null){
+       if(this.isEnLigne==0){
+     for(let i=0 ; i< this.rooms.length ; i++){
+     axios.post('http://localhost:8000/api/booking-room',
+     {
+                  start:this.bookingDate.start,
+                  end:this.bookingDate.end,
+                  confirmation:false,
+                  bookingprice:this.rooms[i].totale,
+                  nom:this.user.firstname,
+                  prenom:this.user.lastname,
+                  cin:this.user.cin,
+                  telephone:this.user.phone,
+                  email:this.user.email,
+                  pay_residence:this.user.country,
+                  user_id:this.user.id,
+                  room_id:this.rooms[i].id_room
+     },
+     { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
+     ).then(res=>{
+      if(res!=null){
+        axios.put('http://localhost:8000/api/updateRoom/'+res.data.Booking.room_id,
+        {
+          avaibility:false,
+        },
+         { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
+        ).then(res=>{
+          console.log(res.data);
+        })
+      }
+     })
+   }
+   }else if(this.isEnLigne==1){
+         for(let i=0 ; i< this.rooms.length ; i++){
+     axios.post('http://localhost:8000/api/booking-room',
+     {
+                  start:this.bookingDate.start,
+                  end:this.bookingDate.end,
+                  confirmation:false,
+                  bookingprice:this.rooms[i].totale,
+                  nom:this.user.firstname,
+                  prenom:this.user.lastname,
+                  cin:this.user.cin,
+                  telephone:this.user.phone,
+                  email:this.user.email,
+                  pay_residence:this.user.country,
+                  user_id:this.user.id,
+                  room_id:this.rooms[i].id_room
+     },
+     { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
+     ).then(res=>{
+      if(res!=null){
+        axios.put('http://localhost:8000/api/updateRoom/'+res.data.Booking.room_id,
+        {
+          avaibility:false,
+        },
+         { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
+        ).then(res=>{
+          if(res!=null){
+            this.$router.push('BookingPaymene')
+          }
+        })
+      }
+     })
+   }
+   }
+     }
+   }
+  }
+  }
+ 
+
+</script>
 <style scoped>
 #title{
   margin-top:25px ;
@@ -285,5 +453,8 @@
 }
 #span{
   font-size: 11px;
+}
+#rd :checked{
+color: crimson;
 }
 </style>
