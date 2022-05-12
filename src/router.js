@@ -92,7 +92,22 @@ const routes=[
         name:'bookingpayment',
         component: () => import('./components/room/booking/BookingPayment.vue'),
     },
-    
+    {
+        path:'/profileedite:id',
+        name:'profileedite',
+        component: () => import('./components/client/ProfileEdite.vue'),
+    },
+    {
+        path:'/offres',
+        name:'offres',
+        component: () => import('./components/client/Offres.vue'),
+    },
+    {
+        path:'/notifications',
+        name:'notifications',
+        component: () => import('./components/client/Notifications.vue'),
+    },
+
 ];
 const router = createRouter({
     history: createWebHashHistory(),

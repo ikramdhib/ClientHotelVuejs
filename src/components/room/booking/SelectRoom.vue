@@ -2,11 +2,11 @@
 <section class="ftco-section contact-section bg-light">
         <div class="row d-flex contact-info">
          <div class="row justify-content-center">
-            <h1 class="mb-4"><div class="row d-flex contact-info">
+          <div class="row d-flex contact-info">
           <div class="col-md-10 heading-section p-5 text-center">
             <h2 class="mb-4 ">Résérvez maintement : </h2>
         </div>
-        </div></h1>
+        </div>
           </div>
         </div>
             <div class="row ">
@@ -34,15 +34,15 @@
                       <td  ><p><span id="tit"> Les Chambre</span></p></td>
                     </tr>
                     <tr v-for="res in reservRoom" :key="res.id">
-                       <td ><p><span id="la" >1 Chambre : {{ res.type }} pour : {{ res.nbadult }}  de {{ res.totale }} DT</span></p></td>
+                       <td ><p><span id="la" ><i id="icone" class="icon icon-bed"></i>  1 Chambre : {{ res.type }} pour : {{ res.nbadult }} persoones de {{ res.totale }} DT</span></p></td>
                     </tr>
-                     <tr>
+                     <tr v-if="totale !=0">
                       <td  ><p><span id="tit"> TOTALE</span></p></td>
                       <td ><p><span id="la"> {{ totale }} </span></p></td>
                     </tr>
                     <tr>
                       <td><div class="form-group">
-		                <input id="btn" type="submit" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="goReserver()">
+		                <input id="btn" type="button" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="goReserver()">
 		              </div></td>
                     </tr>
                   </tbody>
@@ -154,12 +154,12 @@
                       <td>
                          <div class="form-group">
           <div class="heading-section text-center">
-                <input type="submit" :value="((room1.price+option.price_option)*nuits)+'DT'" v-on:click="bookNow1(
+                <input type="button" :value="((room1.price+option.price_option)*nuits)+'DT'" v-on:click="bookNow1(
                   ((room1.price+option.price_option)*nuits),
                   room1.id ,
                    option.nom_option,
                   room1.type,
-                 
+                 room1.nbAdult
                   )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
 
@@ -241,11 +241,12 @@
                       <td>
                          <div class="form-group">
           <div class="heading-section text-center">
-                <input type="submit" :value="(room2.price+option2.price_option)*nuits" v-on:click="bookNow2(
+                <input type="button" :value="(room2.price+option2.price_option)*nuits" v-on:click="bookNow2(
                   ((room2.price+option2.price_option)*nuits),
                   room2.id ,
                    option2.nom_option,
                   room2.type,
+                  room2.nbAdult
                  
                   )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
@@ -319,12 +320,12 @@
                       <td> 
                          <div class="form-group">
           <div class="heading-section text-center">
-                <input type="submit" :value="((room3.price+option.price_option)*nuits)" v-on:click="bookNow3(
+                <input type="button" :value="((room3.price+option.price_option)*nuits)" v-on:click="bookNow3(
                   ((room3.price+option.price_option)*nuits),
                   room3.id ,
                    option.nom_option,
                   room3.type,
-                 
+                 room3.nbAdult
                   )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
               </div>
@@ -393,18 +394,21 @@ export default {
         id_room:"",
         option:"",
         type:"",
+        nbadult:""
       },
       roomReserv2:{
         totale:"",
         id_room:"",
         option:"",
         type:"",
+        nbadult:""
       },
       roomReserv3:{
         totale:"",
         id_room:"",
         option:"",
         type:"",
+        nbadult:""
       },
    totale:0,
     }
@@ -423,12 +427,14 @@ this.nbchambre=parseInt(localStorage.getItem('nbchambre'));
 
 methods:{
 
-   bookNow1(totale , id , option , type){
+   bookNow1(totale , id , option , type , nbadult){
      if(!this.isClickBook1){
    this.roomReserv1.totale=totale
    this.roomReserv1.id_room=id
    this.roomReserv1.option=option
    this.roomReserv1.type=type
+   this.roomReserv1.nbadult=nbadult
+
 console.log("rrom",this.roomReserv);
    this.reservRoom.push(this.roomReserv1)
      console.log("this",this.reservRoom);
@@ -439,6 +445,7 @@ console.log("rrom",this.roomReserv);
    this.roomReserv1.id_room=id
    this.roomReserv1.option=option
    this.roomReserv1.type=type
+   this.roomReserv1.nbadult=nbadult
 console.log("rrom",this.roomReserv);
    this.reservRoom.push(this.roomReserv1)
      console.log("this",this.reservRoom);
@@ -447,12 +454,13 @@ console.log("rrom",this.roomReserv);
 this.calculeTotale();
 
   },
- bookNow2(totale , id , option , type){
+ bookNow2(totale , id , option , type , nbadult){
    if(!this.isClickBook2){
    this.roomReserv2.totale=totale
    this.roomReserv2.id_room=id
    this.roomReserv2.option=option
    this.roomReserv2.type=type
+   this.roomReserv2.nbadult=nbadult
    this.reservRoom.push(this.roomReserv2)
    this.isClickBook2=true;
    }
@@ -462,18 +470,20 @@ this.calculeTotale();
    this.roomReserv2.id_room=id
    this.roomReserv2.option=option
    this.roomReserv2.type=type
+   this.roomReserv2.nbadult=nbadult
    this.reservRoom.push(this.roomReserv2)
    }
    
 this.calculeTotale();
 
   },
-   bookNow3(totale , id , option , type){
+   bookNow3(totale , id , option , type , nbadult){
      if(!this.isClickBook3){
    this.roomReserv3.totale=totale
    this.roomReserv3.id_room=id
    this.roomReserv3.option=option
    this.roomReserv3.type=type
+   this.roomReserv3.nbadult=nbadult
    this.reservRoom.push(this.roomReserv3)
    this.isClickBook3=true;
      }else if (this.isClickBook3){
@@ -482,6 +492,7 @@ this.calculeTotale();
    this.roomReserv3.id_room=id
    this.roomReserv3.option=option
    this.roomReserv3.type=type
+   this.roomReserv3.nbadult=nbadult
    this.reservRoom.push(this.roomReserv3);
      }
      

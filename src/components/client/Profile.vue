@@ -22,8 +22,11 @@
             <h1 class="mb-4"><p>Bonjour {{ user.firstname }}  {{ user.lastname }} </p></h1>
           </div>
         </div>
-        <div class="row block-9 slide-top">
-          <div class="col-md-6 order-md-last d-flex">
+   
+
+                        <div class="row block-9">
+             <div class="row block-9 slide-top">
+          <div class="col-md-6  d-flex">
             <div class="bg-white p-5 contact-form">
                 <div class="row justify-content-center mb-9 pb-5">
           <div class="col-md-10 heading-section text-center">
@@ -33,110 +36,137 @@
                         <table class="table">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Duré</th>
+                    <th scope="col">Chambre</th>
+                    <th scope="col">prix</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
+                <tbody v-for="book in bookings" :key="book">
+                 
+                    <tr  v-if="user.id== book.user_id">
+                    <td> Du {{ book.start }}  <br> Au {{ book.end }} </td>
+                    <td> {{ book.rooms.type }} </td>
+                    <td> {{ book.rooms.price }} </td>
                     </tr>
                 </tbody>
                 </table>
                             </div>
                         
                         </div>
-                        <div class="col-md-6 d-flex">
-                            <div class="bg-white p-5 contact-form">
-                                
-                            <hr/>
+                        
+                        <div class="col-md-6">
+                            <div class="bg-white  contact-form">
+                                <div class="bg-white p-5 contact-form">
+                                  <div class="row justify-content-center mb-9 pb-5">
+                            <div class="col-md-10 heading-section text-center">
+                              <h2 class="mb-4">Mes Information personnel  </h2>
                             </div>
+                            <div class="py-4 ">
+                              <table  class="table table-borderless ">
+                  
+                  <tbody>
+                      <tr>
+                      <td > <i id="icone" class="icon-user"></i> Nom & Prénom</td>
+                      <td> {{ user.firstname }} {{ user.lastname }} </td>
+                    </tr>
+                    <tr>
+                      <td ><i id="icone" class="icon-phone"></i> Téléphone </td>
+                      <td>{{ user.phone }} </td>
+                    </tr>
+                    <tr>
+                      <td > <i id="icone" class="icon-map-marker"></i> Adresse </td>
+                      <td>{{ user.country }} </td>
+                    </tr>
+                      <td ><i id="icone" class="icon-envelope"></i> Code Postal</td>
+                      <td>{{ user.zipcode }} </td>
+                    <tr>
+                      <td ><i id="icone" class="icon-credit-card"></i> Carte d'identité </td>
+                      <td>{{ user.cin }} </td>
+                    </tr>
+                    <tr>
+                      <td > <i id="icone" class="icon-envelope"></i> email </td>
+                      <td> {{ user.email }} </td>
+                      
+                    </tr>
+                    <tr>
+                      <td >
+		                <input id="btnn" type="button" value="Consulter vos Notifications"  class="btn btn-primary px-4" @click="goNotifications()">
+		             </td>
+                    </tr>
+                    <tr>
+                      <td >
+		                <input id="btnn" type="button" value="Consulter notre Offres"  class="btn btn-primary px-4" @click="back()">
+		             </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                      </td>
+                      <td>
+		                <input id="btn" type="button" value="Editer"  class="btn btn-primary px-4" @click="goEditer()">
+		             </td>
+                    </tr>
+                  </tbody>
+                </table>
+                              </div>
+                            </div>
+                          </div>
+                                </div>
                         </div>
                         </div>
 
-                        <div class="row block-9">
-                        <div class="col-md-6 order-md-last d-flex">
-                            <div class="bg-white p-5 contact-form">
-                                <div class="row justify-content-center mb-9 pb-5">
-                        <div class="col-md-10 heading-section text-center">
-                            <h2 class="mb-4"> Mes Information  </h2>
-                        </div>
-                        </div>
-                            <table class="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                    <th scope="row">
-                                        <a href="">Information Personnelles <i id="row" class="icon-arrow-right"></i></a>
-                                    </th>
-                                    </tr>
-                                    <tr>
-                                    <th scope="row">
-                                        <a href="">Changer Mot de Passe <i id="row" class="icon-arrow-right"></i></a>
-                                    </th>
-                                    </tr>
-                                    <tr>
-                                    <th scope="row">
-                                        <a href="">Mes Badges <i id="row" class="icon-arrow-right"></i></a>
-                                    </th>
-                                    </tr>
-                                    <tr>
-                                    <th scope="row">
-                                        <a href="">Mes Points <i id="row" class="icon-arrow-right"></i></a>
-                                    </th>
-                                    </tr>
-                                    <tr>
-                                    <th scope="row">
-                                        <a href="">Gérer Mes Informations Personnelles  <i id="row" class="icon-arrow-right"></i></a>
-                                    </th>
-                                    </tr>
-                                </tbody>
-                            </table>
-            </div>
-          
-          </div>
-          <div class="col-md-6 d-flex">
-               <div class="bg-white p-5 contact-form">
-                  
-              <hr/>
-            </div>
-          </div>
-          
         </div>
       </div>
     </section>
 </template>
 <script>
+import axios from 'axios';
 export default {
 	data(){
 		return{
 			user:{},
-			isToken:false,
+      isToken:false,
+      bookings:[],
 		}
 	},
 	mounted(){
 		if(localStorage.getItem('token_client')){
 			this.isToken=true;
 			this.user=JSON.parse(localStorage.getItem('client'))
-		}
-		console.log(this.isToken);
-		console.log(this.user);
+    }
+    this.getBookings();
+    
+
     },
+    methods : {
+      getBookings(){
+        axios.get('http://localhost:8000/api/bookings',
+         { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
+        ).then(res=>{
+          this.bookings=res.data.bookings 
+          console.log(this.bookings);
+        })
+      },
+      goEditer(){
+        this.$router.push({name:'profileedite' , params:{id:this.user.id}})
+      },
+      goNotifications(){
+        this.$router.push('notifications')
+      }
+    }
 }
 </script>
+<style scoped>
+#icone{
+  font-size:15px;
+  color:#8d703b;
+}
+#btn{
+  border-radius: 0%;
+}
+#btnn{
+ background-color: transparent;
+ color:#8d703b;
+ border-color: transparent;
+}
+</style>

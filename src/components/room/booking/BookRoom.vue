@@ -146,74 +146,33 @@
               </div>
               </div>
                    <div  class="row">
-                <form class="bg-light p-5 contact-form">
-              <div class="form-group">
+                <form class="bg-light p-5 ">
+              <div class="form-group" >
                   <div class="row">
-                  <div class="col-md-2"> 
-                  <i class="icon-circle-arrow-right"></i>  <label id="label" >   Titre : </label><span>*</span>
-		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control">
-	                    	<option value="">M. </option>
-	                      <option value="">Mme. </option>
-	                      <option value="">Mlle. </option>
-	                    </select>
-	                  </div>
-                    </div>
-                    <div class="col-md-4"> 
-                   <label id="label" >   Prénom :</label><span>*</span>
-                   <input type="text" class="form-control" v-model="user.firstname">
-
-                    </div>
-                     <div class="col-md-4"> 
-                 <label id="label" > Nom :</label> <span>*</span>
-                   <input type="text" class="form-control" v-model="user.lastname" >
-
-                    </div>
+                         <table  class="table table-borderless ">
+                  
+                  <tbody>
+                      <tr>
+                      <td colspan="2" id="tit"> Récapitulatif  <hr/></td>
+                      <td ><p id="la"> {{ nuits }} Nuits </p></td>
+                    </tr>
+                    <tr v-for="room in rooms" :key="room">            
+                       <td ><p id="tit"> {{ room.type }} </p> </td>
+                       <td ><p id="la"> <span v-for="i in room.nbadult" :key="i"><i id="icone" class="icon icon-user"> </i> </span> <br> {{ room.option }} </p>  </td>
+                       <td ><p id="la"> {{ room.totale }} DT</p>  </td>
+                       
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>
+		                <input id="btn" type="button" value="Modifier mon résérvation"  class="btn btn-primary" @click="back()">
+		             </td>
+                    </tr>
+                  </tbody>
+                </table>
                  </div>
               </div>
-              <div class="form-group">
-                  <div class="row">
-                     <div class="col-md-4"> 
-                  <label id="label" >   Email :</label><span>*</span>
-                 <input type="email" class="form-control"  v-model="user.email">
-                    </div>
-                    <div class="col-md-4"> 
-                 <label id="label" >   Téléphone :</label><span>*</span>
-                 <input type="text" class="form-control" v-model="user.phone" >
-                    </div>
-                    <div class="col-md-4"> 
-                       <label id="label" >   Pays de résidance :</label><span>*</span>
-                      <input type="text" class="form-control" v-model="user.country">
-                    </div>
-                  </div>
-              </div>
-                    <div class="form-group">
-                      <div class="row">
-                    <div class="col-md-4"> 
-                       <label id="label" > CIN / Passport :</label><span>*</span>
-                      <input type="text" class="form-control" v-model="user.cin">
-                    </div>
-                    <div class="col-md-4 py-4"> 
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" value="1" name="flexRadioDefault" id="rd"  v-model="isEnLigne"  checked>
-                        <label class="form-check-label" for="flexRadioDefault1">
-                         Payement en ligne 
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" value="0" name="flexRadioDefault" id="rd"  v-model="isEnLigne" >
-                        <label class="form-check-label" for="flexRadioDefault2">
-                          Payement à l'Hotel
-                        </label>
-                      </div>
-                    </div>
-                    <div class="col-md-4 py-4"> 
-                      <div class="form-group">
-		                <input id="btn" type="submit" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="BookNow()">
-		               </div>
-                    </div>
-                    </div>
-                    </div>
             </form>
               </div>
               <div  class="row py-4">
@@ -280,7 +239,7 @@
                     </div>
                     <div class="col-md-4 py-4"> 
                       <div class="form-group">
-		                <input id="btn" type="submit" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="BookNow()">
+		                <input id="btn" type="button" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="BookNow()">
 		               </div>
                     </div>
                     </div>
@@ -323,7 +282,6 @@ export default {
     },
      mounted(){
     this.isLogin=true;
-    console.log(this.isLogin);
       if(localStorage.getItem('client')){
                     try{
                         this.user = JSON.parse(localStorage.getItem('client'));
@@ -331,18 +289,17 @@ export default {
                         console.log(e);
                     }
                 }
-                console.log(this.user);
                  this.bookingDate = JSON.parse(localStorage.getItem('bookingdate'))
                   let nuit = (Date.parse(this.bookingDate.end)-Date.parse(this.bookingDate.start))/86400000;
                   this.nuits =nuit
-                  console.log(this.bookingDate);
-                  console.log(this.nuits)
-
                   this.rooms=JSON.parse(localStorage.getItem('roomBooked'));
-                  console.log(this.rooms);
 
   },
   methods :{
+
+    back(){
+      this.$router.push('selectroom')
+    },
 
    BookNow(){
      
@@ -456,5 +413,45 @@ export default {
 }
 #rd :checked{
 color: crimson;
+}
+#title{
+  margin-top:25px ;
+  margin-left: 10px;
+}
+#form{
+  background-color: gray;
+}
+#nuit{
+  margin-top: 45px;
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+}
+#label{
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  font-size: 20px;
+
+}
+#img{
+  width: 150px;
+}
+#dropdown{
+margin: 20px;
+}
+#ctn{
+  margin-top: 1px;
+}
+#tit{
+  font-weight: bold;
+}
+#icone{
+  padding-top: 112px;
+  font-size:25px;
+  color:#8d703b;
+}
+#sp{
+  font-weight: bold;
+  color: lightslategrey;
+  font-size: 12px;
 }
 </style>
