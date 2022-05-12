@@ -72,11 +72,7 @@ const routes=[
         name:'roomsingle',
         component: () => import('./components/room/RoomSingle.vue'),
     },
-    {
-        path:'/BookingRoom',
-        name:'BookingRoom',
-        component: () => import('./components/room/BookingRoom.vue'),
-    },
+   
    
     
 ];
