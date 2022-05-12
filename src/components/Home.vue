@@ -200,21 +200,12 @@
         </div>
       </div>
     </section>
-<<<<<<< HEAD
 <!--get les chambres-->
     <section class="ftco-section bg-light">
     	<div class="container">
 				<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ">
             <h2 class="mb-4">Notres Chambres</h2>
-=======
-
-    <section class=" bg-light">
-    	<div class="container">
-				<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section text-center">
-            <h2 class="mb-4">Our Rooms</h2>
->>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
           </div>
         </div>
 
