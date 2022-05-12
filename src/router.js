@@ -72,6 +72,11 @@ const routes=[
         name:'roomsingle',
         component: () => import('./components/room/RoomSingle.vue'),
     },
+<<<<<<< HEAD
+   
+   
+    
+=======
     {
         path:'/findroom',
         name:'findroom',
@@ -108,6 +113,7 @@ const routes=[
         component: () => import('./components/client/Notifications.vue'),
     },
 
+>>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
 ];
 const router = createRouter({
     history: createWebHashHistory(),

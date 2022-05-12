@@ -17,13 +17,46 @@
     <section class="ftco-section bg-light">
     	<div class="container">
 				
-    		<div class="row">
+    	<div class="row justify-content-center mb-5 pb-3">
+         
 			
 	           <div class="col-lg-9">
 				   
 		    		<div class="row">
 						 
 						<template v-for="room in rooms" :key="room.id">
+<<<<<<< HEAD
+							
+		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate py-4"   v-if="room.avaibility == 1" >
+							  <div class="card-deck">
+		    				<div class="card" style="width: 18rem;">
+
+                          <img :src="'http://localhost:8000/storage'+room.images.name"/>
+
+						  
+                       <div class="card-body">
+
+						   <div v-for="type in types" :key="type.id">
+                             <div v-if="type.id == room.type_id">
+
+						   <h5 class="card-title text-center">{{type.nom_type}}</h5>
+						   <div v-for="price in prices" :key="price.id">
+
+                             <div v-if="price.id == room.price_id">
+						   	<div class="text p-3 text-center">
+    						
+    						<h4 class="price mb-4">{{price.price_hotel}} DT <span class="per"> par nuit</span></h4>
+    						
+							   </div>
+							 </div></div>
+						<div class="box">
+							   <div v-if="room.nbAdult>0">
+                          <p class="card-text"><i class="icon-group " > :</i>{{room.nbAdult}} Adult</p></div>
+				
+	                    <p class="card-text"><i class="icon-bed " > :</i>{{room.nbBed}} Lits</p>
+						   </div></div>
+                                        	<hr>
+=======
 		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate" v-if="room.avaibility == 'OUI'" >
 							 
 		    				<div class="room">
@@ -44,12 +77,16 @@
 		    							<li><span>nombre lit :</span> {{room.nbBed}}</li>
 		    						</ul>
 		    						<hr>
+>>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
 		    						<p class="pt-1"> 
-										 <router-link :to="'RoomSingle'+ room.id " class="btn-custom">plus details <span class="icon-long-arrow-right"></span> </router-link>
-										</p>
-		    					</div>
-		    			
-		    			</div></div></template>
+						 <router-link :to="'RoomSingle'+ room.id " class="btn-custom ">plus details <span class="icon-long-arrow-right"></span> </router-link>
+							</p>
+                          
+                         </div>   
+						</div>	
+						</div>
+						</div></div>
+						</template>
 				
 		 
     	</div>
@@ -220,6 +257,7 @@ export default {
 	  types:[],
 	room_id:[],
 	     id:0,
+		 image:"",
     };
   },
    computed: {
@@ -232,8 +270,8 @@ export default {
   mounted(){
    this.getRoom();
     this.getType();
- 
-	
+ this.getPrice();
+
   },
 
    
@@ -241,16 +279,27 @@ export default {
   methods: {       
   async getRoom(){
  await axios
+<<<<<<< HEAD
+  .get("http://localhost:8000/api/getRoom", 
+       
+      )
+      .then((res) => {
+		   
+			   this.rooms = res.data.rooms;
+			   this.image=res.data.rooms.images.name;
+=======
   .get("http://127.0.0.1:8000/api/room", {
         headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
       })
       .then((res) => {
 		   
 			   this.rooms = res.data.room;
+>>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
 
-           console.log(this.rooms.length)
-         
-	  })
+           console.log(this.table)
+		   
+   }
+	)
 
 	  },
           
@@ -258,18 +307,50 @@ export default {
 	 
 	  async getType(){
  await axios
+<<<<<<< HEAD
+  .get("http://127.0.0.1:8000/api/type", 
+
+      )
+=======
   .get("http://127.0.0.1:8000/api/type", {
         headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
       })
+>>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
       .then((res) => {
      
  
-      this.types = res.data.data;
+      this.types = res.data.type;
 	  
 
-        console.log(res.data);
+        console.log(this.types);
       })
 	
     
-      }}}
+      },
+	  
+	  async getPrice(){
+ await axios
+  .get("http://127.0.0.1:8000/api/price", 
+
+      )
+      .then((res) => {
+     
+ 
+      this.prices= res.data.price;
+	  
+
+        console.log(this.prices);
+      })
+	
+    
+      },
+	  
+  }}
 	  </script>
+	  <style >
+	div.box{
+	 font-size: 15px;
+	 color: black;
+
+	  }
+	  </style>
