@@ -23,9 +23,9 @@
                     <li v-if="isTokenAccount" id="compte" class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="icon-user"></i> {{ user.firstname }}  {{ user.lastname }}</a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="#" class="dropdown-item">profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Quiter</a>
+                         <!--   <a class="dropdown-item" @click="goToProfile()" >profile</a>-->
+						 <router-link class="dropdown-item" to="profile" >Profile</router-link>
+                            <a href="#" class="dropdown-item" @click="logout()">Quiter</a>
                         </div>
                     </li>
 					
@@ -71,6 +71,9 @@ export default {
 					console.warn(e)
 				})
 			}
+		},
+		goToProfile(){
+			this.$router.push('profile')
 		}
 	}
 }

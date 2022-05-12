@@ -6,7 +6,7 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <p class="breadcrumbs mb-2"><span class="mr-2"><router-link to="/"> Home</router-link></span> <span>Contact</span></p>
+	            <p class="breadcrumbs mb-2"><span class="mr-2"><router-link to="/"> Home</router-link></span> <span>Login</span></p>
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@
           <div class="col-md-3 d-flex">
           </div>
         </div>
-        <div class="row block-9 slide-top">
+        <div class="row block-9 slide-top" >
           <div class="col-md-6 order-md-last d-flex">
             <form  class="bg-white p-5 contact-form">
               <div class="form-group">
@@ -42,7 +42,7 @@
               <div class="form-group">
                   <div class="row justify-content-center mb-9 pb-2">
           <div class="col-md-10 heading-section text-center">
-                <input type="submit" value="Connecter" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" v-on:click="login()">
+                <input type="button" value="Connecter" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5" v-on:click="login()">
               </div>
                   </div>
               </div>
@@ -51,7 +51,7 @@
               <div class="form-group">
                        <div class="row justify-content-center mb-9 pb-2">
           <div class="col-md-10 heading-section text-center">
-           <span><router-link to="forgetpassword"> de Passe Oublier  ?</router-link></span>
+           <span><router-link to="forgetpassword"> Mot de Passe Oublier  ?</router-link></span>
           </div>
         </div>
               </div>

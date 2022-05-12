@@ -25,6 +25,7 @@
 		    		<div class="row">
 						 
 						<template v-for="room in rooms" :key="room.id">
+<<<<<<< HEAD
 							
 		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate py-4"   v-if="room.avaibility == 1" >
 							  <div class="card-deck">
@@ -55,6 +56,28 @@
 	                    <p class="card-text"><i class="icon-bed " > :</i>{{room.nbBed}} Lits</p>
 						   </div></div>
                                         	<hr>
+=======
+		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate" v-if="room.avaibility == 'OUI'" >
+							 
+		    				<div class="room">
+		    					<a  class="img d-flex justify-content-center align-items-center" id="room1" style="background-image">
+		    						<div class="icon d-flex justify-content-center align-items-center">
+		    							<span class="icon-search2"></span>
+		    						</div>
+		    					</a>
+							<div class="text p-3 text-center">
+								<div v-for="type in types" :key="type.id">
+                                        <div v-if="type.id == room.type_id">
+		    						<h3 class="mb-3"><a href="">{{type.nom_type}}</a></h3></div></div>
+		    					
+		    						<ul class="list">
+		    							<li><span>nombre adult:</span>{{room.nbAdult}}</li>
+		    							<li><span>nombre enfant : </span>{{room.nbEnfant}}</li>
+		    							
+		    							<li><span>nombre lit :</span> {{room.nbBed}}</li>
+		    						</ul>
+		    						<hr>
+>>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
 		    						<p class="pt-1"> 
 						 <router-link :to="'RoomSingle'+ room.id " class="btn-custom ">plus details <span class="icon-long-arrow-right"></span> </router-link>
 							</p>
@@ -256,6 +279,7 @@ export default {
   methods: {       
   async getRoom(){
  await axios
+<<<<<<< HEAD
   .get("http://localhost:8000/api/getRoom", 
        
       )
@@ -263,6 +287,14 @@ export default {
 		   
 			   this.rooms = res.data.rooms;
 			   this.image=res.data.rooms.images.name;
+=======
+  .get("http://127.0.0.1:8000/api/room", {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
+      })
+      .then((res) => {
+		   
+			   this.rooms = res.data.room;
+>>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
 
            console.log(this.table)
 		   
@@ -275,9 +307,15 @@ export default {
 	 
 	  async getType(){
  await axios
+<<<<<<< HEAD
   .get("http://127.0.0.1:8000/api/type", 
 
       )
+=======
+  .get("http://127.0.0.1:8000/api/type", {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token_client") },
+      })
+>>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
       .then((res) => {
      
  
