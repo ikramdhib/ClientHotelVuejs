@@ -30,7 +30,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Restaurant & Cofée</a>
                         <div class="dropdown-menu dropdown-menu-end">
                          <!--   <a class="dropdown-item" @click="goToProfile()" >profile</a>-->
-						 <router-link class="dropdown-item" to="restaurant" >Restaurant</router-link>
+						 <router-link class="dropdown-item" to="restaurant1" >Restaurant</router-link>
                            <router-link class="dropdown-item" to="rooftop" >Roof-Top</router-link>
                         </div>
                     </li>

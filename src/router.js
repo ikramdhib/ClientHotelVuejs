@@ -107,6 +107,11 @@ const routes=[
         name:'notifications',
         component: () => import('./components/client/Notifications.vue'),
     },
+    {
+        path:'/roof-top:id',
+        name:'roof-top',
+        component: () => import('./components/roof-top/Roof-Top.vue'),
+    },
 
 ];
 const router = createRouter({
