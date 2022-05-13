@@ -208,9 +208,7 @@
             <h2 class="mb-4">Notres Chambres</h2>
           </div>
         </div>
-
-
-    		        <div class="row">
+		 <div class="row">
 					<template v-for="room in rooms" :key="room.id">
     		    	<div class="col-sm col-md-6 col-lg-4 py-4"  v-if="room.avaibility == 1" >
 				
@@ -226,7 +224,10 @@
 
                              <div v-if="price.id == room.price_id">
     						<div class="text p-3 text-center">
-    						<h4 class="price mb-4"><div class="box">{{price.price_hotel}} DT </div><div class="box1"> par nuit </div></h4>
+    			<p class="box">{{price.price_hotel}} DT  <span class="box1"> par nuit </span> 
+
+          
+          </p>
 						</div>
 					</div>
 				</div>
@@ -244,93 +245,7 @@
 		
 </section>
 
-  <!--
-
- <section class="  testimony-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8 ">
-          	<div class="row">
-		          <div class="col-md-12">
-		            <div class="carousel-testimony ">
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(./images/person_1.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-		                    <p class="name">Nathan Smith</p>
-		                    <span class="position">Guests</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(./images/person_2.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-		                    <p class="name">Nathan Smith</p>
-		                    <span class="position">Guests</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(./images/person_3.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-		                    <p class="name">Nathan Smith</p>
-		                    <span class="position">Guests</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(./images/person_1.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-		                    <p class="name">Nathan Smith</p>
-		                    <span class="position">Guests</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(./images/person_1.jpg)">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-		                    <p class="name">Nathan Smith</p>
-		                    <span class="position">Guests</span>
-		                  </div>
-		                </div>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-          </div>
-        </div>
-      </div>
-    </section>
--->
+  
     <section class="">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
@@ -413,12 +328,7 @@ export default {
 		 image:"",
     };
   },
-   computed: {
-    FilteredList() {
-      return this.rooms.filter((room) => {
-       return room.adult.tolowerCase().includes(this.nbAdultselect.tolowerCase())
-            });}
-   },
+   
    
   mounted(){
    this.getRoom();
@@ -486,15 +396,16 @@ export default {
   }}
 	  </script>
 	  <style >
-	div.box{
+	.box{
 	
-	 color:#8d703b;
-	text-align: left;
+	 color:#bb9245;
+		font-size: 20px;
+    font-weight: bold;
 	  }
-	  	div.box1{
+	  	.box1{
 	font-size: 15px;
 	 color:grey;
-	 text-align: right;
+font-weight: lighter;
 
 	  }
 	  </style>

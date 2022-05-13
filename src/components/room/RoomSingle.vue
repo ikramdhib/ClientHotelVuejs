@@ -1,6 +1,7 @@
-<template>
- 
-<div class="hero-wrap" id="bg1" style="background-image">
+<template >
+  <div class="hero-wrap" id="bg1" style="background-image">
+      <div class="overlay"></div>
+      <div class="hero-wrap" id="bg1" style="background-image">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
@@ -12,11 +13,8 @@
           </div>
         </div>
       </div>
-    </div>
- 
-
-
-  <section class="ftco-section">
+    </div></div>
+ <section class="ftco-section">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
@@ -25,20 +23,7 @@
                 <div class="col-md-10 heading-section text-center py-4">
           			<h2 class="mb-4"> {{ type_nom}} </h2>
                 </div> 
-      <div class="col-md-8">
-               <carousel>
-  
- 
-  
-      
-                     <img class="img-fluid" v-for="image in images" :src="'http://localhost:8000/storage'+image.name" :key="image.id"/>
-               </carousel>
-    </div>
-
- 
-     
-    
-
+              
               </div>
           		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
     						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.{{room.description}}</p>
@@ -58,11 +43,8 @@
 	    							<li><i class="icon-bed " id="icon">: </i>{{room.nbBed}}</li>
 	    						</ul>
     						</div>
-    					
-          		</div>
-          
-
-          		<div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
+    					</div>
+              <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
           			<h4 class="mb-4">Review &amp; Ratings</h4>
           			<div class="row">
           				<div class="col-md-6">
@@ -104,83 +86,75 @@
           		<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
                   <div class="row">
           			<h4 class="mb-4">Available Room</h4>
-             
-          					<div class="col-sm col-md-6 "  v-for="chambre in chambres" :key="chambre.id"  >
+             <div class="col-sm col-md-3 "  v-for="chambre in chambres" :key="chambre.id"  >
                     <div class="c">  
-                      
-                            
-				    		
-				    				
-				    			<div class="card" style="width: 18rem;" > 
-  <img  :src="'http://localhost:8000/storage'+chambre.images.name" alt="Card image cap">
+                      <div v-for="objet in objets" :key="objet.id ">
+                      <div v-if="objet.id==type_id && objet.id==chambre.type_id">
+				    				<div class="card" style="width: 18rem;" > 
+                      <img  :src="'http://localhost:8000/storage'+chambre.images.name" alt="Card image cap">
+                      <div class="card-body">
+                     <h5 class="card-title text-center">{{objet.nom_type}}</h5>
+                           <div class="text p-3 text-center">
+	                             <div v-for="prix in prixs" :key="prix.id">
+                                 <div v-if="prix.id == chambre.price_id">
+    						                      <div class="text p-3 text-center">
+    						               <p class="bo">{{prix.price_hotel}} DT  <span class="b1"> par nuit </span> 
 
-  <div class="card-body">
-    <div v-for="objet in objets" :key="objet.id ">
-         
-       <div v-if="objet.id==type_id && objet.id==chambre.type_id">
-      
-     <h5 class="card-title text-center">{{objet.nom_type}}</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.{{chambre.description}}</p>
-  </div></div></div>
-</div>
-                         
-				    			</div>
+          
+          </p>
+						                    </div>
+				                      	</div>
+				                        </div>
+                                   <router-link :to="'RoomSingle'+ room.id " ><a href="#" class="btn btn-primary">plus details</a></router-link>
+                                    </div>
+                                   </div>
+                               </div>
+                         </div>
                     </div>
-                
-                  </div></div>
-
-          	</div>
+                </div>
+                 </div>
+                  </div>
+                </div>
+                </div>
           </div> <!-- .col-md-8 -->
           <div class="col-lg-4 sidebar ftco-animate">
-          
-             
-                <div class="form-group">
-                 <div class="box">
-                 
-                <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5">
+          <div class="form-group">
+               <div class="box">
+              <router-link :to="'findroom'" > <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5"></router-link>
               </div>
-                </div>
-              
-           
-            <div class="sidebar-box ftco-animate">
+              </div>
+               <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h2> les Prix</h2>
-               <div  v-if="pric>0">
+               <div  v-if="this.per>0">
                  <del id="reduit">{{price}} DT </del>
-                   <li id="p1">{{ calcul }} DT</li> 
+                   <li id="p1">{{ (this.pric*this.pric)/100}} DT</li> 
                </div>
-               <div v-else-if="pric==null">
+               <div v-else-if="this.per==0">
               <li id="p1">{{ price }} DT  </li> 
               </div>
               </div>
             </div>
-
-          
-  
+            	
             <div class="sidebar-box ftco-animate">
               <h2>Options</h2>
               <div class="row">
-          		<div class="col-sm-2" v-for="option in options" :key="option.id">
-              
-               
+          	<div class="col-sm-2" v-for="option in options" :key="option.id">
               <div class="tagcloud " id="tag">
-                 
                 <a class="tag-cloud-link">{{option.nom_option}}</a>
-                    
               </div>
               </div>
               </div>
             </div>
-            <div v-for="offre in offres" :key="offre.id">
-
-   <div class="card"  id="card" style="width: 18rem;" v-if="offre.disponibilite== 1">
-  <div class="card-body">
-    <h5 class="card-title">{{offre.titre}}</h5>
-    <p class="card-text">{{ offre.description }}.</p>
-    <p class="card-text" id="p">{{ offre.pourcentage}} % </p>
-  </div>
-  </div>
-</div>
+             <div v-for="offre in offres" :key="offre.id">
+             <div class="card"  id="card" style="width: 18rem;" v-if="offre.disponibilite== 1">
+            <div class="card-body">
+          <h5 class="card-title">{{offre.titre}}</h5>
+         <p class="card-text">{{ offre.description }}.</p>
+           <p class="card-text" id="p">{{ offre.pourcentage}} % </p>
+              </div>
+           </div>
+            </div>
             <div class="sidebar-box ftco-animate">
               <h3>type chambre</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!{{typdesc}}</p>
@@ -188,12 +162,9 @@
           </div>
         </div>
       </div>
-   
-    </section> <!-- .section -->
-
-
-    
+      </section> <!-- .section -->
 </template>
+ 
 <script>
 
 import axios from "axios";
@@ -206,7 +177,7 @@ export default {
   options:[],
   type_nom:{},
   objets:[],
-  prix:[],
+  prixs:[],
 price:{},
 calcul:{},
   images:[],
@@ -246,10 +217,10 @@ calcul:{},
           this.offres=res.data.rooms.offres;
           this.images=res.data.rooms.images;
 
-   this. per= parseFloat(res.data.rooms.offres.pourcentage);
- this. pric=parseFloat(res.data.rooms.prices.price_hotel);
- this.calcul=parseFloat((this.pric*this.pric)/100);
- console.log("gg",this.calcul,this.per,this.pric);
+   this.per=parseInt( res.data.rooms.offres.pourcentage);
+ this. pric=res.data.rooms.prices.price_hotel;
+ 
+
 
 
          console.log("option",this.type_id) 
@@ -298,7 +269,7 @@ calcul:{},
       .then((res) => {
      
  
-      this.prix= res.data.price;
+      this.prixs= res.data.price;
 	  
 
         console.log(this.prix);
@@ -306,20 +277,9 @@ calcul:{},
 	
     
       },}}
-   
-    
-    
-    
-  
-  
-  
-
-			
-  
-
-
-</script>
+   </script>
 <style>
+
 #tag{
    min-height: 1rem;
 }
@@ -353,4 +313,16 @@ box-shadow: 10px 5px 5px #8d703b;}
 #box{
 margin-top: 35%;
 border-radius: 0%}
+.bo{
+	
+	 color:#f33413;
+		font-size: 20px;
+    font-weight: bold;
+	  }
+	  	.b1{
+	font-size: 15px;
+	 color:grey;
+font-weight: lighter;
+
+	  }
 </style>

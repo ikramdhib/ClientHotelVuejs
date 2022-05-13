@@ -72,9 +72,47 @@ const routes=[
         name:'roomsingle',
         component: () => import('./components/room/RoomSingle.vue'),
     },
-   
-   
-    
+    {
+        path:'/findroom',
+        name:'findroom',
+        component: () => import('./components/room/booking/FindRoom.vue'),
+    },
+    {
+        path:'/booking',
+        name:'booking',
+        component: () => import('./components/booking.vue'),
+    },
+    {
+        path:'/selectroom',
+        name:'selectroom',
+        component: () => import('./components/room/booking/SelectRoom.vue'),
+    },
+    {
+        path:'/bookroom',
+        name:'bookroom',
+        component: () => import('./components/room/booking/BookRoom.vue'),
+    },
+    {
+        path:'/bookingpayment',
+        name:'bookingpayment',
+        component: () => import('./components/room/booking/BookingPayment.vue'),
+    },
+    {
+        path:'/profileedite:id',
+        name:'profileedite',
+        component: () => import('./components/client/ProfileEdite.vue'),
+    },
+    {
+        path:'/offres',
+        name:'offres',
+        component: () => import('./components/client/Offres.vue'),
+    },
+    {
+        path:'/notifications',
+        name:'notifications',
+        component: () => import('./components/client/Notifications.vue'),
+    },
+
 ];
 const router = createRouter({
     history: createWebHashHistory(),

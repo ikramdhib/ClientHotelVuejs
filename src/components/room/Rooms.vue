@@ -5,77 +5,65 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home</a></span> <span>About</span></p>
-	            <h1 class="mb-4 bread">Rooms</h1>
+	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Acceuil</a></span> <span>A propos</span></p>
+	            <h1 class="mb-4 bread">Chambres</h1>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
-    <section class="ftco-section bg-light">
+<section class="ftco-section bg-light">
     	<div class="container">
-				
-    	<div class="row justify-content-center mb-5 pb-3">
-         
-			
-	           <div class="col-lg-9">
-				   
-		    		<div class="row">
-						 
+			<div class="row justify-content-center mb-5 pb-3">
+                <div class="col-lg-9">
+				  <div class="row">
 						<template v-for="room in rooms" :key="room.id">
-							
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate py-4"   v-if="room.avaibility == 1" >
+				            <div class="col-sm col-md-6 col-lg-4 ftco-animate py-4"   v-if="room.avaibility == 1" >
 							  <div class="card-deck">
 		    				<div class="card" style="width: 18rem;">
-
-                          <img :src="'http://localhost:8000/storage'+room.images.name"/>
-
-						  
-                       <div class="card-body">
-
-						   <div v-for="type in types" :key="type.id">
+                              <img :src="'http://localhost:8000/storage'+room.images.name"/>
+							  <div class="card-body">
+                              <div v-for="type in types" :key="type.id">
                              <div v-if="type.id == room.type_id">
-
-						   <h5 class="card-title text-center">{{type.nom_type}}</h5>
-						   <div v-for="price in prices" :key="price.id">
-
-                             <div v-if="price.id == room.price_id">
+                              <h5 class="card-title text-center">{{type.nom_type}}</h5>
+						      <div v-for="price in prices" :key="price.id">
+                               <div v-if="price.id == room.price_id">
 						   	<div class="text p-3 text-center">
-    						
-    						<h4 class="price mb-4">{{price.price_hotel}} DT <span class="per"> par nuit</span></h4>
-    						
-							   </div>
-							 </div></div>
+    							<p class="bo">{{price.price_hotel}} DT  <span class="b1"> par nuit </span> 
+
+          
+          </p>
+    						</div>
+							 </div>
+							 </div> 
 						<div class="box">
-							   <div v-if="room.nbAdult>0">
-                          <p class="card-text"><i class="icon-group " > :</i>{{room.nbAdult}} Adult</p></div>
-				
-	                    <p class="card-text"><i class="icon-bed " > :</i>{{room.nbBed}} Lits</p>
-						   </div></div>
-                                        	<hr>
-		    						<p class="pt-1"> 
+						<div v-if="room.nbAdult>0">
+                        <p class="card-text"><i class="icon-group " > :</i>{{room.nbAdult}} Adult</p></div>
+				        <p class="card-text"><i class="icon-bed " > :</i>{{room.nbBed}} Lits</p>
+						   </div>
+						   </div>
+						   </div>
+                            <hr>
+		    			<p class="pt-1"> 
 						 <router-link :to="'RoomSingle'+ room.id " class="btn-custom ">plus details <span class="icon-long-arrow-right"></span> </router-link>
 							</p>
-                          
-                         </div>   
-						</div>	
+                          </div>	
 						</div>
-						</div></div>
+						</div>
+						</div>
 						</template>
-				
-		 
-    	</div>
-			</div>
-		 <div class="col-lg-3 sidebar">
+                            </div>
+			                   </div>
+		               <div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Advanced Search</h3>
 	      			<form action="#">
 	      				<div class="fields">
 		              <div class="form-group">
-		                <input type="text" id="checkin_date" class="form-control checkin_date" placeholder="Check In Date">
-		              </div>
+		              
+                      <input placeholder="" type="date" id="example" class="form-control" :min="dateNow"  >
+                    </div>
+		             
 		              <div class="form-group">
 		                <input type="text" id="checkin_date" class="form-control checkout_date" placeholder="Check Out Date">
 		              </div>
@@ -96,35 +84,29 @@
 	                    	<option value="1">1 Adult</option>
 							<option value="2">2 Adult</option>
 							<option value="3">3 Adult</option>
-	                  
-	                    
-	                    </select>
+	                  </select>
 	                  </div>
 		              </div>
 		              <div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                   
-	                    	 <select name="" id="" class="form-control">
+	                   <select name="" id="" class="form-control">
 	                    	<option value="0">0 Enfant</option>
 	                    	<option value="1">1 Enfant</option>
 							<option value="2">2 Enfant</option>
 							<option value="3">3 Enfant</option>
-	                  
-	                    
-	                    </select>
+	                  </select>
 	                  </div>
 		              </div>
 		              <div class="form-group">
 		              	<div class="range-slider">
 		              		<span>
-										    <input type="number" value="25000" min="0" max="120000"/>	-
-										    <input type="number" value="50000" min="0" max="120000"/>
-										  </span>
-										  <input value="1000" min="0" max="120000" step="500" type="range"/>
-										  <input value="50000" min="0" max="120000" step="500" type="range"/>
-										  
-										</div> 
+						<input type="number" value="25000" min="0" max="120000"/>	-
+						<input type="number" value="50000" min="0" max="120000"/>
+						</span>
+						<input value="1000" min="0" max="120000" step="500" type="range"/>
+						<input value="50000" min="0" max="120000" step="500" type="range"/>
+						</div> 
 		              </div>
 		              <div class="form-group">
 		                <input type="submit" value="Search" v-on:click="searchInput" class="btn btn-primary py-3 px-5">
@@ -166,19 +148,12 @@
 							    </label>
 							  </div>
 							</form>
-	      		</div>
-	        </div>
-		    </div>
-			</div>
-			
-    	
-    </section>
-
-		   
-		   
-		  
-	
-    <section class="instagram pt-5">
+	      		            </div>
+	                      </div>
+		                </div>
+			          </div>
+			      </section>
+				  <section class="instagram pt-5">
       <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -237,12 +212,7 @@ export default {
 		 image:"",
     };
   },
-   computed: {
-    FilteredList() {
-      return this.rooms.filter((room) => {
-       return room.adult.tolowerCase().includes(this.nbAdultselect.tolowerCase())
-            });}
-   },
+  
    
   mounted(){
    this.getRoom();
@@ -315,4 +285,20 @@ export default {
 	 color: black;
 
 	  }
+	  #c{
+		  color:#bb9245;
+	  }
+	  	.bo{
+	
+	 color:#bb9245;
+		font-size: 20px;
+    font-weight: bold;
+	  }
+	  	.b1{
+	font-size: 15px;
+	 color:grey;
+font-weight: lighter;
+
+	  }
+
 	  </style>
