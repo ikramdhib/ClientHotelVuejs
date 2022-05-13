@@ -57,7 +57,7 @@ const routes=[
         component: () => import('./components/client/Register'),
     },
     {
-        path:'/restaurant',
+        path:'/restaurant:id',
         name:'restaurant',
         component: () => import('./components/restaurant/Restaurant.vue'),
     },
