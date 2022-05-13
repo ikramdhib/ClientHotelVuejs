@@ -1,20 +1,27 @@
 <template :key="path">
-    <div  class="hero-wrap" id="bg2" :style="'background-image '" >
+    <div  class="hero-wrap" id="s1" :style="'background-image '" >
 
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <h1 class="mb-4 bread"> RESTAURANT </h1>
+	            <h1 class="mb-4 bread"> SPA </h1>
             </div>
           </div>
         </div>
     </div>
 </div>
 		<section class="ftco-section ftc-no-pb ftc-no-pt">
-			<div class="container">
-				<div>
+			<div class="container"><div class="row">
+					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
+	          	<div class="ml-md-0">
+		            <h2 class="mb-4">PROFITEZ  DE FRESH EAU </h2>
+	            </div>
+	          </div>
+					</div>
+				</div>
 					<div class="row  py-4"  v-if="image1!=null && image2!=null" >
 					<div class="col-md-6"  >
 					<div class=" p-md-5 img img-2 img-3 d-flex justify-content-center align-items-center " :style="' width: 550px; height: 500px; background-image :url(http://localhost:8000/storage//'+image1.name+')'">
@@ -27,11 +34,6 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 py-5 wrap-about pb-md-5 ftco-animate">
-	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
-	          	<div class="ml-md-0">
-		            <h2 class="mb-4"> {{ restaurant.nom }} </h2>
-	            </div>
-	          </div>
 	          <div class="pb-md-4">
 							<p>{{ restaurant.description }}</p>
 							<p>Résérver un<span id="tt"> Table </span> à partire de :  <span id="prix" class="pl-md-5"> {{ restaurant.prix_reservation }} DT </span></p>
@@ -40,7 +42,6 @@
 	        			</div>
 						</div>
 					</div>
-				</div>
 				</div>
 				</div>
 		</section>
@@ -80,7 +81,7 @@
       <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Nos Offres pour le Restaurant</span></h2>
+            <h2><span>Nos Offres pour le SPA</span></h2>
           </div>
 
         </div>
@@ -178,23 +179,24 @@ export default {
 		async getRes(){
 			const id =this.$route.params.id;
 			console.log("rr",id);
-		await axios.get('http://localhost:8000/api/getrestaurant/'+id).then(res=>{
+		await axios.get('http://localhost:8000/api/spaimg/'+id).then(res=>{
 				if(res!=null){
-					this.restaurant=res.data.restaurant
-				for(let i=0 ; i< this.restaurant.img.length ; i++){
-					this.image1=this.restaurant.img[0]
-					this.image2=this.restaurant.img[1]
+					this.restaurant=res.data.rooftop
+				for(let i=0 ; i< this.restaurant.images.length ; i++){
+					this.image1=this.restaurant.images[0]
+					this.image2=this.restaurant.images[1]
 					break;
 				}
 				}
 			})
 		},
 		async getAll(){
-			await axios.get('http://localhost:8000/api/all').then(res=>{
+			await axios.get('http://localhost:8000/api/allspa').then(res=>{
 				if(res!=null){
-					for(let i=0 ; i < res.data.ress.length ; i++){
-						this.recard.push(res.data.ress[i]);
+					for(let i=0 ; i < res.data.roofs.length ; i++){
+						this.recard.push(res.data.roofs[i]);
 					}
+					
 				}
 			})
 		},
