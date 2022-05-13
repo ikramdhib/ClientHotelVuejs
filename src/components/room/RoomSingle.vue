@@ -51,7 +51,6 @@
 	    							<li><span id="icon">Enfant</span> : {{room.nbEnfant}} </li>
                       </div>
 	    						</ul>
-<<<<<<< HEAD
 	    						<ul class="list ml-md-5">
                       <div v-if="room.nbbebe>0">
 	    							<li><span id="icon">Bebe</span> : {{room.nbbebe}}</li>
@@ -65,14 +64,6 @@
 
           		<div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
           			<h4 class="mb-4">Review &amp; Ratings</h4>
-=======
-                </div></div>
-			             <div class="form-group">
-		                <input id="btn" type="submit" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="goToBooking">
-		              </div>
-          		<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
-          			<h4 class="mb-4">Available Room</h4>
->>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
           			<div class="row">
           				<div class="col-md-6">
           					<form method="post" class="star-rating">
@@ -116,22 +107,19 @@
              
           					<div class="col-sm col-md-6 "  v-for="chambre in chambres" :key="chambre.id"  >
                     <div class="c">  
-                      
-                            
-				    		
 				    				
-				    			<div class="card" style="width: 18rem;" > 
-  <img  :src="'http://localhost:8000/storage'+chambre.images.name" alt="Card image cap">
+                                        <div class="card" style="width: 18rem;" > 
+                        <img  :src="'http://localhost:8000/storage'+chambre.images.name" alt="Card image cap">
 
-  <div class="card-body">
-    <div v-for="objet in objets" :key="objet.id ">
-         
-       <div v-if="objet.id==type_id && objet.id==chambre.type_id">
-      
-     <h5 class="card-title text-center">{{objet.nom_type}}</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.{{chambre.description}}</p>
-  </div></div></div>
-</div>
+                        <div class="card-body">
+                          <div v-for="objet in objets" :key="objet.id ">
+                              
+                            <div v-if="objet.id==type_id && objet.id==chambre.type_id">
+                            
+                          <h5 class="card-title text-center">{{objet.nom_type}}</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.{{chambre.description}}</p>
+                        </div></div></div>
+                      </div>
                          
 				    			</div>
                     </div>
@@ -141,16 +129,11 @@
           	</div>
           </div> <!-- .col-md-8 -->
           <div class="col-lg-4 sidebar ftco-animate">
-          
-             
                 <div class="form-group">
                  <div class="box">
-                 
                 <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5">
               </div>
                 </div>
-              
-           
             <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h2> les Prix</h2>
@@ -163,7 +146,6 @@
               </div>
               </div>
             </div>
-<<<<<<< HEAD
 
           
   
@@ -194,42 +176,6 @@
             <div class="sidebar-box ftco-animate">
               <h3>type chambre</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!{{typdesc}}</p>
-=======
-              <div class="col-lg-4 sidebar ftco-animate">
-	      			<h3 class="heading mb-4">Star Rating</h3>
-	      			<form method="post" class="star-rating">
-							  <div class="form-check">
-									<input type="checkbox" class="form-check-input" id="exampleCheck1">
-									<label class="form-check-label" for="exampleCheck1">
-										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
-									</label>
-							  </div>
-							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
-						      </label>
-							  </div>
-							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-						     </label>
-							  </div>
-							  <div class="form-check">
-							    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-						      </label>
-							  </div>
-							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
-						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-							    </label>
-							  </div>
-							</form>
->>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
             </div>
           </div>
         </div>
@@ -283,7 +229,6 @@ calcul:{},
       })
       .then((res) => {
 		  
-<<<<<<< HEAD
 			    this.room=res.data.rooms;
          this.options=res.data.rooms.options;
           this.type_nom=res.data.rooms.type.nom_type;
@@ -301,11 +246,6 @@ calcul:{},
 
          console.log("option",this.type_id) 
            console.log("room",this.types)
-=======
-			    this.room=res.data.room;
-         
-           console.log(res.data)
->>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
          
 	  })
 
@@ -357,7 +297,6 @@ calcul:{},
       })
 	
     
-<<<<<<< HEAD
       },}}
    
     
@@ -365,15 +304,6 @@ calcul:{},
     
   
   
-=======
-      },
-      goToBooking(){
-        this.$router.push('bookingroom')
-      }
-          
-  },
-
->>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e
   
 
 			
@@ -381,7 +311,6 @@ calcul:{},
 
 
 </script>
-<<<<<<< HEAD
 <style>
 #tag{
    min-height: 1rem;
@@ -417,10 +346,3 @@ box-shadow: 10px 5px 5px #8d703b;}
 margin-top: 35%;
 border-radius: 0%}
 </style>
-=======
-<style scoped>
-#btn{
-  margin-left: 10px;
-}
-</style>
->>>>>>> 55aa3a834a0f19199f24366f029f8c27f8ec961e

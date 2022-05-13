@@ -9,15 +9,47 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto"> 
+				 <li>
+				   <ul class="nav navbar-nav ms-auto">
+                    <li v-if="isTokenLogReg" id="compte" class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Login</a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                         <!--   <a class="dropdown-item" @click="goToProfile()" >profile</a>-->
+						 <router-link class="dropdown-item" to="login" >Login</router-link>
+                           <router-link class="dropdown-item" to="register" >Register</router-link>
+                        </div>
+                    </li>
+					
+                </ul>
+			  </li>
 	          <li class="nav-item "><router-link class="nav-link" to="/"> Accueil</router-link></li>
-	          <li class="nav-item " v-if="isTokenLogReg"><router-link class="nav-link" to="login"> Login</router-link></li>
-	          <li class="nav-item " v-if="isTokenLogReg"><router-link class="nav-link" to="register"> Register</router-link></li>
-	          <li class="nav-item"><router-link class="nav-link" to="rooms"> Chambres</router-link></li>
-	          <li class="nav-item"><router-link class="nav-link" to="restaurant"> Restaurants</router-link></li>
-	          <li class="nav-item"><router-link class="nav-link" to="about"> About</router-link></li>
-	          <li class="nav-item"><router-link class="nav-link" to="blog"> Blog</router-link></li>
+			  
+	          <li class="nav-item"><router-link class="nav-link" to="rooms"> Chambres </router-link></li>
+			   <ul class="nav navbar-nav ms-auto">
+                    <li  class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Restaurant & Cofée</a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                         <!--   <a class="dropdown-item" @click="goToProfile()" >profile</a>-->
+						 <router-link class="dropdown-item" to="restaurant" >Restaurant</router-link>
+                           <router-link class="dropdown-item" to="rooftop" >Roof-Top</router-link>
+                        </div>
+                    </li>
+					
+                </ul>
 	          <li class="nav-item"><router-link class="nav-link" to="contact"> Contact</router-link></li>
 			
+				 <ul class="nav navbar-nav ms-auto">
+                    <li  class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Plus </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                         <!--   <a class="dropdown-item" @click="goToProfile()" >profile</a>-->
+						 <router-link class="dropdown-item" to="restaurants" >Salle de Conference</router-link>
+                           <router-link class="dropdown-item" to="rooftop" >Pool</router-link>
+                           <router-link class="dropdown-item" to="rooftop" >SPA</router-link>
+                        </div>
+                    </li>
+					
+                </ul>
 				 <li>
 				   <ul class="nav navbar-nav ms-auto">
                     <li v-if="isTokenAccount" id="compte" class="nav-item dropdown">

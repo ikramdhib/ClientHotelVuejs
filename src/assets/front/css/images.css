@@ -18,11 +18,20 @@
     background-image: url(/src/components/images/room-5.jpg);
    
   }
+  #bg_res {
+    background-image: url(/src/components/images/bg_res.jpg);
+   
+  }
   #room6 {
     background-image: url(/src/components/images/room-6.jpg);
   }
   #bg2 {
     background-image: url(/src/components/images/bg_2.jpg);
+  }#bg3 {
+    background-image: url(/src/components/images/vd.jpg);
+  }
+  #vd {
+    background-image: url(/src/components/images/bg_3.jpg);
   }
   #bg1 {
     background-image: url(/src/components/images/bg_1.jpg);
