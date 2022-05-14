@@ -30,8 +30,8 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Restaurant & Cofée</a>
                         <div class="dropdown-menu dropdown-menu-end">
                          <!--   <a class="dropdown-item" @click="goToProfile()" >profile</a>-->
-						 <router-link class="dropdown-item" to="restaurant" >Restaurant</router-link>
-                           <router-link class="dropdown-item" to="rooftop" >Roof-Top</router-link>
+						 <router-link class="dropdown-item" to="restaurants" >Restaurant</router-link>
+                           <router-link class="dropdown-item" to="roof-tops" >Roof-Top</router-link>
                         </div>
                     </li>
 					
@@ -44,8 +44,8 @@
                         <div class="dropdown-menu dropdown-menu-end">
                          <!--   <a class="dropdown-item" @click="goToProfile()" >profile</a>-->
 						 <router-link class="dropdown-item" to="restaurants" >Salle de Conference</router-link>
-                           <router-link class="dropdown-item" to="rooftop" >Pool</router-link>
-                           <router-link class="dropdown-item" to="rooftop" >SPA</router-link>
+                           <router-link class="dropdown-item" to="pools" >Pool</router-link>
+                           <router-link class="dropdown-item" to="spas" >SPA</router-link>
                         </div>
                     </li>
 					

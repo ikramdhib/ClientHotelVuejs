@@ -60,7 +60,7 @@
               <div class="form-group">
                   <div class="row justify-content-center mb-9 pb-2">
           <div class="col-md-10 heading-section text-center">
-                <input type="submit" value="Connecter" v-on:click="addUser()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
+                <input type="button" value="Connecter" v-on:click="addUser()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
               </div>
                   </div>
               </div>

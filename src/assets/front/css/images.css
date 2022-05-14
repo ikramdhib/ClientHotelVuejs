@@ -51,6 +51,21 @@
   #insta5 {
     background-image: url(/src/components/images/insta-5.jpg);
   }
+  #res1 {
+    background-image: url(/src/components/images/res_img.jpg);
+  }
+  #spa1 {
+    background-image: url(/src/components/images/spa1.jpg);
+  }
+  #s1 {
+    background-image: url(/src/components/images/bg_3.jpg);
+  }
+  #pool1 {
+    background-image: url(/src/components/images/pool1.jpg);
+  }
+  #roof1 {
+    background-image: url(/src/components/images/roof1.jpg);
+  }
 #compte{
   padding-left: 150px;
 }

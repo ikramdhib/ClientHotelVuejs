@@ -112,6 +112,41 @@ const routes=[
         name:'notifications',
         component: () => import('./components/client/Notifications.vue'),
     },
+    {
+        path:'/restaurants',
+        name:'restaurants',
+        component: () => import('./components/restaurant/RestaurantMain.vue'),
+    },
+    {
+        path:'/roof-top:id',
+        name:'roof-top',
+        component: () => import('./components/roof-top/Roof-Top.vue'),
+    },
+    {
+        path:'/roof-tops',
+        name:'roof-tops',
+        component: () => import('./components/roof-top/Roof-TopMain.vue'),
+    },
+    {
+        path:'/pool:id',
+        name:'pool',
+        component: () => import('./components/pool/Pool.vue'),
+    },
+    {
+        path:'/pools',
+        name:'pools',
+        component: () => import('./components/pool/PoolMain.vue'),
+    },
+    {
+        path:'/spas',
+        name:'spas',
+        component: () => import('./components/spa/SPAMain.vue'),
+    },
+    {
+        path:'/spa:id',
+        name:'spa',
+        component: () => import('./components/spa/SPA.vue'),
+    },
 
 ];
 const router = createRouter({
