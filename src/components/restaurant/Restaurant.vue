@@ -29,7 +29,7 @@
 							<p>Résérver un<span id="tt"> Table </span> à partire de :</p>
 							<p id="prix" class="pl-md-5"> {{ restaurant.prix_reservation }} DT </p>
 							<div class="d-flex text align-items-center">
-								<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" @click="back()">
+								 <router-link :to="'booking'">	<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" ></router-link>
 	        			</div>
 						</div>
 					</div>
@@ -173,7 +173,9 @@ export default {
 					this.image1=this.restaurant.img[1]
 					break;
 				}4
-				console.log("img",this.image1);
+				console.log("img",res.data.restaurant.id);
+				localStorage.setItem("prix_reservation",res.data.restaurant.prix_reservation)
+				localStorage.setItem("restaurant",JSON.stringify(res.data.restaurant.id))
 				}
 			})
 		},
@@ -185,7 +187,9 @@ export default {
 					}
 				}
 			})
-		}
+		},
+		
+
 	}
 }
 </script>

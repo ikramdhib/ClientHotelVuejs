@@ -105,7 +105,7 @@
 						                    </div>
 				                      	</div>
 				                        </div>
-                                   <router-link :to="'RoomSingle'+ room.id " ><a href="#" class="btn btn-primary">plus details</a></router-link>
+                                   <router-link :to="'RoomSingle'+ room.id " ><a  class="btn btn-primary">plus details</a></router-link>
                                     </div>
                                    </div>
                                </div>
