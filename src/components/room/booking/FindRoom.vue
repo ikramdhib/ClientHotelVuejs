@@ -217,6 +217,16 @@
               </div>
                   </div>
               </div>
+               <div class="form-group">
+                  <div class="row justify-content-center mb-9 pb-2 py-4">
+          <div class="col-md-2 heading-section text-center"  >
+                <input type="button" value="Accueil" id="bb" v-on:click="goAcc()" class="btn btn-primary btn-md btn-block waves-effect text-center">
+              </div>
+               <div class="col-md-2 heading-section text-center" >
+                <input type="button" id="bb" value="Vos reservation" v-on:click="goProfile" class="btn btn-primary btn-md btn-block waves-effect text-center ">
+              </div>
+                  </div>
+              </div>
             </form>
               </div>
               </div>
@@ -296,6 +306,12 @@ export default {
        console.log("tyty",typeof(this.nbChambre));
        console.log("tyty",typeof(event.target.value));
 
+     },
+     goAcc(){
+       this.$router.push('/');
+     },
+     goProfile(){
+       this.$router.push('profile')
      }
      
     }
@@ -330,5 +346,11 @@ export default {
   color:#8d703b;
   font-size: 20px;
   font-weight: bold;
+}
+#bb{
+  background-color: transparent;
+  border-color: transparent;
+  color: grey;
+
 }
 </style>

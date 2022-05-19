@@ -77,11 +77,7 @@ const routes=[
         name:'findroom',
         component: () => import('./components/room/booking/FindRoom.vue'),
     },
-    {
-        path:'/booking',
-        name:'booking',
-        component: () => import('./components/booking.vue'),
-    },
+   
     {
         path:'/selectroom',
         name:'selectroom',
@@ -146,6 +142,11 @@ const routes=[
         path:'/spa:id',
         name:'spa',
         component: () => import('./components/spa/SPA.vue'),
+    },
+    {
+        path:'/bookingpayement',
+        name:'bookingpayement',
+        component: () => import('./components/room/booking/BookingPayment.vue'),
     },
 
 ];

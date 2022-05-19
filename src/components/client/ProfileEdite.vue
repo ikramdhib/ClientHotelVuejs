@@ -67,7 +67,7 @@
             <form class="bg-white p-5 contact-form">
                <div class="row justify-content-center ">
           <div class="col-md-10 heading-section text-center">
-            <h3 class="mb-4">Editer vos Informations Personnels </h3>
+            <h3 class="mb-4">Editer vos Informations Personnelles </h3>
             <span>Merci de verifer vos information avant de les envoyer</span>
           </div>
         </div>

@@ -90,15 +90,12 @@
                  <div class="col-md-9 d-flex align-self-stretch ">
             <div class="media block-2 services py-4  text-center">
                  <h3 id="title" class="mb-4">1.2 Choisissez Votre chambre N° :</h3>
-		                <div id="dropdown" class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="whichroom"  @change="displayRooms($event)">
-	                    	<option v-for="chambre in nbchambre" :key="chambre" :value="chambre" > {{ chambre }} </option >
-	                    </select>
-                    </div>
+		               
             </div>
                  </div>
               </div>
-              <div v-if="whichroom==1">
+              <div v-if=" ((rooms1.length > 0) && (whichroom==1) && (selectedRoom1==true) )" >
+                  
               <div  class="row" v-for="room1 in rooms1" :key="room1.id">
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
@@ -111,7 +108,7 @@
                       <td rowspan="3">
     				<div  class="room">
               <div id="img">
-    					<a  class="img d-flex justify-content-center align-items-center" id="room1" style="background-image">
+    					<a  class="img d-flex justify-content-center align-items-center"  :style="'background-image :url(http://localhost:8000/storage//'+room1.images.name+')'">
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>
@@ -123,17 +120,62 @@
                       <td colspan="2" id="label"> {{ room1.type }} </td>
                     </tr>
                     <tr>
-                      <td >Description:</td>
-                      <td>  {{ room1.description }} </td>
+                      <td>  {{ room1.description }}  </td>
                     </tr>
-                    <tr>
-                      <td>Availablity:</td>
-                      <td>{{ room1.avaibility }} </td>
+                    <tr v-if="room1.offres.length!=0 " >
+                       <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke==true">
+                      <input id="tbb" type="button" @click="cacheOffres()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                    </div>
+                    </td>
+                      <td td rowspan="3"> <div class="heading-section text-center" v-if="room1.offres.length!=0 && offreClicke==false">
+                      <input id="tbb" type="button" @click="clickOffre()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                    </div>
+                    </td>
                     </tr>
                   </tbody>
                 </table>
                </div>
               </div>
+           
+             <!------------------------------------------------------------------------------------------------------------------>
+                <div class="form-group" v-if="isOffreClicked==true">
+                  <div class="row" v-for="offre in room1.offres" :key="offre">
+                     <div class="col-md-12 py-4"> 
+                  <table class="table">
+                  <thead id="tr">
+                    <tr>
+                      <th scope="col">Nombre de personnes </th>
+                      <th scope="col">Options pour un chambre</th>
+                      <th scope="col">Pourcentage de L'offre</th>
+                      <th scope="col">prix par nuit </th>
+                      <th scope="col">prix par {{ nuits }} jours</th>
+                    </tr>
+                  </thead>
+                  <tbody v-for="option in optionsTab" :key="option.id">
+                    <tr  v-if="room1.id==option.room_id">
+                        <th scope="row"  ><i class="icon-user" v-for="icon in room1.nbAdult" :key="icon.id"></i></th>
+                      <td > {{ option.nom_option }} </td>
+                      <td id="pourcentage"> {{ offre.pourcentage }} % </td>
+                      <td id="t"> <del>{{room1.price + option.price_option }} DT</del> </td>
+                      <td> {{ (room1.price + option.price_option)-((room1.price + option.price_option)*offre.pourcentage)/100 }} DT </td>
+                     
+          <div class="heading-section text-center">
+                <input id="bbt" type="button" :value="(((room1.price + option.price_option)-((room1.price + option.price_option)*offre.pourcentage)/100)*nuits)+'DT'" v-on:click="bookNow1(
+                  (((room1.price + option.price_option)-((room1.price + option.price_option)*offre.pourcentage)/100)*nuits),
+                  room1.id ,
+                   option.nom_option,
+                  room1.type,
+                 room1.nbAdult,
+                 offre.id
+                  )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+              </div> 
+              </tr>
+              </tbody>
+                </table>
+                  </div>
+              </div>
+              </div>
+          <!------------------------------------------------------------------------------------------------------------------>
               <div class="form-group">
                   <div class="row">
                      <div class="col-md-12 py-4"> 
@@ -159,7 +201,8 @@
                   room1.id ,
                    option.nom_option,
                   room1.type,
-                 room1.nbAdult
+                 room1.nbAdult, 
+                  0
                   )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
 
@@ -176,16 +219,9 @@
             </form>
               </div>
               </div>
-              <div class="col-md-3 order-md-last d-flex">
-            <div class="bg-white p-5 contact-form">
-              <div class="form-group">
-                  <div class="row">
-                  </div>
               </div>
-            </div>
-              </div>
-              </div>
-              <div v-if="whichroom==2">
+              <div v-if=" (rooms2.length > 0 && whichroom==2 && selectedRoom2==true )">
+               
               <div  class="row" v-for="room2 in rooms2" :key="room2.id">
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
@@ -200,7 +236,6 @@
               <div id="img">
     					<a  class="img d-flex justify-content-center align-items-center" id="room1" style="background-image">
     						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
     						</div>
     					</a>
               </div>
@@ -213,14 +248,67 @@
                       <td >Description:</td>
                       <td>  {{ room2.description }} </td>
                     </tr>
-                    <tr>
-                      <td>Availablity:</td>
-                      <td>{{ room2.avaibility }} </td>
+                    
+                    <tr v-if="room2.offres.length!=0 ">
+                        <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke==true">
+                      <input id="tbb" type="button" @click="cacheOffres()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                    </div>
+                    </td>
+                      <td td rowspan="3"> <div class="heading-section text-center" v-if="room2.offres.length!=0 && offreClicke==false">
+                      <input id="tbb" type="button" @click="clickOffre()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                    </div>
+                    </td>
                     </tr>
                   </tbody>
                 </table>
                </div>
               </div>
+              
+              <!------------------------------------------------------------------------------------------------------------------>
+                <div class="form-group" v-if="isOffreClicked==true">
+                  <div class="row" v-for="offre in room2.offres" :key="offre">
+                     <div class="col-md-12 py-4"> 
+                  <table class="table">
+                  <thead id="tr">
+                    <tr>
+                      <th scope="col">Nombre de personnes </th>
+                      <th scope="col">Options pour un chambre</th>
+                      <th scope="col">Pourcentage de L'offre</th>
+                      <th scope="col">L'ancien prix</th>
+                      <th scope="col">Prix moyen par nuit</th>
+                      <th scope="col">prix par {{ nuits }} jours</th>
+                    </tr>
+                  </thead>
+                  <tbody  v-for="option in optionsTab" :key="option.id">
+                         <tr v-if="room2.id==option.room_id">
+                      <th scope="row"  ><i class="icon-user" v-for="icon in room2.nbAdult" :key="icon.id"></i></th>
+                      <td > {{ option.nom_option }} </td>
+                      <td id="pourcentage"> {{ offre.pourcentage }} % </td>
+                      <td id="t"> <del>{{room2.price + option.price_option }} DT</del> </td>
+                      <td> {{ (room2.price + option.price_option)-((room2.price + option.price_option)*offre.pourcentage)/100 }} DT </td>
+                      <td>
+                         <div class="form-group">
+          <div class="heading-section text-center">
+                <input id="bbt" type="button" :value="(((room2.price + option.price_option)-((room2.price + option.price_option)*offre.pourcentage)/100)*nuits)+'DT'" v-on:click="bookNow1(
+                  (((room2.price + option.price_option)-((room2.price + option.price_option)*offre.pourcentage)/100)*nuits),
+                  room2.id ,
+                   option.nom_option,
+                  room2.type,
+                 room2.nbAdult,
+                 offre.id
+                  )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+              </div>
+
+                        
+              </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                     </div>
+              </div>
+              </div>
+          <!------------------------------------------------------------------------------------------------------------------>
               <div class="form-group">
                   <div class="row">
                      <div class="col-md-12 py-4"> 
@@ -246,7 +334,8 @@
                   room2.id ,
                    option2.nom_option,
                   room2.type,
-                  room2.nbAdult
+                  room2.nbAdult,
+                  0
                  
                   )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
@@ -264,7 +353,8 @@
               </div>
               </div>
            
-            <div v-if="whichroom==3">
+            <div v-if=" rooms3.length!=0  && whichroom==3 && selectedRoom3==true  ">
+              
               <div  class="row" v-for="room3 in rooms3" :key="room3.id">
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
@@ -292,14 +382,66 @@
                       <td >Description:</td>
                       <td>  {{ room3.description }} </td>
                     </tr>
-                    <tr>
-                      <td>Availablity:</td>
-                      <td>{{ room3.avaibility }} </td>
+                    <tr v-if="room3.offres.length!=0 ">
+                        <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke==true">
+                      <input id="tbb" type="button" @click="cacheOffres()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                    </div>
+                    </td>
+                      <td td rowspan="3"> <div class="heading-section text-center" v-if="room3.offres.length!=0 && offreClicke==false">
+                      <input id="tbb" type="button" @click="clickOffre()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                    </div>
+                    </td>
                     </tr>
                   </tbody>
                 </table>
                </div>
               </div>
+              
+              <!------------------------------------------------------------------------------------------------------------------>
+                <div class="form-group" v-if="isOffreClicked==true">
+                  <div class="row" v-for="offre in room3.offres" :key="offre">
+                     <div class="col-md-12 py-4"> 
+                  <table class="table">
+                  <thead id="tr">
+                    <tr>
+                      <th scope="col">Nombre de personnes </th>
+                      <th scope="col">Options pour un chambre</th>
+                      <th scope="col">Pourcentage de L'offre</th>
+                      <th scope="col">L'ancien prix</th>
+                      <th scope="col">Prix moyen par nuit</th>
+                      <th scope="col">prix par {{ nuits }} jours</th>
+                    </tr>
+                  </thead>
+                  <tbody  v-for="option in optionsTab" :key="option.id">
+                         <tr v-if="room3.id==option.room_id">
+                      <th scope="row"  ><i class="icon-user" v-for="icon in room3.nbAdult" :key="icon.id"></i></th>
+                      <td > {{ option.nom_option }} </td>
+                      <td id="pourcentage"> {{ offre.pourcentage }} % </td>
+                      <td id="t"> <del>{{room3.price + option.price_option }} DT</del> </td>
+                      <td> {{ (room3.price + option.price_option)-((room3.price + option.price_option)*offre.pourcentage)/100 }} DT </td>
+                      <td>
+                         <div class="form-group">
+          <div class="heading-section text-center">
+                <input id="bbt" type="button" :value="(((room3.price + option.price_option)-((room3.price + option.price_option)*offre.pourcentage)/100)*nuits)+'DT'" v-on:click="bookNow1(
+                  (((room3.price + option.price_option)-((room3.price + option.price_option)*offre.pourcentage)/100)*nuits),
+                  room3.id ,
+                   option.nom_option,
+                  room3.type,
+                 room3.nbAdult,
+                 offre.id
+                  )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+              </div>
+
+                        
+              </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                     </div>
+              </div>
+              </div>
+          <!------------------------------------------------------------------------------------------------------------------>
               <div class="form-group">
                   <div class="row">
                      <div class="col-md-12 py-4"> 
@@ -325,7 +467,8 @@
                   room3.id ,
                    option.nom_option,
                   room3.type,
-                 room3.nbAdult
+                 room3.nbAdult,
+                     0
                   )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
               </div>
               </div>
@@ -341,10 +484,23 @@
             </form>
               </div>
               </div>
+               <div class="form-group">
+                  <div class="row justify-content-center mb-9 pb-2 py-4">
+          <div class="col-md-4 heading-section text-center"  >
+                <input type="button" value="Accueil" id="bb" v-on:click="goAcc()" class="btn btn-primary btn-md btn-block waves-effect text-center">
+              </div>
+               <div class="col-md-4 heading-section text-center" >
+                <input type="button" id="bb" value="Vos reservation" v-on:click="goProfile" class="btn btn-primary btn-md btn-block waves-effect text-center ">
+              </div>
+                  </div>
+              </div>
                </div>
+               
           </div>
+          
             </div>
       </div>
+
     </section>
             </div>
           </div>
@@ -384,11 +540,15 @@ export default {
       optionsRoom1:[],
       optionsRoom2:[],
       optionsRoom3: [],
-
+      isOffreClicked:false,
       reservRoom:[],
       isClickBook1:false,
       isClickBook2:false,
       isClickBook3:false,
+      selectedRoom1:true,
+      selectedRoom2:false,
+      selectedRoom3:false,
+      offreClicke:false,
       roomReserv1:{
         totale:"",
         id_room:"",
@@ -420,21 +580,39 @@ this.getBookinDates();
  this.selectTheSecondRoom();
  this.selectTheThirdRoom();
  this.getOptions();
+ console.log("eeee",this.rooms1);
  //recuperer le nombre de chambre 
 this.nbchambre=parseInt(localStorage.getItem('nbchambre'));
 
 },
 
-methods:{
 
-   bookNow1(totale , id , option , type , nbadult){
+methods:{
+   goAcc(){
+       this.$router.push('/');
+     },
+     goProfile(){
+       this.$router.push('profile')
+     },
+  cacheOffres(){
+    this.isOffreClicked=false
+    console.log('eeerrr',this.isOffreClicked);
+  },
+
+  clickOffre(){
+    this.isOffreClicked=true;
+    this.offreClicke=true
+  },
+
+   bookNow1(totale , id , option , type , nbadult , offre_id){
      if(!this.isClickBook1){
    this.roomReserv1.totale=totale
    this.roomReserv1.id_room=id
    this.roomReserv1.option=option
    this.roomReserv1.type=type
    this.roomReserv1.nbadult=nbadult
-
+   this.roomReserv1.offre_id=offre_id
+  
 console.log("rrom",this.roomReserv);
    this.reservRoom.push(this.roomReserv1)
      console.log("this",this.reservRoom);
@@ -446,21 +624,33 @@ console.log("rrom",this.roomReserv);
    this.roomReserv1.option=option
    this.roomReserv1.type=type
    this.roomReserv1.nbadult=nbadult
+   this.roomReserv1.offre_id=offre_id
 console.log("rrom",this.roomReserv);
    this.reservRoom.push(this.roomReserv1)
      console.log("this",this.reservRoom);
      }
-     
+    if(this.rooms2.length==0){
+      this.selectedRoom2=false
+      this.selectedRoom3=true;
+      this.whichroom=3;
+    }    else{
+   this.whichroom++;   
+   this.selectedRoom2=true;
+   console.log("bool", this.selectedRoom2);
+   }
+   console.log("trrrrrrrrrrrt",this.roomReserv1.offre_id);
+
 this.calculeTotale();
 
   },
- bookNow2(totale , id , option , type , nbadult){
+ bookNow2(totale , id , option , type , nbadult , offre_id){
    if(!this.isClickBook2){
    this.roomReserv2.totale=totale
    this.roomReserv2.id_room=id
    this.roomReserv2.option=option
    this.roomReserv2.type=type
    this.roomReserv2.nbadult=nbadult
+   this.roomReserv2.offre_id=offre_id
    this.reservRoom.push(this.roomReserv2)
    this.isClickBook2=true;
    }
@@ -471,19 +661,30 @@ this.calculeTotale();
    this.roomReserv2.option=option
    this.roomReserv2.type=type
    this.roomReserv2.nbadult=nbadult
+   this.roomReserv2.offre_id=offre_id
    this.reservRoom.push(this.roomReserv2)
    }
-   
-this.calculeTotale();
+   if(this.rooms3.length==0){
+     this.selectedRoom3=false
+   }else{
+    this.whichroom++;
+    this.selectedRoom3=true;
+    console.log("rrre",this.rooms3.length)
+    console.log("ee",this.selectedRoom3);
+    console.log("ee4",this.selectedRoom1);
 
+   }
+      console.log("trrrrrrgdhdrgrrrrrt",this.roomReserv2.offre_id);
+   this.calculeTotale();
   },
-   bookNow3(totale , id , option , type , nbadult){
+   bookNow3(totale , id , option , type , nbadult , offre_id){
      if(!this.isClickBook3){
    this.roomReserv3.totale=totale
    this.roomReserv3.id_room=id
    this.roomReserv3.option=option
    this.roomReserv3.type=type
    this.roomReserv3.nbadult=nbadult
+   this.roomReserv3.offre_id=offre_id
    this.reservRoom.push(this.roomReserv3)
    this.isClickBook3=true;
      }else if (this.isClickBook3){
@@ -493,9 +694,10 @@ this.calculeTotale();
    this.roomReserv3.option=option
    this.roomReserv3.type=type
    this.roomReserv3.nbadult=nbadult
+   this.roomReserv3.offre_id=offre_id
    this.reservRoom.push(this.roomReserv3);
      }
-     
+        console.log("trrrrrrrrrrrt",this.roomReserv3.offre_id);
 this.calculeTotale();
 
   },
@@ -512,6 +714,7 @@ this.calculeTotale();
      this.reservRoom=this.reservRoom.slice(0 , this.reservRoom.length-1);
     }else{
     localStorage.setItem('roomBooked', JSON.stringify(this.reservRoom))
+    localStorage.setItem('totale',this.totale)
     this.$router.push('bookroom')
     }
   },
@@ -546,9 +749,16 @@ this.calculeTotale();
     }).catch(error=>{
       console.log(error);
     })
-       }else{
-         this.message1="Vous devez changer les dates de résérvation"
        }
+        if(this.rooms1.length==0){
+         this.selectedRoom1=false,
+      this.selectedRoom2=true,
+      this.whichroom++;
+       }
+       if(this.rooms1.length==0 && this.rooms2.length==0 ){
+      this.whichroom=3
+      this.selectedRoom3=true
+}
   },
    async selectTheSecondRoom(){
      
@@ -620,9 +830,6 @@ this.calculeTotale();
   },
  
 
-  displayRooms(event){
-     this.whichroom=parseInt(event.target.value);
-  },
   getBookinDates(){
     this.bookingDate = JSON.parse(localStorage.getItem('bookingdate'))
     let nuit = (Date.parse(this.bookingDate.end)-Date.parse(this.bookingDate.start))/86400000;
@@ -679,7 +886,7 @@ this.calculeTotale();
 
 }
 #img{
-  width: 150px;
+  width: 350px;
 }
 #dropdown{
 margin: 20px;
@@ -699,5 +906,33 @@ margin: 20px;
   font-weight: bold;
   color: lightslategrey;
   font-size: 12px;
+}
+#pourcentage{
+color: red;
+font-size: 30px;
+}
+#t{
+  color: red;
+  font-size: 16px;
+}
+#bbt{
+  background-color: red;
+  border-color: rgb(129, 14, 14);
+  color: white;
+}
+#tbb{
+  background-color: transparent;
+  border-color:transparent ;
+  font-size: 22px;
+  color: red;
+}
+#bg{
+  font-size: 50px;
+}
+#bb{
+  background-color: transparent;
+  border-color: transparent;
+  color: grey;
+
 }
 </style>

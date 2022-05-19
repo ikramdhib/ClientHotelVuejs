@@ -34,41 +34,6 @@
 			</div>
 		</div>
 		</section>
-      <div class="container-fluid py-4">
-        <div class="row no-gutters justify-content-center pb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Nos Offres pour les Restaurants</span></h2>
-          </div>
-
-        </div>
-          <div class="col-md-12 order-md-last d-flex">
-            <div class="bg-white p-5 contact-form">
-              <div class="form-group">
-              <div  class="row">
-                <form class="p-5 contact-form">
-              <div class="form-group">
-                  <div class="row">
-
-                  <div class="col-md-4 py-4" v-for="offre in res" :key="offre"> 
-                    <div class="card"  id="card" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title"> {{offre.titre }} </h5>
-                      <p class="card-text"> {{ offre.description }} </p>
-                      <p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
-					  <p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{ restaurant.prix_reservation }} DT </del>
-					  </p>
-                    </div>
-                  </div>
-                    </div>
-                   
-                 </div>
-              </div>
-            </form>
-              </div>
-              </div>
-              </div>
-            </div>
-		 </div>
 		  <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
