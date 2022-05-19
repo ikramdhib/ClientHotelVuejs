@@ -604,14 +604,14 @@ methods:{
     this.offreClicke=true
   },
 
-   bookNow1(totale , id , option , type , nbadult , offre_id){
+   bookNow1(totale , id , option , type , nbadult , offres){
      if(!this.isClickBook1){
    this.roomReserv1.totale=totale
    this.roomReserv1.id_room=id
    this.roomReserv1.option=option
    this.roomReserv1.type=type
    this.roomReserv1.nbadult=nbadult
-   this.roomReserv1.offre_id=offre_id
+   this.roomReserv1.offres=offres
   
 console.log("rrom",this.roomReserv);
    this.reservRoom.push(this.roomReserv1)
@@ -624,7 +624,7 @@ console.log("rrom",this.roomReserv);
    this.roomReserv1.option=option
    this.roomReserv1.type=type
    this.roomReserv1.nbadult=nbadult
-   this.roomReserv1.offre_id=offre_id
+   this.roomReserv1.offres=offres
 console.log("rrom",this.roomReserv);
    this.reservRoom.push(this.roomReserv1)
      console.log("this",this.reservRoom);
@@ -638,19 +638,19 @@ console.log("rrom",this.roomReserv);
    this.selectedRoom2=true;
    console.log("bool", this.selectedRoom2);
    }
-   console.log("trrrrrrrrrrrt",this.roomReserv1.offre_id);
+   console.log("trrrrrrrrrrrt",this.roomReserv1.offres);
 
 this.calculeTotale();
 
   },
- bookNow2(totale , id , option , type , nbadult , offre_id){
+ bookNow2(totale , id , option , type , nbadult , offres){
    if(!this.isClickBook2){
    this.roomReserv2.totale=totale
    this.roomReserv2.id_room=id
    this.roomReserv2.option=option
    this.roomReserv2.type=type
    this.roomReserv2.nbadult=nbadult
-   this.roomReserv2.offre_id=offre_id
+   this.roomReserv2.offres=offres
    this.reservRoom.push(this.roomReserv2)
    this.isClickBook2=true;
    }
@@ -661,7 +661,7 @@ this.calculeTotale();
    this.roomReserv2.option=option
    this.roomReserv2.type=type
    this.roomReserv2.nbadult=nbadult
-   this.roomReserv2.offre_id=offre_id
+   this.roomReserv2.offres=offres
    this.reservRoom.push(this.roomReserv2)
    }
    if(this.rooms3.length==0){
@@ -674,17 +674,17 @@ this.calculeTotale();
     console.log("ee4",this.selectedRoom1);
 
    }
-      console.log("trrrrrrgdhdrgrrrrrt",this.roomReserv2.offre_id);
+      console.log("trrrrrrgdhdrgrrrrrt",this.roomReserv2.offres);
    this.calculeTotale();
   },
-   bookNow3(totale , id , option , type , nbadult , offre_id){
+   bookNow3(totale , id , option , type , nbadult , offres){
      if(!this.isClickBook3){
    this.roomReserv3.totale=totale
    this.roomReserv3.id_room=id
    this.roomReserv3.option=option
    this.roomReserv3.type=type
    this.roomReserv3.nbadult=nbadult
-   this.roomReserv3.offre_id=offre_id
+   this.roomReserv3.offres=offres
    this.reservRoom.push(this.roomReserv3)
    this.isClickBook3=true;
      }else if (this.isClickBook3){
@@ -694,10 +694,10 @@ this.calculeTotale();
    this.roomReserv3.option=option
    this.roomReserv3.type=type
    this.roomReserv3.nbadult=nbadult
-   this.roomReserv3.offre_id=offre_id
+   this.roomReserv3.offres=offres
    this.reservRoom.push(this.roomReserv3);
      }
-        console.log("trrrrrrrrrrrt",this.roomReserv3.offre_id);
+        console.log("trrrrrrrrrrrt",this.roomReserv3.offres);
 this.calculeTotale();
 
   },

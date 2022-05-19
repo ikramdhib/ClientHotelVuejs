@@ -1,4 +1,4 @@
-<template :key="path">
+<template>
     <div  class="hero-wrap" id="bg2" :style="'background-image '" >
 
       <div class="overlay"></div>
@@ -91,7 +91,7 @@
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
                       <p class="card-text"> {{ ret.description }} </p>
-                      <p class="card-text"> <router-link :to="'restaurant'+ret.id"><input type="button" value="plus details" class="btn btn-primary"  > </router-link></p>
+                      <p class="card-text"> <router-link :to="'roof-top'+ret.id"><input type="button" value="plus details" class="btn btn-primary"  > </router-link></p>
 
 					  <hr/>
                       <p class="card-text" id="pp">  {{ ret.prix_reservation }} DT  
@@ -150,7 +150,7 @@ export default {
 			})
 		},
 		goDetail(id){
-			this.$router.push({name:'restaurant' , params:{id:id}})
+			this.$router.push({name:'roof-top' , params:{id:id}})
 		},
 		
     }

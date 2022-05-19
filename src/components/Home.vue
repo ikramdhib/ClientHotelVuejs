@@ -43,19 +43,19 @@
     			<div class="col-lg-12">
     				<form action="#" class="booking-form">
 	        		<div class="row">
-	        			<div class="col-md-3 d-flex">
+	        			<div class="col-md d-flex">
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Date d'arriver</label>
-				    					<input type="date" class="form-control checkin_date" placeholder="Check-in date">
+				    					<input v-model="fetch.start" type="date" class="form-control checkin_date" placeholder="Check-in date">
 			    					</div>
 			    				</div>
 	        			</div>
-	        			<div class="col-md-3 d-flex"> 
+	        			<div class="col-md d-flex"> 
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Date de départ</label>
-				    					<input type="date" class="form-control checkout_date" placeholder="Check-out date">
+				    					<input v-model="fetch.end" type="date" class="form-control checkout_date" placeholder="Check-out date">
 			    				</div>
 			    				</div>
 	        			</div>
@@ -66,13 +66,51 @@
 			      					<div class="form-field">
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                    <select name="" id="" class="form-control">
-			                     <option value="">1 Adult</option>
-			                      <option value="">2 Adult</option>
-			                      <option value="">3 Adult</option>
-			                      <option value="">4 Adult</option>
-			                      <option value="">5 Adult</option>
-			                      <option value="">6 Adult</option>
+			                    <select v-model="fetch.nbadult" class="form-control">
+			                     <option value="1">1 </option>
+			                      <option value="2">2 </option>
+			                      <option value="3">3 </option>
+			                      <option value="4">4 </option>
+			                      <option value="5">5 </option>
+			                      <option value="6">6 </option>
+			                    </select>
+			                  </div>
+				              </div>
+				            </div>
+		              </div>
+	        			</div>
+                <div class="col-md d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+			      					<label for="#">enfant</label>
+			      					<div class="form-field">
+			        					<div class="select-wrap">
+			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+			                    <select  v-model="fetch.nbenfant" class="form-control">
+			                      <option value="0">0</option>
+			                     <option value="1">1 </option>
+			                      <option value="2">2 </option>
+			                      <option value="3">3 </option>
+			                      <option value="4">4 </option>
+			                    </select>
+			                  </div>
+				              </div>
+				            </div>
+		              </div>
+	        			</div>
+                <div class="col-md d-flex">
+	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        					<div class="wrap">
+			      					<label for="#">bébé</label>
+			      					<div class="form-field">
+			        					<div class="select-wrap">
+			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+			                    <select  v-model="fetch.nbbebe" class="form-control">
+			                      <option value="0">0</option>
+			                     <option value="1">1</option>
+			                      <option value="2">2 </option>
+			                      <option value="3">3 </option>
+			                      <option value="4">4 </option>
 			                    </select>
 			                  </div>
 				              </div>
@@ -81,7 +119,7 @@
 	        			</div>
 	        			<div class="col-md d-flex">
 	        				<div class="form-group d-flex align-self-stretch">
-			              <input type="button" value="Vérifier les disponibilités" class="btn btn-primary py-3 px-4 align-self-stretch">
+			              <input type="button" value="Vérifier les disponibilités" @click="getfetch()" class="btn btn-primary py-3 px-4 align-self-stretch">
 			            </div>
 	        			</div>
 	        		</div>
@@ -292,10 +330,19 @@ export default {
   data() {
     return {
       rooms: [],
-	  types:[],
-	room_id:[],
+	     types:[],
+    	room_id:[],
 	     id:0,
 		 image:"",
+     fetch:{
+       end:"",
+       start:"",
+       nbadult:"",
+       nbenfant:"",
+       nbbebe:"",
+      
+     },
+    isFetch:false,
     };
   },
    
@@ -327,7 +374,18 @@ export default {
 
 	  },
           
-		  
+		  getfetch(){
+        if(this.fetch!=null){
+          this.isFetch=true,
+          localStorage.setItem('fetch',JSON.stringify(this.fetch));
+          localStorage.setItem('isFetch',this.isFetch)
+          this.$router.push('findroom')
+        }
+        else{
+          this.isFetch=false
+        }
+       
+      },
 	 
 	  async getType(){
  await axios
