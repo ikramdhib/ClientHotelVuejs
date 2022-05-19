@@ -65,7 +65,7 @@
                     </div>
 		             
 		              <div class="form-group">
-		                <input type="text" id="checkin_date" class="form-control checkout_date" placeholder="Check Out Date">
+		                <input type="date" id="exemple" class="form-control " placeholder="" :min="dateNow" >
 		              </div>
 		              <div class="form-group">
 		                <div class="select-wrap one-third">
