@@ -66,6 +66,15 @@
   #roof1 {
     background-image: url(/src/components/images/roof1.jpg);
   }
+  #salle {
+    background-image: url(/src/components/images/salle.jpg);
+  }
+  #contact {
+    background-image: url(/src/components/images/contact2.jpg);
+  }
+  #contact1 {
+    background-image: url(/src/components/images/contact.jpg);
+  }
 #compte{
   padding-left: 150px;
 }

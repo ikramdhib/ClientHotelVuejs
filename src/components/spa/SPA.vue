@@ -1,4 +1,4 @@
-<template :key="path">
+<template >
     <div  class="hero-wrap" id="s1" :style="'background-image '" >
 
       <div class="overlay"></div>
@@ -38,7 +38,7 @@
 							<p>{{ restaurant.description }}</p>
 							<p>Résérver un<span id="tt"> Table </span> à partire de :  <span id="prix" class="pl-md-5"> {{ restaurant.prix_reservation }} DT </span></p>
 							<div class="d-flex text align-items-center">
-								<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" @click="back()">
+							<input id="btn" type="button" value="Résérver"  @click="gobook(restaurant.id)" class="btn btn-primary py-3 px-4" >
 	        			</div>
 						</div>
 					</div>
@@ -117,7 +117,7 @@
 		  <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Nos Restaurants</span></h2>
+            <h2><span>Nos Spas</span></h2>
           </div>
 
         </div>
@@ -140,7 +140,7 @@
 
 					  <hr/>
                       <p class="card-text" id="pp">  {{ ret.prix_reservation }} DT  
-					  <span class="card-text py-4" id="b"> <input id="btn" type="button" value="Résérver"  class="btn btn-primary" @click="back()"> </span></p>
+					  </p>
                     </div>
                   </div>
                     </div>
@@ -167,11 +167,13 @@ export default {
 			image2:{},
 			path:1,
 		}
+		
 	},
 	mounted (){
 		console.log("hy");
 		this.getRes();
 		this.getAll();
+			
 		
 },
 
@@ -187,7 +189,9 @@ export default {
 					this.image2=this.restaurant.images[1]
 					break;
 				}
+					
 				}
+			
 			})
 		},
 		async getAll(){
@@ -200,13 +204,16 @@ export default {
 				}
 			})
 		},
-		goDetail(id){
-			this.$router.push({name:'restaurant' , params:{id:id}})
-		},
-		
-    }
+		gobook(id){
+	
+	
+         this.$router.push({name:'booking', params:{id:id , categorie:'spa'}})
+       }
+	 }
+		}
+    
 
-}
+
 </script>
 <style scoped>
 #prix{

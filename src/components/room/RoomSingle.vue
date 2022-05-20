@@ -14,6 +14,9 @@
         </div>
       </div>
     </div></div>
+
+
+
  <section class="ftco-section">
       <div class="container">
         <div class="row">
@@ -25,6 +28,27 @@
                 </div> 
               
               </div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <div v-for="(image, index) in images" :key="index">
+                <li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+            </div>
+        </ol>
+        <div class="carousel-inner">
+          <div v-for="(image, index) in images" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+                    <img class="d-block w-100" :src="'http://localhost:8000/storage'+image.name" >
+                </div>
+            
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
           		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
     						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.{{room.description}}</p>
     						<div class="d-md-flex mt-5 mb-5">
@@ -83,9 +107,10 @@
           				</div>
           			</div>
           		</div>
+
           		<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
                   <div class="row">
-          			<h4 class="mb-4">Available Room</h4>
+          			<h4 class="mb-4">Les Chambres Disponible</h4>
              <div class="col-sm col-md-3 "  v-for="chambre in chambres" :key="chambre.id"  >
                     <div class="c">  
                       <div v-for="objet in objets" :key="objet.id ">
@@ -98,10 +123,7 @@
 	                             <div v-for="prix in prixs" :key="prix.id">
                                  <div v-if="prix.id == chambre.price_id">
     						                      <div class="text p-3 text-center">
-    						               <p class="bo">{{prix.price_hotel}} DT  <span class="b1"> par nuit </span> 
-
-          
-          </p>
+    						               <p class="bo">{{prix.price_hotel}} DT  <span class="b1"> par nuit </span></p>
 						                    </div>
 				                      	</div>
 				                        </div>
@@ -146,14 +168,31 @@
               </div>
               </div>
             </div>
-             <div v-for="offre in offres" :key="offre.id">
-             <div class="card"  id="card" style="width: 18rem;" v-if="offre.disponibilite== 1">
+           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="cards-wrapper">
+      
+      
+       <div v-for="(offre, index) in offres" :key="index" >
+             <div class="card" >
             <div class="card-body">
-          <h5 class="card-title">{{offre.titre}}</h5>
-         <p class="card-text">{{ offre.description }}.</p>
-           <p class="card-text" id="p">{{ offre.pourcentage}} % </p>
-              </div>
-           </div>
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+           
+          </div>
+      </div></div></div></div>
+       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a></div>
+              
+                
+           
             </div>
             <div class="sidebar-box ftco-animate">
               <h3>type chambre</h3>
@@ -279,7 +318,37 @@ calcul:{},
       },}}
    </script>
 <style>
-
+.cards-wrapper {
+  
+  justify-content: center;
+}
+.card img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.card {
+  margin: 0 0.5em;
+  box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+  border: none;
+  border-radius: 0;
+}
+.carousel-inner {
+  padding: 1em;
+}
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: #e1e1e1;
+  width: 5vh;
+  height: 5vh;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@media (min-width: 768px) {
+  .card img {
+    height: 11em;
+  }
+}
 #tag{
    min-height: 1rem;
 }

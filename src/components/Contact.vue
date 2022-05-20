@@ -1,6 +1,6 @@
 <template>
 
-    <div class="hero-wrap" style="background-image: url('./images/bg_1.jpg');">
+    <div class="hero-wrap"  id="contact" :style="'background-image '">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
@@ -65,9 +65,10 @@
           
           </div>
 
+        
           <div class="col-md-6 d-flex">
-          	<div id="map" class="bg-white"></div>
-          </div>
+          	<div class="hero-wrap" id="contact1" :style="'background-image '"></div></div>
+         
         </div>
       </div>
     </section>
@@ -108,3 +109,6 @@ export default {
  
  }
 </script>
+<style scoped>
+ 
+</style>

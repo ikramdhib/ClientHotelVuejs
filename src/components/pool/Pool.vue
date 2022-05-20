@@ -1,4 +1,4 @@
-<template :key="path">
+<template >
     <div  class="hero-wrap" id="bg2" :style="'background-image '" >
 
       <div class="overlay"></div>
@@ -40,7 +40,7 @@
 							<p>Résérver <span id="tt"> Maitenant </span> à partire de :    <span id="prix" class="pl-md-5"> {{ pool.prix_reservation }} DT </span></p>
 							
 							<div class="d-flex text align-items-center">
-								<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" @click="back()">
+						<input id="btn" type="button" value="Résérver"  @click="gobook(pool.id)"  class="btn btn-primary py-3 px-4" >
 	        			</div>
 					</div>
 					</div>
@@ -48,41 +48,9 @@
 			</div>
 		</section>
 
-      <div class="container-fluid" v-if="pool.offres!=null">
-        <div class="row no-gutters justify-content-center pb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Nos Offres pour le POOL</span></h2>
-          </div>
-        </div>
-          <div class="col-md-12 order-md-last d-flex">
-            <div class="bg-white p-5 contact-form">
-              <div class="form-group">
-              <div  class="row">
-                <form class="p-5 contact-form">
-              <div class="form-group">
-                  <div class="row">
+     
 
-                  <div class="col-md-4 py-4" id="d" v-for="offre in pool.offres" :key="offre.id"> 
-                    <div class="card"  id="card" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title"> {{ offre.titre}} </h5>
-                      <p class="card-text"> {{ offre.description }} </p>
-                      <p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
-					  <p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{ pool.prix_reservation}} DT </del>
-					   <span class="px-4" id="of"> {{ pool.prix_reservation-((pool.prix_reservation*offre.pourcentage)/100)}} </span> </p>
-                      
-                    </div>
-                  </div>
-                    </div>
-                   
-                 </div>
-              </div>
-            </form>
-              </div>
-              </div>
-              </div>
-            </div>
-		 </div>
+           
 
 		  <div class="container-fluid" >
         <div class="row no-gutters justify-content-center pb-5">
@@ -110,7 +78,7 @@
 
 					  <hr/>
                       <p class="card-text" id="pp">  {{ ret.prix_reservation }} DT  
-					  <span class="card-text py-4" id="b"> <input id="btn" type="button" value="Résérver"  class="btn btn-primary" @click="back()"> </span></p>
+					  </p>
                     </div>
                   </div>
                     </div>
@@ -154,6 +122,8 @@ export default {
 					this.image2=this.pool.images[1]
 					break;
 				}
+					
+				
 				}
 			})
 		},
@@ -166,8 +136,8 @@ export default {
 				}
 			})
 		},
-		goDetail(id){
-			this.$router.push({name:'restaurant' , params:{id:id}})
+		gobook(id){
+		   this.$router.push({name:'booking', params:{id:id , categorie:'pool'}})
 		},
 		
     }

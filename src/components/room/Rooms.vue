@@ -216,8 +216,8 @@ export default {
    
   mounted(){
    this.getRoom();
-    this.getType();
- this.getPrice();
+   // this.getType();
+// this.getPrice();
 
   },
 
@@ -234,10 +234,11 @@ export default {
 			   this.rooms = res.data.rooms;
 			   this.image=res.data.rooms.images.name;
 
-           console.log(this.table)
+           console.log(this.table);
 		   
-   }
-	)
+   } 
+	) .then(this.getType())
+        .then(this.getPrice());
 
 	  },
           

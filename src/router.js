@@ -78,7 +78,7 @@ const routes=[
         component: () => import('./components/room/booking/FindRoom.vue'),
     },
     {
-        path:'/booking',
+        path:'/booking:id:categorie',
         name:'booking',
         component: () => import('./components/booking.vue'),
     },
@@ -121,6 +121,16 @@ const routes=[
         path:'/roof-top:id',
         name:'roof-top',
         component: () => import('./components/roof-top/Roof-Top.vue'),
+    },
+    {
+        path:'/salle:id',
+        name:'salle',
+        component: () => import('./components/SalleConfernce/SalleConference.vue'),
+    },
+    {
+        path:'/salleconferences',
+        name:'salleconferences',
+        component: () => import('./components/SalleConfernce/salleConferenceMain.vue'),
     },
     {
         path:'/roof-tops',

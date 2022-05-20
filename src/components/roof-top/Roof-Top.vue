@@ -1,4 +1,4 @@
-<template :key="path">
+<template >
     <div  class="hero-wrap" id="bg2" :style="'background-image '" >
 
       <div class="overlay"></div>
@@ -37,10 +37,10 @@
 					<div class="col-md-12 py-5 wrap-about pb-md-5 ftco-animate">
 	          <div class="pb-md-4">
 							<p>{{ rooftop.description }}</p>
-							<p>Résérver un<span id="tt"> Table </span> à partire de :    <span id="prix" class="pl-md-5"> {{ rooftop.prix }} DT </span></p>
+							<p>Résérver un<span id="tt"> Table </span> à partire de : <span id="prix" class="pl-md-5"> {{ rooftop.prix }} DT </span></p>
 							
 							<div class="d-flex text align-items-center">
-								<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" @click="back()">
+										<input id="btn" type="button" value="Résérver"  @click="gobook(rooftop.id)"  class="btn btn-primary py-3 px-4" >
 	        			</div>
 					</div>
 					</div>
@@ -155,6 +155,9 @@ export default {
 					this.image2=this.rooftop.images[1]
 					break;
 				}
+				console.log(res.data.rooftop)
+				
+				
 				}
 			})
 		},
@@ -167,10 +170,9 @@ export default {
 				}
 			})
 		},
-		goDetail(id){
-			this.$router.push({name:'restaurant' , params:{id:id}})
-		},
-		
+		gobook(id){
+	 this.$router.push({name:'booking', params:{id:id , categorie:'roof'}})
+       },
     }
 
 }

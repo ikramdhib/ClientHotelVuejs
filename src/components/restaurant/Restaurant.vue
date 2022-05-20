@@ -1,4 +1,4 @@
-<template :key="path">
+<template >
     <div  class="hero-wrap" id="bg2" :style="'background-image '" >
 
       <div class="overlay"></div>
@@ -36,7 +36,7 @@
 							<p>{{ restaurant.description }}</p>
 							<p>Résérver un<span id="tt"> Table </span> à partire de :  <span id="prix" class="pl-md-5"> {{ restaurant.prix_reservation }} DT </span></p>
 							<div class="d-flex text align-items-center">
-								 <router-link :to="'booking'">	<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" ></router-link>
+									<input id="btn" type="button" value="Résérver"   @click="gobook(restaurant.id)" class="btn btn-primary py-3 px-4" >
 	        			</div>
 						</div>
 					</div>
@@ -185,10 +185,10 @@ export default {
 					this.image1=this.restaurant.img[0]
 					this.image2=this.restaurant.img[1]
 					break;
-				}4
+				}
 				console.log("img",res.data.restaurant.id);
-				localStorage.setItem("prix_reservation",res.data.restaurant.prix_reservation)
-				localStorage.setItem("restaurant",JSON.stringify(res.data.restaurant.id))
+				
+			
 				}
 			})
 		},
@@ -201,7 +201,11 @@ export default {
 				}
 			})
 		},
-		
+		gobook(id){
+	
+	
+         this.$router.push({name:'booking', params:{id:id , categorie:'restaurant'}})
+       }
 
 	}
 }
