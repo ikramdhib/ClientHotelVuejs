@@ -40,11 +40,7 @@
 							<p>Résérver un<span id="tt"> Table </span> à partire de : <span id="prix" class="pl-md-5"> {{ rooftop.prix }} DT </span></p>
 							
 							<div class="d-flex text align-items-center">
-<<<<<<< HEAD
-										<input id="btn" type="button" value="Résérver"  @click="gobook(rooftop.id)"  class="btn btn-primary py-3 px-4" >
-=======
 								<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" @click="goBooking(rooftop.id)">
->>>>>>> ce0f592d6616d7999cf7779de544a95dbfac2cc6
 	        			</div>
 					</div>
 					</div>
@@ -173,16 +169,10 @@ export default {
 				}
 			})
 		},
-<<<<<<< HEAD
-		gobook(id){
-	 this.$router.push({name:'booking', params:{id:id , categorie:'roof'}})
-       },
-=======
 	goBooking(id){
 		this.$router.push({name:'bookingcat' , params:{id:id , catg:'roof'} })
 	}
 		
->>>>>>> ce0f592d6616d7999cf7779de544a95dbfac2cc6
     }
 
 }

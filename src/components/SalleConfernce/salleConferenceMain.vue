@@ -59,7 +59,7 @@
                       <h5 class="card-title"> {{ret.description}} </h5>
 					  <hr/>
                       <p class="card-text"> {{ ret.decoration }} {{ ret.id }} </p>
-                       <p class="card-text"> <input type="button" value="plus details" class="btn btn-primary" @click="goDet(ret.id)" ></p>
+                       <p class="card-text"> <input type="button" value="plus details" class="btn btn-primary" @click="goDetails(ret.id)" ></p>
 					  <hr/>
                       <p class="card-text" id="pp">  {{ ret.prix}} DT  
 					</p>
@@ -92,9 +92,6 @@ this.getal();
 
   },
 methods:{
-	goDet(id){
-		this.$router.push({name:'salleconference', params:{id:id}})
-	},
 	async getal(){
 		await axios.get('http://localhost:8000/api/getSalle').then(res=>{
 			this.salles=res.data.salle;
@@ -104,6 +101,10 @@ methods:{
 		  }
 			)
 		},
+
+		goDetails(id){
+			this.$router.push({path:'salle' , params:{id:id}})
+		}
 		 
     }}
     

@@ -82,6 +82,9 @@
           	<div class="hero-wrap" id="contact1" :style="'background-image '"></div></div>
          
         </div>
+          </div>
+              </div>
+        </div>
       </div>
     </section>
 </template>
