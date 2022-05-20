@@ -1,4 +1,4 @@
-<template :key="path">
+<template >
     <div  class="hero-wrap" id="bg2" :style="'background-image '" >
 
       <div class="overlay"></div>
@@ -40,7 +40,7 @@
 							<p>Résérver un<span id="tt"> Table </span> à partire de :    <span id="prix" class="pl-md-5"> {{ rooftop.prix }} DT </span></p>
 							
 							<div class="d-flex text align-items-center">
-								<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" @click="back()">
+								<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" @click="goBooking(rooftop.id)">
 	        			</div>
 					</div>
 					</div>
@@ -110,7 +110,7 @@
 
 					  <hr/>
                       <p class="card-text" id="pp">  {{ ret.prix }} DT  
-					  <span class="card-text py-4" id="b"> <input id="btn" type="button" value="Résérver"  class="btn btn-primary" @click="back()"> </span></p>
+					  <span class="card-text py-4" id="b"> <input id="btn" type="button" value="Résérver"  class="btn btn-primary" @click="goBooking()"> </span></p>
                     </div>
                   </div>
                     </div>
@@ -135,7 +135,6 @@ export default {
 			rooftopcard:[],
 			image1:{},
 			image2:{},
-			path:1,
 		}
 	},
 	mounted (){
@@ -167,9 +166,9 @@ export default {
 				}
 			})
 		},
-		goDetail(id){
-			this.$router.push({name:'restaurant' , params:{id:id}})
-		},
+	goBooking(id){
+		this.$router.push({name:'bookingcat' , params:{id:id , catg:'roof'} })
+	}
 		
     }
 

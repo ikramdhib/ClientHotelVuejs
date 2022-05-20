@@ -148,6 +148,11 @@ const routes=[
         name:'bookingpayement',
         component: () => import('./components/room/booking/BookingPayment.vue'),
     },
+    {
+        path:'/booking:id :catg',
+        name:'bookingcat',
+        component: () => import('./components/booking.vue'),
+    }
 
 ];
 const router = createRouter({
