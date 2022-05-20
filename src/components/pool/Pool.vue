@@ -137,7 +137,8 @@ export default {
 			})
 		},
 		gobook(id){
-		   this.$router.push({name:'booking', params:{id:id , categorie:'pool'}})
+		   
+		   	this.$router.push({name:'bookingcat' , params:{id:id , catg:'pool'} })
 		},
 		
     }

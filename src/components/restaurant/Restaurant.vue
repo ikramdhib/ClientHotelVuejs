@@ -204,7 +204,7 @@ export default {
 		gobook(id){
 	
 	
-         this.$router.push({name:'booking', params:{id:id , categorie:'restaurant'}})
+         this.$router.push({name:'bookingcat', params:{id:id , catg:'restaurant'}})
        },
 		goDetail(id){
 			// this.$router.push({name:'restaurant' , params:{id:id}})

@@ -77,11 +77,7 @@ const routes=[
         name:'findroom',
         component: () => import('./components/room/booking/FindRoom.vue'),
     },
-    {
-        path:'/booking:id:categorie',
-        name:'booking',
-        component: () => import('./components/booking.vue'),
-    },
+    
     {
         path:'/selectroom',
         name:'selectroom',
@@ -163,7 +159,7 @@ const routes=[
         component: () => import('./components/room/booking/BookingPayment.vue'),
     },
     {
-        path:'/booking:id :catg',
+        path:'/booking:id:catg',
         name:'bookingcat',
         component: () => import('./components/booking.vue'),
     }

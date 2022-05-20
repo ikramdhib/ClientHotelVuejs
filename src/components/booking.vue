@@ -35,46 +35,41 @@
 
 
 <!--rooftop-->
-    <div v-if="isRooftop" >
-               <div  class="row">
+ 
+                  <div v-if="isRooftop" >
+                       <div  class="row">
                 <form class="bg-light p-5 ">
               <div class="form-group" >
                   <div class="row">
     <div class="col-md-4"> 
      <div > Choisir votre offre : </div>
 
-   <select v-model="selected" class="form-control">
+   <select v-model="monChoix" @change="onChange($event)" class="form-control">
      <option></option>
-    <option v-for="offre in offres" :value="pourcentage" :key="offre.id">
+    <option v-for="offre in this.offtop" :value="offre.pourcentage"  :key="offre.id" >
       {{ offre.titre }}{{ offre.pourcentage }}
     </option>
   </select>
-    </div>
    
-    <div class="col-md-4"> 
-
-
  <div class="col-md-4"> 
-
-
-
- <div class="col-md-4"> 
-<i class="icon-circle-arrow-right"></i>  <label id="label"> Totale:</label>
 <ul class="list-group">
+<table>
+  <tr>
+<td >Totale:</td>
+    </tr>
+<tr><div v-if="offre" >
+  <td ><input v-model="booking.prix"  :placeholder="(( prix_reservation -(( prix_reservation*monChoix)/100)*booking.nombre  ))" disabled> </td></div>
+             <td v-else-if="offre==false"><input v-model="booking.prix" :placeholder="(( prix_reservation*booking.nombre))"></td>
+           </tr></table>
+   
   
-
- <div v-for="offre in offres" :key="offre.id" >
-    
-            <td>{{ prix_reservation -(( prix_reservation*offre.pourcentage)/100)*booking.nombre }}</td></div>
-             <td  >{{ prix_reservation*booking.nombre }}</td>
+   
 </ul>
   </div>
-
-  </div>
-
+ </div>
   </div>
        </div>
-      </div>
+   
             </form>
               </div></div>
 
@@ -101,7 +96,7 @@
 <td >Totale:</td>
     </tr>
 <tr><div v-if="offre" >
-<td><input v-model="booking.prix" :placeholder="(( prix_reservation -(( prix_reservation*monChoix)/100)*booking.nombre  ))" disabled> </td></div>
+<td><input :v-model="booking.prix"  :value="prix=((( prix_reservation -(( prix_reservation*monChoix)/100)*booking.nombre  )))"  disabled> </td></div>
 <td v-else-if="offre==false"><input v-model="booking.prix" :placeholder="(( prix_reservation*booking.nombre))"></td>
            </tr></table>
    
@@ -141,11 +136,10 @@
             <td >Totale:</td>
            </tr>
          
-    <tr><div v-if="offre" >
-
-            <td><input v-model="booking.prix" :placeholder="(( prix_reservation -(( prix_reservation*monChoix)/100)*booking.nombre  ))" disabled> </td></div>
-             <td v-else-if="offre==false"><input v-model="booking.prix" :placeholder="(( prix_reservation*booking.nombre))"></td>
-           </tr></table>
+    <tr><div v-if="offre"   >
+ <td :v-model="booking.prix"><input value="(( prix_reservation -(( prix_reservation*monChoix)/100)*booking.nombre  ))"  disabled> </td></div>
+  <td v-else-if="offre==false"><input v-model="booking.prix" :placeholder="(( prix_reservation*booking.nombre))"></td>
+  </tr></table>
    
   
    
@@ -188,8 +182,8 @@
          
     <tr><div v-if="offre" >
 
-            <td><input v-model="booking.prix" :placeholder="(( prix_reservation -(( prix_reservation*monChoix)/100)*booking.nombre + booking.nombre ))" disabled> </td></div>
-             <td v-else-if="offre==false"><input v-model="booking.prix" :placeholder="(( prix_reservation*booking.nombre))"></td>
+            <td><input v-model="booking.prix" :placeholder="(( prix_reservation -(( prix_reservation*monChoix)/100)*booking.nombre + ( personne * plat )))" disabled> </td></div>
+             <td v-else-if="offre==false"><input v-model="booking.prix" :placeholder="(( prix_reservation*booking.nombre)+(plat*personne))"></td>
            </tr></table>
    
   
@@ -203,6 +197,31 @@
              <div  class="row py-4">
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
+                 <div class="form-group">
+                  <div class="row" v-if="isRooftop"  >
+                  <div class="col-md-2"> 
+                       <i class="icon-circle-arrow-right"></i>  <label id="label">   Nombres de personnes :</label>
+                       <select name="" id="" class="form-control"   v-model="booking.nombre"  >
+	                    	<option value="1">1 </option>
+	                      <option value="2">2 </option>
+	                      <option value="3">3 </option>
+                        <option value="4">4 </option>
+                        <option value="5">5 </option> 
+                        <option value="6">6 </option>
+                        <option value="7">7 </option>
+                        <option value="8">8 </option>
+                        <option value="9">9 </option>
+                        <option value="10">10 </option>
+	                    </select>
+                    </div>
+                   
+                     <div class="col-md-8"> 
+                       <i class="icon-circle-arrow-right"></i>  <label id="label">   Information Complimentaire:</label>
+
+                        <textarea name="" id="" cols="30" rows="7"  :placeholder="Message" class="form-control" v-model="booking.infoComplimentaire"/>
+                    </div>
+                 </div>
+              </div>
                   <div class="row" v-if="isPool || isSpa"  >
                   <div class="col-md-2"> 
                        <i class="icon-circle-arrow-right"></i>  <label id="label">   Nombres de personnes :</label>
@@ -228,7 +247,7 @@
                  </div>
               </div>
                  <div class="form-group" >
-                  <div class="row" v-if="isrestaurant || isRooftop" >
+                  <div class="row" v-if="isrestaurant" >
                   <div class="col-md-2"> 
                        <i class="icon-circle-arrow-right"></i>  <label id="label">   Nombres de tables :</label>
                      
@@ -248,7 +267,7 @@
                       <div class="col-md-2"> 
                        <i class="icon-circle-arrow-right"></i>  <label id="label">   Nombres de personne :</label>
                      
-                       <select name="" id="" class="form-control"    >
+                       <select name="" id="" class="form-control"   v-model="personne"  >
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
@@ -266,8 +285,8 @@
                        
                          
                    <div class="form-check"  v-for="p in m.plats" :key="p">
-                    <input class="form-check-input" type="checkbox"  v-model="p.prix_plat"  id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox"  v-model="plat"  :value="p.prix_plat" id="flexCheckDefault">
+                    <label class="form-check-label" @change="onChange($ev)" for="flexCheckDefault">
                             {{ p.nom }}
                    </label>
                    </div></div>
@@ -376,17 +395,20 @@ export default {
 				email:"",
         password:""
       },user_id:0,
+  
       booking:{
           nom:"",
          infoComplimentaire:"",
           email:"",
          offres:"",
         prenom:"",
+         
           phone:"",
-          prix:"",
+          prix:0,
          nombre:""},
      spa:"",
-     
+     off:null,
+     offtop:[],
      selected:false,
      plat:"",
     isrestaurant:false,
@@ -404,8 +426,8 @@ export default {
    	mounted(){
      
 	   const id = this.$route.params.id
-       const categorie =this.$route.params.categorie
-   if(categorie=="spa"){
+       const catg =this.$route.params.catg
+   if(catg=="spa"){
        axios.get('http://localhost:8000/api/spaimg/'+id).then(res=>{
 				this.spa=res.data.rooftop.id
 				localStorage.setItem("spa",this.spa)
@@ -415,7 +437,7 @@ export default {
       this.isSpa=true;}
 
 
-     else if (categorie=="restaurant"){
+     else if (catg=="restaurant"){
 		 axios.get('http://localhost:8000/api/getrestaurant/'+id).then(res=>{
 		      	this.restaurent=res.data.restaurant
 					this.restaurant=res.data.restaurant.id;
@@ -427,7 +449,7 @@ export default {
 			});
         this.isrestaurant=true;}
       
-	else if(categorie=="pool"){
+	else if(catg=="pool"){
      axios.get('http://localhost:8000/api/alloffimg/'+id).then(res=>{
 			
 					this.pool=res.data.rooftop.id
@@ -436,7 +458,7 @@ export default {
       console.log(this.prix_reservation)
 });
       this.isPool=true;}
-    else if(categorie=="roof"){
+    else if(catg=="roof"){
        axios.get('http://localhost:8000/api/getroof/'+id).then(res=>{
 				if(res!=null){
 					this.rooftop=res.data.rooftop.id
@@ -444,7 +466,7 @@ export default {
        });  
       this.isRooftop=true;
 			}
-       else if(categorie=="salleConference"){
+       else if(catg=="salleConference"){
        axios.get('http://127.0.0.1:8000/api/getconf/'+id).then(res=>{
 				if(res!=null){
 					this.ConferenceRoom=res.data.room.id
@@ -467,7 +489,8 @@ this.offresres();
   methods: { 
          
   async Addbooking(){
-      if(this.isRooftop!=null){
+     
+     if(this.isRooftop){
  await axios
  
   .post("http://localhost:8000/api/Booking", {
@@ -494,7 +517,7 @@ this.offresres();
 	     console.log(res);
 	   
           })}
-          else if(this.isrestaurant!=null){
+          else if(this.isrestaurant){
            
     await axios.post("http://localhost:8000/api/Booking", {
           
@@ -518,7 +541,7 @@ this.offresres();
 	     console.log(res);
           })}
             
-          else if(this.isPool!=null){
+          else if(this.isPool){
     await axios.post("http://localhost:8000/api/Booking", {
             
               infoComplimentaire:this.booking.infoComplimentaire,
@@ -540,7 +563,7 @@ this.offresres();
 	     console.log(res);
           })}
             
-          else if(this.isConferenceRoom!=null){
+          else if(this.isConferenceRoom){
     await axios.post("http://localhost:8000/api/Booking", {
             
                infoComplimentaire:this.booking.infoComplimentaire,
@@ -590,38 +613,44 @@ this.offresres();
           })}},
           async offresres(){
              const id = this.$route.params.id
-       const categorie =this.$route.params.categorie
-  if(categorie=="restaurant"){
+       const catg =this.$route.params.catg
+  if(catg=="restaurant"){
  await axios
   .get("http://127.0.0.1:8000/api/getoffrestaurent/"+id, 
 
  ).then(res=>{
 
        this.offres= res.data.offres;
-			console.log(this.offres); })}
-    else if(categorie=="roof"){
+     
+     
+			console.log(this.off);} )}
+    else if(catg=="roof"){
  await axios
-  .get("http://127.0.0.1:8000/api/getoffRoofTop/"+id,  ).then(res=>{
-this.offres= res.data.offres;
-console.log(this.Offres);
+  .get("http://127.0.0.1:8000/api/getoffRoofTop/"+id,).then(res=>{
+this.offtop= res.data.offres;
+console.log(this.offtop);
  })}
 
- else if(categorie=="pool"){
+ else if(catg=="pool"){
  await axios
-  .get("http://127.0.0.1:8000/api/getoffpool/"+id, ).then(res=>{
+  .get("http://127.0.0.1:8000/api/getoffpool/"+id,).then(res=>{
 this.offres= res.data.offres;
 console.log(this.offres);})}
 
 
-  else if(categorie=="spa"){
+  else if(catg=="spa"){
  await axios
   .get("http://127.0.0.1:8000/api/soldde/"+id, ).then(res=>{
 this.offspa= res.data.offres;
-for( let i=0;i<this.offspa.lengeth;i++){
-console.log(this.offspa[i]);} }) }
+//for( let i=0;i<this.offspa.lengeth;i++){
+   
+    //   if (this.monChoix=this.offspa[i].pourcentage)
+    //   this.off=this.offspa[i].id}
+			console.log(this.off);
+ }) }
 
 
- else if(categorie=="salleConference"){
+ else if(catg=="salleConference"){
  await axios
   .get("http://127.0.0.1:8000/api/getoffsall/"+id, ).then(res=>{
 console.log( this.offres= res.data.offres);
@@ -643,6 +672,18 @@ console.log(this.offres); })
    }
       console.log("ooo",this.monChoix);
     },
+    //ONCHANGE PLAT 
+    onchange(ev){
+      let p=ev.target.value;
+      this.plat=true;
+      if(p!=null){
+          console.log('hi');
+      }  else if(p==null){
+     console.log("eeer");
+   }
+    console.log("ooo",this.plat);
+    }
+
 }}
 
 </script>

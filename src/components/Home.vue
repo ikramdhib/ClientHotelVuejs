@@ -346,9 +346,7 @@
             </ul>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+     
 
   <section clas="ftco-section">
     <div class="container">
@@ -580,13 +578,13 @@ export default {
   data() {
     return {
       rooms: [],
-      types: [],
+     
       room_id: [],
       id: 0,
-      image: "",
+    
 	     types:[],
-    	room_id:[],
-	     id:0,
+    	
+	     
 		 image:"",
      fetch:{
        end:"",
@@ -620,10 +618,7 @@ export default {
         .then(this.getPrice());
     },
 
-    async getType() {
-      await axios.get("http://127.0.0.1:8000/api/type").then((res) => {
-        this.types = res.data.type;
-	  })},
+  
 		  getfetch(){
         if(this.fetch!=null){
           this.isFetch=true,

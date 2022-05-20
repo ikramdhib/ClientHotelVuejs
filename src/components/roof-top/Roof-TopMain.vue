@@ -57,7 +57,7 @@
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
                       <p class="card-text"> {{ ret.description }} </p>
-                      <p class="card-text"> <router-link :to="'roof-tops'+ret.id"><input type="button" value="plus details" class="btn btn-primary"  > </router-link></p>
+                      <p class="card-text"> <input type="button" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)" ></p>
 
 					  <hr/>
                       <p class="card-text" id="pp">  {{ ret.prix_reservation }} DT  

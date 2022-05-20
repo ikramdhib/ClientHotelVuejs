@@ -42,7 +42,7 @@
 	            <p><span>Website</span> <a href="#">yoursite.com</a></p>
 	          </div>
           </div>
-        </div>
+        </div></div>
         <div class="row ">
               <div class="row ">
             <div class="col-md-6 d-flex">
@@ -78,11 +78,11 @@
           </div>
 
         
-          <div class="col-md-6 d-flex">
-          	<div class="hero-wrap" id="contact1" :style="'background-image '"></div></div>
+    
          
         </div>
-      </div>
+          </div>
+      </div></div>
     </section>
 </template>
 
