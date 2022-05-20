@@ -278,16 +278,14 @@ export default {
       nuits:null,
       rooms:null,
      isEnLigne:null,
+     booking:null,
+     nb:0,
 		}
     },
      mounted(){
     this.isLogin=true;
       if(localStorage.getItem('client')){
-                    try{
                         this.user = JSON.parse(localStorage.getItem('client'));
-                    }catch(e){
-                        console.log(e);
-                    }
                 }
                  this.bookingDate = JSON.parse(localStorage.getItem('bookingdate'))
                   let nuit = (Date.parse(this.bookingDate.end)-Date.parse(this.bookingDate.start))/86400000;
@@ -302,7 +300,6 @@ export default {
     },
 
    BookNow(){
-     
      if( localStorage.getItem('token_client')!=null){
        if(this.isEnLigne==0){
      for(let i=0 ; i< this.rooms.length ; i++){
@@ -319,12 +316,15 @@ export default {
                   email:this.user.email,
                   pay_residence:this.user.country,
                   user_id:this.user.id,
-                  room_id:this.rooms[i].id_room
+                  room_id:this.rooms[i].id_room,
+                  offre_id:this.rooms[i].offre_id
      },
      { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
      ).then(res=>{
       if(res!=null){
-        axios.put('http://localhost:8000/api/updateRoom/'+res.data.Booking.room_id,
+         this.booking=res.data.Booking
+        console.log("eeeeggg",res.data.Booking.room_id);
+        axios.put('http://localhost:8000/api/room/'+res.data.Booking.room_id,
         {
           avaibility:false,
         },
@@ -336,13 +336,13 @@ export default {
      })
    }
    }else if(this.isEnLigne==1){
-         for(let i=0 ; i< this.rooms.length ; i++){
+         for(let j=0 ; j< this.rooms.length ; j++){
      axios.post('http://localhost:8000/api/booking-room',
      {
                   start:this.bookingDate.start,
                   end:this.bookingDate.end,
                   confirmation:false,
-                  bookingprice:this.rooms[i].totale,
+                  bookingprice:this.rooms[j].totale,
                   nom:this.user.firstname,
                   prenom:this.user.lastname,
                   cin:this.user.cin,
@@ -350,29 +350,75 @@ export default {
                   email:this.user.email,
                   pay_residence:this.user.country,
                   user_id:this.user.id,
-                  room_id:this.rooms[i].id_room
+                  room_id:this.rooms[j].id_room,
+                  offre_id:this.rooms[j].offre_id
      },
      { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
      ).then(res=>{
+      
       if(res!=null){
-        axios.put('http://localhost:8000/api/updateRoom/'+res.data.Booking.room_id,
+         this.booking=res.data.Booking
+        console.log("eeeeggg",res.data.Booking.room_id);
+        axios.put('http://localhost:8000/api/room/'+res.data.Booking.room_id,
         {
           avaibility:false,
         },
          { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
         ).then(res=>{
           if(res!=null){
-            this.$router.push('BookingPaymene')
+            this.isTermineted=true
+            this.nb=this.nb+1;
+             console.log("t1",this.nb);
+           console.log("rre",res.data);
+                if(this.booking!=null){
+    console.log("ccc",this.rooms.length);
+      let totaux=parseFloat(localStorage.getItem('totale'))
+       console.log("zzz",this.nb);
+          console.log("toto",totaux);
+      axios.defaults.headers.common['x-api-key'] = '6284fff6e09cf7432239133a:ZgFs0PSDYj7r09CVgFwLITz0';
+            axios.post('https://api.preprod.konnect.network/api/v2/payments/init-payment',
+            {
+              receiverWalletId:"6284fff6e09cf7432239133b",
+              amount:(totaux*1000),
+              token: "TND",
+              firstName: this.booking.nom,
+              lastName: this.booking.prenom,
+              phoneNumber: this.booking.telephone,
+              email: this.booking.email,
+              orderId: this.booking.id,
+              link: "https://api.dev.konnect.network/WSlQUtBF8",
+              webhook: "http://localhost:8081/#/bookingpayement",
+              successUrl: "https://dev.konnect.network/gateway/payment-success",
+              failUrl: "https://dev.konnect.network/gateway/payment-failure",
+              acceptedPaymentMethods: [
+              "bank_card",
+              "wallet",
+              "e-DINAR"
+              ]
+            }
+            ).then(res=>{
+              window.open(res.data.payUrl);
+              console.log("book",res.data.payUrl);
+            })
+      }
           }
         })
       }
      })
+       
    }
+   
+    
    }
      }
+   
+   },
+   payNow(){
+
+   }
    }
   }
-  }
+  
  
 
 </script>

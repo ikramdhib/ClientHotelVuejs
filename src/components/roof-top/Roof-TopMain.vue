@@ -116,7 +116,7 @@ export default {
 			})
 		},
 		goDetail(id){
-			this.$router.push({name:'restaurant' , params:{id:id}})
+			this.$router.push({name:'roof-top' , params:{id:id}})
 		},
 		
     }

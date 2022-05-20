@@ -157,6 +157,11 @@ const routes=[
         name:'spa',
         component: () => import('./components/spa/SPA.vue'),
     },
+    {
+        path:'/bookingpayement',
+        name:'bookingpayement',
+        component: () => import('./components/room/booking/BookingPayment.vue'),
+    },
 
 ];
 const router = createRouter({

@@ -43,9 +43,21 @@
 	          </div>
           </div>
         </div>
-        <div class="row block-9">
-          <div class="col-md-6 order-md-last d-flex">
-            <form action="#" class="bg-white p-5 contact-form">
+        <div class="row ">
+              <div class="row ">
+            <div class="col-md-6 d-flex">
+                 <div  id="contact" class=" p-md-5 img img-2 img-3 d-flex justify-content-center align-items-center" style='width: 550px; height: 800px; background-image '>
+					</div>
+          </div>
+          <div class="col-md-6 ">
+					<div class="col-md-12 py-5 wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
+	          	<div class="ml-md-0">
+		            <h1 id="titre" class="mb-4"> Contactez Nous </h1>
+	            </div>
+	          </div>
+	          <div class="pb-md-4">
+						<form action="#" class="bg-white p-5 contact-form">
               <div class="form-group">
                 <input type="text" class="form-control"   v-model="contact.name" placeholder="votre Nom">
               </div>

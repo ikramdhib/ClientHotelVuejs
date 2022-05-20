@@ -26,14 +26,14 @@
 
                         <div class="row block-9">
              <div class="row block-9 slide-top">
-          <div class="col-md-6  d-flex">
+          <div class="col-md-5  d-flex">
             <div class="bg-white p-5 contact-form">
                 <div class="row justify-content-center mb-9 pb-5">
           <div class="col-md-10 heading-section text-center">
             <h2 class="mb-4">Mes Réservations  </h2>
           </div>
         </div>
-                        <table class="table">
+                 <table class="table">
                 <thead>
                     <tr>
                     <th scope="col">Duré</th>
@@ -54,7 +54,7 @@
                         
                         </div>
                         
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <div class="bg-white  contact-form">
                                 <div class="bg-white p-5 contact-form">
                                   <div class="row justify-content-center mb-9 pb-5">
@@ -62,7 +62,7 @@
                               <h2 class="mb-4">Mes Information personnel  </h2>
                             </div>
                             <div class="py-4 ">
-                              <table  class="table table-borderless ">
+                   <table  class="table table-borderless ">
                   
                   <tbody>
                       <tr>
@@ -85,7 +85,7 @@
                     </tr>
                     <tr>
                       <td > <i id="icone" class="icon-envelope"></i> email </td>
-                      <td> {{ user.email }} </td>
+                      <td style="width : 2px"> {{ user.email }} </td>
                       
                     </tr>
                     <tr>
@@ -108,10 +108,10 @@
                     </tr>
                   </tbody>
                 </table>
-                              </div>
-                            </div>
-                          </div>
-                                </div>
+                       </div>
+                        </div>
+                       </div>
+                     </div>
                         </div>
                         </div>
 

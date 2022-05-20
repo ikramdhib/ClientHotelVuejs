@@ -78,6 +78,9 @@
 #compte{
   padding-left: 150px;
 }
+#contact{
+  background-image: url(/src/components/images/contact.jpg);
+}
 #row{
   margin-left: 20px;
   position: absolute;
