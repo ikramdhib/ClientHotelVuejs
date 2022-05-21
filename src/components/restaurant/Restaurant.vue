@@ -45,19 +45,17 @@
 				</div>
 		</section>
 
-		<section class="ftco-section">
+		<section class="ftco-section ">
 			<div class="container">
 				<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
-			  <div  v-for="res in restaurant.menus" :key="res">
 				  
-            <h2>{{res.titre}}</h2>
-			  </div>
+            <h2>{{ menu.titre }}</h2>
           </div>
         </div>
-		<div  v-for="m in restaurant.menus" :key="m"> 
+		<div > 
 				<div class="row">
-        	<div class="col-md-6" v-for="p in m.plats" :key="p">
+        	<div class="col-md-6" v-for="p in menu.plats" :key="p">
         		<div class="pricing-entry d-flex ftco-animate" v-for="im in p.images" :key="im" >
         			<div class="img" :style="'background-image :url(http://localhost:8000/storage//'+im.name+')'"></div>
         			<div class="desc pl-3">
@@ -134,12 +132,9 @@
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} </p>
-                      <p class="card-text"> <input type="button" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  > </p>
-
+                      <p class="card-text"> {{ ret.description }} <input type="button" id="btn" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  >   </p> 
 					  <hr/>
-                      <p class="card-text" id="pp">  {{ ret.prix_reservation }} DT  
-					  <span class="card-text py-4" id="b"> <input id="btn" type="button" value="Résérver"  class="btn btn-primary" @click="back()"> </span></p>
+                      <p class="card-text" id="pr">  {{ ret.prix_reservation }} DT   </p>
                     </div>
                   </div>
                     </div>
@@ -152,6 +147,8 @@
               </div>
             </div>
 		 </div>
+		
+		 
 </template>
 <script>
 import axios from 'axios'
@@ -162,16 +159,21 @@ export default {
 			name:"",
 			res:{ },
 			recard:[],
+			recardd:[],
 			image1:{},
 			image2:{},
-			path:1,
+			menu:{ },
+			plats:[],
 		}
 	},
 	mounted (){
 		console.log("hy");
 		this.getRes();
 		this.getAll();
-		
+		this.getAlll();
+		console.log(this.plats)
+		console.log(this.restaurant);
+		console.log("ggg",this.menu);
 },
 
 	methods :{
@@ -181,12 +183,13 @@ export default {
 		await axios.get('http://localhost:8000/api/getrestaurant/'+id).then(res=>{
 				if(res!=null){
 					this.restaurant=res.data.restaurant
+					this.menu=res.data.restaurant.menus
 				for(let i=0 ; i< this.restaurant.img.length ; i++){
 					this.image1=this.restaurant.img[0]
 					this.image2=this.restaurant.img[1]
 					break;
 				}
-				console.log("img",res.data.restaurant.id);
+				console.log("img",res.data.restaurant.menus);
 				
 			
 				}
@@ -201,19 +204,30 @@ export default {
 				}
 			})
 		},
+			async getAlll(){
+			await axios.get('http://localhost:8000/api/alll').then(res=>{
+				if(res!=null){
+					for(let i=0 ; i < res.data.restaurants.length ; i++){
+						this.recardd.push(res.data.restaurants[i]);
+					}
+				}
+			})
+		},
 		gobook(id){
 	
 	
          this.$router.push({name:'bookingcat', params:{id:id , catg:'restaurant'}})
        },
 		goDetail(id){
-			// this.$router.push({name:'restaurant' , params:{id:id}})
-			this.restaurant=this.recard.filter(e=>e.id==id)[0];
-			console.log(this.restaurant)
-
-			this.image1=this.restaurant.images[0]
-			// this.image2=this.restaurant.images[1].name
-			// this.data()
+			this.restaurant=this.recardd.filter(e=>e.id==id)[0];
+			console.log("eeee", this.restaurant);
+			this.menu=this.restaurant.menus
+			for(let i=0 ; i< this.restaurant.images.length ; i++){
+					this.image1=this.restaurant.images[0]
+					this.image2=this.restaurant.images[1]
+					break;
+				}
+			
 		},
 		
 
@@ -253,7 +267,17 @@ box-shadow: 10px 5px 5px #8d703b;}
 	margin-right: 20px;
 }
 
+#btn{
+	background-color: transparent;
+	border-color: transparent;
+	color: #8d703b;
+}
 #b{
 	margin-left:92px ;
+}
+#pr{
+	color: black;
+	font-family: monospace;
+	font-size: 20px;
 }
 </style>

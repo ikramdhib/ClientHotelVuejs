@@ -50,9 +50,12 @@
     </div>
   </section>
  
+<<<<<<< HEAD
         
        
      
+=======
+>>>>>>> 06f136fcc55815cf3dd9818e389037affdfecd20
 	  <section class="ftco-booking">
     	<div class="container">
     		<div class="row">
