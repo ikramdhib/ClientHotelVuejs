@@ -165,40 +165,54 @@
 </div>
 </form>
 </div></div>
+<!--isConferenceRoom-->
+<div v-if="isConferenceRoom" >
+<div  class="row">
+<form class="bg-light p-5 ">
+<div class="form-group" >
+<div class="row">
+    <div class="col-md-4"> 
+      
+<i class="icon-circle-arrow-right"></i>  <label id="label"> Choisir equipements :</label>
+<div  v-for="p in salle" :key="p.id">
+<input type="checkbox" :v-model="somme" :value="somme=p.prix" @change="check($event)"  />
+{{p.label}}
+</div></div>
+<div class="col-md-4">                
+                       <i class="icon-circle-arrow-right"></i>  <label id="label">   capacite :</label>
+                      <input :placeholder="capacite" type="number" min="4"  id="example" class="form-control" v-model="capacite" >
+                    </div>
+ 
+<div class="col-md-4"> 
+<i class="icon-circle-arrow-right"></i>  <label id="label"> Choisir une offre :</label>
+<select v-model="monChoix" @change="onChange3($event)" class="form-control">
+<option></option>
+<option v-for="offre in offsall" :value="offre.id"  :key="offre.id" >{{ offre.titre }}{{ offre.pourcentage }}</option>
+</select></div>
+<div class="col-md-4"> 
+<ul class="list-group py-4" >
+<table>
+<tr><td >Totale:</td></tr>
+<tr><div v-if="offre" ><td >
+<input v-model="prix1" disabled > </td></div>
+<div v-if="offre==false">
+<td ><input :v-model="prix1"  :value="this.prix1=this.prix_reservation" disabled></td></div>
+</tr></table>
+</ul>
+</div>
+
+</div>
+</div>
+</form>
+</div>
+</div>
 <!--restaurent-->
 <div v-if=" isrestaurant" >
 <div  class="row">
 <form class="bg-light p-5 ">
 <div class="form-group" >
 <div class="row">
-<div class="col-md-4"> 
-<div > Choisir votre offre : </div>
-<select v-model="monChoix" @change="onChange($event)" class="form-control">
-<option></option>
-<option v-for="offre in offres" :value="offre.id" :key="offre.id" > {{ offre.titre }}{{ offre.pourcentage }}</option>
-</select>
-</div>
-<div class="col-md-4"> 
-<div class="col-md-4"> 
-<ul class="list-group">
-<table >
-<tr><td >Totale:</td></tr>
-<tr><div v-if="offre" >
- <td><input :v-model="prix"  disabled> </td></div>
- <td v-else-if="offre==false"><input v-model="prix" ></td>
-</tr></table>
-</ul>
-</div>
-</div>
-</div></div>
-</form>
-</div></div>
-<!--restaurannnnt-->
-<div  class="row py-4">
-<form class="bg-light p-5 contact-form">
-<div class="form-group" >
-<div class="row" v-if="isrestaurant" >
-<div class="col-md-2"> 
+  <div class="col-md-2"> 
 <i class="icon-circle-arrow-right"></i>  <label id="label">   Nombres de tables :</label>
 <select name="" id="" class="form-control"   v-model="table" >
 <option value="1">1 </option>
@@ -228,17 +242,41 @@
 <option value="10">10 </option>
 </select>
 </div>
+
 <div class="col-md-2" v-for="m in restaurent.menus" :key="m"> 
+  <i class="icon-circle-arrow-right"></i><label id="label"> Choisir le menu :</label>
 <div class="form-check"  v-for="p in m.plats" :key="p">
 <input class="form-check-input" type="checkbox"  v-model="plat"  :value="p.prix_plat" id="flexCheckDefault">
 <label class="form-check-label" @change="onChange($ev)" for="flexCheckDefault">
  {{ p.nom }}
 </label>
 </div></div>
- </div>
+<div class="col-md-4"> 
+<div > Choisir votre offre : </div>
+<select v-model="monChoix" @change="onChange($event)" class="form-control">
+<option></option>
+<option v-for="offre in offres" :value="offre.id" :key="offre.id" > {{ offre.titre }}{{ offre.pourcentage }}</option>
+</select>
 </div>
-             
- <!--information personnels -->             
+<div class="col-md-4"> 
+<div class="col-md-4"> 
+<ul class="list-group">
+<table >
+<tr><td >Totale:</td></tr>
+<tr><div v-if="offre" >
+ <td><input :v-model="prix"  disabled> </td></div>
+ <td v-else-if="offre==false"><input v-model="prix" ></td>
+</tr></table>
+</ul>
+</div>
+</div>
+</div></div>
+</form>
+</div></div>
+           
+ <!--information personnels -->  
+ <div  class="row py-4">
+<form class="bg-light p-5 contact-form">           
               <div class="form-group">
                   <div class="row" >
                      <h2 >Information personnels : </h2>
@@ -346,6 +384,9 @@ export default {
           prix:"",
          nombre:""},
      spa:"",
+     p:"",
+     prixeq:null,
+     salle:"",
      off:null,
      offpool:[],
      offtop:[],
@@ -360,9 +401,11 @@ export default {
      offre:false,
 	 offres:[],
  offspa:[],
-table:[],
+monChoix1:"",
+resultat:"",
 prix:null,
-
+equi:"",
+capacite:null,
 prix1:null,
   pour:0
     };
@@ -408,6 +451,7 @@ prix1:null,
        axios.get('http://localhost:8000/api/getroof/'+id).then(res=>{
 				if(res!=null){
 					this.rooftop=res.data.rooftop.id
+          
            this.prix_reservation=res.data.rooftop.prix
            	localStorage.setItem("Roof",this.rooftop)}
        });  
@@ -416,8 +460,12 @@ prix1:null,
        else if(catg=="salleConference"){
        axios.get('http://127.0.0.1:8000/api/getconf/'+id).then(res=>{
 				if(res!=null){
-					this.ConferenceRoom=res.data.room.id
-           this.prix_reservation=res.data.room.prix_reservation}
+					this.ConferenceRoom=res.data.cf.id
+          this.salle=res.data.cf.equipement
+          this.capacite=res.data.cf.typeconferencerooms.capacite
+           this.prix_reservation=res.data.cf.prix
+           localStorage.setItem("salle",this.ConferenceRoom)
+           console.log("zzzz",this.capacite)}
        });  
       this.isConferenceRoom=true;
 			}
@@ -538,16 +586,16 @@ this.offresres();
     await axios.post("http://localhost:8000/api/Booking", {
             
                infoComplimentaire:this.booking.infoComplimentaire,
-                 nombre:this.booking.nombre,
+                 nombre:this.capacite,
                   phone:this.user.phone,
                   email:this.user.email,
                     offre:this.monChoix,
                  nom:this.user.lastname,
                  prenom:this.user.firstname,
-                   prix:this.prix,
+                   prix:this.prix1,
                 user_id:this.user.id,
          
-                conference_id:localStorage.getItem("conference_id")
+                conference_id:localStorage.getItem("salle")
 
 
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
@@ -635,7 +683,7 @@ for( let i=0;i<this.offspa.lengeth;i++){
  else if(catg=="salleConference"){
  await axios
   .get("http://127.0.0.1:8000/api/getoffsall/"+id, ).then(res=>{
-console.log( this.offres= res.data.offres);
+
 this.offsall= res.data.offres;
 			 
 console.log(this.offsall); })
@@ -746,18 +794,22 @@ console.log(this.offsall); })
    
     }
       
-
- this.prix =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)*this.booking.nombre  )))
+if(this.equi){
+ this.prix1 =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)+this.equi )))
+ console.log("eeer",this.prix1);
+}
+else if
+(this.equi==""){
+   this.prix1 =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)+this.equi )))
+    console.log("eeer",this.prix1);
+}
  
- if(this.monChoix==null){
- this.prix=(( this.prix_reservation*this.booking.nombre))
-
- } console.log("eeer",this.prix);
+  
     },
+  
 //onchange restaurent
     onChange4(event) {
-  
-   let pr=event.target.value;
+     let pr=event.target.value;
    this.offre=true;
    for(let i=0; i<this.offres.length ; i++){
       if(this.offres[i].id==this.monChoix){
@@ -784,18 +836,7 @@ console.log(this.offsall); })
 
 
 
-    //ONCHANGE PLAT 
-    onchange11(ev){
-      let p=ev.target.value;
-      this.plat=true;
-      if(p!=null){
-          console.log('hi');
-      }  else if(p==null){
-     console.log("eeer");
-   }
-    console.log("ooo",this.plat);
-    }
-
+   
 }}
 
 </script>

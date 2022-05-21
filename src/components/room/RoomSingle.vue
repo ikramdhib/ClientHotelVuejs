@@ -1,5 +1,5 @@
-<template >
-  <div class="hero-wrap" id="bg1" style="background-image">
+<template>
+   <div class="hero-wrap" id="bg1" style="background-image">
       <div class="overlay"></div>
       <div class="hero-wrap" id="bg1" style="background-image">
       <div class="overlay"></div>
@@ -8,37 +8,31 @@
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
 	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Acceuil</a></span> <span>A propos</span></p>
-	            <h1 class="mb-4 bread">Details Chambres</h1>
+	            <h1 class="mb-4 bread">Details chambre</h1>
             </div>
           </div>
         </div>
       </div>
-    </div></div>
-
-
-
- <section class="ftco-section">
+    </div></div> 
+    <section class="ftco-section">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
           	<div class="row">
           		<div class="col-md-12 ">
-                <div class="col-md-10 heading-section text-center py-4">
-          			<h2 class="mb-4"> {{ type_nom}} </h2>
-                </div> 
-              
-              </div>
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
+               
+              <div v-if="images.length > 0">
+          		    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators" >
             <div v-for="(image, index) in images" :key="index">
                 <li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
             </div>
         </ol>
         <div class="carousel-inner">
           <div v-for="(image, index) in images" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
-                    <img class="d-block w-100" :src="'http://localhost:8000/storage'+image.name" >
+                    <img class="d-block w-100" :src="'http://localhost:8000/storage'+image.name"   >
                 </div>
-            
+        </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -49,9 +43,11 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+              
+              </div>
           		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
     						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.{{room.description}}</p>
-    						<div class="d-md-flex mt-5 mb-5">
+    					<div class="d-md-flex mt-5 mb-5">
     							<ul class="list">
                     <div v-if="room.nbAdult>0">
 	    							<li><i class="icon-group" id="icon">:</i> {{room.nbAdult}} Adult</li>
@@ -68,97 +64,30 @@
 	    						</ul>
     						</div>
     					</div>
-              <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
-          			<h4 class="mb-4">Review &amp; Ratings</h4>
-          			<div class="row">
-          				<div class="col-md-6">
-          					<form method="post" class="star-rating">
-										  <div class="form-check">
-												<input type="checkbox" class="form-check-input" id="exampleCheck1">
-												<label class="form-check-label" for="exampleCheck1">
-													<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> 100 Ratings</span></p>
-												</label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> 30 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 5 Ratings</span></p>
-									     </label>
-										  </div>
-										  <div class="form-check">
-										    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-										    </label>
-										  </div>
-										</form>
-          				</div>
-          			</div>
-          		</div>
-
-          		<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
-                  <div class="row">
-          			<h4 class="mb-4">Les Chambres Disponible</h4>
-             <div class="col-sm col-md-3 "  v-for="chambre in chambres" :key="chambre.id"  >
-                    <div class="c">  
-                      <div v-for="objet in objets" :key="objet.id ">
-                      <div v-if="objet.id==type_id && objet.id==chambre.type_id">
-				    				<div class="card" style="width: 18rem;" > 
-                      <img  :src="'http://localhost:8000/storage'+chambre.images.name" alt="Card image cap">
-                      <div class="card-body">
-                     <h5 class="card-title text-center">{{objet.nom_type}}</h5>
-                           <div class="text p-3 text-center">
-	                             <div v-for="prix in prixs" :key="prix.id">
-                                 <div v-if="prix.id == chambre.price_id">
-    						                      <div class="text p-3 text-center">
-    						               <p class="bo">{{prix.price_hotel}} DT  <span class="b1"> par nuit </span></p>
-						                    </div>
-				                      	</div>
-				                        </div>
-                                   <router-link :to="'RoomSingle'+ room.id " ><a  class="btn btn-primary">plus details</a></router-link>
-                                    </div>
-                                   </div>
-                               </div>
-                         </div>
-                    </div>
-                </div>
-                 </div>
-                  </div>
-                </div>
-                </div>
-          </div> <!-- .col-md-8 -->
-          <div class="col-lg-4 sidebar ftco-animate">
+   
+          </div> </div>
+           <div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group">
-               <div class="box">
-              <router-link :to="'findroom'" > <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5"></router-link>
+        
+             
+          		
+                 <div class="box">
+                 <router-link :to="'findroom'" > <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5"></router-link>
               </div>
               </div>
                <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h2> les Prix</h2>
-               <div  v-if="this.per>0">
-                 <del id="reduit">{{price}} DT </del>
-                   <li id="p1">{{ (this.pric*this.pric)/100}} DT</li> 
-               </div>
-               <div v-else-if="this.per==0">
+               
+              
+              
+              
+           
               <li id="p1">{{ price }} DT  </li> 
-              </div>
-              </div>
-            </div>
-            	
-            <div class="sidebar-box ftco-animate">
+            
+                 
+              
+            
               <h2>Options</h2>
               <div class="row">
           	<div class="col-sm-2" v-for="option in options" :key="option.id">
@@ -167,43 +96,48 @@
               </div>
               </div>
               </div>
-            </div>
-           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <div class="cards-wrapper">
-      
-      
-       <div v-for="(offre, index) in offres" :key="index" >
-             <div class="card" >
-            <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-           
-          </div>
-      </div></div></div></div>
-       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a></div>
-              
-                
-           
-            </div>
-            <div class="sidebar-box ftco-animate">
+               <div class="sidebar-box ftco-animate">
               <h3>type chambre</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!{{typdesc}}</p>
-            </div>
+            </div></div></div></div>
+            </div></div></section>
+             <div class="container-fluid">
+        <div class="row no-gutters justify-content-center pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2><span>Nos Chambres </span></h2>
           </div>
+
         </div>
-      </div>
-      </section> <!-- .section -->
+          <div class="col-md-12 ">
+            <div class="bg-white p-5">
+                  <div class="row">
+                  <div class="col-md-4"  v-for="chambre in chambres" :key="chambre.id"> 
+					 
+                    <div class="card"  >
+						  <img  :src="'http://localhost:8000/storage'+chambre.images.name"  alt="Card image cap">
+                    <div class="card-body">
+                       <div v-for="objet in objets" :key="objet.id ">
+                      <div v-if="objet.id==type_id && objet.id==chambre.type_id">
+                      <h5 class="card-title">{{ objet.nom_type }} </h5></div></div>
+					  <hr/>
+                
+                    
+ <p class="card-text"> <a :href="'http://localhost:8080/#/Roomsingle'+chambre.id"   > plus de details </a></p>
+                    
+					  <hr/>
+             <div v-for="prix in prixs" :key="prix.id">
+                                 <div v-if="prix.id == chambre.price_id">
+                      <p class="card-text" id="pr"> {{prix.price_hotel}} DT  </p></div></div>
+                    </div>
+                   
+                  </div>
+                  </div>
+              </div>
+              </div>
+              </div>
+            </div>
+
 </template>
- 
 <script>
 
 import axios from "axios";
@@ -225,7 +159,7 @@ calcul:{},
   per:{},
   pric:{},
   type_id:{},
-  
+  ro:{},
     };
   },
   
@@ -255,9 +189,10 @@ calcul:{},
          this.price=res.data.rooms.prices.price_hotel
           this.offres=res.data.rooms.offres;
           this.images=res.data.rooms.images;
+          this.ro=res.data.rooms.id;
 
    this.per=parseInt( res.data.rooms.offres.pourcentage);
- this. pric=res.data.rooms.prices.price_hotel;
+ this.pric=res.data.rooms.prices.price_hotel;
  
 
 
@@ -278,7 +213,7 @@ calcul:{},
 			   this.chambres= res.data.rooms;
 			 
 
-           console.log(this.chambre)
+           console.log(this.chambres)
 		   
    }
 	)
@@ -311,7 +246,7 @@ calcul:{},
       this.prixs= res.data.price;
 	  
 
-        console.log(this.prix);
+        console.log(this.prixs);
       })
 	
     

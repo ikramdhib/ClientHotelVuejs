@@ -20,6 +20,7 @@
           <div class="col-lg-8">
           	<div class="row">
           		<div class="col-md-12 ">
+               
               <div v-if="images.length > 0">
           		    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators" >
@@ -50,14 +51,20 @@
     					</div>
    
           </div> </div>
+          
           <div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group">
-               <div class="box">
-                  <input type="button" value="Reserver" @click="gobook(room.id)" id="box" class="btn btn-primary py-3 px-5">
+        
+             
+          		
+                 <div class="box">
+             <input type="button" value="Reserver" @click="gobook(room)" id="box" class="btn btn-primary py-3 px-5">
               </div>
               </div>
+        
                <div class="sidebar-box ftco-animate">
               <div class="categories">
+                	<h2> {{decoration}} </h2>
                 
                    <h2  > les Equipements</h2>
                   <div v-for="eq in equipement" :key="eq.id">
@@ -85,7 +92,7 @@
              <div v-for="offre in offres" :key="offre.id">
              <div class="card"  id="card" style="width: 18rem;" v-if="offre.disponibilite== 1">
             <div class="card-body">
-          <h5 class="card-title">{{offre.titre}}</h5>
+          <h5 class="card-title">{{offre.titre}}</h5>-
          <p class="card-text">{{ offre.description }}.</p>
            <p class="card-text" id="p">{{ offre.pourcentage}} % </p>
               </div>
@@ -96,6 +103,37 @@
         </div>
       </div>
       </section> <!-- .section -->
+        <div class="container-fluid">
+        <div class="row no-gutters justify-content-center pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2><span>Nos Salles de conference </span></h2>
+          </div>
+
+        </div>
+          <div class="col-md-12 ">
+            <div class="bg-white p-5">
+                  <div class="row">
+                  <div class="col-md-4"  v-for="ret in record" :key="ret.id"> 
+					  <div v-if="ret.id != room && ret.disponibilite==true">
+                    <div class="card"  >
+						  <img  :src="'http://localhost:8000/storage'+ret.images.name"  alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title"> {{ret.nom}} </h5>
+					  <hr/>
+                      <p class="card-text"> {{ ret.description }} </p>
+       
+ <p class="card-text"> <a :href="'http://localhost:8080/#/conferenceroom'+ret.id"   > plus de details </a></p>
+                    
+					  <hr/>
+                      <p class="card-text" id="pr">  {{ ret.prix }} DT   </p>
+                    </div>
+                    </div>
+                  </div>
+                  </div>
+              </div>
+              </div>
+              </div>
+            </div>
 </template>
  
 <script>
@@ -104,11 +142,13 @@ import axios from "axios";
 export default {
   data() {
     return {
+      decoration:{},
 	  room:{},
    tab1:[],
     tab2:[],
     tab3:[],
     tab4:[],
+    record:[],
     salles:[],
     equipement:[],
      types:[],
@@ -129,7 +169,8 @@ export default {
       const id = this.$route.params.id
       await axios  .get("http://127.0.0.1:8000/api/getconf/"+id,)
             .then(res => {
-                this.room.id=res.data.cf;
+                this.room=res.data.cf.id;
+                this.decoration=res.data.cf.decoration
                 this.tab1=res.data.cf.equipement
                 for(let i=0 ; i< this.tab1.length ; i++){
                   this.equipement.push(this.tab1[i]);
@@ -151,14 +192,16 @@ export default {
           },
             async getal(){
           await axios.get('http://localhost:8000/api/getSalle').then(res=>{
-            this.salles=res.data.salle;
-
-            }
-            )
+          
+					for(let i=0 ; i < res.data.salle.length ; i++){
+						this.record.push(res.data.salle[i]);
+					
+          }
+            })
           },
 
           gobook(id){
-            this.$router.push({name:"bookingcat" , params:{id:id , catg:"salleConference"}})
+            this.$router.push({name:"bookingcat" , params:{id:id,catg:"salleConference"}})
           }
           
           }}
