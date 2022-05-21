@@ -40,7 +40,7 @@
 							<p>Résérver un<span id="tt"> Table </span> à partire de : <span id="prix" class="pl-md-5"> {{ rooftop.prix }} DT </span></p>
 							
 							<div class="d-flex text align-items-center">
-										<input id="btn" type="button" value="Résérver"  @click="goBooking(rooftop.id)"  class="btn btn-primary py-3 px-4" >
+								<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" @click="goBooking(rooftop.id)">
 	        			</div>
 					</div>
 					</div>
@@ -172,7 +172,8 @@ export default {
 	goBooking(id){
 		this.$router.push({name:'bookingcat' , params:{id:id , catg:'roof'} })
 	}
-	}
+		
+    }
 
 }
 </script>

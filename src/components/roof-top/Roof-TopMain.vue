@@ -56,7 +56,7 @@
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} </p>
+                      <p class="card-text"> {{ ret.description }} {{ ret.id }} </p>
                       <p class="card-text"> <input type="button" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)" ></p>
 
 					  <hr/>
@@ -87,7 +87,6 @@ export default {
 			offres:[],
 			off:[],
 			tab:[],
-			path:1,
 		}
 	},
 	mounted (){

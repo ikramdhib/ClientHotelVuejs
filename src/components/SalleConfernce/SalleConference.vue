@@ -20,9 +20,9 @@
           <div class="col-lg-8">
           	<div class="row">
           		<div class="col-md-12 ">
-              
+              <div v-if="images.length > 0">
           		    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
+        <ol class="carousel-indicators" >
             <div v-for="(image, index) in images" :key="index">
                 <li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
             </div>
@@ -31,7 +31,7 @@
           <div v-for="(image, index) in images" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
                     <img class="d-block w-100" :src="'http://localhost:8000/storage'+image.name"   >
                 </div>
-            
+        </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -48,84 +48,12 @@
     						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.{{room.description}}</p>
     					
     					</div>
-              <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
-          			<h4 class="mb-4">Review &amp; Ratings</h4>
-          			<div class="row">
-          				<div class="col-md-6">
-          					<form method="post" class="star-rating">
-										  <div class="form-check">
-												<input type="checkbox" class="form-check-input" id="exampleCheck1">
-												<label class="form-check-label" for="exampleCheck1">
-													<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> 100 Ratings</span></p>
-												</label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> 30 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 5 Ratings</span></p>
-									     </label>
-										  </div>
-										  <div class="form-check">
-										    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-										    </label>
-										  </div>
-										</form>
-          				</div>
-          			</div>
-          		</div>
-          		<!--<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
-                  <div class="row">
-          			<h4 class="mb-4">Les Salles de conference disponible</h4>
-             <div class="col-sm col-md-3 "  v-for="chambre in chambres" :key="chambre.id"  >
-                    <div class="c">  
-                      <div v-for="objet in objets" :key="objet.id ">
-                      <div v-if="objet.id==type_id && objet.id==chambre.type_id">
-				    				<div class="card" style="width: 18rem;" > 
-                      <img  :src="'http://localhost:8000/storage'+chambre.images.name" alt="Card image cap">
-                      <div class="card-body">
-                     <h5 class="card-title text-center">{{objet.nom_type}}</h5>
-                           <div class="text p-3 text-center">
-	                             <div v-for="prix in prixs" :key="prix.id">
-                                 <div v-if="prix.id == chambre.price_id">
-    						                      <div class="text p-3 text-center">
-    						               <p class="bo">{{prix.price_hotel}} DT  <span class="b1"> par nuit </span> 
-
-          
-          </p>
-						                    </div>
-				                      	</div>
-				                        </div>
-                                   <router-link :to="'RoomSingle'+ room.id " ><a  class="btn btn-primary">plus details</a></router-link>
-                                    </div>
-                                   </div>
-                               </div>
-                         </div>
-                    </div>
-                </div>
-                 </div>
    
-                  </div>
-                </div>
-                </div>-->
           </div> </div>
           <div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group">
                <div class="box">
-              <router-link :to="booking" > <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5"></router-link>
+                  <input type="button" value="Reserver" @click="gobook(room.id)" id="box" class="btn btn-primary py-3 px-5">
               </div>
               </div>
                <div class="sidebar-box ftco-animate">
@@ -153,7 +81,7 @@
               </div></div>
               </div>
               </div>
-           
+           <div v-if="offres.length >0">
              <div v-for="offre in offres" :key="offre.id">
              <div class="card"  id="card" style="width: 18rem;" v-if="offre.disponibilite== 1">
             <div class="card-body">
@@ -163,7 +91,7 @@
               </div>
            </div>
             </div>
-          
+           </div>
           </div>
         </div>
       </div>
@@ -173,120 +101,113 @@
 <script>
 
 import axios from "axios";
-
 export default {
   data() {
     return {
-       salles: [], 
-	 room:{},
-  
-  equipement:[],
-  types:[],
-  offres:[],
-  images:[],
- 
-  
-
-
-  
+	  room:{},
+   tab1:[],
+    tab2:[],
+    tab3:[],
+    tab4:[],
+    salles:[],
+    equipement:[],
+     types:[],
+     offres:[],
+     images:[],
     };
   },
   
    
   mounted(){
  this.getRoom();
-    this.getal();
-   this.id=this.$route.params.id;
-   console.log("rrrrrrrt",this.id);
+    this.getal()
   },
  
 	  
-  methods: {       
-  async getRoom(){
+        methods: {       
+        async getRoom(){
+      const id = this.$route.params.id
+      await axios  .get("http://127.0.0.1:8000/api/getconf/"+id,)
+            .then(res => {
+                this.room.id=res.data.cf;
+                this.tab1=res.data.cf.equipement
+                for(let i=0 ; i< this.tab1.length ; i++){
+                  this.equipement.push(this.tab1[i]);
+                }
+                this.tab2=res.data.cf.typeconferencerooms
+                for(let i=0 ; i< this.tab2.length ; i++){
+                  this.types.push(this.tab2[i]);
+                }
+                this.tab3=res.data.cf.offres
+                for(let i =0; i<this.tab3.length ; i++){
+                  this.offres.push(this.tab3[i])
+                }
+                this.tab4=res.data.cf.images
+                for(let i =0 ; i <this.tab4.length ; i++){
+                  this.images.push(this.tab4[i])
+                }
+          })
 
- await axios
- .get("http://127.0.0.1:8000/api/getconf/1", {
-      
-      })
-      .then((res) => {
-		  
-			    this.room=res.data.room;
+          },
+            async getal(){
+          await axios.get('http://localhost:8000/api/getSalle').then(res=>{
+            this.salles=res.data.salle;
+
+            }
+            )
+          },
+
+          gobook(id){
+            this.$router.push({name:"bookingcat" , params:{id:id , catg:"salleConference"}})
+          }
           
-         this.equipement=res.data.room.equipement;
-         this.types=res.data.room.typeconferencerooms;
-          this.offres=res.data.room.offres;
-          this.images=res.data.room.images;
-   
-  
+          }}
+        </script>
+      <style>
 
+      #tag{
+        min-height: 1rem;
+      }
+      #p1{
+        color: #d1a44f;
+      font-size: 30px;
+      }
+      #reduit{
+      
+      font-size: 22px;
+      color:rgb(90, 90, 90)
+          
+      }
+      div.c{
 
+              margin: 0 auto; /* Added */
+              float: none; /* Added */
+              margin-bottom: 10px; /* Added */
 
-    
-           console.log("room",this.equipement);
-             console.log("roo",this.type);
-               console.log("o",this.offres);
-                 console.log("images",this.images)
-         
-	  })
+      }
+      #p{
+      color: #d1a44f;
+      font-size: 22px;
+      }
+      #card{
+      box-shadow: 10px 5px 5px #8d703b;}
+      #icon{
+          font-size: 22px;
+        color:#8d703b;
+      }
+      #box{
+      margin-top: 35%;
+      border-radius: 0%}
+      .bo{
+        
+        color:#f33413;
+          font-size: 20px;
+          font-weight: bold;
+          }
+            .b1{
+        font-size: 15px;
+        color:grey;
+      font-weight: lighter;
 
-	  },
-    	async getal(){
-		await axios.get('http://localhost:8000/api/getSalle').then(res=>{
-			this.salles=res.data.salle;
-
-       console.log(res.data.salle)
-
-		  }
-			)
-		},
-     
-     }}
-   </script>
-<style>
-
-#tag{
-   min-height: 1rem;
-}
-#p1{
-   color: #d1a44f;
- font-size: 30px;
-}
-#reduit{
- 
- font-size: 22px;
- color:rgb(90, 90, 90)
-    
-}
-div.c{
-
-        margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 10px; /* Added */
-
-}
-#p{
- color: #d1a44f;
- font-size: 22px;
-}
-#card{
-box-shadow: 10px 5px 5px #8d703b;}
-#icon{
-  	font-size: 22px;
-  color:#8d703b;
-}
-#box{
-margin-top: 35%;
-border-radius: 0%}
-.bo{
-	
-	 color:#f33413;
-		font-size: 20px;
-    font-weight: bold;
-	  }
-	  	.b1{
-	font-size: 15px;
-	 color:grey;
-font-weight: lighter;
-
-	  }
-</style>
+          }
+      </style>
