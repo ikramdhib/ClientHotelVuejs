@@ -146,7 +146,7 @@ export default {
 					this.image2=this.rooftop.images[1]
 					break;
 				}
-				console.log(res.data.rooftop)
+				console.log(this.rooftp)
 				
 				
 				}

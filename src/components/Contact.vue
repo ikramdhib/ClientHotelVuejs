@@ -42,7 +42,7 @@
 	            <p><span>Website</span> <a href="#">yoursite.com</a></p>
 	          </div>
           </div>
-        </div>
+        </div></div>
         <div class="row ">
               <div class="row ">
             <div class="col-md-6 d-flex">
@@ -76,11 +76,16 @@
             </form>
           
           </div>
+<<<<<<< HEAD
+=======
+
+        
+    
+         
+>>>>>>> d503f453e37045546e42ac278a7db5de6613f668
         </div>
           </div>
-              </div>
-        </div>
-      </div>
+      </div></div>
     </section>
 </template>
 

@@ -50,6 +50,12 @@
     </div>
   </section>
  
+<<<<<<< HEAD
+        
+       
+     
+=======
+>>>>>>> 06f136fcc55815cf3dd9818e389037affdfecd20
 	  <section class="ftco-booking">
     	<div class="container">
     		<div class="row">
@@ -172,50 +178,7 @@
 			</div>
 		</section>
 
-        <div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
-          <div
-            class="heading-section heading-section-wo-line pt-md-5 pl-md-5 mb-5"
-          >
-            <div class="ml-md-0">
-              <span class="subheading">BienVenu Au Deluxe</span>
-              <h2 class="mb-4">Bienvenue dans notre Hôtel</h2>
-            </div>
-          </div>
-          <div class="pb-md-5">
-            <p>
-              Situé au coeur de Tunisie, Deluxe est un point de départ idéal
-              pour toutes les activités plein air, artistiques et culturelles :
-              VTT sous toutes ses formes, balades, randonnées ou trail, ou
-              encore, yoga, pic-nique et visites de petits villages qui vous
-              feront voyager dans le temps.
-            </p>
-            <p>
-              Deluxe réunit tous les ingrédients pour passer un séjour
-              inoubliable en Tunisie en famille ou entre amis. Nous avons pensé
-              le Deluxe comme un lieu typique et rafraîchissant aux couleurs
-              accidulées proposant de multiples options pour un séjour qui vous
-              ressemble : déjeuner ou goûter gourmand au soleil sur la toute
-              nouvelle terrasse du Savoy, moment détente au spa ou cocktails...à
-              vous de concocter votre journée parfaite avant de passer au Resto,
-              le restaurant du Deluxe, où vous vous régalerez de plats
-              traditionnels et raffinés dans une ambiance chaleureuse.
-            </p>
-            <ul class="ftco-social d-flex">
-              <li class="ftco-animate">
-                <a href="#"><span class="icon-twitter"></span></a>
-              </li>
-              <li class="ftco-animate">
-                <a href="#"><span class="icon-facebook"></span></a>
-              </li>
-              <li class="ftco-animate">
-                <a href="#"><span class="icon-google-plus"></span></a>
-              </li>
-              <li class="ftco-animate">
-                <a href="#"><span class="icon-instagram"></span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
+     
 
   <section clas="ftco-section">
     <div class="container">
