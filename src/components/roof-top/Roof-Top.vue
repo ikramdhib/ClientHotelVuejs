@@ -34,7 +34,12 @@
 				</div>
 				</div>
 					<div class="row">
-					<div class="col-md-12 py-5 wrap-about pb-md-5 ftco-animate">
+					
+				<div class="col-md-7  wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
+		            <h2 class="mb-4"> {{ rooftop.intitule }} </h2>
+	            </div>
+
 	          <div class="pb-md-4">
 							<p>{{ rooftop.description }}</p>
 							<p>Résérver un<span id="tt"> Table </span> à partire de : <span id="prix" class="pl-md-5"> {{ rooftop.prix }} DT </span></p>
@@ -44,27 +49,20 @@
 	        			</div>
 					</div>
 					</div>
-				</div>
-			</div>
-		</section>
-
-      <div class="container-fluid">
-        <div class="row no-gutters justify-content-center pb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Nos Offres pour le Restaurant</span></h2>
-          </div>
-        </div>
-          <div class="col-md-12 order-md-last d-flex">
-            <div class="bg-white p-5 contact-form">
-              <div class="form-group">
-              <div  class="row">
-                <form class="p-5 contact-form">
-              <div class="form-group">
-                  <div class="row">
-
-                  <div class="col-md-4 py-4" id="d" v-for="offre in rooftop.offres" :key="offre.id"> 
-                    <div class="card"  id="card" style="width: 18rem;">
+					<div class="col-md-5  wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
+	          </div>
+										  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<div v-for="(offre, index) in rooftop.offres" :key="index">
+								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+							</div>
+						</ol>
+						<div class="carousel-inner">
+						<div v-for="(offre, index) in rooftop.offres" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+									 <div class="card"  id="card" style="width: 18rem;">
                     <div class="card-body">
+							<span class="badge badge-pill badge-danger" id="r">OFFRE</span>
                       <h5 class="card-title"> {{ offre.titre}} </h5>
                       <p class="card-text"> {{ offre.description }} </p>
                       <p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
@@ -73,17 +71,22 @@
                       
                     </div>
                   </div>
-                    </div>
-                   
-                 </div>
-              </div>
-            </form>
-              </div>
-              </div>
-              </div>
-            </div>
-		 </div>
-
+								</div>
+							
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
+							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only"  id="plus">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
+							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only"  >Next</span>
+						</a>
+					</div>		
+					</div>
+					</div>
+			</div>
+		</section>
 		  <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -101,12 +104,12 @@
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.intitule}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} </p>
-                      <p class="card-text"> <a :href="'http://localhost:8080/#/roof-top'+ret.id"   > plus de details </a></p>
+                      <p class="card-text"> {{ ret.description }} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  >    </p>
+                     
 
 					  <hr/>
-                      <p class="card-text" id="pp">  {{ ret.prix }} DT  
-					  <span class="card-text py-4" id="b"> <input id="btn" type="button" value="Résérver"  class="btn btn-primary" @click="goBooking()"> </span></p>
+                      <p class="card-text" id="pr">  {{ ret.prix }} DT </p> 
+					
                     </div>
                   </div>
                     </div>
@@ -125,6 +128,7 @@ export default {
 			name:"",
 			roof:{ },
 			rooftopcard:[],
+			rooftopcardd:[],
 			image1:{},
 			image2:{},
 		}
@@ -132,6 +136,7 @@ export default {
 	mounted (){
 		this.getRes();
 		this.getAll();
+		this.getAlll();
 },
 
 	methods :{
@@ -160,6 +165,24 @@ export default {
 					}
 				}
 			})
+		},
+		async getAlll(){
+			await axios.get('http://localhost:8000/api/getroomimgg').then(res=>{
+				if(res!=null){
+					for(let i=0 ; i < res.data.roofs.length ; i++){
+						this.rooftopcardd.push(res.data.roofs[i]);
+					}
+				}
+			})
+		},
+		goDetail(id){
+			this.rooftop=this.rooftopcardd.filter(e=>e.id==id)[0]
+			console.log(this.rooftop);
+			for(let i=0 ; i< this.rooftop.images.length ; i++){
+					this.image1=this.rooftop.images[0]
+					this.image2=this.rooftop.images[1]
+					break;
+				}
 		},
 	goBooking(id){
 		this.$router.push({name:'bookingcat' , params:{id:id , catg:'roof'} })
@@ -204,5 +227,18 @@ box-shadow: 10px 5px 5px #8d703b;}
 
 #b{
 	margin-left:92px ;
+}
+#r{
+	margin-left: 80%;
+}
+#bt{
+	background-color: transparent;
+	border-color: transparent;
+	color: #8d703b;
+}
+#pr{
+	color: black;
+	font-family: monospace;
+	font-size: 20px;
 }
 </style>

@@ -239,7 +239,7 @@
                       <input placeholder="Select date" type="date" id="example" class="form-control" :min="dateNow"  v-model="bookingdate.start">
                     </div>
                     <div class="col-md-5"> 
-                  <i class="icon-circle-arrow-right"></i>  <label id="label" >   Date deeeeeeeeee départ :</label>
+                  <i class="icon-circle-arrow-right"></i>  <label id="label" >   Date de départ :</label>
                       <input :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" v-model="bookingdate.end">
                     </div>
                      <div class="col-md-2"> 
@@ -412,6 +412,9 @@
               </div>
                   </div>
               </div>
+              
+            </form>
+              </div>
                <div class="form-group">
                   <div class="row justify-content-center mb-9 pb-2 py-4">
           <div class="col-md-2 heading-section text-center"  >
@@ -421,8 +424,6 @@
                 <input type="button" id="bb" value="Vos reservation" v-on:click="goProfile" class="btn btn-primary btn-md btn-block waves-effect text-center ">
               </div>
                   </div>
-              </div>
-            </form>
               </div>
               <!----------------------------------------------------------------------------------------------------------------------->
               </div>

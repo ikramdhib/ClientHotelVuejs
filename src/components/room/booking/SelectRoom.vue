@@ -105,16 +105,28 @@
                   
                   <tbody>
                     <tr>
-                      <td rowspan="3">
-    				<div  class="room">
-              <div id="img">
-    					<a  class="img d-flex justify-content-center align-items-center"  :style="'background-image :url(http://localhost:8000/storage//'+room1.images.name+')'">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-              </div>
-    			</div>
+                      <td rowspan="3"  style="width:350px">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <div v-for="(image, index) in room1.images" :key="index">
+                <li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+            </div>
+        </ol>
+        <div class="carousel-inner">
+          <div v-for="(image, index) in room1.images" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+                    <img class="d-block w-100" :src="'http://localhost:8000/storage'+image.name" >
+                </div>
+            
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
                       </td>
                       <td colspan="2" id="label"> {{ room1.type }} </td>
@@ -220,6 +232,35 @@
               </div>
               </div>
               </div>
+              <!----------------------------------------------------------------->
+               <div v-if=" ((rooms1.length == 0) && (rooms2.length==0) && (rooms3.length==0) )" >
+                  
+              <div  class="row">
+                <form class="bg-light p-5 contact-form">
+              <div class="form-group">
+                
+            <div class="col-md-12"> 
+                <table  class="table table-borderless ">
+                  
+                  <tbody>
+                   
+                    <tr>
+                      <td id="tbb"> Aucune disponibilité n'a pu être trouvée pour la période de séjour sélectionnée. Veuillez changer vos dates de séjour.   </td>
+                    </tr>
+                       <td >
+                         <div class="col-md-3">
+                      <input  type="button" @click="goBack()" value="Modifier votre séjour" class="btn btn-primary py-2 px-2">
+                         </div>
+                    </td>
+                      
+                  </tbody>
+                </table>
+               </div>
+              </div>
+            </form>
+              </div>
+              </div>
+              <!--------------------------------------------------------->
               <div v-if=" (rooms2.length > 0 && whichroom==2 && selectedRoom2==true )">
                
               <div  class="row" v-for="room2 in rooms2" :key="room2.id">
@@ -231,15 +272,28 @@
                   
                   <tbody>
                     <tr>
-                      <td rowspan="3">
-    				<div  class="room">
-              <div id="img">
-    					<a  class="img d-flex justify-content-center align-items-center" id="room1" style="background-image">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    						</div>
-    					</a>
-              </div>
-    			</div>
+                      <td rowspan="3"  style="width:350px">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <div v-for="(image, index) in room2.images" :key="index">
+                <li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+            </div>
+        </ol>
+        <div class="carousel-inner">
+          <div v-for="(image, index) in room2.images" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+                    <img class="d-block w-100" :src="'http://localhost:8000/storage'+image.name" >
+                </div>
+            
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
                       </td>
                       <td colspan="2" id="label"> {{ room2.type }} </td>
@@ -364,16 +418,28 @@
                   
                   <tbody>
                     <tr>
-                      <td rowspan="3">
-    				<div  class="room">
-              <div id="img">
-    					<a  class="img d-flex justify-content-center align-items-center" id="room1" style="background-image">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-              </div>
-    			</div>
+                      <td rowspan="3"  style="width:350px">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <div v-for="(image, index) in room3.images" :key="index">
+                <li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+            </div>
+        </ol>
+        <div class="carousel-inner">
+          <div v-for="(image, index) in room3.images" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+                    <img class="d-block w-100" :src="'http://localhost:8000/storage'+image.name" >
+                </div>
+            
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
                       </td>
                       <td colspan="2" id="label"> {{ room3.type }} </td>
@@ -588,6 +654,9 @@ this.nbchambre=parseInt(localStorage.getItem('nbchambre'));
 
 
 methods:{
+  goBack(){
+    this.$router.push('findroom')
+  },
    goAcc(){
        this.$router.push('/');
      },
