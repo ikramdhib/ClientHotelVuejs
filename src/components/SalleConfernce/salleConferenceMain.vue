@@ -103,7 +103,7 @@ methods:{
 		},
 
 		goDetails(id){
-			this.$router.push({path:'salle' , params:{id:id}})
+			this.$router.push({path:'conferenceroom' , params:{id:id}})
 		}
 		 
     }}
