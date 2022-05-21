@@ -71,16 +71,11 @@
                 <textarea name="" id="" cols="30" rows="7" class="form-control"   v-model="contact.message" placeholder="Message"></textarea>
               </div>
               <div class="form-group">
-                <input type="submit"   @click="addContact()" value="Send Message" class="btn btn-primary py-3 px-5">
+                <input type="button"   @click="AqddContact()" value="Send Message" class="btn btn-primary py-3 px-5">
               </div>
             </form>
           
           </div>
-
-        
-          <div class="col-md-6 d-flex">
-          	<div class="hero-wrap" id="contact1" :style="'background-image '"></div></div>
-         
         </div>
           </div>
               </div>

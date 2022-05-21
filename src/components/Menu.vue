@@ -43,7 +43,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Plus </a>
                         <div class="dropdown-menu dropdown-menu-end">
                          <!--   <a class="dropdown-item" @click="goToProfile()" >profile</a>-->
-						 <router-link class="dropdown-item" to="salleConference" >Salle de Conference</router-link>
+						 <router-link class="dropdown-item" to="conferencerooms" >Salle de Conference</router-link>
                            <router-link class="dropdown-item" to="pools" >Pool</router-link>
                            <router-link class="dropdown-item" to="spas" >SPA</router-link>
                         </div>

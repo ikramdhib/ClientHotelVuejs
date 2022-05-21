@@ -82,15 +82,11 @@
           </div>
 
         </div>
-          <div class="col-md-12 order-md-last d-flex">
-            <div class="bg-white p-5 contact-form">
-              <div class="form-group">
-              <div  class="row">
-                <form class="p-5 contact-form">
-              <div class="form-group">
+          <div class="col-md-12">
+            <div class="bg-white p-5">
                   <div class="row">
 
-                  <div class="col-md-4 py-4" v-for="offre in restaurant.offres" :key="offre.id"> 
+                  <div class="col-md-4 " v-for="offre in restaurant.offres" :key="offre.id"> 
                     <div class="card"  id="card" style="width: 18rem;">
                     <div class="card-body">
                       <h5 class="card-title"> {{ offre.titre}} </h5>
@@ -99,13 +95,8 @@
 					  <p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{ restaurant.prix_reservation }} DT </del>
 					   <span class="px-4" id="of"> {{ restaurant.prix_reservation-((restaurant.prix_reservation*offre.pourcentage)/100)}} </span> </p>
                       
-                    </div>
                   </div>
-                    </div>
-                   
                  </div>
-              </div>
-            </form>
               </div>
               </div>
               </div>
@@ -118,36 +109,27 @@
           </div>
 
         </div>
-          <div class="col-md-12 order-md-last d-flex">
-            <div class="bg-white p-5 contact-form">
-              <div class="form-group">
-              <div  class="row">
-                <form class="p-5 contact-form">
-              <div class="form-group">
+          <div class="col-md-12 ">
+            <div class="bg-white p-5">
                   <div class="row">
                   <div class="col-md-4"  v-for="ret in recard" :key="ret.id"> 
-					  <div id="d">
-                    <div class="card"  id="card" >
+					  <div v-if="ret.id != restaurant.id && ret.disponibilite==true">
+                    <div class="card"  >
 						  <img  :src="'http://localhost:8000/storage'+ret.images.name"  alt="Card image cap">
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} <input type="button" id="btn" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  >   </p> 
+                      <p class="card-text"> {{ ret.description }} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  >   </p> 
 					  <hr/>
                       <p class="card-text" id="pr">  {{ ret.prix_reservation }} DT   </p>
                     </div>
-                  </div>
                     </div>
                   </div>
-                 </div>
-              </div>
-            </form>
+                  </div>
               </div>
               </div>
               </div>
             </div>
-		 </div>
-		
 		 
 </template>
 <script>
@@ -267,7 +249,7 @@ box-shadow: 10px 5px 5px #8d703b;}
 	margin-right: 20px;
 }
 
-#btn{
+#bt{
 	background-color: transparent;
 	border-color: transparent;
 	color: #8d703b;

@@ -87,19 +87,15 @@
 		  <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Nos Restaurants</span></h2>
+            <h2><span>Découvrez nos Roof-Top</span></h2>
           </div>
 
         </div>
-          <div class="col-md-12 order-md-last d-flex">
-            <div class="bg-white p-5 contact-form">
-              <div class="form-group">
-              <div  class="row">
-                <form class="p-5 contact-form">
-              <div class="form-group">
+          <div class="col-md-12 ">
+            <div class="bg-white p-5 ">
                   <div class="row">
                   <div class="col-md-4"  v-for="ret in rooftopcard" :key="ret.id"> 
-					  <div id="d">
+					  <div v-if="ret.disponibilite==true" >
                     <div class="card"   >
 						  <img  :src="'http://localhost:8000/storage'+ret.images.name"  alt="Card image cap">
                     <div class="card-body">
@@ -116,10 +112,6 @@
                     </div>
                   </div>
                  </div>
-              </div>
-            </form>
-              </div>
-              </div>
               </div>
             </div>
 		 </div>
