@@ -88,17 +88,37 @@
               </div></div>
               </div>
               </div>
-           <div v-if="offres.length >0">
-             <div v-for="offre in offres" :key="offre.id">
-             <div class="card"  id="card" style="width: 18rem;" v-if="offre.disponibilite== 1">
-            <div class="card-body">
-          <h5 class="card-title">{{offre.titre}}</h5>-
-         <p class="card-text">{{ offre.description }}.</p>
-           <p class="card-text" id="p">{{ offre.pourcentage}} % </p>
-              </div>
-           </div>
-            </div>
-           </div>
+           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<div v-for="(offre, index) in registre.offres" :key="index">
+								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+							</div>
+						</ol>
+						<div class="carousel-inner">
+						<div v-for="(offre, index) in registre.offres" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+									<div class="card"  id="card" style="width: 18rem;">
+										<div class="card-body">
+											<span class="badge badge-pill badge-danger" id="r">OFFRE</span>
+										<h5 class="card-title"> {{ offre.titre}}   </h5>
+										<p class="card-text"> {{ offre.description }} </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{price }} DT </del>
+										<span class="px-4" id="of"> {{ price-((price*offre.pourcentage)/100)}} </span> </p>
+										
+									</div>
+									</div>
+								</div>
+							
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
+							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only"  id="plus">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
+							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only"  >Next</span>
+						</a>
+					</div>
           </div>
         </div>
       </div>
@@ -154,6 +174,8 @@ export default {
      types:[],
      offres:[],
      images:[],
+     registre:[],
+     price:{}
     };
   },
   
@@ -169,7 +191,9 @@ export default {
       const id = this.$route.params.id
       await axios  .get("http://127.0.0.1:8000/api/getconf/"+id,)
             .then(res => {
+              this.registre=res.data.cf
                 this.room=res.data.cf.id;
+                this.price=res.data.cf.prix
                 this.decoration=res.data.cf.decoration
                 this.tab1=res.data.cf.equipement
                 for(let i=0 ; i< this.tab1.length ; i++){

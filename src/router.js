@@ -163,7 +163,7 @@ const routes=[
     {
         path:'/conferencerooms',
         name:'conferencerooms',
-        component: () => import('./components/SalleConfernce/SalleConferenceMain.vue'),
+        component: () => import('./components/SalleConfernce/salleConferenceMain.vue'),
     }
 ];
 const router = createRouter({

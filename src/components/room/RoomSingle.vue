@@ -63,6 +63,10 @@
 	    							<li><i class="icon-bed " id="icon">: </i>{{room.nbBed}}</li>
 	    						</ul>
     						</div>
+                 <div class="sidebar-box ftco-animate">
+              <h3>type chambre</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!{{typdesc}}</p>
+            </div>
     					</div>
    
           </div> </div>
@@ -78,16 +82,7 @@
                <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h2> les Prix</h2>
-               
-              
-              
-              
-           
-              <li id="p1">{{ price }} DT  </li> 
-            
-                 
-              
-            
+                <li id="p1">{{ price }} DT  </li> 
               <h2>Options</h2>
               <div class="row">
           	<div class="col-sm-2" v-for="option in options" :key="option.id">
@@ -96,10 +91,39 @@
               </div>
               </div>
               </div>
-               <div class="sidebar-box ftco-animate">
-              <h3>type chambre</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!{{typdesc}}</p>
-            </div></div></div></div>
+              </div>
+                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<div v-for="(offre, index) in room.offres" :key="index">
+								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+							</div>
+						</ol>
+						<div class="carousel-inner">
+						<div v-for="(offre, index) in room.offres" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+									<div class="card"  id="card" style="width: 18rem;">
+										<div class="card-body">
+											<span class="badge badge-pill badge-danger" id="r">OFFRE</span>
+										<h5 class="card-title"> {{ offre.titre}}   </h5>
+										<p class="card-text"> {{ offre.description }} </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{price }} DT </del>
+										<span class="px-4" id="of"> {{ price-((price*offre.pourcentage)/100)}} </span> </p>
+										
+									</div>
+									</div>
+								</div>
+							
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
+							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only"  id="plus">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
+							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only"  >Next</span>
+						</a>
+					</div></div></div>
+           	
             </div></div></section>
              <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
