@@ -50,12 +50,6 @@
     </div>
   </section>
  
-<<<<<<< HEAD
-        
-       
-     
-=======
->>>>>>> 06f136fcc55815cf3dd9818e389037affdfecd20
 	  <section class="ftco-booking">
     	<div class="container">
     		<div class="row">
@@ -66,7 +60,7 @@
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Date d'arriver</label>
-				    					<input v-model="fetch.start" type="date" class="form-control checkin_date" placeholder="Check-in date">
+				    					<input v-model="fetch.start" type="date" :min="dateNow" class="form-control checkin_date" >
 			    					</div>
 			    				</div>
 	        			</div>
@@ -74,7 +68,7 @@
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Date de départ</label>
-				    					<input v-model="fetch.end" type="date" class="form-control checkout_date" placeholder="Check-out date">
+				    					<input   v-model="fetch.end" type="date" :min="dateNow"  class="form-control checkout_date" >
 			    				</div>
 			    				</div>
 	        			</div>
@@ -410,6 +404,7 @@ export default {
   data() {
     return {
       rooms: [],
+      dateNow:null,
       id: 0,
 	     types:[],
     	room_id:[],
@@ -428,8 +423,20 @@ export default {
 
   mounted() {
     this.getRoom();
-    //     this.getType();
-    //  this.getPrice();
+    /********************************** */
+    let d = new Date();
+    let day =(d.getDate()+1)
+    let month =(d.getMonth()+1)
+    let year = d.getFullYear()
+    if(month<10){
+      month="0"+ month
+    }
+    if(day<10){
+      day="0"+ day
+    }
+    this.dateNow= year+"-"+month+"-"+day;
+        this.getType();
+      this.getPrice();
   },
 
   methods: {

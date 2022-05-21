@@ -246,6 +246,16 @@
                     </div>
             </form>
               </div>
+               <div class="form-group">
+                  <div class="row justify-content-center">
+          <div class="col-md-2"  >
+                <input type="button" value="Accueil" id="bb" v-on:click="goAcc()" class="btn btn-primary btn-md btn-block waves-effect text-center">
+              </div>
+               <div class="col-md-2" >
+                <input type="button" id="bb" value="Vos reservation" v-on:click="goProfile" class="btn btn-primary btn-md btn-block waves-effect text-center ">
+              </div>
+                  </div>
+              </div>
               </div>
             </div>
             
@@ -499,5 +509,11 @@ margin: 20px;
   font-weight: bold;
   color: lightslategrey;
   font-size: 12px;
+}
+#bb{
+  background-color: transparent;
+  border-color: transparent;
+  color: grey;
+
 }
 </style>

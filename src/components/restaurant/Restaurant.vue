@@ -26,13 +26,14 @@
 				</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12 py-5 wrap-about pb-md-5 ftco-animate">
+					
+					<div class="col-md-7  wrap-about pb-md-5 ftco-animate">
 	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
-	          	<div class="ml-md-0">
+	          
 		            <h2 class="mb-4"> {{ restaurant.nom }} </h2>
-	            </div>
+	          
 	          </div>
-	          <div class="pb-md-4">
+	          <div >
 							<p>{{ restaurant.description }}</p>
 							<p>Résérver un<span id="tt"> Table </span> à partire de :  <span id="prix" class="pl-md-5"> {{ restaurant.prix_reservation }} DT </span></p>
 							<div class="d-flex text align-items-center">
@@ -40,9 +41,46 @@
 	        			</div>
 						</div>
 					</div>
-				</div>
-				</div>
-				</div>
+					<div class="col-md-5  wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
+	          </div>
+	          <div >
+					  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<div v-for="(offre, index) in restaurant.offres" :key="index">
+								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+							</div>
+						</ol>
+						<div class="carousel-inner">
+						<div v-for="(offre, index) in restaurant.offres" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+									<div class="card"  id="card" style="width: 18rem;">
+										<div class="card-body">
+											<span class="badge badge-pill badge-danger" id="r">OFFRE</span>
+										<h5 class="card-title"> {{ offre.titre}}   </h5>
+										<p class="card-text"> {{ offre.description }} </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{ restaurant.prix_reservation }} DT </del>
+										<span class="px-4" id="of"> {{ restaurant.prix_reservation-((restaurant.prix_reservation*offre.pourcentage)/100)}} </span> </p>
+										
+									</div>
+									</div>
+								</div>
+							
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
+							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only"  id="plus">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
+							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only"  >Next</span>
+						</a>
+					</div>		
+					</div>
+					</div>
+						</div>
+						</div>
+						</div>
 		</section>
 
 		<section class="ftco-section ">
@@ -73,35 +111,6 @@
         </div></div>
 			</div>
 		</section>
-
-    
-      <div class="container-fluid">
-        <div class="row no-gutters justify-content-center pb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Nos Offres pour le Restaurant</span></h2>
-          </div>
-
-        </div>
-          <div class="col-md-12">
-            <div class="bg-white p-5">
-                  <div class="row">
-
-                  <div class="col-md-4 " v-for="offre in restaurant.offres" :key="offre.id"> 
-                    <div class="card"  id="card" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title"> {{ offre.titre}} </h5>
-                      <p class="card-text"> {{ offre.description }} </p>
-                      <p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
-					  <p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{ restaurant.prix_reservation }} DT </del>
-					   <span class="px-4" id="of"> {{ restaurant.prix_reservation-((restaurant.prix_reservation*offre.pourcentage)/100)}} </span> </p>
-                      
-                  </div>
-                 </div>
-              </div>
-              </div>
-              </div>
-            </div>
-		 </div>
 		  <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -261,5 +270,12 @@ box-shadow: 10px 5px 5px #8d703b;}
 	color: black;
 	font-family: monospace;
 	font-size: 20px;
+}
+
+#plus{
+	color: black;
+}
+#r{
+	margin-left: 80%;
 }
 </style>
