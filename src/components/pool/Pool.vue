@@ -34,7 +34,9 @@
 				</div>
 				</div>
 					<div class="row">
-					<div class="col-md-12 py-5 wrap-about pb-md-5 ftco-animate">
+					<div class="col-md-7  wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
+	          <h2>  {{ pool.title }} </h2>
 	          <div class="pb-md-4">
 							<p>{{ pool.description }}</p>
 							<p>Résérver <span id="tt"> Maitenant </span> à partire de :    <span id="prix" class="pl-md-5"> {{ pool.prix_reservation }} DT </span></p>
@@ -44,50 +46,73 @@
 	        			</div>
 					</div>
 					</div>
+					</div>
+					<div class="col-md-5  wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
+	          </div>
+			  					  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<div v-for="(offre, index) in pool.offres" :key="index">
+								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+							</div>
+						</ol>
+						<div class="carousel-inner">
+						<div v-for="(offre, index) in pool.offres" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+									<div class="card"  id="card" style="width: 18rem;">
+										<div class="card-body">
+											<span class="badge badge-pill badge-danger" id="r">OFFRE</span>
+										<h5 class="card-title"> {{ offre.titre}}   </h5>
+										<p class="card-text"> {{ offre.description }} </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{ pool.prix_reservation }} DT </del>
+										<span class="px-4" id="of"> {{ pool.prix_reservation-((pool.prix_reservation*offre.pourcentage)/100)}} </span> </p>
+										
+									</div>
+									</div>
+								</div>
+							
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
+							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only"  id="plus">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
+							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only"  >Next</span>
+						</a>
+					</div>
+					</div>
 				</div>
 			</div>
 		</section>
 
-     
-
-           
-
 		  <div class="container-fluid" >
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Nos POOL</span></h2>
+            <h2><span>Découvrez nos Pool</span></h2>
           </div>
 
         </div>
-          <div class="col-md-12 order-md-last d-flex">
-            <div class="bg-white p-5 contact-form">
-              <div class="form-group">
-              <div  class="row">
-                <form class="p-5 contact-form">
-              <div class="form-group">
+          <div class="col-md-12 ">
+            <div class="bg-white p-5">
                   <div class="row">
                   <div class="col-md-4"  v-for="ret in poolcard" :key="ret.id"> 
-					  <div id="d" v-if="ret.avaibility==true">
+					  <div v-if="ret.avaibility==true">
                     <div class="card"   >
 						  <img  :src="'http://localhost:8000/storage'+ret.images.name"  alt="Card image cap">
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.title}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} </p>
-                      <p class="card-text"> <a :href="'http://localhost:8080/#/roof-top'+ret.id"   > plus de details </a></p>
+                      <p class="card-text"> {{ ret.description }}  <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetails(ret.id)"  >   </p>
 
 					  <hr/>
-                      <p class="card-text" id="pp">  {{ ret.prix_reservation }} DT  
+                      <p class="card-text" id="pr">  {{ ret.prix_reservation }} DT  
 					  </p>
                     </div>
                   </div>
                     </div>
                   </div>
                  </div>
-              </div>
-            </form>
-              </div>
-              </div>
               </div>
             </div>
 		 </div>
@@ -100,14 +125,16 @@ export default {
 			pool:{ },
 			name:"",
 			poolcard:[],
+			poolcardd:[],
 			image1:{},
 			image2:{},
-			path:1,
+		
 		}
 	},
 	mounted (){
 		this.getRes();
 		this.getAll();
+		this.getAlll();
 },
 
 	methods :{
@@ -136,8 +163,25 @@ export default {
 				}
 			})
 		},
+		async getAlll(){
+			await axios.get('http://localhost:8000/api/allimgg').then(res=>{
+				if(res!=null){
+					for(let i=0 ; i < res.data.roofs.length ; i++){
+						this.poolcardd.push(res.data.roofs[i]);
+					}
+				}
+			})
+		},
+		goDetails(id){
+			this.pool=this.poolcardd.filter(e=>e.id==id)[0]
+			console.log(this.pool);
+			for(let i=0 ; i< this.pool.images.length ; i++){
+					this.image1=this.pool.images[0]
+					this.image2=this.pool.images[1]
+					break;
+				}
+		},
 		gobook(id){
-		   
 		   	this.$router.push({name:'bookingcat' , params:{id:id , catg:'pool'} })
 		},
 		
@@ -180,5 +224,18 @@ box-shadow: 10px 5px 5px #8d703b;}
 
 #b{
 	margin-left:92px ;
+}
+#bt{
+	background-color: transparent;
+	border-color: transparent;
+	color: #8d703b;
+}
+#pr{
+	color: black;
+	font-family: monospace;
+	font-size: 20px;
+}
+#r{
+	margin-left: 80%;
 }
 </style>

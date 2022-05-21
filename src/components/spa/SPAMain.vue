@@ -38,39 +38,31 @@
 		  <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Nos Spas</span></h2>
+            <h2><span>Découvrez nos Spa Spas</span></h2>
           </div>
 
         </div>
-          <div class="col-md-12 order-md-last d-flex">
-            <div class="bg-white p-5 contact-form">
-              <div class="form-group">
-              <div  class="row">
-                <form class="p-5 contact-form">
-              <div class="form-group">
+          <div class="col-md-12 ">
+            <div class="bg-white p-5 ">
                   <div class="row">
                   <div class="col-md-4"  v-for="ret in recard" :key="ret.id"> 
-					  <div id="d">
-                    <div class="card"  id="card" >
+					  <div >
+                    <div class="card"  >
 						  <img  :src="'http://localhost:8000/storage'+ret.images.name"  alt="Card image cap">
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
                       <p class="card-text"> {{ ret.description }} </p>
-                      <p class="card-text"> <router-link :to="'spa'+ret.id"><input type="button" value="plus details" class="btn btn-primary"  > </router-link></p>
+                      <p class="card-text"> <router-link :to="'spa'+ret.id"><input type="button" value="plus details" class="btn btn-primary" id="bt" > </router-link></p>
 
 					  <hr/>
-                      <p class="card-text" id="pp">  {{ ret.prix_reservation }} DT  
+                      <p class="card-text" id="pr">  {{ ret.prix_reservation }} DT  
 					</p>
                     </div>
                   </div>
                     </div>
                   </div>
                  </div>
-              </div>
-            </form>
-              </div>
-              </div>
               </div>
             </div>
 		 </div>
@@ -158,5 +150,15 @@ box-shadow: 10px 5px 5px #8d703b;}
 
 #b{
 	margin-left:92px ;
+}
+#bt{
+	background-color: transparent;
+	border-color: transparent;
+	color: #8d703b;
+}
+#pr{
+	color: black;
+	font-family: monospace;
+	font-size: 20px;
 }
 </style>
