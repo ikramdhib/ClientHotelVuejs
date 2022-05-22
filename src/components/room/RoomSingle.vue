@@ -145,7 +145,7 @@
                       <h5 class="card-title">{{ objet.nom_type }} </h5></div></div>
 					  <hr/>
                 
-                    
+                     <p class="card-text" id="pr"> {{chambre.description.substr(0 , 110)+',...'}}</p>
  <p class="card-text"> <a :href="'http://localhost:8080/#/Roomsingle'+chambre.id"   > plus de details </a></p>
                     
 					  <hr/>

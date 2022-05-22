@@ -86,7 +86,7 @@
 <div class="form-group" >
 <div class="row">
 <div class="col-md-4"> 
-<i class="icon-circle-arrow-right"></i>  <label id="label"> Choisir une offre :</label>
+<i class="icon-circle-arrow-right"></i>  <label id="label"> Choisir nombre personne :</label>
 <select name="" id="" class="form-control"   v-model="booking.nombre" >
 <option value="1">1 </option>
 <option value="2">2 </option>
@@ -127,7 +127,7 @@
 <div class="form-group" >
 <div class="row">
 <div class="col-md-4"> 
-<i class="icon-circle-arrow-right"></i>  <label id="label"> Nombres de tables :</label>
+<i class="icon-circle-arrow-right"></i>  <label id="label">  choisir nombre de Personnes :</label>
 <select name="" id="" class="form-control"   v-model="booking.nombre" >
 <option value="1">1 </option>
 <option value="2">2 </option>
@@ -143,7 +143,7 @@
 </div>
 <div class="col-md-4"> 
 <div > Choisir votre offre : </div>
-<select v-model="monChoix" @change="onchange1($event)" class="form-control">
+<select v-model="Choix" @change="modif($event)" class="form-control">
 <option></option>
 <option v-for="offre in offpool" :value="offre.id" :key="offre.id" >{{ offre.titre }}{{ offre.pourcentage }}</option>
 </select></div>
@@ -154,9 +154,9 @@
 <td >Totale:</td>
 </tr>
 <tr><div v-if="offre">
-<td :v-model="prix"><input disabled> </td></div>
+<td ><input  v-model="somm" disabled >   </td></div>
 <div v-if="offre==false">
-<td><input :v-model="prix" :value="this.prix=(( this.prix_reservation*this.booking.nombre))" ></td></div>
+<td><input :v-model="somm" :value=" this.somm=(( this.prix_reservation*this.booking.nombre))" disabled></td></div>
 </tr>
 </table> 
 </ul>
@@ -175,12 +175,12 @@
       
 <i class="icon-circle-arrow-right"></i>  <label id="label"> Choisir equipements :</label>
 <div  v-for="p in salle" :key="p.id">
-<input type="checkbox" :v-model="somme" :value="somme=p.prix" @change="check($event)"  />
+<input type="checkbox"  :v-model="choi" :value="choi=p.id" @click="isOffre($event)"  />
 {{p.label}}
 </div></div>
 <div class="col-md-4">                
                        <i class="icon-circle-arrow-right"></i>  <label id="label">   capacite :</label>
-                      <input :placeholder="capacite" type="number" min="4"  id="example" class="form-control" v-model="capacite" >
+                      <input  type="number" min="1"  id="example" class="form-control" v-model="capacite" >
                     </div>
  
 <div class="col-md-4"> 
@@ -196,7 +196,7 @@
 <tr><div v-if="offre" ><td >
 <input v-model="prix1" disabled > </td></div>
 <div v-if="offre==false">
-<td ><input :v-model="prix1"  :value="this.prix1=this.prix_reservation" disabled></td></div>
+<td ><input :v-model="prix1" :value="this.prix1=((this.prixx*this.capacite)+this.somm)" disabled></td></div>
 </tr></table>
 </ul>
 </div>
@@ -212,9 +212,9 @@
 <form class="bg-light p-5 ">
 <div class="form-group" >
 <div class="row">
-  <div class="col-md-2"> 
+  <div class="col-md-4"> 
 <i class="icon-circle-arrow-right"></i>  <label id="label">   Nombres de tables :</label>
-<select name="" id="" class="form-control"   v-model="table" >
+<select name="" id="" class="form-control"   v-model="booking.nombre" >
 <option value="1">1 </option>
 <option value="2">2 </option>
 <option value="3">3 </option>
@@ -227,33 +227,9 @@
 <option value="10">10 </option>
 </select>
 </div>
- <div class="col-md-2"> 
-<i class="icon-circle-arrow-right"></i><label id="label">   Nombres de personne :</label>
-<select name="" id="" class="form-control"   v-model="personne"  >
-<option value="1">1 </option>
-<option value="2">2 </option>
-<option value="3">3 </option>
-<option value="4">4 </option>
-<option value="5">5 </option>
-<option value="6">6 </option>
-<option value="7">7 </option>
-<option value="8">8 </option>
-<option value="9">9 </option>
-<option value="10">10 </option>
-</select>
-</div>
-
-<div class="col-md-2" v-for="m in restaurent.menus" :key="m"> 
-  <i class="icon-circle-arrow-right"></i><label id="label"> Choisir le menu :</label>
-<div class="form-check"  v-for="p in m.plats" :key="p">
-<input class="form-check-input" type="checkbox"  v-model="plat"  :value="p.prix_plat" id="flexCheckDefault">
-<label class="form-check-label" @change="onChange($ev)" for="flexCheckDefault">
- {{ p.nom }}
-</label>
-</div></div>
 <div class="col-md-4"> 
 <div > Choisir votre offre : </div>
-<select v-model="monChoix" @change="onChange($event)" class="form-control">
+<select v-model="monChoix" @change="onChangee($event)" class="form-control">
 <option></option>
 <option v-for="offre in offres" :value="offre.id" :key="offre.id" > {{ offre.titre }}{{ offre.pourcentage }}</option>
 </select>
@@ -264,8 +240,9 @@
 <table >
 <tr><td >Totale:</td></tr>
 <tr><div v-if="offre" >
- <td><input :v-model="prix"  disabled> </td></div>
- <td v-else-if="offre==false"><input v-model="prix" ></td>
+ <td><input v-model="prix"  disabled> </td></div>
+ <div v-if="offre==false">
+ <td><input :v-model="prix"  :value="this.prix=(( this.prix_reservation*this.booking.nombre))" ></td></div>
 </tr></table>
 </ul>
 </div>
@@ -312,20 +289,7 @@
                     
                  </div>
               
-               <div class="col-md-4 py-4"> 
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" value="1" name="flexRadioDefault" id="rd"   checked>
-                        <label class="form-check-label" for="flexRadioDefault1">
-                         Payement en ligne 
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" value="0" name="flexRadioDefault" id="rd"  >
-                        <label class="form-check-label" for="flexRadioDefault2">
-                          Payement à l'Hotel
-                        </label>
-                      </div>
-                    </div>
+           
               </div>
               
               </div>
@@ -360,6 +324,7 @@ export default {
         pourcentage:"",
         isOffreExist:false,
     	restaurent:{ },
+      prixx:0,
       prix_reservation:null,
          	user:{
 				firstname:"",
@@ -402,12 +367,21 @@ export default {
 	 offres:[],
  offspa:[],
 monChoix1:"",
+Choix:"",
 resultat:"",
 prix:null,
-equi:"",
-capacite:null,
+equi:0,
+somm:0,
+capacite:0,
 prix1:null,
-  pour:0
+pourr:0,
+  pour:0,
+  somme:0,
+  choi:"",
+  table:[],
+  po:0,
+
+  
     };
   },
   
@@ -419,7 +393,7 @@ prix1:null,
    if(catg=="spa"){
        axios.get('http://localhost:8000/api/spaimg/'+id).then(res=>{
 				this.spa=res.data.rooftop.id
-				localStorage.setItem("spa",this.spa)
+			
 			console.log("si spa",this.spa);
        this.prix_reservation=res.data.rooftop.prix_reservation
 	});
@@ -443,7 +417,7 @@ prix1:null,
 			
 					this.pool=res.data.rooftop.id
            this.prix_reservation=res.data.rooftop.prix_reservation
-			localStorage.setItem("pool",this.pool)
+	
       console.log(this.prix_reservation)
 });
       this.isPool=true;}
@@ -453,7 +427,7 @@ prix1:null,
 					this.rooftop=res.data.rooftop.id
           
            this.prix_reservation=res.data.rooftop.prix
-           	localStorage.setItem("Roof",this.rooftop)}
+        }
        });  
       this.isRooftop=true;
 			}
@@ -463,8 +437,8 @@ prix1:null,
 					this.ConferenceRoom=res.data.cf.id
           this.salle=res.data.cf.equipement
           this.capacite=res.data.cf.typeconferencerooms.capacite
-           this.prix_reservation=res.data.cf.prix
-           localStorage.setItem("salle",this.ConferenceRoom)
+           this.prixx=res.data.cf.prix
+         
            console.log("zzzz",this.capacite)}
        });  
       this.isConferenceRoom=true;
@@ -487,7 +461,7 @@ this.offresres();
          this.monChoix="0"
       }
       if(this.booking.infoComplimentaire==""){
-        this.booking.infoComplimentaire="AUCUN COMMENTAIRE"
+        this.booking.infoComplimentaire="AUCUN INFORMATION PERSONNELS "
       }
  await axios
  
@@ -502,7 +476,7 @@ this.offresres();
              prenom:this.user.firstname,
                 user_id:this.user.id,
                  prix:this.prix1,
-              rooftop_id:localStorage.getItem("Roof")
+              rooftop_id:this.rooftop
 
 
 
@@ -513,7 +487,7 @@ this.offresres();
       .then((res) => {
 			this.response=res.data.booking;
 	     console.log(res);
-	   
+	   this.$router.push('book');
           })}
           else if(this.isrestaurant){
               if(this.monChoix==""){
@@ -521,7 +495,7 @@ this.offresres();
    
       }
        if(this.booking.infoComplimentaire==""){
-        this.booking.infoComplimentaire="AUCUN COMMENTAIRE"
+        this.booking.infoComplimentaire="AUCUN INFORMATION PERSONNELS "
       }
            
     await axios.post("http://localhost:8000/api/Booking", {
@@ -530,12 +504,12 @@ this.offresres();
              nombre:this.booking.nombre,
                  phone:this.user.phone,
                   email:this.user.email,
-                    offre:this.monChoix,
+                    offres:this.monChoix,
                  nom:this.user.lastname,
                 prenom:this.user.firstname,
                    user_id:this.user.id,
                      prix:this.prix,
-                 restaurant_id:localStorage.getItem("restaurant"),
+                 restaurant_id:this.restaurant,
 
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
    )
@@ -544,6 +518,7 @@ this.offresres();
 		
 	   	this.response=res.data.booking;
 	     console.log(res);
+       this.$router.push('book');
           })}
             
           else if(this.isPool){
@@ -552,7 +527,7 @@ this.offresres();
    
       }
        if(this.booking.infoComplimentaire==""){
-        this.booking.infoComplimentaire="AUCUN COMMENTAIRE"
+        this.booking.infoComplimentaire="AUCUN INFORMATION PERSONNELS "
       }
     await axios.post("http://localhost:8000/api/Booking", {
             
@@ -560,12 +535,12 @@ this.offresres();
                  nombre:this.booking.nombre,
                  phone:this.user.phone,
                   email:this.user.email,
-                    offre:this.monChoix,
+                    offres:this.monChoix,
                  nom:this.user.lastname,
                   prenom:this.user.firstname,
                 user_id:this.user.id,
-                   prix:this.prix,
-                pool_id:localStorage.getItem("pool")
+                   prix:this.somm,
+                pool_id:this.pool
 
 
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
@@ -573,6 +548,7 @@ this.offresres();
       .then((res) => {
 		this.response=res.data.booking;
 	     console.log(res);
+       this.$router.push('book');
           })}
             
           else if(this.isConferenceRoom){
@@ -581,7 +557,7 @@ this.offresres();
    
       }
        if(this.booking.infoComplimentaire==""){
-        this.booking.infoComplimentaire="AUCUN COMMENTAIRE"
+        this.booking.infoComplimentaire="AUCUN INFORMATION PERSONNELS "
       }
     await axios.post("http://localhost:8000/api/Booking", {
             
@@ -589,13 +565,12 @@ this.offresres();
                  nombre:this.capacite,
                   phone:this.user.phone,
                   email:this.user.email,
-                    offre:this.monChoix,
+                    offres:this.monChoix,
                  nom:this.user.lastname,
                  prenom:this.user.firstname,
                    prix:this.prix1,
                 user_id:this.user.id,
-         
-                conference_id:localStorage.getItem("salle")
+              conference_room_id:this.ConferenceRoom,
 
 
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
@@ -604,7 +579,7 @@ this.offresres();
         
 			this.response=res.data.booking;
 	     console.log(res);
-	   
+	   this.$router.push('book');
           })}
              
           else if(this.isSpa){
@@ -613,7 +588,7 @@ this.offresres();
    
       }
        if(this.booking.infoComplimentaire==""){
-        this.booking.infoComplimentaire="AUCUN COMMENTAIRE"
+        this.booking.infoComplimentaire="AUCUN INFORMATION PERSONNELS "
       }
      
     await axios.post("http://localhost:8000/api/Booking", {
@@ -627,16 +602,15 @@ this.offresres();
                  prenom:this.user.firstname,
                    prix:this.prix,
                 user_id:this.user.id,
-                spa_id:localStorage.getItem("spa")
+                spa_id:this.spa,
 
 
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
    )
       .then((res) => {
 			this.response=res.data.booking;
-      if(res.data.booking.offres==null)
-      {this.offres==0}
-	     console.log(res);
+         console.log(res);
+        this.$router.push('book');
 	   
           })}},
           async offresres(){
@@ -651,7 +625,7 @@ this.offresres();
        this.offres= res.data.offres;
      
      
-			console.log(this.off);} )}
+			console.log(this.offres);} )}
     else if(catg=="roof"){
  await axios
   .get("http://127.0.0.1:8000/api/getoffRoofTop/"+id,).then(res=>{
@@ -690,7 +664,7 @@ console.log(this.offsall); })
 
 
 }},
- //onchange spa
+ //onchange spa******************************************************************************/
  onChange(event) {
   
    let pr=event.target.value;
@@ -723,19 +697,19 @@ console.log(this.offsall); })
 
 
   
-//onchange pool
- onChange1(event) {
+//onchange pool/*************************************************************************** */
+ modif(event) {
   
    let pr=event.target.value;
    this.offre=true;
    for(let i=0; i<this.offpool.length ; i++){
-      if(this.offpool[i].id==this.monChoix){
-        this.pour=this.offpool[i].pourcentage
-        console.log("eeeeeeeeeh",this.pour);
+      if(this.offpool[i].id==this.Choix){
+        this.pourr=this.offpool[i].pourcentage
+        console.log("eeeeeeeeeh",this.pourr);
       }
    }
    if(pr!=null){
-     console.log('hi', this.monChoix);
+     console.log('hi', this.Choix);
    }
    else if(pr ==null){
      console.log("eeer");
@@ -743,7 +717,7 @@ console.log(this.offsall); })
     }
       
 
- this.prix =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)*this.booking.nombre  )))
+ this.somm=((( this.prix_reservation-(( this.prix_reservation*this.pourr)/100)*this.booking.nombre)))
 
  
  
@@ -751,7 +725,7 @@ console.log(this.offsall); })
 
 
     },
-    //onchange roof
+    //onchange roof****************************************************************************/
  onChang(event) {
   
    let pr=event.target.value;
@@ -775,10 +749,12 @@ console.log(this.offsall); })
    
  
     },
-    //onchange salle
+    //onchange salle/******************************************************* */
  onChange3(event) {
   
    let pr=event.target.value;
+  
+   
    this.offre=true;
    for(let i=0; i<this.offsall.length ; i++){
       if(this.offsall[i].id==this.monChoix){
@@ -794,21 +770,36 @@ console.log(this.offsall); })
    
     }
       
-if(this.equi){
- this.prix1 =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)+this.equi )))
- console.log("eeer",this.prix1);
-}
-else if
-(this.equi==""){
-   this.prix1 =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)+this.equi )))
-    console.log("eeer",this.prix1);
-}
+
+ this.prix1 =((( this.prixx-(( this.prixx*this.pour)/100)*this.capacite)+this.somm))
  
   
     },
+
+
+
+    isOffre(event){
+      if(event.target.checked!=null){
+        this.Offre=true;
+          for(let i=0; i<this.salle.length ; i++){
+      if(this.salle[i].id==this.choi){
+        this.po=this.salle[i].prix
+        console.log("eeeeeeeeeh",this.po);
+      }}
+      }else{
+        this.Offre=false;
+      }
+      
+   this.somm=this.somm+this.po
+      
+      console.log("rrrrrrrrrrrrrrrrr",this.somm);
+    },
+   
+    
+     
   
-//onchange restaurent
-    onChange4(event) {
+//onchange restaurent/*************************************************************** */
+    onChangee(event) {
      let pr=event.target.value;
    this.offre=true;
    for(let i=0; i<this.offres.length ; i++){
@@ -826,12 +817,9 @@ else if
     }
       
 
- this.prix =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)*this.table  )))
+ this.prix =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)*this.booking.nombre)))
  
- if(this.monChoix==null){
- this.prix=(( this.prix_reservation*this.booking.nombre))
 
- } console.log("eeer",this.prix);
     },
 
 
