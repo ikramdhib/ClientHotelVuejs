@@ -291,21 +291,27 @@
               
            
               </div>
-              
-              </div>
-                    
-                </form>
-             
-              <div class="form-group">
+                <div class="form-group">
                   <div class="row justify-content-center mb-9 pb-2 py-4">
           <div class="col-md-5 heading-section text-center">
                 <input type="button" value="Reserver"  @click="Addbooking()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
               </div>
                   </div>
               </div>
+              </div>
+                    
+                </form>
+             
+            
           </div>
            
-          
+             <div class="form-group">
+                  <div class="row justify-content-center">
+          <div class="col-md-2"  >
+          <a :href="'http://localhost:8080/#/'"> Acceuil </a>
+              </div>
+            </div>
+              </div>
              
             </div> </div></div></div>
              
@@ -476,7 +482,8 @@ this.offresres();
              prenom:this.user.firstname,
                 user_id:this.user.id,
                  prix:this.prix1,
-              rooftop_id:this.rooftop
+              rooftop_id:this.rooftop,
+              isSmsSend:false
 
 
 
@@ -510,6 +517,7 @@ this.offresres();
                    user_id:this.user.id,
                      prix:this.prix,
                  restaurant_id:this.restaurant,
+                    isSmsSend:false
 
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
    )
@@ -540,7 +548,8 @@ this.offresres();
                   prenom:this.user.firstname,
                 user_id:this.user.id,
                    prix:this.somm,
-                pool_id:this.pool
+                pool_id:this.pool,
+                   isSmsSend:false
 
 
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
@@ -571,6 +580,7 @@ this.offresres();
                    prix:this.prix1,
                 user_id:this.user.id,
               conference_room_id:this.ConferenceRoom,
+                 isSmsSend:false
 
 
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
@@ -603,6 +613,7 @@ this.offresres();
                    prix:this.prix,
                 user_id:this.user.id,
                 spa_id:this.spa,
+                   isSmsSend:false
 
 
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
@@ -687,7 +698,7 @@ console.log(this.offsall); })
     }
       
  
- this.prix =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)*this.booking.nombre  )))
+ this.prix =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100))*this.booking.nombre))
  
  
 
@@ -717,7 +728,7 @@ console.log(this.offsall); })
     }
       
 
- this.somm=((( this.prix_reservation-(( this.prix_reservation*this.pourr)/100)*this.booking.nombre)))
+ this.somm=((( this.prix_reservation-(( this.prix_reservation*this.pourr)/100))*this.booking.nombre))
 
  
  
@@ -745,7 +756,7 @@ console.log(this.offsall); })
     }
       
 
- this.prix1 =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)*this.booking.nombre  )))
+ this.prix1 =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100))*this.booking.nombre  ))
    
  
     },
@@ -771,7 +782,7 @@ console.log(this.offsall); })
     }
       
 
- this.prix1 =((( this.prixx-(( this.prixx*this.pour)/100)*this.capacite)+this.somm))
+ this.prix1 =((( this.prixx-(( this.prixx*this.pour)/100))*this.capacite)+this.somm)
  
   
     },
@@ -817,7 +828,7 @@ console.log(this.offsall); })
     }
       
 
- this.prix =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100)*this.booking.nombre)))
+ this.prix =((( this.prix_reservation -(( this.prix_reservation*this.pour)/100))*this.booking.nombre))
  
 
     },

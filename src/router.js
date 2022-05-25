@@ -169,7 +169,13 @@ const routes=[
         path:'/book',
         name:'book',
         component: () => import('./components/BookFinall.vue'),
-    }
+    },
+    {
+        path:'/ratings',
+        name:'ratings',
+        component: () => import('./components/Ratings.vue'),
+    },
+   
 ];
 const router = createRouter({
     history: createWebHashHistory(),
