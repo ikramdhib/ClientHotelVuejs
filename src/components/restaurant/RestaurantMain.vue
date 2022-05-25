@@ -52,7 +52,7 @@
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} <router-link :to="'restaurant'+ret.id"><input type="button" value="plus details" class="btn btn-primary" id="bt" > </router-link></p>
+                      <p class="card-text"> {{ ret.description.substr(0 , 110)+',...' }} <router-link :to="'restaurant'+ret.id"><input type="button" value="plus details" class="btn btn-primary" id="bt" > </router-link></p>
 					  <hr/>
                       <p class="card-text" id="pr">  {{ ret.prix_reservation }} DT  
 					 </p>
@@ -77,7 +77,6 @@ export default {
 			offres:[],
 			off:[],
 			tab:[],
-			path:1,
 		}
 	},
 	mounted (){

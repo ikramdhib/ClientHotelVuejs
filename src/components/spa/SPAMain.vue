@@ -52,7 +52,7 @@
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} </p>
+                      <p class="card-text"> {{ ret.description.substr(0 , 110)+',...' }} </p>
                       <p class="card-text"> <router-link :to="'spa'+ret.id"><input type="button" value="plus details" class="btn btn-primary" id="bt" > </router-link></p>
 
 					  <hr/>

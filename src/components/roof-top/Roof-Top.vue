@@ -104,7 +104,7 @@
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.intitule}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  >    </p>
+                      <p class="card-text"> {{ ret.description.substr(0 , 110)+',...' }}} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  >    </p>
                      
 
 					  <hr/>

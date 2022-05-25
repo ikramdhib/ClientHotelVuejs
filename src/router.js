@@ -153,7 +153,7 @@ const routes=[
     {
         path:'/bookingcat:id:catg',
         name:'bookingcat',
-        component: () => import('./components/booking.vue'),
+        component: () => import('./components/BookingCatg.vue'),
     },
     {
         path:'/conferenceroom:id',

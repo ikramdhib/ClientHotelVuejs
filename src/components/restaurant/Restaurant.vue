@@ -128,7 +128,7 @@
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  >   </p> 
+                      <p class="card-text"> {{ ret.description.substr(0 , 110)+',...' }} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  >   </p> 
 					  <hr/>
                       <p class="card-text" id="pr">  {{ ret.prix_reservation }} DT   </p>
                     </div>

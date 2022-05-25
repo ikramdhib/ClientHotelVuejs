@@ -45,10 +45,10 @@
                     </div>
                     <div class="col-md-5"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Date de départ :</label>
-                      <input :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" v-model="bookingdate.end">
+                      <input :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" v-model="bookingdate.end"  @change="nbNuit()">
                     </div>
                      <div class="col-md-2"> 
-                       <h6 id="nuit" class="mb-4"> : Ntuis .</h6>
+                       <h6 id="nuit" class="mb-4">{{ this.nuits }} : Ntuis .</h6>
                     </div>
                  </div>
               </div>
@@ -97,7 +97,7 @@
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
 	                      <option value="4">4 </option>
-	                    </select>
+	                    </select>8
 	                  </div>
                     </div>
                     <div class="col-md-4"> 
@@ -240,10 +240,10 @@
                     </div>
                     <div class="col-md-5"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Date de départ :</label>
-                      <input :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" v-model="bookingdate.end">
+                      <input :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" @change="nbNuit()" v-model="bookingdate.end">
                     </div>
                      <div class="col-md-2"> 
-                       <h6 id="nuit" class="mb-4"> : Ntuis .</h6>
+                       <h6 id="nuit" class="mb-4"> {{ nuits }} : Ntuis .</h6>
                     </div>
                  </div>
               </div>
@@ -463,6 +463,7 @@ export default {
       isFetch:false,
       isNotFetch:true,
       fetch:null,
+      nuits:null
     }
   },
   mounted(){
@@ -496,12 +497,15 @@ export default {
     }
     this.dateNow= year+"-"+month+"-"+day;
     console.log("ttttt",this.dateNow);
-     let nuit = (Date.parse(this.bookingdate.end)-Date.parse(this.bookingdate.start))/86400000;
-     this.nuits=nuit
+     
 
 
   },
    methods : {
+     nbNuit(){
+   let nuit = (Date.parse(this.bookingdate.end)-Date.parse(this.bookingdate.start))/86400000;
+     this.nuits=nuit
+     },
       findRoom(){
         if(!this.bookgroom1.nbenfant=='' && !this.bookgroom1.nbbebe=='' && !this.bookgroom1.nbadult==''){
         localStorage.setItem('bookgroom1',JSON.stringify(this.bookgroom1))

@@ -41,7 +41,8 @@
                       <td ><p><span id="la"> {{ totale }} </span></p></td>
                     </tr>
                     <tr>
-                      <td><div class="form-group">
+                      <td>
+                        <div class="form-group">
 		                <input id="btn" type="button" value="RESERVEZ"  class="btn btn-primary  py-2 px-5" @click="goReserver()">
 		              </div></td>
                     </tr>
