@@ -81,17 +81,17 @@
               </div>
                <div class="sidebar-box ftco-animate">
               <div class="categories">
-                <h2> les Prix</h2>
-                <li id="p1">{{ price }} DT  </li> 
+                <h2> le Prix</h2>
+                <li id="p1">{{room.price_booking}} DT  </li>  </div>
               <h2>Options</h2>
               <div class="row">
-          	<div class="col-sm-2" v-for="option in options" :key="option.id">
-              <div class="tagcloud " id="tag">
-                <a class="tag-cloud-link">{{option.nom_option}}</a>
+          	<div  v-for="option in options" :key="option.id">
+              <ul>
+                <li>{{option.nom_option}}</li>
+              </ul>
               </div>
               </div>
-              </div>
-              </div>
+             
                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<div v-for="(offre, index) in room.offres" :key="index">
@@ -204,10 +204,8 @@
                      <p class="card-text" id="pr"> {{chambre.description.substr(0 , 110)+',...'}}</p>
  <p class="card-text"> <a :href="'http://localhost:8080/#/Roomsingle'+chambre.id"   > plus de details </a></p>
                     
-					  <hr/>
-             <div v-for="prix in prixs" :key="prix.id">
-                                 <div v-if="prix.id == chambre.price_id">
-                      <p class="card-text" id="pr"> {{prix.price_hotel}} DT  </p></div></div>
+					  <hr/>                    
+                      <p class="card-text" id="pr"> {{ chambre.price_booking }} DT  </p>
                     </div>
                    
                   </div>
@@ -260,11 +258,13 @@ number4:0,
    this.getRoom();
     this.getRooms();
     this.getType();
-    this.getPrice();
+
      this.isLogin=true;
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
                 }
+                  this.idus=this.user.id;
+console.log("fghhj",this.idus)
   },
  
 	  
@@ -282,13 +282,12 @@ number4:0,
           this.type_nom=res.data.rooms.type.nom_type;
           this.type_id=res.data.rooms.type.id;
           this.typdesc=res.data.rooms.type.intitule;
-         this.price=res.data.rooms.prices.price_hotel
+         this.price=res.data.rooms.price_booking;
           this.offres=res.data.rooms.offres;
           this.images=res.data.rooms.images;
           this.ro=res.data.rooms.id;
 
-   this.per=parseInt( res.data.rooms.offres.pourcentage);
- this.pric=res.data.rooms.prices.price_hotel;
+ 
  
 
 
@@ -417,14 +416,16 @@ number4:0,
         
     },
      async addRatings() {
-		 
+		  if(this.idus==""){
+         this.idus=null
+      }
 			 await axios
 			 
 			    .post('http://localhost:8000/api/addrating',
 				{ rate:this.totale,
                   commentaire:this.rating.commentaire,
                    room_id:this.ro,
-                   user_id:this.user.id,
+                    user_id:this.idus,
 				},
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{
@@ -474,7 +475,8 @@ number4:0,
    min-height: 1rem;
 }
 #p1{
-   color: #d1a44f;
+  
+   color: #f51606;
  font-size: 30px;
 }
 #reduit{

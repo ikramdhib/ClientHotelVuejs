@@ -337,25 +337,22 @@
             class="col-sm col-md-6 col-lg-4 py-4"
             v-if="room.avaibility == 1"
           >
-            <div class="card" style="width: 18rem">
+            <div class="card" >
               <img :src="'http://localhost:8000/storage' + room.images.name" />
               <div class="card-body">
                 <div v-for="type in types" :key="type.id">
                   <div v-if="type.id == room.type_id">
                     <h5 class="card-title text-center">{{ type.nom_type }}</h5>
+                      <p class="card-text text-center"> {{room.description.substr(0 , 110)+',...' }}</p>
                     <div class="text p-3 text-center">
-                      <div v-for="price in prices" :key="price.id">
-                        <div v-if="price.id == room.price_id">
-                          <div class="text p-3 text-center">
+                      
                             <p class="box">
-                              {{ price.price_hotel }} DT
+                              {{ room.price_booking }} DT
                               <span class="box1"> par nuit </span>
                             </p>
-                          </div>
-                        </div>
-                      </div>
+                      
                       <router-link :to="'RoomSingle' + room.id"
-                        ><a href="#" class="btn btn-primary"
+                        ><a href="#" 
                           >plus details</a
                         ></router-link
                       >
@@ -382,8 +379,12 @@ export default {
       id: 0,
 	     types:[],
     	room_id:[],
+<<<<<<< HEAD
       nbadult:"2",
       nbenfant:"0",
+=======
+      description:"",
+>>>>>>> 80d9a3061c3b311148fbfef6b60c64a6734ab0ca
 		 image:"",
      fetch:{
        end:"",
@@ -429,11 +430,15 @@ export default {
     }
     this.dateNow= year+"-"+month+"-"+day;
         this.getType();
+<<<<<<< HEAD
       this.getPrice();
         /************************ */
   this.fetch.start=this.dateNow;
     /********************************** */
     
+=======
+   
+>>>>>>> 80d9a3061c3b311148fbfef6b60c64a6734ab0ca
   },
 
 
@@ -598,8 +603,9 @@ export default {
         .then((res) => {
           this.rooms = res.data.rooms;
           this.image = res.data.rooms.images.name;
-
-          console.log(this.table);
+          this.description=res.data.rooms.description;
+          console.log("ii",this.description);
+          console.log("rooms",this.table);
         })
         .then(this.getType())
         .then(this.getPrice());
@@ -699,13 +705,7 @@ export default {
       });
     },
 
-    async getPrice() {
-      await axios.get("http://127.0.0.1:8000/api/price").then((res) => {
-        this.prices = res.data.price;
-
-        console.log(this.prices);
-      });
-    },
+   
   }
 };
 </script>

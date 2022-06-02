@@ -146,7 +146,7 @@
               </div></div>
               </div>
               </div>
-              
+			  		
            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<div v-for="(offre, index) in registre.offres" :key="index">
@@ -163,11 +163,11 @@
 										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
 										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{price }} DT </del>
 										<span class="px-4" id="of"> {{ price-((price*offre.pourcentage)/100)}} </span> </p>
-										
+										</div>
 									</div>
 									</div>
-								</div>
 							
+           </div>
 						</div>
 						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
 							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -177,7 +177,7 @@
 							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only"  >Next</span>
 						</a>
-					</div>
+					
           </div>
         </div>
       </div>
@@ -240,6 +240,7 @@ export default {
              commentaire:"",
                 },
 			 user_id:0,
+       idus:0,
 totale:0,
 number:0,
 number1:0,
@@ -257,6 +258,8 @@ number4:0,
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
                 }
+                  this.idus=this.user.id;
+console.log("fghhj",this.idus)
   },
  
 	  
@@ -369,14 +372,18 @@ number4:0,
         
     },
      async addRatings() {
-		 
+		   if(this.idus==""){
+         this.idus=null
+      
+         
+      }
 			 await axios
 			 
 			    .post('http://localhost:8000/api/addrating',
 				{ rate:this.totale,
                   commentaire:this.rating.commentaire,
                    conference_room_id:this.room,
-                   user_id:this.user.id,
+                     user_id:this.idus,
 				},
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{

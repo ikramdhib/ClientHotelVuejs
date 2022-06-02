@@ -211,6 +211,7 @@ export default {
 			menu:{ },
 			plats:[],
 			idres:"",
+			idus:0,
 			isRatingsExist:false,
 			rating:{
              commentaire:"",
@@ -236,6 +237,8 @@ number4:0,
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
                 }
+				 this.idus=this.user.id;
+console.log("fghhj",this.idus)
 },
 
 	methods :{
@@ -358,14 +361,18 @@ number4:0,
         
     },
 	 async addRatings() {
-		 
+		  if(this.idus==""){
+         this.idus=null
+      
+         
+      }
 			 await axios
 			 
 			    .post('http://localhost:8000/api/addrating',
 				{ rate:this.totale,
                   commentaire:this.rating.commentaire,
                    restaurant_id:this.idres,
-                   user_id:this.user.id,
+                   user_id:this.idus,
 				},
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{
