@@ -282,7 +282,7 @@ console.log("fghhj",this.idus)
 		gobook(id){
 	
 	
-         this.$router.push({name:'bookingcat', params:{id:id , catg:'restaurant'}})
+         this.$router.push({name:'booking', params:{id:id , catg:'restaurant'}})
        },
 		goDetail(id){
 			this.restaurant=this.recardd.filter(e=>e.id==id)[0];

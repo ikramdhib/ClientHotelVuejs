@@ -151,9 +151,9 @@ const routes=[
         component: () => import('./components/room/booking/BookingPayment.vue'),
     },
     {
-        path:'/bookingcat:id:catg',
-        name:'bookingcat',
-        component: () => import('./components/BookingCatg.vue'),
+        path:'/booking:id:catg',
+        name:'booking',
+        component: () => import('./components/booking.vue'),
     },
     {
         path:'/conferenceroom:id',
@@ -163,7 +163,7 @@ const routes=[
     {
         path:'/conferencerooms',
         name:'conferencerooms',
-        component: () => import('./components/SalleConfernce/SalleConferenceMain.vue'),
+        component: () => import('./components/SalleConfernce/salleConferenceMain.vue'),
     },
     {
         path:'/book:id',

@@ -263,7 +263,7 @@ console.log("fghhj",this.idus)
 				}
 		},
 	goBooking(id){
-		this.$router.push({name:'bookingcat' , params:{id:id , catg:'roof'} })
+		this.$router.push({name:'booking' , params:{id:id , catg:'roof'} })
 	},
 	 isRating(event){
  if(event.target.checked==1){

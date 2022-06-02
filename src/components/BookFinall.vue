@@ -111,7 +111,7 @@
 							<p id="tit">Nous apprécions vraiment votre réservation et nous sommes très reconnaissants de la confiance que vous nous accordez. 
                                </p>
                             	
-							<p>Consultez votre boite mail pour la confirmation de votre RESERVATION et n'hesistez pas de nous 
+							<p>
                                 connecter sur (+216 50711246) ou sur notre page Facebook  pour plus d'information . 
                             </p>
 						</div>

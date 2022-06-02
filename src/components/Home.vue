@@ -379,12 +379,8 @@ export default {
       id: 0,
 	     types:[],
     	room_id:[],
-<<<<<<< HEAD
       nbadult:"2",
       nbenfant:"0",
-=======
-      description:"",
->>>>>>> 80d9a3061c3b311148fbfef6b60c64a6734ab0ca
 		 image:"",
      fetch:{
        end:"",
@@ -430,15 +426,11 @@ export default {
     }
     this.dateNow= year+"-"+month+"-"+day;
         this.getType();
-<<<<<<< HEAD
       this.getPrice();
         /************************ */
   this.fetch.start=this.dateNow;
     /********************************** */
     
-=======
-   
->>>>>>> 80d9a3061c3b311148fbfef6b60c64a6734ab0ca
   },
 
 

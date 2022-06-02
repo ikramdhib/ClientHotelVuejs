@@ -52,11 +52,7 @@
 			                   </div>
 		               <div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
-<<<<<<< HEAD
-	      			<h3 class="heading mb-4">Chercher les disponibilités </h3>
-=======
 	      			<h3 class="heading mb-4">Chercher les Disponibilite</h3>
->>>>>>> 80d9a3061c3b311148fbfef6b60c64a6734ab0ca
 	      			<form action="#">
 	      				<div class="fields">
 		              <div class="form-group">
@@ -95,22 +91,6 @@
 	                  </select>
 	                  </div>
 		              </div>
-<<<<<<< HEAD
-					     <div class="form-group" >
-		                <div class="select-wrap one-third">
-	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                   <select name="" id="" class="form-control">
-	                    	<option value="0">0 Bébé</option>
-	                    	<option value="1">1 Bébé</option>
-							<option value="2">2 Bébé</option>
-							<option value="3">3 Bébé</option>
-	                  </select>
-	                  </div>
-		              </div>
-		              
-		              <div class="form-group">
-		                <input type="submit" value="Chercher" v-on:click="searchInput" class="btn btn-primary py-3 px-5">
-=======
 					    <div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -125,7 +105,6 @@
 		          
 		              <div class="form-group">
 		                <input type="submit" value="chercher" v-on:click="searchInput" class="btn btn-primary py-3 px-5">
->>>>>>> 80d9a3061c3b311148fbfef6b60c64a6734ab0ca
 		              </div>
 		            </div>
 	            </form>

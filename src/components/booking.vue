@@ -550,7 +550,7 @@ export default {
         prenom: "",
         phone: "",
         prix: "",
-        nombre: "",
+        nombre:0,
       },
       spa: "",
       p: "",
@@ -573,7 +573,7 @@ export default {
       monChoix1: "",
       Choix: "",
       resultat: "",
-      prix: null,
+      prix:0,
       equi: 0,
       somm: 0,
       capacite: 0,
@@ -647,6 +647,8 @@ export default {
     if (localStorage.getItem("client")) {
       this.user = JSON.parse(localStorage.getItem("client"));
     }
+    this.idus=this.user.id;
+console.log("fghhj",this.idus)
   },
   unmounted(){
      document.getElementById('ftco-navbar').style.display="block";
@@ -658,8 +660,12 @@ export default {
     async Addbooking() {
       if (this.isRooftop) {
         if (this.monChoix == "") {
-          this.monChoix = "0";
+          this.monChoix =null;
         }
+          if(this.idus==""){
+      this.idus=null
+   
+      }
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
@@ -673,9 +679,9 @@ export default {
               phone: this.user.phone,
               email: this.user.email,
               nom: this.user.lastname,
-              offres: this.monChoix,
+              offre_id: this.monChoix,
               prenom: this.user.firstname,
-              user_id: this.user.id,
+              user_id:this.idus,
               prix: this.prix1,
               rooftop_id: this.rooftop,
               isSmsSend: false,
@@ -687,14 +693,18 @@ export default {
             }
           )
           .then((res) => {
-            this.response = res.data.booking;
+            this.response = res.data.booking.id;
             console.log(res);
-            this.$router.push("book");
+           this.$router.push({name:"book" , params:{id:this.response}});
           });
       } else if (this.isrestaurant) {
         if (this.monChoix == "") {
-          this.monChoix = "0";
+          this.monChoix =null;
         }
+          if(this.idus==""){
+      this.idus=null
+   
+      }
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
@@ -707,10 +717,10 @@ export default {
               nombre: this.booking.nombre,
               phone: this.user.phone,
               email: this.user.email,
-              offres: this.monChoix,
+              offre_id: this.monChoix,
               nom: this.user.lastname,
               prenom: this.user.firstname,
-              user_id: this.user.id,
+              user_id:this.idus,
               prix: this.prix,
               restaurant_id: this.restaurant,
               isSmsSend: false,
@@ -722,14 +732,18 @@ export default {
             }
           )
           .then((res) => {
-            this.response = res.data.booking;
+            this.response = res.data.booking.id;
             console.log(res);
-            this.$router.push("book");
+           this.$router.push({name:"book" , params:{id:this.response}});
           });
       } else if (this.isPool) {
         if (this.monChoix == "") {
-          this.monChoix = "0";
+          this.monChoix =null;
         }
+          if(this.idus==""){
+      this.idus=null
+   
+      }
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
@@ -741,10 +755,10 @@ export default {
               nombre: this.booking.nombre,
               phone: this.user.phone,
               email: this.user.email,
-              offres: this.monChoix,
+              offre_id: this.monChoix,
               nom: this.user.lastname,
               prenom: this.user.firstname,
-              user_id: this.user.id,
+              user_id:this.idus,
               prix: this.somm,
               pool_id: this.pool,
               isSmsSend: false,
@@ -756,14 +770,18 @@ export default {
             }
           )
           .then((res) => {
-            this.response = res.data.booking;
+            this.response = res.data.booking.id;
             console.log(res);
-            this.$router.push("book");
+           this.$router.push({name:"book" , params:{id:this.response}});
           });
       } else if (this.isConferenceRoom) {
         if (this.monChoix == "") {
-          this.monChoix = "0";
+          this.monChoix =null;
         }
+          if(this.idus==""){
+      this.idus=null
+   
+      }
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
@@ -775,11 +793,11 @@ export default {
               nombre: this.capacite,
               phone: this.user.phone,
               email: this.user.email,
-              offres: this.monChoix,
+              offre_id: this.monChoix,
               nom: this.user.lastname,
               prenom: this.user.firstname,
               prix: this.prix1,
-              user_id: this.user.id,
+              user_id:this.idus,
               conference_room_id: this.ConferenceRoom,
               isSmsSend: false,
             },
@@ -790,14 +808,18 @@ export default {
             }
           )
           .then((res) => {
-            this.response = res.data.booking;
+            this.response = res.data.booking.id;
             console.log(res);
-            this.$router.push("book");
+            this.$router.push({name:"book" , params:{id:this.response}});
           });
       } else if (this.isSpa) {
         if (this.monChoix == "") {
-          this.monChoix = "0";
+          this.monChoix =null;
         }
+          if(this.idus==""){
+      this.idus=null
+   
+      }
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
@@ -806,7 +828,7 @@ export default {
           .post(
             "http://localhost:8000/api/Booking",
             {
-              offres: this.monChoix,
+              offre_id: this.monChoix,
               infoComplimentaire: this.booking.infoComplimentaire,
               nombre: this.booking.nombre,
               phone: this.user.phone,
@@ -814,7 +836,7 @@ export default {
               nom: this.user.lastname,
               prenom: this.user.firstname,
               prix: this.prix,
-              user_id: this.user.id,
+              user_id:this.idus,
               spa_id: this.spa,
               isSmsSend: false,
             },
@@ -825,9 +847,9 @@ export default {
             }
           )
           .then((res) => {
-            this.response = res.data.booking;
+            this.response = res.data.booking.id;
             console.log(res);
-            this.$router.push("book");
+           this.$router.push({name:"book" , params:{id:this.response}});
           });
       }
     },

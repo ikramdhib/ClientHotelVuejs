@@ -260,7 +260,7 @@ console.log("fghhj",this.idus)
 
 		},
 		gobook(id){
-		   	this.$router.push({name:'bookingcat' , params:{id:id , catg:'pool'} })
+		   	this.$router.push({name:'booking' , params:{id:id , catg:'pool'} })
 		},
 
 		 isRating(event){
