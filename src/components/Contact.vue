@@ -93,6 +93,7 @@ export default {
     return {
        toastCount: 0,
       user_id:0,
+      idus:0,
       contact:{
              messsage:"",
 			 objet:"",
@@ -100,11 +101,23 @@ export default {
 			name:"",
 				}
         }},
+        mounted(){
+          document.getElementById("toggle").click();
+  if(localStorage.getItem('client')){
+                        this.user = JSON.parse(localStorage.getItem('client'));
+                }
+               this.idus=this.user.id;
+console.log("fghhj",this.idus)
+        },
         methods:{
           
  async AddContact(){
      
     this.user = JSON.parse(localStorage.getItem('client'));
+     if(this.idus==""){
+      this.idus=null
+   
+      }
  await axios
   .post("http://127.0.0.1:8000/api/AddContact", 
 
@@ -112,7 +125,7 @@ export default {
                objet:this.contact.objet,
                 email:this.contact.email,
                  name :this.contact.name,
-                 user_id:this.user.id,
+                user_id:this.idus,
 	          
 				}).then(res=>{
 	this.response=res.data.contact;
