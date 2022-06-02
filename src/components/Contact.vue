@@ -71,7 +71,7 @@
                 <textarea name="" id="" cols="30" rows="7" class="form-control"   v-model="contact.message" placeholder="Message"></textarea>
               </div>
               <div class="form-group">
-                <input type="button"   @click="AqddContact()" value="Send Message" class="btn btn-primary py-3 px-5">
+                <input type="button"   @click="AddContact()" value="Send Message" class="btn btn-primary py-3 px-5">
               </div>
             </form>
           
@@ -92,15 +92,19 @@ export default {
   data() {
     return {
        toastCount: 0,
-     contact:  {
+      user_id:0,
+      contact:{
              messsage:"",
 			 objet:"",
             email:"",
 			name:"",
-					
-				}}},
+				}
+        }},
         methods:{
+          
  async AddContact(){
+     
+    this.user = JSON.parse(localStorage.getItem('client'));
  await axios
   .post("http://127.0.0.1:8000/api/AddContact", 
 
@@ -108,6 +112,7 @@ export default {
                objet:this.contact.objet,
                 email:this.contact.email,
                  name :this.contact.name,
+                 user_id:this.user.id,
 	          
 				}).then(res=>{
 	this.response=res.data.contact;

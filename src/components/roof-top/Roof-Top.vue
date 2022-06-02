@@ -201,6 +201,7 @@ number1:0,
 number2:0,
 number3:0,
 number4:0,
+idus:0,
 		}
 	},
 	mounted (){
@@ -211,6 +212,8 @@ number4:0,
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
                 }
+                 this.idus=this.user.id;
+console.log("fghhj",this.idus)
 },
 
 	methods :{
@@ -328,14 +331,18 @@ number4:0,
         
     },
 	 async addRatings() {
-		 
+		   if(this.idus==""){
+         this.idus=null
+      
+         
+      }
 			 await axios
 			 
 			    .post('http://localhost:8000/api/addrating',
 				{ rate:this.totale,
                   commentaire:this.rating.commentaire,
                    rooftop_id:this.roofid,
-                   user_id:this.user.id,
+                    user_id:this.idus,
 				},
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{

@@ -5,7 +5,9 @@
           <div class="col-md-10 heading-section text-center">
             <h2 class="mb-4">Résérvez maintement : </h2>
           </div>
-          
+         
+           
+
         </div>
           <div class="col-md-3 d-flex">
             	
@@ -26,13 +28,13 @@
               <!--	<div class="icon d-flex align-items-center justify-content-center">
               		<span class="flaticon-airplane49" ></span> 
               	</div>-->
+                
                  <h3 id="title" class="mb-4">Saisir une reservation </h3>
             </div>
                  </div>
                   </div>
 	            </div>
               </div>
-
 
 <!--rooftop-->
 <div v-if="isRooftop" >
@@ -68,7 +70,7 @@
 <tr><div v-if="offre" ><td >
 <input v-model="prix1" disabled > </td></div>
 <div v-if="offre==false">
-<td ><input :v-model="prix1"  :value="this.prix1=(( this.prix_reservation*this.booking.nombre))" disabled></td></div>
+<td ><input :v-model="prix1"  :value="this.prix1=(( this.prix_reservation*this.booking.nombre))+'DT'" disabled></td></div>
 </tr></table>
 </ul>
 </div>
@@ -121,7 +123,7 @@
 </form>
 </div></div>
 <!--pool-->
-<div v-if="isPool" >
+<div v-if="ispool" >
 <div  class="row">
 <form class="bg-light p-5 ">
 <div class="form-group" >
@@ -156,7 +158,7 @@
 <tr><div v-if="offre">
 <td ><input  v-model="somm" disabled >   </td></div>
 <div v-if="offre==false">
-<td><input :v-model="somm" :value=" this.somm=(( this.prix_reservation*this.booking.nombre))" disabled></td></div>
+<td><input :v-model="somm" :value=" this.somm=(( this.prix_reservation*this.booking.nombre))+'DT'" disabled></td></div>
 </tr>
 </table> 
 </ul>
@@ -196,7 +198,7 @@
 <tr><div v-if="offre" ><td >
 <input v-model="prix1" disabled > </td></div>
 <div v-if="offre==false">
-<td ><input :v-model="prix1" :value="this.prix1=((this.prixx*this.capacite)+this.somm)" disabled></td></div>
+<td ><input :v-model="prix1" :value="this.prix1=((this.prixx*this.capacite)+this.somm)+'DT'" disabled></td></div>
 </tr></table>
 </ul>
 </div>
@@ -242,7 +244,7 @@
 <tr><div v-if="offre" >
  <td><input v-model="prix"  disabled> </td></div>
  <div v-if="offre==false">
- <td><input :v-model="prix"  :value="this.prix=(( this.prix_reservation*this.booking.nombre))" ></td></div>
+ <td><input :v-model="prix"  :value="this.prix=(( this.prix_reservation*this.booking.nombre))+'DT'" ></td></div>
 </tr></table>
 </ul>
 </div>
@@ -294,7 +296,7 @@
                 <div class="form-group">
                   <div class="row justify-content-center mb-9 pb-2 py-4">
           <div class="col-md-5 heading-section text-center">
-                <input type="button" value="Reserver"  @click="Addbooking()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
+                <input type="button" value="Reserver"  @click="Addbooking() " class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
               </div>
                   </div>
               </div>
@@ -353,7 +355,7 @@ export default {
         prenom:"",
          phone:"",
           prix:"",
-         nombre:""},
+         nombre:null},
      spa:"",
      p:"",
      prixeq:null,
@@ -375,7 +377,7 @@ export default {
 monChoix1:"",
 Choix:"",
 resultat:"",
-prix:null,
+prix:0,
 equi:0,
 somm:0,
 capacite:0,
@@ -385,15 +387,17 @@ pourr:0,
   somme:0,
   choi:"",
   table:[],
+  idus:0,
   po:0,
-
+        isLogin:false,
+       
   
     };
   },
   
 
    	mounted(){
-     
+
 	   const id = this.$route.params.id
        const catg =this.$route.params.catg
    if(catg=="spa"){
@@ -426,7 +430,7 @@ pourr:0,
 	
       console.log(this.prix_reservation)
 });
-      this.isPool=true;}
+      this.ispool=true;}
     else if(catg=="roof"){
        axios.get('http://localhost:8000/api/getroof/'+id).then(res=>{
 				if(res!=null){
@@ -456,15 +460,22 @@ this.offresres();
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
                 }
+               this.idus=this.user.id;
+console.log("fghhj",this.idus)
+
      },
 	  
   methods: { 
          
   async Addbooking(){
-     
+    
      if(this.isRooftop){
       if(this.monChoix==""){
-         this.monChoix="0"
+         this.monChoix=null
+      }
+       if(this.idus==""){
+      this.idus=null
+   
       }
       if(this.booking.infoComplimentaire==""){
         this.booking.infoComplimentaire="AUCUN INFORMATION PERSONNELS "
@@ -478,9 +489,9 @@ this.offresres();
                 phone:this.user.phone,
                   email:this.user.email,
                  nom:this.user.lastname,
-                 offres:this.monChoix,
+                 offre_id:this.monChoix,
              prenom:this.user.firstname,
-                user_id:this.user.id,
+                user_id:this.idus,
                  prix:this.prix1,
               rooftop_id:this.rooftop,
               isSmsSend:false
@@ -492,13 +503,17 @@ this.offresres();
 
       )
       .then((res) => {
-			this.response=res.data.booking;
+			this.response=res.data.booking.id;
 	     console.log(res);
-	   this.$router.push('book');
+	   this.$router.push({name:"book" , params:{id:this.response}});
           })}
           else if(this.isrestaurant){
               if(this.monChoix==""){
-      this.monChoix="0"
+      this.monChoix=null
+   
+      }
+       if(this.idus==""){
+      this.idus=null
    
       }
        if(this.booking.infoComplimentaire==""){
@@ -511,10 +526,10 @@ this.offresres();
              nombre:this.booking.nombre,
                  phone:this.user.phone,
                   email:this.user.email,
-                    offres:this.monChoix,
+                    offre_id:this.monChoix,
                  nom:this.user.lastname,
                 prenom:this.user.firstname,
-                   user_id:this.user.id,
+                   user_id:this.idus,
                      prix:this.prix,
                  restaurant_id:this.restaurant,
                     isSmsSend:false
@@ -524,14 +539,18 @@ this.offresres();
       .then((res) => {
         	
 		
-	   	this.response=res.data.booking;
+	   	this.response=res.data.booking.id;
 	     console.log(res);
-       this.$router.push('book');
+     this.$router.push({name:"book" , params:{id:this.response}});
           })}
             
-          else if(this.isPool){
+          else if(this.ispool){
               if(this.monChoix==""){
-      this.monChoix="0"
+      this.monChoix=null
+   
+      }
+       if(this.idus==""){
+      this.idus=null
    
       }
        if(this.booking.infoComplimentaire==""){
@@ -543,10 +562,10 @@ this.offresres();
                  nombre:this.booking.nombre,
                  phone:this.user.phone,
                   email:this.user.email,
-                    offres:this.monChoix,
+                    offre_id:this.monChoix,
                  nom:this.user.lastname,
                   prenom:this.user.firstname,
-                user_id:this.user.id,
+                user_id:this.idus,
                    prix:this.somm,
                 pool_id:this.pool,
                    isSmsSend:false
@@ -555,14 +574,18 @@ this.offresres();
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
    )
       .then((res) => {
-		this.response=res.data.booking;
+		this.response=res.data.booking.id;
 	     console.log(res);
-       this.$router.push('book');
+        this.$router.push({name:"book" , params:{id:this.response}});
           })}
             
           else if(this.isConferenceRoom){
               if(this.monChoix==""){
-      this.monChoix="0"
+      this.monChoix=null
+   
+      }
+       if(this.idus==""){
+      this.idus=null
    
       }
        if(this.booking.infoComplimentaire==""){
@@ -574,11 +597,11 @@ this.offresres();
                  nombre:this.capacite,
                   phone:this.user.phone,
                   email:this.user.email,
-                    offres:this.monChoix,
+                    offre_id:this.monChoix,
                  nom:this.user.lastname,
                  prenom:this.user.firstname,
                    prix:this.prix1,
-                user_id:this.user.id,
+                user_id:this.idus,
               conference_room_id:this.ConferenceRoom,
                  isSmsSend:false
 
@@ -587,14 +610,19 @@ this.offresres();
    )
       .then((res) => {
         
-			this.response=res.data.booking;
+			this.response=res.data.booking.id;
 	     console.log(res);
-	   this.$router.push('book');
+	     this.$router.push({name:"book" , params:{id:this.response}});
           })}
              
           else if(this.isSpa){
-        if(this.monChoix==""){
-      this.monChoix="0"
+      
+  if(this.monChoix==""){
+      this.monChoix=null
+   
+      }
+      if(this.idus==""){
+      this.idus=null
    
       }
        if(this.booking.infoComplimentaire==""){
@@ -603,7 +631,7 @@ this.offresres();
      
     await axios.post("http://localhost:8000/api/Booking", {
          
-                offres:this.monChoix,
+              
                 infoComplimentaire:this.booking.infoComplimentaire,
                 nombre:this.booking.nombre,
                 phone:this.user.phone,
@@ -611,7 +639,8 @@ this.offresres();
                   nom:this.user.lastname,
                  prenom:this.user.firstname,
                    prix:this.prix,
-                user_id:this.user.id,
+                offre_id:this.monChoix,
+                user_id:this.idus,
                 spa_id:this.spa,
                    isSmsSend:false
 
@@ -619,9 +648,9 @@ this.offresres();
   }, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
    )
       .then((res) => {
-			this.response=res.data.booking;
+			this.response=res.data.booking.id;
          console.log(res);
-        this.$router.push('book');
+          this.$router.push({name:"book" , params:{id:this.response}});
 	   
           })}},
           async offresres(){
@@ -653,7 +682,7 @@ console.log(this.offpool);})}
 
   else if(catg=="spa"){
  await axios
-  .get("http://127.0.0.1:8000/api/soldde/"+id, ).then(res=>{
+  .get('http://127.0.0.1:8000/api/soldde/'+id, ).then(res=>{
 this.offspa= res.data.offres;
 for( let i=0;i<this.offspa.lengeth;i++){
   this.table.push(this.offspa[i].pourcentage);
@@ -728,7 +757,7 @@ console.log(this.offsall); })
     }
       
 
- this.somm=((( this.prix_reservation-(( this.prix_reservation*this.pourr)/100))*this.booking.nombre))
+ this.somm=((( this.prix_reservation-(( this.prix_reservation*this.pourr)/100))*this.booking.nombre));
 
  
  
@@ -833,7 +862,7 @@ console.log(this.offsall); })
 
     },
 
-
+ 
 
    
 }}
@@ -843,4 +872,5 @@ console.log(this.offsall); })
 div.p{
   color:red;
 }
+
 </style>

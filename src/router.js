@@ -166,7 +166,7 @@ const routes=[
         component: () => import('./components/SalleConfernce/salleConferenceMain.vue'),
     },
     {
-        path:'/book',
+        path:'/book:id',
         name:'book',
         component: () => import('./components/BookFinall.vue'),
     },
