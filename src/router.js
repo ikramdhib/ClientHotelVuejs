@@ -164,7 +164,18 @@ const routes=[
         path:'/conferencerooms',
         name:'conferencerooms',
         component: () => import('./components/SalleConfernce/SalleConferenceMain.vue'),
-    }
+    },
+    {
+        path:'/book',
+        name:'book',
+        component: () => import('./components/BookFinall.vue'),
+    },
+    {
+        path:'/ratings',
+        name:'ratings',
+        component: () => import('./components/Ratings.vue'),
+    },
+   
 ];
 const router = createRouter({
     history: createWebHashHistory(),

@@ -3,7 +3,7 @@
     <SelectRoom v-else-if="$route.path === '/selectroom'" />
     <BookRoom v-else-if="$route.path === '/bookroom'" />
     <BookingPayment v-else-if="$route.path === '/bookingpayment'" />
-    <Booking v-else-if="$route.path === '/bookingcat'"/>
+    <Booking v-else-if="$route.path === '/bookingcat :id :catg'"/>
     <App v-else/>
    
 </template>

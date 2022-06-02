@@ -1,5 +1,5 @@
-<template >
-  <div class="hero-wrap" id="bg1" style="background-image">
+<template>
+   <div class="hero-wrap" id="bg1" style="background-image">
       <div class="overlay"></div>
       <div class="hero-wrap" id="bg1" style="background-image">
       <div class="overlay"></div>
@@ -8,37 +8,31 @@
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
 	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Acceuil</a></span> <span>A propos</span></p>
-	            <h1 class="mb-4 bread">Details Chambres</h1>
+	            <h1 class="mb-4 bread">Details chambre</h1>
             </div>
           </div>
         </div>
       </div>
-    </div></div>
-
-
-
- <section class="ftco-section">
+    </div></div> 
+    <section class="ftco-section">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
           	<div class="row">
           		<div class="col-md-12 ">
-                <div class="col-md-10 heading-section text-center py-4">
-          			<h2 class="mb-4"> {{ type_nom}} </h2>
-                </div> 
-              
-              </div>
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
+               
+              <div v-if="images.length > 0">
+          		    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators" >
             <div v-for="(image, index) in images" :key="index">
                 <li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
             </div>
         </ol>
         <div class="carousel-inner">
           <div v-for="(image, index) in images" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
-                    <img class="d-block w-100" :src="'http://localhost:8000/storage'+image.name" >
+                    <img class="d-block w-100" :src="'http://localhost:8000/storage'+image.name"   >
                 </div>
-            
+        </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -49,9 +43,11 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+              
+              </div>
           		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
     						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.{{room.description}}</p>
-    						<div class="d-md-flex mt-5 mb-5">
+    					<div class="d-md-flex mt-5 mb-5">
     							<ul class="list">
                     <div v-if="room.nbAdult>0">
 	    							<li><i class="icon-group" id="icon">:</i> {{room.nbAdult}} Adult</li>
@@ -67,98 +63,26 @@
 	    							<li><i class="icon-bed " id="icon">: </i>{{room.nbBed}}</li>
 	    						</ul>
     						</div>
+                 <div class="sidebar-box ftco-animate">
+              <h3>type chambre</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!{{typdesc}}</p>
+            </div>
     					</div>
-              <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
-          			<h4 class="mb-4">Review &amp; Ratings</h4>
-          			<div class="row">
-          				<div class="col-md-6">
-          					<form method="post" class="star-rating">
-										  <div class="form-check">
-												<input type="checkbox" class="form-check-input" id="exampleCheck1">
-												<label class="form-check-label" for="exampleCheck1">
-													<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> 100 Ratings</span></p>
-												</label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> 30 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 5 Ratings</span></p>
-									     </label>
-										  </div>
-										  <div class="form-check">
-										    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-										    </label>
-										  </div>
-										</form>
-          				</div>
-          			</div>
-          		</div>
-
-          		<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
-                  <div class="row">
-          			<h4 class="mb-4">Les Chambres Disponible</h4>
-             <div class="col-sm col-md-3 "  v-for="chambre in chambres" :key="chambre.id"  >
-                    <div class="c">  
-                      <div v-for="objet in objets" :key="objet.id ">
-                      <div v-if="objet.id==type_id && objet.id==chambre.type_id">
-				    				<div class="card" style="width: 18rem;" > 
-                      <img  :src="'http://localhost:8000/storage'+chambre.images.name" alt="Card image cap">
-                      <div class="card-body">
-                     <h5 class="card-title text-center">{{objet.nom_type}}</h5>
-                           <div class="text p-3 text-center">
-	                             <div v-for="prix in prixs" :key="prix.id">
-                                 <div v-if="prix.id == chambre.price_id">
-    						                      <div class="text p-3 text-center">
-    						               <p class="bo">{{prix.price_hotel}} DT  <span class="b1"> par nuit </span></p>
-						                    </div>
-				                      	</div>
-				                        </div>
-                                   <router-link :to="'RoomSingle'+ room.id " ><a  class="btn btn-primary">plus details</a></router-link>
-                                    </div>
-                                   </div>
-                               </div>
-                         </div>
-                    </div>
-                </div>
-                 </div>
-                  </div>
-                </div>
-                </div>
-          </div> <!-- .col-md-8 -->
-          <div class="col-lg-4 sidebar ftco-animate">
+   
+          </div> </div>
+           <div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group">
-               <div class="box">
-              <router-link :to="'findroom'" > <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5"></router-link>
+        
+             
+          		
+                 <div class="box">
+                 <router-link :to="'findroom'" > <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5"></router-link>
               </div>
               </div>
                <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h2> les Prix</h2>
-               <div  v-if="this.per>0">
-                 <del id="reduit">{{price}} DT </del>
-                   <li id="p1">{{ (this.pric*this.pric)/100}} DT</li> 
-               </div>
-               <div v-else-if="this.per==0">
-              <li id="p1">{{ price }} DT  </li> 
-              </div>
-              </div>
-            </div>
-            	
-            <div class="sidebar-box ftco-animate">
+                <li id="p1">{{ price }} DT  </li> 
               <h2>Options</h2>
               <div class="row">
           	<div class="col-sm-2" v-for="option in options" :key="option.id">
@@ -167,43 +91,133 @@
               </div>
               </div>
               </div>
+              </div>
+                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<div v-for="(offre, index) in room.offres" :key="index">
+								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+							</div>
+						</ol>
+						<div class="carousel-inner">
+						<div v-for="(offre, index) in room.offres" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+									<div class="card"  id="card" style="width: 18rem;">
+										<div class="card-body">
+											<span class="badge badge-pill badge-danger" id="r">OFFRE</span>
+										<h5 class="card-title"> {{ offre.titre}}   </h5>
+										<p class="card-text"> {{ offre.description }} </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
+										<p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{price }} DT </del>
+										<span class="px-4" id="of"> {{ price-((price*offre.pourcentage)/100)}} </span> </p>
+										
+									</div>
+									</div>
+								</div>
+							
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
+							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only"  id="plus">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
+							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only"  >Next</span>
+						</a>
+					</div></div></div>
+           	
             </div>
-           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <div class="cards-wrapper">
-      
-      
-       <div v-for="(offre, index) in offres" :key="index" >
-             <div class="card" >
-            <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-           
-          </div>
-      </div></div></div></div>
-       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a></div>
-              
-                
-           
-            </div>
-            <div class="sidebar-box ftco-animate">
-              <h3>type chambre</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!{{typdesc}}</p>
-            </div>
-          </div>
-        </div>
+                <div class="col-lg-4 sidebar ftco-animate">
+          <div class="form-group">
+                  <h4>Evaluation</h4>
+      <div class="rating" >
+        <input type="radio" name="rating-star"  :v-model="number" :value="number=1" @click="isRating($event)" class="rating__control screen-reader"  id="rc1">
+        <input type="radio" name="rating-star"  :v-model="number1" :value="number1=2"  @click="isRating1($event)" class="rating__control screen-reader" id="rc2">
+        <input type="radio" name="rating-star"  :v-model="number2" :value="number2=3" @click="isRating2($event)" class="rating__control screen-reader" id="rc3">
+        <input type="radio" name="rating-star"  :v-model="number3" :value="number3=4" @click="isRating3($event)" class="rating__control screen-reader" id="rc4">
+        <input type="radio" name="rating-star"  :v-model="number4" :value="number4=5"  @click="isRating4($event)" class="rating__control screen-reader" id="rc5">
+        <label for="rc1" class="rating__item">
+          <svg class="rating__star">
+            <use xlink:href="#star"></use>
+          </svg>
+          <span class="screen-reader">1</span>
+        </label>
+        <label for="rc2" class="rating__item">
+          <svg class="rating__star">
+            <use xlink:href="#star"></use>
+          </svg>
+          <span class="screen-reader">2</span>
+        </label>
+        <label for="rc3" class="rating__item">
+          <svg class="rating__star">
+            <use xlink:href="#star"></use>
+          </svg>
+          <span class="screen-reader">3</span>
+        </label>
+        <label for="rc4" class="rating__item">
+          <svg class="rating__star">
+            <use xlink:href="#star"></use>
+          </svg>
+          <span class="screen-reader">4</span>
+        </label>
+        <label for="rc5" class="rating__item">
+          <svg class="rating__star">
+            <use xlink:href="#star"></use>
+          </svg>
+          <span class="screen-reader">5</span>
+        </label>  
       </div>
-      </section> <!-- .section -->
+
+    </div>
+
+   
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+  <symbol id="star" viewBox="0 0 26 28">
+    <path d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z"/>
+  </symbol>
+</svg>
+  <div class="col-md-12">
+
+    <textarea class="form-control" placeholder="Ajouter commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6"></textarea>
+        <input type="button" value="Envoyer" id="B"  @click="addRatings" class="btn btn-primary py-3 px-3"></div></div>
+  </div>
+   
+</section>
+             <div class="container-fluid">
+        <div class="row no-gutters justify-content-center pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2><span>Nos Chambres </span></h2>
+          </div>
+
+        </div>
+          <div class="col-md-12 ">
+            <div class="bg-white p-5">
+                  <div class="row">
+                  <div class="col-md-4"  v-for="chambre in chambres" :key="chambre.id"> 
+					 
+                    <div class="card"  >
+						  <img  :src="'http://localhost:8000/storage'+chambre.images.name"  alt="Card image cap">
+                    <div class="card-body">
+                       <div v-for="objet in objets" :key="objet.id ">
+                      <div v-if="objet.id==type_id && objet.id==chambre.type_id">
+                      <h5 class="card-title">{{ objet.nom_type }} </h5></div></div>
+					  <hr/>
+                
+                     <p class="card-text" id="pr"> {{chambre.description.substr(0 , 110)+',...'}}</p>
+ <p class="card-text"> <a :href="'http://localhost:8080/#/Roomsingle'+chambre.id"   > plus de details </a></p>
+                    
+					  <hr/>
+             <div v-for="prix in prixs" :key="prix.id">
+                                 <div v-if="prix.id == chambre.price_id">
+                      <p class="card-text" id="pr"> {{prix.price_hotel}} DT  </p></div></div>
+                    </div>
+                   
+                  </div>
+                  </div>
+              </div>
+              </div>
+              </div>
+            </div>
+
 </template>
- 
 <script>
 
 import axios from "axios";
@@ -225,7 +239,19 @@ calcul:{},
   per:{},
   pric:{},
   type_id:{},
-  
+  ro:{},
+  rating:{
+             commentaire:"",
+                },
+			 user_id:0,
+   isRatingsExist:false,
+totale:0,
+number:0,
+number1:0,
+number2:0,
+number3:0,
+number4:0,
+
     };
   },
   
@@ -235,6 +261,10 @@ calcul:{},
     this.getRooms();
     this.getType();
     this.getPrice();
+     this.isLogin=true;
+      if(localStorage.getItem('client')){
+                        this.user = JSON.parse(localStorage.getItem('client'));
+                }
   },
  
 	  
@@ -255,9 +285,10 @@ calcul:{},
          this.price=res.data.rooms.prices.price_hotel
           this.offres=res.data.rooms.offres;
           this.images=res.data.rooms.images;
+          this.ro=res.data.rooms.id;
 
    this.per=parseInt( res.data.rooms.offres.pourcentage);
- this. pric=res.data.rooms.prices.price_hotel;
+ this.pric=res.data.rooms.prices.price_hotel;
  
 
 
@@ -278,7 +309,7 @@ calcul:{},
 			   this.chambres= res.data.rooms;
 			 
 
-           console.log(this.chambre)
+           console.log(this.chambres)
 		   
    }
 	)
@@ -311,11 +342,101 @@ calcul:{},
       this.prixs= res.data.price;
 	  
 
-        console.log(this.prix);
+        console.log(this.prixs);
       })
 	
     
-      },}}
+      },
+     
+
+
+
+    isRating(event){
+ if(event.target.checked==1){
+ this.isRatingsExist=true;
+ this.totale=this.totale+this.number;}
+
+      else{
+        this.isRatingsExist=false;
+      }
+     
+      console.log("rrrrrrrrrrrrrrrrr",this.isRatingsExist );
+       console.log("rrrrrrrrrrrrrrrrr",this.totale);
+        
+    },
+     isRating1(event){
+ if(event.target.checked==1){
+ this.isRatingsExist=true;
+ this.totale=this.totale+this.number1;}
+
+      else{
+        this.isRatingsExist=false;
+      }
+     
+      console.log("rrrrrrrrrrrrrrrrr",this.isRatingsExist );
+       console.log("rrrrrrrrrrrrrrrrr",this.totale);
+        
+    },
+     isRating2(event){
+ if(event.target.checked==1){
+ this.isRatingsExist=true;
+ this.totale=this.totale+this.number2;}
+
+      else{
+        this.isRatingsExist=false;
+      }
+     
+      console.log("rrrrrrrrrrrrrrrrr",this.isRatingsExist );
+       console.log("rrrrrrrrrrrrrrrrr",this.totale);
+        
+    },
+     isRating3(event){
+ if(event.target.checked==1){
+ this.isRatingsExist=true;
+ this.totale=this.totale+this.number3;}
+
+      else{
+        this.isRatingsExist=false;
+      }
+     
+      console.log("rrrrrrrrrrrrrrrrr",this.isRatingsExist );
+       console.log("rrrrrrrrrrrrrrrrr",this.totale);
+        
+    },
+    isRating4(event){
+ if(event.target.checked==1){
+ this.isRatingsExist=true;
+ this.totale=this.totale+this.number4;}
+
+      else{
+        this.isRatingsExist=false;
+      }
+     
+      console.log("rrrrrrrrrrrrrrrrr",this.isRatingsExist );
+       console.log("rrrrrrrrrrrrrrrrr",this.totale);
+        
+    },
+     async addRatings() {
+		 
+			 await axios
+			 
+			    .post('http://localhost:8000/api/addrating',
+				{ rate:this.totale,
+                  commentaire:this.rating.commentaire,
+                   room_id:this.ro,
+                   user_id:this.user.id,
+				},
+				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
+				).then(response=>{
+					 	
+				     let res = response.data;
+					 console.log(res);
+    
+				})
+	
+		
+    }
+}}
    </script>
 <style>
 .cards-wrapper {
@@ -362,6 +483,9 @@ calcul:{},
  color:red
     
 }
+#f{
+  color:black;
+}
 div.c{
 
         margin: 0 auto; /* Added */
@@ -382,6 +506,10 @@ box-shadow: 10px 5px 5px #8d703b;}
 #box{
 margin-top: 35%;
 border-radius: 0%}
+#B{
+  margin-top: 10%;
+  border-radius: 0%
+}
 .bo{
 	
 	 color:#f33413;
@@ -394,4 +522,126 @@ border-radius: 0%}
 font-weight: lighter;
 
 	  }
+    .screen-reader{
+  width: var(--screenReaderWidth, 1px) !important;
+  height: var(--screenReaderHeight, 1px) !important;
+  padding: var(--screenReaderPadding, 0) !important;
+  border: var(--screenReaderBorder, none) !important;
+
+  position: var(--screenReaderPosition, absolute) !important;
+  clip: var(--screenReaderClip, rect(1px, 1px, 1px, 1px)) !important;
+  overflow: var(--screenReaderOverflow, hidden) !important;
+}
+
+/*
+=====
+CORE STYLES
+=====
+*/
+
+.rating{
+  --uiRatingColor: var(--ratingColor, #eee);
+  --uiRatingColorActive: var(--ratingColorActive, #8d703b);
+
+  display: var(--ratingDisplay, flex);
+  font-size: var(--ratingSize, 1rem);
+  color: var(--uiRatingColor);
+}
+    
+.rating__control:nth-of-type(1):focus ~ .rating__item:nth-of-type(1)::before,
+.rating__control:nth-of-type(2):focus ~ .rating__item:nth-of-type(2)::before,
+.rating__control:nth-of-type(3):focus ~ .rating__item:nth-of-type(3)::before,
+.rating__control:nth-of-type(4):focus ~ .rating__item:nth-of-type(4)::before,
+.rating__control:nth-of-type(5):focus ~ .rating__item:nth-of-type(5)::before{
+  content: ""; 
+  box-shadow: 0 0 0 var(--ratingOutlineWidth, 4px) var(--uiRatingColorActive);
+
+  position: absolute;
+  top: -.15em;
+  right: 0;
+  bottom: -.15em;
+  left: 0;
+  z-index: -1;
+}
+
+.rating__item{
+  cursor: pointer;  
+  position: relative;
+}
+
+.rating__item{
+  padding-left: .25em;
+  padding-right: .25em;
+}
+
+.rating__star{
+  display: block;
+  width: 1em;
+  height: 1em;
+
+  fill: currentColor;
+  stroke: var(--ratingStroke, #222);
+  stroke-width: var(--ratingStrokeWidth, 1px);
+}
+
+.rating:hover,
+.rating__control:nth-of-type(1):checked ~ .rating__item:nth-of-type(1),
+.rating__control:nth-of-type(2):checked ~ .rating__item:nth-of-type(-n+2),
+.rating__control:nth-of-type(3):checked ~ .rating__item:nth-of-type(-n+3),
+.rating__control:nth-of-type(4):checked ~ .rating__item:nth-of-type(-n+4),
+.rating__control:nth-of-type(5):checked ~ .rating__item:nth-of-type(-n+5){
+  color: var(--uiRatingColorActive);
+}
+
+.rating__item:hover ~ .rating__item{
+  color: var(--uiRatingColor);
+}
+
+/*
+=====
+SETTINGS
+=====
+*/
+
+.rating{
+  --ratingSize: 2rem;
+  --ratingColor: #eee;
+  --ratingColorActive: #8d703b;
+}
+
+/*
+=====
+DEMO
+=====
+*/
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.page{
+  min-height: 100vh;
+  display: flex;
+}
+
+.page__demo{
+  margin: auto;  
+}
+
+
+
+@media (min-width: 641px){
+  .page__demo{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page__group{
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+  }
+}
 </style>
