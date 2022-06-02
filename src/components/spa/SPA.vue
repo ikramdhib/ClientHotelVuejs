@@ -1,6 +1,5 @@
 <template >
     <div  class="hero-wrap" id="s1" :style="'background-image '" >
-
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">

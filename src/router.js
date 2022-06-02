@@ -151,11 +151,6 @@ const routes=[
         component: () => import('./components/room/booking/BookingPayment.vue'),
     },
     {
-        path:'/bookingcat:id:catg',
-        name:'bookingcat',
-        component: () => import('./components/BookingCatg.vue'),
-    },
-    {
         path:'/conferenceroom:id',
         name:'conferenceroom',
         component: () => import('./components/SalleConfernce/SalleConference.vue'),
