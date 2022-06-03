@@ -128,7 +128,7 @@
                   <div v-for="eq in equipement" :key="eq.id">
                  <div   v-if ="eq.disponibilite == 1">
                   <li >{{eq.label}}</li>
-                   <li>{{ eq.prix }}</li>
+                   <li>{{ eq.prix }}DT</li>
              
                  </div>
               </div>
@@ -240,6 +240,7 @@ export default {
              commentaire:"",
                 },
 			 user_id:0,
+       user:{},
        idus:0,
 totale:0,
 number:0,
@@ -257,9 +258,10 @@ number4:0,
      this.isLogin=true;
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
+                         this.idus=this.user.id;
+                         console.log("fghhj",this.idus);
                 }
-                  this.idus=this.user.id;
-console.log("fghhj",this.idus)
+                 
   },
  
 	  
@@ -373,22 +375,16 @@ console.log("fghhj",this.idus)
     },
      async addRatings() {
 		   if(this.idus==""){
-         this.idus=null
-      
-         
-      }
+         this.idus=null }
 			 await axios
-			 
-			    .post('http://localhost:8000/api/addrating',
+			  .post('http://localhost:8000/api/addrating',
 				{ rate:this.totale,
                   commentaire:this.rating.commentaire,
                    conference_room_id:this.room,
-                     user_id:this.idus,
-				},
+                     user_id:this.idus,	},
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{
-					 	
-				     let res = response.data;
+					 	  let res = response.data;
 					 console.log(res);
     
 				})

@@ -43,7 +43,7 @@
 	          </div>
           </div>
         </div></div>
-        <div class="row ">
+         <div class="row ">
               <div class="row ">
             <div class="col-md-6 d-flex">
                  <div  id="contact" class=" p-md-5 img img-2 img-3 d-flex justify-content-center align-items-center" style='width: 550px; height: 800px; background-image '>
@@ -92,7 +92,7 @@ export default {
   data() {
     return {
        toastCount: 0,
-      user_id:0,
+      
       idus:0,
       contact:{
              messsage:"",
@@ -106,14 +106,14 @@ export default {
   if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
                 }
-               this.idus=this.user.id;
+               this.user=this.user.id;
 console.log("fghhj",this.idus)
         },
         methods:{
           
  async AddContact(){
      
-    this.user = JSON.parse(localStorage.getItem('client'));
+
      if(this.idus==""){
       this.idus=null
    

@@ -426,7 +426,7 @@ export default {
     }
     this.dateNow= year+"-"+month+"-"+day;
         this.getType();
-      this.getPrice();
+     
         /************************ */
   this.fetch.start=this.dateNow;
     /********************************** */
