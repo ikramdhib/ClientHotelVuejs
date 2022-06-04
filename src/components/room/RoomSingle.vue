@@ -238,6 +238,8 @@ calcul:{},
   pric:{},
   type_id:{},
   ro:{},
+  user:{},
+  idus:0,
   rating:{
              commentaire:"",
                 },
@@ -262,9 +264,10 @@ number4:0,
      this.isLogin=true;
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
+                         this.idus=this.user.id;
+console.log("fghhj",this.idus);
                 }
-                  this.idus=this.user.id;
-console.log("fghhj",this.idus)
+                 
   },
  
 	  

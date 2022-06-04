@@ -83,7 +83,7 @@
                             <tr>
                               <div v-if="offre">
                                 <td>
-                                  <input v-model="prix1" disabled />
+                                  <input v-model="prix1" disabled />DT
                                 </td>
                               </div>
                               <div v-if="offre == false">

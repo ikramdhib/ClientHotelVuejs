@@ -189,12 +189,15 @@ export default {
              commentaire:"",
                 },
 			spaid:{},
+			user:{},
+			idus:0,
 totale:0,
 number:0,
 number1:0,
 number2:0,
 number3:0,
 number4:0,
+
 		}
 		
 	},
@@ -207,9 +210,11 @@ number4:0,
 		 this.isLogin=true;
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
+						this.idus=this.user.id;
+						console.log("jvfkl",this.idus);
                 }
-				 this.idus=this.user.id;
-console.log("fghhj",this.idus)
+				
+
 },
 
 	methods :{
@@ -340,7 +345,7 @@ async addRatings() {
 				{ rate:this.totale,
                   commentaire:this.rating.commentaire,
                    spa_id:this.spaid,
-				user_id:this.idus,
+				    user_id:this.idus,
                  
 				},
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}

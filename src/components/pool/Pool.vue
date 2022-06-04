@@ -190,6 +190,7 @@ export default {
                 },
 			 user_id:0,
 			isRatingsExist:false,
+			user:{},
 			
 totale:0,
 number:0,
@@ -208,9 +209,10 @@ idus:0,
 		  this.isLogin=true;
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
-                }
-      this.idus=this.user.id;
+						 this.idus=this.user.id;
 console.log("fghhj",this.idus)
+                }
+     
 },
 
 	methods :{
