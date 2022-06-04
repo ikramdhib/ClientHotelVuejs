@@ -80,7 +80,7 @@
 						</a>
 						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
 							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only"  >Next</span>
+							<span class="sr-only" >Next</span>
 						</a>
 					</div>
 					 <div class="col-lg-4 sidebar ftco-animate">
