@@ -21,7 +21,8 @@
                   
                   <tbody>
                       <tr>
-                      <td colspan="2" id="tit"> Votre Choix </td>
+                      <td colspan="2" id="tit"> Votre Choix <hr/> </td>
+                      
                     </tr>
                     <tr>            
                        <td ><p id="la"> Du  {{ bookingDate.start }} <br> 
@@ -31,7 +32,7 @@
 
                     </tr>
                     <tr>
-                      <td  ><p><span id="tit"> Les Chambre</span></p></td>
+                      <td  ><p><span id="tit"> Les Chambre</span></p> <hr/></td>
                     </tr>
                     <tr v-for="res in reservRoom" :key="res.id">
                        <td ><p><span id="la" ><i id="icone" class="icon icon-bed"></i>  1 Chambre : {{ res.type }} pour : {{ res.nbadult }} persoones de {{ res.totale }} DT</span></p></td>
@@ -106,8 +107,8 @@
                   
                   <tbody>
                     <tr>
-                      <td rowspan="3" >
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                      <td rowspan="3" id="car">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"  >
         <ol class="carousel-indicators">
             <div v-for="(image, index) in room1.images" :key="index">
                 <li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
@@ -133,14 +134,14 @@
                       <td colspan="2" id="label"> {{ room1.type }} </td>
                     </tr>
                     <tr>
-                      <td colspan="2" >  {{ room1.description.substr(0 , 110)+',...' }}  </td>
+                      <td colspan="2" id="desc">  {{ room1.description.substr(0 , 110)+',...' }}  </td>
                     </tr>
                     <tr v-if="room1.offres.length!=0 " >
-                       <td td > <div class="heading-section text-center" v-if="offreClicke==true">
+                       <td td > <div class="heading-section text-center" v-if="offreClicke>0">
                       <input id="tbb" type="button" @click="cacheOffres()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
                     </div>
                     </td>
-                      <td > <div class="heading-section text-center" v-if="room1.offres.length!=0 && offreClicke==false">
+                      <td > <div class="heading-section text-center" v-if="room1.offres.length!=0 && offreClicke==0">
                       <input id="tbb" type="button" @click="clickOffre()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
                     </div>
                     </td>
@@ -151,7 +152,7 @@
               </div>
            
              <!------------------------------------------------------------------------------------------------------------------>
-                <div class="form-group" v-if="isOffreClicked==true">
+                <div class="form-group" v-if="offreClicke>0">
                   <div class="row" v-for="offre in room1.offres" :key="offre">
                      <div class="col-md-12 py-4"> 
                   <table class="table">
@@ -273,7 +274,7 @@
                   
                   <tbody>
                     <tr>
-                      <td rowspan="3"  style="width:350px">
+                      <td rowspan="3"  id="car">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <div v-for="(image, index) in room2.images" :key="index">
@@ -300,15 +301,15 @@
                       <td colspan="2" id="label"> {{ room2.type }} </td>
                     </tr>
                     <tr>
-                      <td>  {{ room2.description.substr(0 , 110)+',...'  }} </td>
+                      <td colspan="2" id="desc">  {{ room2.description.substr(0 , 110)+',...'  }} </td>
                     </tr>
                     
                     <tr v-if="room2.offres.length!=0 ">
-                        <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke==true">
+                        <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke>0">
                       <input id="tbb" type="button" @click="cacheOffres()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
                     </div>
                     </td>
-                      <td td rowspan="3"> <div class="heading-section text-center" v-if="room2.offres.length!=0 && offreClicke==false">
+                      <td td rowspan="3"> <div class="heading-section text-center" v-if="room2.offres.length!=0 && offreClicke==0">
                       <input id="tbb" type="button" @click="clickOffre()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
                     </div>
                     </td>
@@ -319,7 +320,7 @@
               </div>
               
               <!------------------------------------------------------------------------------------------------------------------>
-                <div class="form-group" v-if="isOffreClicked==true">
+                <div class="form-group" v-if="offreClicke>0" >
                   <div class="row" v-for="offre in room2.offres" :key="offre">
                      <div class="col-md-12 py-4"> 
                   <table class="table">
@@ -408,7 +409,6 @@
               </div>
            
             <div v-if=" rooms3.length!=0  && whichroom==3 && selectedRoom3==true  ">
-               <h1>HOOOOOOOOOOOOOME333333333</h1>
               <div  class="row" v-for="room3 in rooms3" :key="room3.id">
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
@@ -418,7 +418,7 @@
                  
                   <tbody>
                     <tr>
-                      <td rowspan="3"  style="width:350px">
+                      <td rowspan="3"  id="car">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <div v-for="(image, index) in room3.images" :key="index">
@@ -446,14 +446,14 @@
                     </tr>
                     <tr>
                       <td >Description:</td>
-                      <td>  {{ room3.description }} </td>
+                      <td colspan="2" id="desc">  {{ room3.description }} </td>
                     </tr>
                     <tr v-if="room3.offres.length!=0 ">
-                        <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke==true">
+                        <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke>0">
                       <input id="tbb" type="button" @click="cacheOffres()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
                     </div>
                     </td>
-                      <td td rowspan="3"> <div class="heading-section text-center" v-if="room3.offres.length!=0 && offreClicke==false">
+                      <td td rowspan="3"> <div class="heading-section text-center" v-if="room3.offres.length!=0 && offreClicke==0">
                       <input id="tbb" type="button" @click="clickOffre()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
                     </div>
                     </td>
@@ -464,7 +464,7 @@
               </div>
               
               <!------------------------------------------------------------------------------------------------------------------>
-                <div class="form-group" v-if="isOffreClicked==true">
+                <div class="form-group" v-if="offreClicke>0">
                   <div class="row" v-for="offre in room3.offres" :key="offre">
                      <div class="col-md-12 py-4"> 
                   <table class="table">
@@ -606,7 +606,7 @@ export default {
       optionsRoom1:[],
       optionsRoom2:[],
       optionsRoom3: [],
-      isOffreClicked:false,
+      isOffreClicked:0,
       reservRoom:[],
       isClickBook1:false,
       isClickBook2:false,
@@ -614,7 +614,7 @@ export default {
       selectedRoom1:true,
       selectedRoom2:false,
       selectedRoom3:false,
-      offreClicke:false,
+      offreClicke:0,
       roomReserv1:{
         totale:"",
         id_room:"",
@@ -680,13 +680,12 @@ if(this.rooms2.length==0 && this.rooms1.length<=0){
        this.$router.push('profile')
      },
   cacheOffres(){
-    this.isOffreClicked=false
-    console.log('eeerrr',this.isOffreClicked);
+    this.offreClicke--;
   },
 
   clickOffre(){
-    this.isOffreClicked=true;
-    this.offreClicke=true
+    this.offreClicke++;
+   
   },
 
    bookNow1(totale , id , option , type , nbadult , offres){
@@ -1071,6 +1070,12 @@ font-size: 30px;
   background-color: transparent;
   border-color: transparent;
   color: grey;
-
+}
+#car{
+  width: 350px !important;
+  height: 150px !important;
+}
+#desc{
+  width: 250px !important;
 }
 </style>

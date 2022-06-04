@@ -444,9 +444,9 @@ export default {
         end:"",
       },
     bookgroom1:{
-        nbadult:"",
-        nbenfant:"",
-        nbbebe:"",
+        nbadult:"2",
+        nbenfant:"0",
+        nbbebe:"0",
       },
         bookgroom2:{
         nbadult:"",
@@ -458,7 +458,7 @@ export default {
         nbenfant:"",
         nbbebe:"",
       },
-      nbChambre:"" ,
+      nbChambre:1 ,
       dateNow: null,
       isFetch:false,
       isNotFetch:true,
@@ -496,7 +496,7 @@ export default {
       day="0"+ day
     }
     this.dateNow= year+"-"+month+"-"+day;
-    console.log("ttttt",this.dateNow);
+ this.bookingdate.start=this.dateNow
      
 
 

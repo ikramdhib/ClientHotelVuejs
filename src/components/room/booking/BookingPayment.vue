@@ -145,7 +145,15 @@ number4:0,
 
  };},
  mounted(){
-
+localStorage.removeItem('bookingdate')
+localStorage.removeItem('roomBooked')
+localStorage.removeItem('nbchambre')
+localStorage.removeItem('totale')
+localStorage.removeItem('bookgroom1')
+localStorage.removeItem('bookgroom2')
+localStorage.removeItem('bookgroom3')
+localStorage.removeItem('fetch')
+localStorage.removeItem('isFetch')
 document.getElementById("toggle").click();
   if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
@@ -241,9 +249,6 @@ console.log("fghhj",this.idus)
 					 console.log(res);
     
 				})
-
-        	 
-       
 	
      }}
     

@@ -523,7 +523,6 @@ export default {
 				cin:this.user.cin,
         email:this.user.email, 
          role:"user",
-         img:"images/bg1.png",
 				password:this.user.password
 		}).then((response)=>{
       let res = response.data;
@@ -596,7 +595,7 @@ export default {
                   isSmsSend: false,
                 },
               )
-              .then(res=>{this.$router.push({name:'bookingpayement', params:{id:res.data.Booking.id}})});
+              .then(res=>{this.$router.push({name:'finaleStep', params:{id:res.data.Booking.id}})});
           }
           }
           else{
@@ -622,7 +621,7 @@ export default {
                   isSmsSend: false,
                 },
             
-              ).then(res=>{this.$router.push({name:'bookingpayement', params:{id:res.data.Booking.id}})});
+              ).then(res=>{this.$router.push({name:'finaleStep', params:{id:res.data.Booking.id}})});
           }
           }
          
@@ -686,7 +685,7 @@ export default {
                                 link:
                                   "https://api.dev.konnect.network/WSlQUtBF8",
                                 webhook:
-                                  "http://localhost:8081/#/bookingpayement:id"+this.booking.id,
+                                  "http://localhost:8081/#/finaleStep"+this.booking.id,
                                 successUrl:
                                   "https://dev.konnect.network/gateway/payment-success",
                                 failUrl:
@@ -765,7 +764,7 @@ export default {
                                 link:
                                   "https://api.dev.konnect.network/WSlQUtBF8",
                                 webhook:
-                                  "http://localhost:8081/#/bookingpayement",
+                                  "http://localhost:8081/#/finaleStep"+this.booking.id,
                                 successUrl:
                                   "https://dev.konnect.network/gateway/payment-success",
                                 failUrl:
