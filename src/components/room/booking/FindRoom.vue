@@ -520,7 +520,7 @@ export default {
         localStorage.setItem('bookingdate',JSON.stringify(this.bookingdate))
         localStorage.setItem('nbchambre', this.nbChambre);
         this.$router.push('selectroom');
-
+        
      },
 
      display(event){

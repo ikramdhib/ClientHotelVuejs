@@ -26,16 +26,12 @@
                               <div v-for="type in types" :key="type.id">
                              <div v-if="type.id == room.type_id">
                               <h5 class="card-title text-center">{{type.nom_type}}</h5>
-						      <div v-for="price in prices" :key="price.id">
-                               <div v-if="price.id == room.price_id">
-						   	<div class="text p-3 text-center">
-    							<p class="bo">{{price.price_hotel}} DT  <span class="b1"> par nuit </span> 
-
-          
-          </p>
+							     <p class="card-text text-center"> {{room.description.substr(0 ,100)+',...' }}</p>
+						    
+                              <div class=" card-text text-center" >
+    							<p class="bo">{{room.price_booking}} DT <span class="b1">par nuit </span></p>
     						</div>
-							 </div>
-							 </div> 
+							 
 						<div class="box">
 						<div v-if="room.nbAdult>0">
                         <p class="card-text"><i class="icon-group " > :</i>{{room.nbAdult}} Adult</p></div>
@@ -56,7 +52,7 @@
 			                   </div>
 		               <div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
-	      			<h3 class="heading mb-4">Chercher les disponibilités </h3>
+	      			<h3 class="heading mb-4">Chercher les Disponibilite</h3>
 	      			<form action="#">
 	      				<div class="fields">
 		              <div class="form-group">
@@ -95,20 +91,20 @@
 	                  </select>
 	                  </div>
 		              </div>
-					     <div class="form-group" >
+					    <div class="form-group">
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 	                   <select name="" id="" class="form-control">
-	                    	<option value="0">0 Bébé</option>
-	                    	<option value="1">1 Bébé</option>
-							<option value="2">2 Bébé</option>
-							<option value="3">3 Bébé</option>
+	                    	<option value="0">0 Bebe</option>
+	                    	<option value="1">1 Bebe</option>
+							<option value="2">2 Bebe</option>
+							<option value="3">3 Bebe</option>
 	                  </select>
 	                  </div>
 		              </div>
-		              
+		          
 		              <div class="form-group">
-		                <input type="submit" value="Chercher" v-on:click="searchInput" class="btn btn-primary py-3 px-5">
+		                <input type="submit" value="chercher" v-on:click="searchInput" class="btn btn-primary py-3 px-5">
 		              </div>
 		            </div>
 	            </form>
@@ -203,7 +199,7 @@ export default {
 		   
    } 
 	) .then(this.getType())
-        .then(this.getPrice());
+       
 
 	  },
           
@@ -226,22 +222,7 @@ export default {
     
       },
 	  
-	  async getPrice(){
- await axios
-  .get("http://127.0.0.1:8000/api/price", 
-
-      )
-      .then((res) => {
-     
- 
-      this.prices= res.data.price;
-	  
-
-        console.log(this.prices);
-      })
 	
-    
-      },
 	  
   }}
 	  </script>

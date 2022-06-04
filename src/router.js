@@ -146,9 +146,14 @@ const routes=[
         component: () => import('./components/spa/SPA.vue'),
     },
     {
-        path:'/bookingpayement',
+        path:'/bookingpayement:id',
         name:'bookingpayement',
         component: () => import('./components/room/booking/BookingPayment.vue'),
+    },
+    {
+        path:'/booking:id:catg',
+        name:'booking',
+        component: () => import('./components/booking.vue'),
     },
     {
         path:'/conferenceroom:id',
@@ -158,8 +163,19 @@ const routes=[
     {
         path:'/conferencerooms',
         name:'conferencerooms',
-        component: () => import('./components/SalleConfernce/SalleConferenceMain.vue'),
-    }
+        component: () => import('./components/SalleConfernce/salleConferenceMain.vue'),
+    },
+    {
+        path:'/book:id',
+        name:'book',
+        component: () => import('./components/BookFinall.vue'),
+    },
+    {
+        path:'/ratings',
+        name:'ratings',
+        component: () => import('./components/Ratings.vue'),
+    },
+   
 ];
 const router = createRouter({
     history: createWebHashHistory(),
