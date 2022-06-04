@@ -88,11 +88,7 @@ const routes=[
         name:'bookroom',
         component: () => import('./components/room/booking/BookRoom.vue'),
     },
-    {
-        path:'/bookingpayment',
-        name:'bookingpayment',
-        component: () => import('./components/room/booking/BookingPayment.vue'),
-    },
+   
     {
         path:'/profileedite:id',
         name:'profileedite',
@@ -146,8 +142,8 @@ const routes=[
         component: () => import('./components/spa/SPA.vue'),
     },
     {
-        path:'/bookingpayement:id',
-        name:'bookingpayement',
+        path:'/finaleStep:id',
+        name:'finaleStep',
         component: () => import('./components/room/booking/BookingPayment.vue'),
     },
     {
