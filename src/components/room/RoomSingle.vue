@@ -122,7 +122,32 @@
 							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only"  >Next</span>
 						</a>
-					</div></div></div>
+					</div>
+          <!---------------les meilleur commentaire ---->
+          <h5>Ce que les clients ont le plus apprécié :</h5>
+                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<div v-for="(com, index) in comment" :key="index">
+								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+							</div>
+						</ol>
+						<div class="carousel-inner">
+						<div v-for="(com, index) in comment" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+									<ul class="list-group">
+                     <li class="list-group-item" id="style">{{com.commentaire}}</li></ul>
+								</div>
+							
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
+							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only"  id="plus">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
+							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only"  >Next</span>
+						</a>
+					</div>
+   </div></div>
            	
             </div>
                 <div class="col-lg-4 sidebar ftco-animate">
@@ -251,6 +276,7 @@ number1:0,
 number2:0,
 number3:0,
 number4:0,
+comment:[],
 
     };
   },
@@ -260,6 +286,7 @@ number4:0,
    this.getRoom();
     this.getRooms();
     this.getType();
+    this.getcomment();
 
      this.isLogin=true;
       if(localStorage.getItem('client')){
@@ -333,6 +360,17 @@ console.log("fghhj",this.idus);
 	
     
       },
+      async getcomment(){
+         const id=this.$route.params.id;
+await axios .get("http://127.0.0.1:8000/api/gettee/"+id, {
+      
+      })
+      .then((res) => {
+		  
+			    this.comment=res.data.ratings.Ratings;
+            console.log(this.comment);
+
+       })},
        async getPrice(){
  await axios
   .get("http://127.0.0.1:8000/api/price", 
@@ -648,5 +686,12 @@ body{
     margin-left: 3.5rem;
     margin-right: 3.5rem;
   }
+  #style{
+    border:transparent;
+    font-weight:Bold;
+    font-size: 20px;
+    color: rgb(46, 36, 5);
+  }
+ 
 }
 </style>

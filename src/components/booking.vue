@@ -83,7 +83,7 @@
                             <tr>
                               <div v-if="offre">
                                 <td>
-                                  <input v-model="prix1" disabled />DT
+                                  <input v-model="prix1" disabled /> DT
                                 </td>
                               </div>
                               <div v-if="offre == false">
@@ -96,7 +96,7 @@
                                         this.booking.nombre)
                                     "
                                     disabled
-                                  />
+                                  /> DT
                                 </td>
                               </div>
                             </tr>
@@ -162,7 +162,7 @@
                             </tr>
                             <tr>
                               <div v-if="offre">
-                                <td><input v-model="prix" disabled /></td>
+                                <td><input v-model="prix" disabled />DT</td>
                               </div>
                               <div v-if="offre == false">
                                 <td>
@@ -174,7 +174,7 @@
                                         this.booking.nombre)
                                     "
                                     disabled
-                                  />
+                                  />DT
                                 </td>
                               </div>
                             </tr>
@@ -238,7 +238,7 @@
                             </tr>
                             <tr>
                               <div v-if="offre">
-                                <td><input v-model="somm" disabled /></td>
+                                <td><input v-model="somm" disabled />DT</td>
                               </div>
                               <div v-if="offre == false">
                                 <td>
@@ -250,7 +250,7 @@
                                         this.booking.nombre)
                                     "
                                     disabled
-                                  />
+                                  />DT
                                 </td>
                               </div>
                             </tr>
@@ -320,7 +320,7 @@
                             <tr>
                               <div v-if="offre">
                                 <td>
-                                  <input v-model="prix1" disabled />
+                                  <input v-model="prix1" disabled />DT
                                 </td>
                               </div>
                               <div v-if="offre == false">
@@ -332,7 +332,7 @@
                                         this.prixx * this.capacite + this.somm)
                                     "
                                     disabled
-                                  />
+                                  />DT
                                 </td>
                               </div>
                             </tr>
@@ -397,7 +397,7 @@
                               </tr>
                               <tr>
                                 <div v-if="offre">
-                                  <td><input v-model="prix" disabled /></td>
+                                  <td><input v-model="prix" disabled />DT</td>
                                 </div>
                                 <div v-if="offre == false">
                                   <td>
@@ -408,7 +408,7 @@
                                           this.prix_reservation *
                                           this.booking.nombre)
                                       "
-                                    />
+                                    />DT
                                   </td>
                                 </div>
                               </tr>
