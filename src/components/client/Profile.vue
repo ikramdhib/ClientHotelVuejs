@@ -13,6 +13,9 @@
         </div>
       </div>
     </div>
+  <div>
+    <input type="button" @click="makeToast(true)" value="click" class="mb-2">
+  </div>
 
 
     <section class="ftco-section contact-section bg-light">
@@ -26,13 +29,14 @@
 
                         <div class="row block-9">
              <div class="row block-9 slide-top">
-          <div class="col-md-5  d-flex">
-            <div class="bg-white p-5 contact-form">
+          <div class="col-md-5 ">
+            <div class="bg-white p-5 contact-form" id="sc">
                 <div class="row justify-content-center mb-9 pb-5">
           <div class="col-md-10 heading-section text-center">
             <h2 class="mb-4">Mes Réservations  </h2>
           </div>
         </div>
+        
                  <table class="table">
                 <thead>
                     <tr>
@@ -46,7 +50,7 @@
                     <tr  v-if="user.id== book.user_id">
                     <td> Du {{ book.start }}  <br> Au {{ book.end }} </td>
                     <td> {{ book.rooms.type }} </td>
-                    <td> {{ book.rooms.price }} </td>
+                    <td> {{ book.bookingprice}} </td>
                     </tr>
                 </tbody>
                 </table>
@@ -95,7 +99,7 @@
                     </tr>
                     <tr>
                       <td >
-		                <input id="btnn" type="button" value="Consulter notre Offres"  class="btn btn-primary px-4" @click="back()">
+		                <input id="btnn" type="button" value="Consulter notre Offres"  class="btn btn-primary px-4" @click="gOffres()">
 		             </td>
                     </tr>
                     
@@ -139,6 +143,17 @@ export default {
 
     },
     methods : {
+       makeToast(append = false) {
+        this.toastCount++
+        this.bvToast.toast(`This is toast number ${this.toastCount}`, {
+          title: 'BootstrapVue Toast',
+          autoHideDelay: 5000,
+          appendToast: append
+        })
+      },
+      gOffres(){
+        this.$router.push('offres')
+      },
       getBookings(){
         axios.get('http://localhost:8000/api/bookings',
          { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }}
@@ -168,5 +183,9 @@ export default {
  background-color: transparent;
  color:#8d703b;
  border-color: transparent;
+}
+#sc{
+overflow-y: auto;
+height: 750px;
 }
 </style>

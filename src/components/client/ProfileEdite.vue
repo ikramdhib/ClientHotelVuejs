@@ -13,6 +13,7 @@
         </div>
       </div>
     </div>
+    
 
     <section class="ftco-section contact-section bg-light">
       <div class="container">
@@ -25,7 +26,7 @@
           <div class="col-md-3 d-flex">
           </div>
         </div>
-               <div class="row block-9 " v-if="isMot==true">
+               <div class="row block-9 " v-if="isMot>0">
           <div class="col-md-6 order-md-last d-flex">
             <form class="bg-white p-5 contact-form">
               <div class="row justify-content-center ">
@@ -47,10 +48,10 @@
               <div class="form-group">
                   <div class="row justify-content-center ">
           <div class="col-md-6 heading-section text-center">
-                <input type="submit" value="Modifier" v-on:click="updatePassword()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
+                <input type="button" value="Modifier" v-on:click="updatePassword()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
               </div>
               <div class="col-md-6 heading-section text-center">
-                <input type="submit" id="btn" value="Annuler" v-on:click="goBackInfo()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
+                <input type="button" id="btn" value="Annuler" v-on:click="goBackInfo()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
               </div>
                   </div>
               </div>
@@ -62,7 +63,7 @@
              
           </div>
         </div>
-        <div class="row block-9 " v-if="isInfo==true">
+        <div class="row block-9 " v-if="isMot==0">
           <div class="col-md-6 order-md-last d-flex">
             <form class="bg-white p-5 contact-form">
                <div class="row justify-content-center ">
@@ -98,10 +99,10 @@
               <div class="form-group">
                   <div class="row justify-content-center ">
           <div class="col-md-6 heading-section text-center">
-                <input type="submit" value="Modifier" v-on:click="updateProfile()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
+                <input type="button" value="Modifier" v-on:click="updateProfile()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
               </div>
               <div class="col-md-6 heading-section text-center">
-                <input type="submit" id="btn" value="Annuler" v-on:click="goBack()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
+                <input type="button" id="btn" value="Annuler" v-on:click="goBack()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-3 px-5">
               </div>
                   </div>
               </div>
@@ -112,6 +113,7 @@
           <div class="col-md-3 d-flex">
              
           </div>
+          
         </div>
       </div>
     </section>
@@ -121,8 +123,7 @@ import axios from 'axios'
 export default {
 	data(){
 		return {
-      isMot:false,
-      isInfo:true,
+      isMot:0,
       password:"",
       passwordconf:"",
 			user:{
@@ -153,16 +154,14 @@ mounted (){
 
 	methods:{
     goPass(){
-      this.isMot=true
-      this.isInfo=false
+      this.isMot++;
     },
 
     goBack(){
       this.$router.push('profile')
     },
     goBackInfo(){
-      this.isMot=false
-      this.isInfo=true
+      this.isMot--;
     },
  async updateProfile(){
                   if(this.user.firstname){
@@ -173,9 +172,9 @@ mounted (){
                { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }
                }).then((response)=>{
                 let res = response.data;
-                 localStorage.setItem("user",JSON.stringify(res));
-                  this.$router.push("profile")
-                  console.log(res)
+                   localStorage.removeItem('client');
+                localStorage.setItem("client",JSON.stringify(res));
+                this.$router.push('profile')
               })
                   }
 
@@ -187,9 +186,8 @@ mounted (){
                { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }
                }).then((response)=>{
                 let res = response.data;
-                 localStorage.setItem("user",JSON.stringify(res));
-                  this.$router.push("profile")
-                  console.log(res)
+                   localStorage.removeItem('client');
+                localStorage.setItem("client",JSON.stringify(res));
               })
               }
 
@@ -201,9 +199,8 @@ mounted (){
                { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }
                }).then((response)=>{
                 let res = response.data;
-                 localStorage.setItem("user",JSON.stringify(res));
-                  this.$router.push("profile")
-                  console.log(res)
+                  localStorage.removeItem('client');
+                localStorage.setItem("client",JSON.stringify(res));
               })
                }
                 if(this.user.country){
@@ -214,9 +211,8 @@ mounted (){
                { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }
                }).then((response)=>{
                 let res = response.data;
-                 localStorage.setItem("user",JSON.stringify(res));
-                  this.$router.push("profile")
-                  console.log(res)
+                  localStorage.removeItem('client');
+                localStorage.setItem("client",JSON.stringify(res));
               })
                 }
                  if(this.user.zipcode){
@@ -227,9 +223,8 @@ mounted (){
                { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }
                }).then((response)=>{
                 let res = response.data;
-                 localStorage.setItem("user",JSON.stringify(res));
-                  this.$router.push("profile")
-                  console.log(res)
+                   localStorage.removeItem('client');
+                localStorage.setItem("client",JSON.stringify(res));
               })
                  }
                   if(this.user.firstname && this.user.lastname && this.user.phone &&
@@ -244,9 +239,9 @@ mounted (){
                },
                { headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client') }
                }).then((response)=>{
-                let res = response.data;
-                  this.$router.push("profile")
-                  console.log(res)
+                let res = response.data.user;
+                localStorage.removeItem('client');
+                localStorage.setItem("client",JSON.stringify(res));
               })
                   }
                    if (!this.user.firstname && !this.user.lastname && !this.user.phone && !this.user.country

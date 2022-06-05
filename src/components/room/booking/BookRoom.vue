@@ -492,6 +492,7 @@ export default {
       nb: 0,
       cpt:0,
       showPhoto:false,
+      booking_id:[],
     };
   },
   mounted() {
@@ -595,8 +596,11 @@ export default {
                   isSmsSend: false,
                 },
               )
-              .then(res=>{this.$router.push({name:'finaleStep', params:{id:res.data.Booking.id}})});
-          }
+              .then(res=>{this.$router.push({name:'finaleStep', params:{id:res.data.Booking.id}})
+              this.booking_id.push(res.data.Booking.id);
+              console.log("booooooooooooooooooooooooooook",this.booking_id);
+              });
+          }localStorage.setItem('booking_id' , JSON.stringify( this.booking_id));
           }
           else{
              for (let i = 0; i < this.rooms.length; i++) {
@@ -621,8 +625,10 @@ export default {
                   isSmsSend: false,
                 },
             
-              ).then(res=>{this.$router.push({name:'finaleStep', params:{id:res.data.Booking.id}})});
-          }
+              ).then(res=>{this.$router.push({name:'finaleStep', params:{id:res.data.Booking.id}})
+              this.booking_id.push(res.data.Booking.id);
+              });
+          }localStorage.setItem('booking_id' , JSON.stringify( this.booking_id));
           }
          
         }
@@ -655,6 +661,7 @@ export default {
                 },
                
               ) .then((res) => {
+                this.booking_id.push(res.data.Booking.id);
                 this.booking=res.data.Booking
                       if (res != null) {
                         this.isTermineted = true;
@@ -698,6 +705,7 @@ export default {
                               }
                             )
                             .then((res) => {
+                              localStorage.setItem('booking_id' , JSON.stringify( this.booking_id));
                               window.open(res.data.payUrl);
                               console.log("book", res.data.payUrl);
                             });
@@ -734,6 +742,7 @@ export default {
                 },
               )
                     .then((res) => {
+                      this.booking_id.push(res.data.Booking.id);
                       if (res != null) {
                          this.booking=res.data.Booking
                         this.isTermineted = true;
@@ -777,6 +786,7 @@ export default {
                               }
                             )
                             .then((res) => {
+                              localStorage.setItem('booking_id' , JSON.stringify( this.booking_id));
                               window.open(res.data.payUrl);
                               console.log("book", res.data.payUrl);
                             });
@@ -786,6 +796,7 @@ export default {
                 
           }
           }
+          
         }
     },
     payNow() {},

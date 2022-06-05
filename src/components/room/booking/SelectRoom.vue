@@ -136,6 +136,19 @@
                     <tr>
                       <td colspan="2" id="desc">  {{ room1.description.substr(0 , 110)+',...' }}  </td>
                     </tr>
+                     <tr v-if="room1.options.length==0 " >
+                       <td  > <div class="heading-section text-center">
+                      <input id="tbn" type="button" v-on:click="bookNow1(
+                  (room1.price_booking*nuits),
+                  room1.id ,
+                    null,
+                  room1.type,
+                 room1.nbAdult,
+                    0
+                  )" :value="room1.price_booking +' DT'" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                    </div>
+                    </td>
+                    </tr>
                     <tr v-if="room1.offres.length!=0 " >
                        <td td > <div class="heading-section text-center" v-if="offreClicke>0">
                       <input id="tbb" type="button" @click="cacheOffres()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
@@ -150,9 +163,49 @@
                 </table>
                </div>
               </div>
+              <!------------------------------------------------------------------------------------------------------------------>
+                <div class="form-group" v-if="offreClicke>0 && room1.options.length==0">
+                  <div class="row" >
+                     <div class="col-md-12 py-4"> 
+                  <table class="table">
+                  <thead id="tr">
+                    <tr>
+                      <th scope="col">Nombre de personnes </th>
+                      <th scope="col">Offre</th>
+                      <th scope="col">Pourcentage de L'offre</th>
+                      <th scope="col">prix par nuit </th>
+                      <th scope="col">prix par {{ nuits }} jours</th>
+                    </tr>
+                  </thead>
+                  <tbody v-for="offre in room1.offres" :key="offre">
+                    <tr>
+                        <th scope="row"  ><i class="icon-user" v-for="icon in room1.nbAdult" :key="icon.id"></i></th>
+                      <td > {{ offre.titre }} </td>
+                      <td id="pourcentage"> {{ offre.pourcentage }} % </td>
+                      <td> <del id="t">{{ room1.price_booking }} DT</del>  <br/>
+                     {{ (room1.price_booking )-((room1.price_booking)*offre.pourcentage)/100 }} DT </td>
+                     
+          <div class="heading-section text-center">
+                <input id="bbt" type="button" :value="(((room1.price_booking)-((room1.price_booking)*offre.pourcentage)/100)*nuits)+' DT'" v-on:click="bookNow1(
+                  (((room1.price_booking)-((room1.price_booking)*offre.pourcentage)/100)*nuits),
+                  room1.id ,
+                   null,
+                  room1.type,
+                 room1.nbAdult,
+                 offre.id
+                  )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+              </div> 
+              </tr>
+              </tbody>
+                </table>
+                  </div>
+              </div>
+              </div>
+          <!------------------------------------------------------------------------------------------------------------------>
            
              <!------------------------------------------------------------------------------------------------------------------>
                 <div class="form-group" v-if="offreClicke>0">
+                  <div v-if="room1.offres.length>0  && room1.options.length>0">
                   <div class="row" v-for="offre in room1.offres" :key="offre">
                      <div class="col-md-12 py-4"> 
                   <table class="table">
@@ -165,13 +218,13 @@
                       <th scope="col">prix par {{ nuits }} jours</th>
                     </tr>
                   </thead>
-                  <tbody v-for="option in optionsTab" :key="option.id">
-                    <tr  v-if="room1.id==option.room_id">
+                  <tbody v-for="option in room1.options" :key="option.id">
+                    <tr>
                         <th scope="row"  ><i class="icon-user" v-for="icon in room1.nbAdult" :key="icon.id"></i></th>
                       <td > {{ option.nom_option }} </td>
                       <td id="pourcentage"> {{ offre.pourcentage }} % </td>
-                      <td id="t"> <del>{{room1.price_booking + option.price_option }} DT</del> </td>
-                      <td> {{ (room1.price_booking + option.price_option)-((room1.price_booking + option.price_option)*offre.pourcentage)/100 }} DT </td>
+                      <td > <del id="t">{{room1.price_booking + option.price_option }} DT</del> <br/>
+                     {{ (room1.price_booking + option.price_option)-((room1.price_booking + option.price_option)*offre.pourcentage)/100 }} DT </td>
                      
           <div class="heading-section text-center">
                 <input id="bbt" type="button" :value="(((room1.price_booking + option.price_option)-((room1.price_booking + option.price_option)*offre.pourcentage)/100)*nuits)+'DT'" v-on:click="bookNow1(
@@ -189,8 +242,9 @@
                   </div>
               </div>
               </div>
+                </div>
           <!------------------------------------------------------------------------------------------------------------------>
-              <div class="form-group">
+              <div class="form-group" v-if="room1.options.length>0">
                   <div class="row">
                      <div class="col-md-12 py-4"> 
                   <table class="table">
@@ -202,7 +256,7 @@
                       <th scope="col">prix par {{ nuits }} jours</th>
                     </tr>
                   </thead>
-                  <tbody  v-for="option in optionsTab" :key="option.id">
+                  <tbody  v-for="option in room1.options" :key="option.id">
                          <tr v-if="room1.id==option.room_id">
                       <th scope="row"  ><i class="icon-user" v-for="icon in room1.nbAdult" :key="icon.id"></i></th>
                       <td > {{ option.nom_option }} </td>
@@ -303,7 +357,19 @@
                     <tr>
                       <td colspan="2" id="desc">  {{ room2.description.substr(0 , 110)+',...'  }} </td>
                     </tr>
-                    
+                      <tr v-if="room2.options.length==0 " >
+                       <td  > <div class="heading-section text-center">
+                      <input id="tbn" type="button" v-on:click="bookNow2(
+                  (room2.price_booking *nuits),
+                  room2.id ,
+                   null,
+                  room2.type,
+                 room2.nbAdult,
+                 0
+                  )" :value="room2.price_booking+' DT'" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                    </div>
+                    </td>
+                    </tr>
                     <tr v-if="room2.offres.length!=0 ">
                         <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke>0">
                       <input id="tbb" type="button" @click="cacheOffres()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
@@ -318,9 +384,49 @@
                 </table>
                </div>
               </div>
+              <!------------------------------------------------------------------------------------------------------------------>
+                <div class="form-group" v-if="offreClicke>0 ">
+                  <div class="row" v-if="room2.options.length==0 && room2.offres.length>0" >
+                     <div class="col-md-12 py-4"> 
+                  <table class="table">
+                  <thead id="tr">
+                    <tr>
+                      <th scope="col">Nombre de personnes </th>
+                      <th scope="col">Offre</th>
+                      <th scope="col">Pourcentage de L'offre</th>
+                      <th scope="col">Prix par nuit </th>
+                      <th scope="col">Prix par {{ nuits }} jours</th>
+                    </tr>
+                  </thead>
+                  <tbody v-for="offre in room2.offres" :key="offre">
+                    <tr>
+                        <th scope="row"  ><i class="icon-user" v-for="icon in room2.nbAdult" :key="icon.id"></i></th>
+                      <td > {{ offre.titre }} </td>
+                      <td id="pourcentage"> {{ offre.pourcentage }} % </td>
+                      <td> <del id="t">{{ room2.price_booking }} DT</del>  <br/>
+                     {{ (room2.price_booking )-((room2.price_booking)*offre.pourcentage)/100 }} DT </td>
+                     
+                   <div class="heading-section text-center">
+                <input id="bbt" type="button" :value="(((room2.price_booking)-((room2.price_booking)*offre.pourcentage)/100)*nuits)+' DT'" v-on:click="bookNow2(
+                  (((room2.price_booking)-((room2.price_booking)*offre.pourcentage)/100)*nuits),
+                  room2.id ,
+                 null,
+                  room2.type,
+                 room2.nbAdult,
+                 offre.id
+                  )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+              </div> 
+              </tr>
+              </tbody>
+                </table>
+                  </div>
+              </div>
+              </div>
+          <!------------------------------------------------------------------------------------------------------------------>
               
               <!------------------------------------------------------------------------------------------------------------------>
                 <div class="form-group" v-if="offreClicke>0" >
+                  <div v-if="room2.offres.length>0 && room2.options.length>0">
                   <div class="row" v-for="offre in room2.offres" :key="offre">
                      <div class="col-md-12 py-4"> 
                   <table class="table">
@@ -329,22 +435,21 @@
                       <th scope="col">Nombre de personnes </th>
                       <th scope="col">Options pour un chambre</th>
                       <th scope="col">Pourcentage de L'offre</th>
-                      <th scope="col">L'ancien prix</th>
                       <th scope="col">Prix moyen par nuit</th>
                       <th scope="col">prix par {{ nuits }} jours</th>
                     </tr>
                   </thead>
-                  <tbody  v-for="option in optionsTab" :key="option.id">
-                         <tr v-if="room2.id==option.room_id">
+                  <tbody  v-for="option in room2.options" :key="option.id">
+                         <tr>
                       <th scope="row"  ><i class="icon-user" v-for="icon in room2.nbAdult" :key="icon.id"></i></th>
                       <td > {{ option.nom_option }} </td>
                       <td id="pourcentage"> {{ offre.pourcentage }} % </td>
-                      <td id="t"> <del>{{room2.price_booking + option.price_option }} DT</del> </td>
-                      <td> {{ (room2.price_booking + option.price_option)-((room2.price_booking + option.price_option)*offre.pourcentage)/100 }} DT </td>
+                      <td > <del id="t">{{room2.price_booking + option.price_option }} DT</del><br/>
+                      {{ (room2.price_booking + option.price_option)-((room2.price_booking + option.price_option)*offre.pourcentage)/100 }} DT </td>
                       <td>
                          <div class="form-group">
           <div class="heading-section text-center">
-                <input id="bbt" type="button" :value="(((room2.price_booking + option.price_option)-((room2.price_booking + option.price_option)*offre.pourcentage)/100)*nuits)+'DT'" v-on:click="bookNow1(
+                <input id="bbt" type="button" :value="(((room2.price_booking + option.price_option)-((room2.price_booking + option.price_option)*offre.pourcentage)/100)*nuits)+'DT'" v-on:click="bookNow2(
                   (((room2.price_booking + option.price_option)-((room2.price_booking+ option.price_option)*offre.pourcentage)/100)*nuits),
                   room2.id ,
                    option.nom_option,
@@ -362,10 +467,11 @@
                 </table>
                      </div>
               </div>
+                  </div>
               </div>
           <!------------------------------------------------------------------------------------------------------------------>
-              <div class="form-group">
-                  <div class="row">
+              <div class="form-group" v-if="room2.options.length>0">
+                  <div class="row" >
                      <div class="col-md-12 py-4"> 
                   <table class="table">
                   <thead id="tr">
@@ -376,7 +482,7 @@
                       <th scope="col">prix pour {{ nuits }} jours</th>
                     </tr>
                   </thead>
-                  <tbody v-for="option2 in optionsTab" :key="option2.id">
+                  <tbody v-for="option2 in room2.options" :key="option2.id">
                       <tr v-if="room2.id==option2.room_id">
                       <th scope="row" ><i class="icon-user" v-for="icon in room2.nbAdult" :key="icon.id"></i></th>
                       <td> {{ option2.nom_option }} </td>
@@ -408,7 +514,7 @@
               </div>
               </div>
            
-            <div v-if=" rooms3.length!=0  && whichroom==3 && selectedRoom3==true  ">
+            <div v-if=" size3!=0  && whichroom==3 && selectedRoom3==true  ">
               <div  class="row" v-for="room3 in rooms3" :key="room3.id">
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
@@ -445,15 +551,27 @@
                       <td colspan="2" id="label"> {{ room3.type }} </td>
                     </tr>
                     <tr>
-                      <td >Description:</td>
                       <td colspan="2" id="desc">  {{ room3.description }} </td>
+                    </tr>
+                      <tr v-if="room3.options.length==0 " >
+                       <td  > <div class="heading-section text-center">
+                      <input id="tbn" type="button" v-on:click="bookNow3(
+                  (room3.price_booking*nuits),
+                  room3.id ,
+                   null,
+                  room3.type,
+                 room3.nbAdult,
+                    0
+                  )" :value="room3.price_booking" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                    </div>
+                    </td>
                     </tr>
                     <tr v-if="room3.offres.length!=0 ">
                         <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke>0">
                       <input id="tbb" type="button" @click="cacheOffres()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
                     </div>
                     </td>
-                      <td td rowspan="3"> <div class="heading-section text-center" v-if="room3.offres.length!=0 && offreClicke==0">
+                      <td td rowspan="3"> <div class="heading-section text-center" v-if="offreClicke==0">
                       <input id="tbb" type="button" @click="clickOffre()" value="Consulter nos Offres" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
                     </div>
                     </td>
@@ -462,10 +580,49 @@
                 </table>
                </div>
               </div>
-              
               <!------------------------------------------------------------------------------------------------------------------>
-                <div class="form-group" v-if="offreClicke>0">
-                  <div class="row" v-for="offre in room3.offres" :key="offre">
+                <div class="form-group" v-if="offreClicke>0 && room3.options.length==0 && room3.offres.length>0">
+                  <div class="row" >
+                     <div class="col-md-12 py-4"> 
+                  <table class="table">
+                  <thead id="tr">
+                    <tr>
+                      <th scope="col">Nombre de personnes </th>
+                      <th scope="col">Offre</th>
+                      <th scope="col">Pourcentage de L'offre</th>
+                      <th scope="col">prix par nuit </th>
+                      <th scope="col">prix par {{ nuits }} jours</th>
+                    </tr>
+                  </thead>
+                  <tbody v-for="offre in room3.offres" :key="offre">
+                    <tr>
+                        <th scope="row"  ><i class="icon-user" v-for="icon in room3.nbAdult" :key="icon.id"></i></th>
+                      <td > {{ offre.titre }} </td>
+                      <td id="pourcentage"> {{ offre.pourcentage }} % </td>
+                      <td> <del id="t">{{ room3.price_booking }} DT</del>  <br/>
+                     {{ (room3.price_booking )-((room3.price_booking)*offre.pourcentage)/100 }} DT </td>
+                     
+          <div class="heading-section text-center">
+                <input id="bbt" type="button" :value="(((room3.price_booking)-((room3.price_booking)*offre.pourcentage)/100)*nuits)+' DT'" v-on:click="bookNow3(
+                  (((room3.price_booking)-((room3.price_booking)*offre.pourcentage)/100)*nuits),
+                  room3.id ,
+                 null,
+                  room3.type,
+                 room3.nbAdult,
+                 offre.id
+                  )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+              </div> 
+              </tr>
+              </tbody>
+                </table>
+                  </div>
+              </div>
+              </div>
+          <!------------------------------------------------------------------------------------------------------------------>
+              <!------------------------------------------------------------------------------------------------------------------>
+                <div class="form-group" v-if="offreClicke>0 && room3.offres.length>0 ">
+                  <div v-if="room.offres.length>0 && room3.options.length>0">
+                  <div class="row" >
                      <div class="col-md-12 py-4"> 
                   <table class="table">
                   <thead id="tr">
@@ -473,22 +630,21 @@
                       <th scope="col">Nombre de personnes </th>
                       <th scope="col">Options pour un chambre</th>
                       <th scope="col">Pourcentage de L'offre</th>
-                      <th scope="col">L'ancien prix</th>
                       <th scope="col">Prix moyen par nuit</th>
                       <th scope="col">prix par {{ nuits }} jours</th>
                     </tr>
                   </thead>
-                  <tbody  v-for="option in optionsTab" :key="option.id">
-                         <tr v-if="room3.id==option.room_id">
+                  <tbody  v-for="option in room3.options" :key="option">
+                         <tr>
                       <th scope="row"  ><i class="icon-user" v-for="icon in room3.nbAdult" :key="icon.id"></i></th>
                       <td > {{ option.nom_option }} </td>
                       <td id="pourcentage"> {{ offre.pourcentage }} % </td>
-                      <td id="t"> <del>{{room3.price_booking + option.price_option }} DT</del> </td>
-                      <td> {{ (room3.price_booking + option.price_option)-((room3.price_booking + option.price_option)*offre.pourcentage)/100 }} DT </td>
+                      <td > <del id="t">{{room3.price_booking + option.price_option }} DT</del> <br/>
+                      {{ (room3.price_booking + option.price_option)-((room3.price_booking + option.price_option)*offre.pourcentage)/100 }} DT </td>
                       <td>
                          <div class="form-group">
-          <div class="heading-section text-center">
-                <input id="bbt" type="button" :value="(((room3.price_booking + option.price_option)-((room3.price_booking + option.price_option)*offre.pourcentage)/100)*nuits)+'DT'" v-on:click="bookNow1(
+                <div class="heading-section text-center">
+                <input id="bbt" type="button" :value="(((room3.price_booking + option.price_option)-((room3.price_booking + option.price_option)*offre.pourcentage)/100)*nuits)+'DT'" v-on:click="bookNow3(
                   (((room3.price_booking + option.price_option)-((room3.price_booking + option.price_option)*offre.pourcentage)/100)*nuits),
                   room3.id ,
                    option.nom_option,
@@ -505,10 +661,11 @@
                   </tbody>
                 </table>
                      </div>
+                     </div>
               </div>
               </div>
           <!------------------------------------------------------------------------------------------------------------------>
-              <div class="form-group">
+              <div class="form-group" v-if="room3.options.length">
                   <div class="row">
                      <div class="col-md-12 py-4"> 
                   <table class="table">
@@ -520,9 +677,9 @@
                       <th scope="col">prix pour {{ nuits }} jours</th>
                     </tr>
                   </thead>
-                  <tbody v-for="option in optionsTab" :key="option">
-                      <tr v-if="room3.id==option.room_id">
-                      <th scope="row" v-if="room3.id==option.room_id" ><i class="icon-user" v-for="icon in room3.nbAdult" :key="icon.id"></i></th>
+                  <tbody v-for="option in room3.options" :key="option">
+                      <tr>
+                      <th scope="row" ><i class="icon-user" v-for="icon in room3.nbAdult" :key="icon.id"></i></th>
                       <td> {{ option.nom_option }}</td>
                       <td>{{ (room3.price_booking+option.price_option) }}</td>
                       <td> 
@@ -602,11 +759,6 @@ export default {
       message1:"",
       message2:"",
       message3:"",
-      optionsTab:[],
-      optionsRoom1:[],
-      optionsRoom2:[],
-      optionsRoom3: [],
-      isOffreClicked:0,
       reservRoom:[],
       isClickBook1:false,
       isClickBook2:false,
@@ -649,7 +801,6 @@ if(this.rooms1.length==0){
   this.test()
 }
 })
- this.getOptions();
  //recuperer le nombre de chambre 
 this.nbchambre=parseInt(localStorage.getItem('nbchambre'));
 
@@ -661,14 +812,16 @@ methods:{
     console.log(true);
 if(this.rooms1.length==0){
   this.selectTheSecondRoom();
+  this.selectedRoom2=true;
+  this.whichroom=2;
 }
- if(this.size2==0){
-  this.selectTheThirdRoom();
-}
-if(this.rooms2.length==0 && this.rooms1.length<=0){
-    this.selectedRoom3=true;
+else if(this.size2==0){
+  console.log("effffffff");
+    this.selectTheThirdRoom();
+     this.selectedRoom3=true;
     this.whichroom==3;
 }
+
   },
   goBack(){
     this.$router.push('findroom')
@@ -719,7 +872,7 @@ if(this.rooms2.length==0 && this.rooms1.length<=0){
       this.whichroom=3;
       })
     }   
-  if(this.size2<=0 && this.rooms3.length==0){
+  if(this.size2<=0 && this.size3==0){
     console.log("hieeeeeeeee");
         this.$router.push('bookroom');
       }
@@ -754,15 +907,15 @@ if(this.rooms2.length==0 && this.rooms1.length<=0){
    }
    this.selectTheThirdRoom().then(()=>{
      console.log(this.rooms3);
-   console.log("thiiiiiiiiiiiiiiiiis",this.reservRoom);
+   console.log("thiiiiiiiiiiiiiiiiis",this.size3);
    if(this.size3==0){
+     console.log("khraaa3");
      this.selectedRoom3=false
    }else if (this.size3>0){
-    this.whichroom++;
+    this.whichroom=3;
     this.selectedRoom3=true;
     console.log("rrre",this.rooms3.length)
     console.log("ee",this.selectedRoom3);
-    console.log("ee4",this.selectedRoom1);
 
    }
       }).then( this.calculeTotale())
@@ -920,20 +1073,32 @@ this.calculeTotale();
       if(this.tab13.length !=0){
          if(this.reservRoom.length!=0){
            console.log("eetttt",this.reservRoom.length);
-           for(let f=0 ; f <this.reservRoom.length ; f++){
-        for(let j=0 ; j<res.data.rooms.length ;j++){
+            for(let f=0 ; f <this.reservRoom.length ; f++){
+              console.log("himem");
+            for(let j=0 ; j<res.data.rooms.length ;j++){
+          console.log("j :",j , "f :",f);
+            console.log("eee");
           if(this.reservRoom[f].id_room != res.data.rooms[j].id){
           this.rooms3.push(res.data.rooms[j])
-          }else{
-            j++;
-          }
+          }else if(this.reservRoom[f].id_room==res.data.rooms[j].id) { 
+            console.log("hyyyyyyyyyyyyyyyyyyyhooooooooooo**");
+            if(this.reservRoom.length<(f+1)){
+             console.log ("hooooo1")
+            f++;
+            }else{
+              console.log ("hooooo2");
+              j++;
+            }
+            }
+          
         }
         
           }
           
          }
-         else{
+         else if(this.reservRoom.length<=0){
            for(let j=0 ; j<res.data.rooms.length ;j++){
+           console.log("geee");
           this.rooms3.push(res.data.rooms[j])
         }
          }
@@ -956,9 +1121,9 @@ this.calculeTotale();
           this.rooms3.push(res.data.bookings[i]);
         }
          }
-        this.size3=this.rooms3.length;
-       console.log("vvvvvvvvvvvvv",this.size3);
       }
+       this.size3=this.rooms3.length;
+       console.log("vvvvvvvvvvvvv",this.size3);
     }).catch(error=>{
       console.log(error);
     })
@@ -972,31 +1137,6 @@ this.calculeTotale();
     let nuit = (Date.parse(this.bookingDate.end)-Date.parse(this.bookingDate.start))/86400000;
      this.nuits =nuit
   },
-    async getOptions(){
-      await axios.get('http://localhost:8000/api/option')
-      .then(res=>{
-        this.optionsTab=res.data.option
-        console.log("options",this.optionsTab);
-      })
-    },
-    getRoomOption1(){
-     
-            this.optionsRoom1=this.optionsTab;
-            console.log("tyt",this.optionsRoom1);
-          
-    },
-     getRoomOption2(){
-      for(let i=0 ; i<this.rooms2.length ; i++){
-        for(let j=0 ; j<this.optionsTab.length ; j++){
-          if(this.rooms2[i].id==this.optionsTab[j].room_id){
-            this.optionsRoom2.push(this.optionsTab[j]);
-          }
-        }
-      }
-      console.log("optionroom2",this.optionsRoom2);
-    }
-  
-
 }
 }
 </script>
@@ -1077,5 +1217,9 @@ font-size: 30px;
 }
 #desc{
   width: 250px !important;
+}
+#tbn{
+  width: 90px;
+  border-radius: 0mm;
 }
 </style>

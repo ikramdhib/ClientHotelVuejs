@@ -44,9 +44,26 @@
                       <h5 class="card-title"> {{ offre.titre}} </h5>
                       <p class="card-text"> {{ offre.description }} </p>
                       <p class="card-text" id="p"> {{ offre.pourcentage }} % </p>
-                      <p class="card-text bg-light" style="transform: rotate(0);">
+                      <span class="card-text bg-light" style="transform: rotate(0);">
+                        <div v-if="offre.offreable_type.substr(11)=='Room'"> 
                      <router-link to="rooms" class="stretched-link" >Les chambre</router-link>
-                      </p>
+                        </div>
+                         <div v-if="offre.offreable_type.substr(11)=='Pool'"> 
+                     <router-link to="pools" class="stretched-link" >Les Pools</router-link>
+                        </div>
+                         <div v-if="offre.offreable_type.substr(11)=='Spa'"> 
+                     <router-link to="spas" class="stretched-link" >Les Spa</router-link>
+                        </div>
+                         <div v-if="offre.offreable_type.substr(11)=='RoofTop'"> 
+                     <router-link to="roof-tops" class="stretched-link" >Les Roof-Top</router-link>
+                        </div>
+                         <div v-if="offre.offreable_type.substr(11)=='Restaurant'"> 
+                     <router-link to="restaurants" class="stretched-link" >Les Resaturants</router-link>
+                        </div>
+                         <div v-if="offre.offreable_type.substr(11)=='ConferenceRoom'"> 
+                     <router-link to="conferencerooms" class="stretched-link" >Les Salle de conference</router-link>
+                        </div>
+                      </span>
                     </div>
                   </div>
                     </div>

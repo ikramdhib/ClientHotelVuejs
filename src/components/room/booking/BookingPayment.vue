@@ -142,7 +142,7 @@ number1:0,
 number2:0,
 number3:0,
 number4:0,
-
+booking_id:null,
  };},
  mounted(){
 localStorage.removeItem('bookingdate')
@@ -154,6 +154,8 @@ localStorage.removeItem('bookgroom2')
 localStorage.removeItem('bookgroom3')
 localStorage.removeItem('fetch')
 localStorage.removeItem('isFetch')
+this.booking_id=JSON.parse(localStorage.getItem('booking_id'));
+console.log("eeeerr", JSON.parse(localStorage.getItem('booking_id')));
 document.getElementById("toggle").click();
   if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
@@ -239,8 +241,7 @@ console.log("fghhj",this.idus)
 			.post('http://localhost:8000/api/addrating',
 				{         rate:this.totale,
                   commentaire:this.rating.commentaire,
-                   booking_id:id,
-                   user_id:this.idus,
+                   booking_room_id:id,
 				},
 			
 				).then(response=>{
