@@ -150,7 +150,7 @@ export default {
           autoHideDelay: 5000,
           appendToast: append
         })
-      },
+      },/************************************tyytytytytytty */
       gOffres(){
         this.$router.push('offres')
       },
