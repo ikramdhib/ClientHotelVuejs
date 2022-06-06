@@ -135,7 +135,7 @@
                 </div>
               </div>
             </div>
-            	<!--rrrrr-->
+            
             <div class="sidebar-box ftco-animate">
               <h2>les Types de salle de conference  </h2>
               <div class="row" v-if="types.length>0">
