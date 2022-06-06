@@ -83,6 +83,7 @@
               <div class="categories">
                 <h2> le Prix</h2>
                 <li id="p1">{{room.price_booking}} DT  </li>  </div>
+                <div v-if="options.length>0">
               <h2>Options</h2>
               <div class="row">
           	<div  v-for="option in options" :key="option.id">
@@ -90,8 +91,8 @@
                 <li>{{option.nom_option}}</li>
               </ul>
               </div>
-              </div>
-             
+              </div></div>
+             <div v-if="offres.length>0">
                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<div v-for="(offre, index) in room.offres" :key="index">
@@ -112,7 +113,7 @@
 									</div>
 									</div>
 								</div>
-							
+            
 						</div>
 						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
 							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -122,8 +123,9 @@
 							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only"  >Next</span>
 						</a>
-					</div>
+					</div></div>
           <!---------------les meilleur commentaire ---->
+          <div v-if="comment.length>0">
           <h5>Ce que les clients ont le plus apprécié :</h5>
                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
@@ -147,7 +149,7 @@
 							<span class="sr-only"  >Next</span>
 						</a>
 					</div>
-   </div></div>
+   </div></div></div>
            	
             </div>
                 <div class="col-lg-4 sidebar ftco-animate">
