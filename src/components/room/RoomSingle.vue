@@ -132,7 +132,7 @@
 							<div v-for="(com, index) in comment" :key="index">
 								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
 							</div>
-						</ol>
+						</ol> <!---------------------------hyhyhyhy-->
 						<div class="carousel-inner">
 						<div v-for="(com, index) in comment" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
 									<ul class="list-group">
