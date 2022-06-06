@@ -123,7 +123,7 @@
                <div class="sidebar-box ftco-animate">
               <div class="categories">
                 	<h2> {{decoration}} </h2>
-                
+                <div v-if="equipement.length>0">
                    <h2  > les Equipements</h2>
                   <div v-for="eq in equipement" :key="eq.id">
                  <div   v-if ="eq.disponibilite == 1">
@@ -132,12 +132,13 @@
              
                  </div>
               </div>
+                </div>
               </div>
             </div>
             	
             <div class="sidebar-box ftco-animate">
               <h2>les Types de salle de conference  </h2>
-              <div class="row">
+              <div class="row" v-if="types.length>0">
           	<div  v-for="type in types" :key="type.id">
                <div v-if ="type.disponibilite == 1">
              
@@ -146,7 +147,7 @@
               </div></div>
               </div>
               </div>
-			  		
+			  		<div v-if="offres.length>0">
            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<div v-for="(offre, index) in registre.offres" :key="index">
@@ -177,7 +178,7 @@
 							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only"  >Next</span>
 						</a>
-					
+            </div>
           </div>
         </div>
       </div>
