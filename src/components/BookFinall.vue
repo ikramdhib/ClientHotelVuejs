@@ -86,11 +86,27 @@
    <textarea name=""  cols="30" rows="6"  placeholder="Ajouter" v-model="rating.commentaire" />
   <div class="col-md-12">
  <hr/>
+  
 <input type="button" value="Envoyer"  id="btn" @click="addRatings" class="btn btn-primary py-3 px-4"></div></div>
+  <form action="#" class="bg-white p-5 contact-form" v-if="terminer">
+      <div class="form-group">
+          <div class="row justify-content-center mb-9 pb-2">
+            <div class="col-md-10 heading-section text-center"> 
+                 <h1>terminé</h1>
+               </div>
+            </div>
+            <div class="row justify-content-center mb-9 pb-2">
+            <img src="./images/done.png">
+            </div>
+           </div>
+          </form>
        </div>
+      
       </div>
     </div>
+    
   </div>
+  
 </div>
  <section class="ftco-section contact-section bg-light">
       <div class="container">
@@ -127,15 +143,15 @@ import axios from "axios";
 export default {
    data() {
     return {
-      isLogin:false,
+     isLogin:false,
       id:0,
       user_id:0,
       idus:0,
   rating:{
-             commentaire:"",
-                },
-
-   isRatingsExist:false,
+  commentaire:"",
+  },
+ isRatingsExist:false,
+ terminer:false,
 totale:0,
 number:0,
 number1:0,
@@ -152,6 +168,7 @@ document.getElementById("toggle").click();
                 }
                this.idus=this.user.id;
 console.log("fghhj",this.idus)
+
  },
 
  methods:{
@@ -233,21 +250,15 @@ console.log("fghhj",this.idus)
                   commentaire:this.rating.commentaire,
                    booking_id:id,
                    user_id:this.idus,
-				},
-			
-				).then(response=>{
-					 	
-				     let res = response.data;
-					 console.log(res);
-    
-				})
-
-        	 
-       
-	
-     }}
-    
- }
+				},).then(response=>{
+           let res = response.data;
+           if(res!=null){
+             this.terminer=true;
+           }
+          console.log(res);
+         }
+         ) 
+         }}}
 </script>
 <style scoped>
 
