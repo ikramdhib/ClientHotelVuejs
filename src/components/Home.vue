@@ -366,6 +366,106 @@
       </div>
     </div>
   </section>
+  <!--get spa  -->
+  <section class="ftco-section bg-light">
+    <div class="container">
+      <div class="row justify-content-center mb-5 pb-3">
+        <div class="col-md-7 heading-section text-center">
+          <h2 class="mb-4">Autres</h2>
+        </div>
+      </div>
+      <div class="row">
+     <!--spa-->
+          <div class="col-sm col-md-6 col-lg-4 py-4">
+            <div class="card" >
+              <img :src="'http://localhost:8000/storage'+ph"/>
+              <div class="card-body">
+    
+                <h5 class="card-title text-center">{{ record.title }}</h5>
+                      <p class="card-text text-center"> {{record.description }}  </p>
+                    <div class="text p-3 text-center">
+                      <p class="box">  {{ record.prix_reservation }} DT </p>
+                      <router-link :to="'spa'+id1" center>Details</router-link>
+                    </div>
+               
+                
+              </div>
+            </div>
+          </div>
+       
+      <!--pool-->
+     
+          <div class="col-sm col-md-6 col-lg-4 py-4">
+            <div class="card" >
+              <img :src="'http://localhost:8000/storage'+ph1"/>
+              <div class="card-body">
+    
+                <h5 class="card-title text-center">{{ record1.title }}</h5>
+                      <p class="card-text text-center"> {{record1.description }}</p>
+                    <div class="text p-3 text-center">
+                      <p class="box">  {{ record1.prix_reservation }} DT </p>
+                      <router-link :to="'pool'+id2" center>Details</router-link>
+                    </div>
+                
+                
+              </div>
+            </div>
+          </div>
+          <!--roof-->
+           <div class="col-sm col-md-6 col-lg-4 py-4" >
+            <div class="card" >
+              <img :src="'http://localhost:8000/storage'+ph2"/>
+              <div class="card-body">
+    
+                <h5 class="card-title text-center">{{ record2.intitule }}</h5>
+                      <p class="card-text text-center"> {{record1.description }}</p>
+                    <div class="text p-3 text-center">
+                      <p class="box">  {{ record2.prix }} DT </p>
+                      <router-link :to="'roof-top'+id3" center>Details</router-link>
+                    </div>
+                
+              
+              </div>
+            </div>
+          </div>
+           <!--salle conference--> 
+              <div class="col-sm col-md-6 col-lg-4 py-4"  >
+            <div class="card" >
+              <img :src="'http://localhost:8000/storage'+photo"/>
+              <div class="card-body">
+    
+                <h5 class="card-title text-center">{{ record3.decoration }}</h5>
+                      <p class="card-text text-center"> {{record3.description }}</p>
+                    <div class="text p-3 text-center">
+                      <p class="box">  {{ record3.prix }} DT </p>
+                      <router-link :to="'conferenceroom'+id4" center>Details</router-link>
+                    </div>
+                
+                
+              </div>
+            </div>
+          </div>
+       <!--restaurant-->
+
+        <div class="col-sm col-md-6 col-lg-4 py-4">
+            <div class="card" >
+              <img :src="'http://localhost:8000/storage'+photo1"/>
+              <div class="card-body">
+    
+                <h5 class="card-title text-center">{{ recorde.nom}}</h5>
+                      <p class="card-text text-center"> {{recorde.description }}</p>
+                    <div class="text p-3 text-center">
+                      <p class="box">  {{ recorde.prix_reservation }} DT </p>
+                      <router-link :to="'restaurant'+id5" center>Details</router-link>
+                    </div>
+                
+                
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
 
 
 </template>
@@ -374,6 +474,21 @@ import axios from "axios";
 export default {
   data() {
     return {
+     res:[],
+     recorde:{},
+     photo1:{},
+      record:{},
+      record2:{},
+      ph2:{},
+     ph:{},
+     id1:"",
+     id2:"",
+     id3:"",
+     id4:"",
+     id5:"",
+     record3:{},
+     photo:{},
+     record1:{},ph1:{},
       rooms: [],
       dateNow:null,
       id: 0,
@@ -381,7 +496,7 @@ export default {
     	room_id:[],
       nbadult:"2",
       nbenfant:"0",
-		 image:"",
+		
      fetch:{
        end:"",
        start:"",
@@ -413,6 +528,11 @@ export default {
 
   mounted() {
     this.getRoom();
+    this.getspa();
+    this.getROOF();
+    this.getpool();
+    this.getsalle();
+    this.getResto();
     /********************************** */
     let d = new Date();
     let day =(d.getDate())
@@ -594,13 +714,12 @@ export default {
         .get("http://localhost:8000/api/getRoom")
         .then((res) => {
           this.rooms = res.data.rooms;
-          this.image = res.data.rooms.images.name;
-          this.description=res.data.rooms.description;
-          console.log("ii",this.description);
+        
+          console.log("ii",this.image);
           console.log("rooms",this.table);
         })
         .then(this.getType())
-        .then(this.getPrice());
+      
     },
 
 		  getfetch(){
@@ -680,6 +799,63 @@ export default {
           this.isFetch=false
         }
        
+      },
+      async getspa(){
+await axios.get('http://127.0.0.1:8000/api/seul').then(res=>{
+				this.record = res.data.roofs;
+        this.ph=res.data.roofs.images.name;
+        this.id1=res.data.roofs.id;
+
+      console.log("rooms",this.record);
+         
+					
+				}
+			)
+      },
+        async getpool(){
+await axios.get('http://localhost:8000/api/seulPool').then(res=>{
+				this.record1 = res.data.roofs;
+        this.ph1=res.data.roofs.images.name;
+        this.id2=res.data.roofs.id;
+
+      console.log("rooms",this.id2);
+         
+					
+				}
+			)
+      },
+         async getROOF(){
+await axios.get('http://localhost:8000/api/seuleroof').then(res=>{
+				this.record2 = res.data.roofs;
+        this.ph2=res.data.roofs.images.name;
+this.id3=res.data.roofs.id;
+      console.log("rooms",this.ph2);
+         
+					
+				}
+			)
+      },
+          async getsalle(){
+await axios.get('http://localhost:8000/api/seulsalle').then(res=>{
+				this.record3 = res.data.salle;
+        this.photo=res.data.salle.images.name;
+this.id4=res.data.salle.id
+      console.log("rooms",this.photo);
+         
+					
+				}
+			)
+      },
+            async getResto(){
+await axios.get('http://localhost:8000/api/seulle').then(res=>{
+				this.recorde= res.data.restaurants;
+        this.photo1=res.data.restaurants.images.name;
+        this.id5=res.data.restaurants.id
+      console.log("rooms",this.photo1);
+         
+					
+				}
+			)
       },
 	 
 	  async getType(){

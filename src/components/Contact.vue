@@ -42,8 +42,8 @@
 	            <p><span>Website</span> <a href="#">yoursite.com</a></p>
 	          </div>
           </div>
-        </div></div>
-         <div class="row ">
+        </div>
+            <div class="row ">
               <div class="row ">
             <div class="col-md-6 d-flex">
                  <div  id="contact" class=" p-md-5 img img-2 img-3 d-flex justify-content-center align-items-center" style='width: 550px; height: 800px; background-image '>
@@ -77,12 +77,12 @@
           
           </div>
 
+        		</div>
+					</div>
+				</div>
+            </div>
         
-    
-         
-        </div>
-          </div>
-      </div></div>
+      </div>
     </section>
 </template>
 
@@ -139,6 +139,10 @@ console.log("fghhj",this.idus)
  
  }
 </script>
-<style scoped>
- 
+<style>
+ .contact{   display: flex;
+    justify-content: space-between;
+flex-direction: row;
+flex-wrap: wrap;
+ }
 </style>
