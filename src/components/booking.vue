@@ -187,7 +187,7 @@
               </div>
             </div>
             <!--pool-->
-            <div v-if="isPool">
+            <div v-if="ispool">
               <div class="row">
                 <form class="bg-light p-5">
                   <div class="form-group">
@@ -327,11 +327,7 @@
                                 <td>
                                   <input
                                     :v-model="prix1"
-                                    :value="
-                                      (this.prix1 =
-                                        this.prixx * this.capacite + this.somm)
-                                    "
-                                    disabled
+                                    :value="(this.prix1 =this.prixx * this.capacite + this.somm)" disabled
                                   />DT
                                 </td>
                               </div>
@@ -397,7 +393,7 @@
                               </tr>
                               <tr>
                                 <div v-if="offre">
-                                  <td><input v-model="prix" disabled />DT</td>
+                                  <td><input v-model="prix" disabled /></td>
                                 </div>
                                 <div v-if="offre == false">
                                   <td>
@@ -407,7 +403,7 @@
                                         (this.prix =
                                           this.prix_reservation *
                                           this.booking.nombre)
-                                      "
+                                      "  
                                     />DT
                                   </td>
                                 </div>
@@ -428,6 +424,9 @@
                 <div class="form-group">
                   <div class="row">
                     <h2>Information personnels :</h2>
+                    <ul style="list-style-type-center:none">
+                                <li class="li" style="color:red" v-for="error in errors" :key="error"><InlineMessage>{{ error }}</InlineMessage> </li>
+                      </ul>
                     <div class="col-md-4">
                       <i class="icon-circle-arrow-right"></i>
                       <label id="label"> Nom :</label>
@@ -564,7 +563,7 @@ export default {
       plat: "",
       isrestaurant: false,
       isRooftop: false,
-      ispool: false,
+      ispool:false,
       isConferenceRoom: false,
       isSpa: false,
       offre: false,
@@ -583,6 +582,7 @@ export default {
       somme: 0,
       choi: "",
       table: [],
+      errors:[],
       po: 0,
     };
   },
@@ -617,7 +617,7 @@ export default {
 
         console.log(this.prix_reservation);
       });
-      this.isPool = true;
+      this.ispool = true;
     } else if (catg == "roof") {
       axios.get("http://localhost:8000/api/getroof/" + id).then((res) => {
         if (res != null) {
@@ -669,6 +669,19 @@ console.log("fghhj",this.idus)
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
+        	if(this.user.lastname==""){
+				this.errors.push("votre nom doit étre saisie")
+	               }
+                  if(this.user.firstname==""){
+				this.errors.push("votre prenom doit étre saisie")
+	               }
+                  	if(this.user.email==""){
+				this.errors.push("votre email doit étre saisie")
+	               }
+                 	if(this.user.email==""){
+				this.errors.push("votre numero de teléphone doit étre saisie")
+	               }
+                 
         await axios
 
           .post(
@@ -708,6 +721,18 @@ console.log("fghhj",this.idus)
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
+        	if(this.user.lastname==""){
+				this.errors.push("votre nom doit étre saisie")
+	               }
+                 	if(this.user.firstname==""){
+				this.errors.push("votre prenom doit étre saisie")
+	               }
+                  	if(this.user.email==""){
+				this.errors.push("votre email doit étre saisie")
+	               }
+                 	if(this.user.email==""){
+				this.errors.push("votre numero de teléphone doit étre saisie")
+	               }
 
         await axios
           .post(
@@ -736,7 +761,7 @@ console.log("fghhj",this.idus)
             console.log(res);
            this.$router.push({name:"book" , params:{id:this.response}});
           });
-      } else if (this.isPool) {
+      } else if (this.ispool) {
         if (this.monChoix == "") {
           this.monChoix =null;
         }
@@ -747,6 +772,18 @@ console.log("fghhj",this.idus)
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
+        	if(this.user.lastname==""){
+				this.errors.push("votre nom doit étre saisie")
+	               }
+                 	if(this.user.firstname==""){
+				this.errors.push("votre prenom doit étre saisie")
+	               }
+                  	if(this.user.email==""){
+				this.errors.push("votre email doit étre saisie")
+	               }
+                 	if(this.user.email==""){
+				this.errors.push("votre numero de teléphone doit étre saisie")
+	               }
         await axios
           .post(
             "http://localhost:8000/api/Booking",
@@ -785,6 +822,18 @@ console.log("fghhj",this.idus)
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
+        	if(this.user.lastname==""){
+				this.errors.push("votre nom doit étre saisie")
+	               }
+                 	if(this.user.firstname==""){
+				this.errors.push("votre prenom doit étre saisie")
+	               }
+                  	if(this.user.email==""){
+				this.errors.push("votre email doit étre saisie")
+	               }
+                 	if(this.user.email==""){
+				this.errors.push("votre numero de teléphone doit étre saisie")
+	               }
         await axios
           .post(
             "http://localhost:8000/api/Booking",
@@ -823,6 +872,18 @@ console.log("fghhj",this.idus)
         if (this.booking.infoComplimentaire == "") {
           this.booking.infoComplimentaire = "AUCUN INFORMATION PERSONNELS ";
         }
+        	if(this.user.lastname==""){
+				this.errors.push("votre nom doit étre saisie")
+	               }
+                 	if(this.user.firstname==""){
+				this.errors.push("votre prenom doit étre saisie")
+	               }
+                  	if(this.user.email==""){
+				this.errors.push("votre email doit étre saisie")
+	               }
+                 	if(this.user.email==""){
+				this.errors.push("votre numero de teléphone doit étre saisie")
+	               }
 
         await axios
           .post(

@@ -101,9 +101,9 @@
 </svg>
 
   	<div class="col-md-12">
-<textarea class="form-control" placeholder="Ajouter commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6"></textarea></div>
-        <input type="button" value="Envoyer"  @click="addRatings" id="B" class="btn btn-primary py-3 px-3">
-  </div>
+<textarea class="form-control" placeholder="Ajouter commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1"></textarea>
+        <input type="button" value="Envoyer"  @click="addRatings" id="B" class="btn btn-primary py-4 px-4">
+  </div></div>
    </div></div>
 
 
