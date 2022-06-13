@@ -193,19 +193,20 @@
         </label>  
       </div>
 
-    </div>
+  
 
    
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
   <symbol id="star" viewBox="0 0 26 28">
     <path d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z"/>
   </symbol>
-</svg>
-  <div class="col-md-12">
-
+</svg></div>
+          </div>
+<div class="col-md-7">
     <textarea class="form-control" placeholder="Ajouter commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6"></textarea>
-        <input type="button" value="Envoyer" id="B"  @click="addRatings" class="btn btn-primary py-3 px-3"></div></div>
+        <input type="button" value="Envoyer" id="B"  @click="addRatings" class="btn btn-primary py-3 px-3">
   </div>
+      </div>
    
 </section>
              <div class="container-fluid">
@@ -228,8 +229,7 @@
                       <h5 class="card-title">{{ objet.nom_type }} </h5></div></div>
 					  <hr/>
                 
-                     <p class="card-text" id="pr"> {{chambre.description.substr(0 , 110)+',...'}}</p>
- <p class="card-text"> <a :href="'http://localhost:8080/#/Roomsingle'+chambre.id"   > plus de details </a></p>
+                     <p class="card-text" id="pr"> {{chambre.description.substr(0 , 110)+',...'}} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(chambre.id)"  >  </p>
                     
 					  <hr/>                    
                       <p class="card-text" id="pr"> {{ chambre.price_booking }} DT  </p>
@@ -279,7 +279,7 @@ number2:0,
 number3:0,
 number4:0,
 comment:[],
-
+chambress:[],
     };
   },
   
@@ -287,8 +287,8 @@ comment:[],
   mounted(){
    this.getRoom();
     this.getRooms();
+    this.getRoomss();
     this.getType();
-    this.getcomment();
 
      this.isLogin=true;
       if(localStorage.getItem('client')){
@@ -318,8 +318,7 @@ console.log("fghhj",this.idus);
           this.offres=res.data.rooms.offres;
           this.images=res.data.rooms.images;
           this.ro=res.data.rooms.id;
-
- 
+this.getcomment(id);
  
 
 
@@ -345,7 +344,33 @@ console.log("fghhj",this.idus);
    }
 	)
 
-	  },
+    },
+      async getRoomss(){
+ await axios
+  .get("http://localhost:8000/api/getRoomm", 
+       
+      )
+      .then((res) => {
+		   
+			   this.chambress= res.data.rooms;
+		   
+   }
+	)
+
+    },
+    	goDetail(id){
+    this.room=this.chambress.filter(e=>e.id==id)[0]
+    console.log("hooo",this.room);
+         this.options=this.room.options;
+          this.type_nom=this.room.type.nom_type;
+          this.type_id=this.room.type.id;
+          this.typdesc=this.room.type.intitule;
+         this.price=this.room.price_booking;
+          this.offres=this.room.offres;
+          this.images=this.room.images;
+          this.ro=this.room.id;
+          this.getcomment(id)
+		},
       async getType(){
  await axios
   .get("http://127.0.0.1:8000/api/type", 
@@ -362,8 +387,8 @@ console.log("fghhj",this.idus);
 	
     
       },
-      async getcomment(){
-         const id=this.$route.params.id;
+      async getcomment(id){
+         
 await axios .get("http://127.0.0.1:8000/api/gettee/"+id, {
       
       })
@@ -373,22 +398,7 @@ await axios .get("http://127.0.0.1:8000/api/gettee/"+id, {
             console.log(this.comment);
 
        })},
-       async getPrice(){
- await axios
-  .get("http://127.0.0.1:8000/api/price", 
-
-      )
-      .then((res) => {
-     
- 
-      this.prixs= res.data.price;
-	  
-
-        console.log(this.prixs);
-      })
-	
-    
-      },
+       /******************************** */
      
 
 

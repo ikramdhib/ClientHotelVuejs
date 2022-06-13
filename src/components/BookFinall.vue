@@ -34,8 +34,8 @@
        
           <div>
          
-             <div class="col-lg-4 sidebar ftco-animate">
-          <div class="form-group">
+             <div class="col-lg-4 sidebar ftco-animate" v-if="doneRating==false">
+          <div class="form-group" >
                  
       <div class="rating" >
         <input type="radio" name="rating-star"  :v-model="number" :value="number=1" @click="isRating($event)" class="rating__control screen-reader"  id="rc1">
@@ -88,20 +88,21 @@
  <hr/>
   
 <input type="button" value="Envoyer"  id="btn" @click="addRatings" class="btn btn-primary py-3 px-4"></div></div>
-  <form action="#" class="bg-white p-5 contact-form" v-if="terminer">
-      <div class="form-group">
-          <div class="row justify-content-center mb-9 pb-2">
-            <div class="col-md-10 heading-section text-center"> 
-                 <h1>terminé</h1>
-               </div>
-            </div>
-            <div class="row justify-content-center mb-9 pb-2">
-            <img src="./images/done.png">
-            </div>
-           </div>
-          </form>
+  
        </div>
-      
+       <form action="#" class="bg-white p-5 contact-form" v-if="doneRating">
+                    <div class="form-group">
+                  <div class="row justify-content-center mb-9 pb-2">
+                  <div class="col-md-10 heading-section text-center"> 
+                 <h1>
+                    Nous apprécions votre avis</h1>
+                  </div>
+                  </div>
+                  <div class="row justify-content-center mb-9 pb-2">
+                  <img style="width:170px" src="./images/done.png">
+                  </div>
+                  </div>
+                 </form>
       </div>
     </div>
     
@@ -151,7 +152,7 @@ export default {
   commentaire:"",
   },
  isRatingsExist:false,
- terminer:false,
+ doneRating:false,
 totale:0,
 number:0,
 number1:0,
@@ -248,12 +249,12 @@ console.log("fghhj",this.idus)
 			.post('http://localhost:8000/api/addrating',
 				{         rate:this.totale,
                   commentaire:this.rating.commentaire,
-                   booking_room_id:id,
+                   booking_id:id,
                    user_id:this.idus,
 				},).then(response=>{
            let res = response.data;
-           if(res!=null){
-             this.terminer=true;
+           if(res.success==true){
+             this.doneRating=true;
            }
           console.log(res);
          }

@@ -795,8 +795,10 @@ export default {
   }
 ,
 mounted(){
-this.getBookinDates();
+this.getBookinDates()
+  console.log("dates",this.bookingDate);
  this.selectTheFirstRoom().then(()=>{
+   console.log("rrrrrrrrrrrrrrrrrrrrrom", this.rooms1);
 if(this.rooms1.length==0){
   this.test()
 }
@@ -809,7 +811,6 @@ this.nbchambre=parseInt(localStorage.getItem('nbchambre'));
 
 methods:{
   test(){
-    console.log(true);
 if(this.rooms1.length==0){
   this.selectTheSecondRoom();
   this.selectedRoom2=true;
@@ -962,7 +963,6 @@ this.calculeTotale();
     }
   },
   async selectTheFirstRoom(){
-
        if(localStorage.getItem('bookgroom1') != null){
        this.bookgroom1=  JSON.parse( localStorage.getItem('bookgroom1'));
       console.log("uuuuuuuuu1",this.bookgroom1);
@@ -989,9 +989,11 @@ this.calculeTotale();
         }
       }
     }).catch(error=>{
+      console.log("rrrrrreeeeeeeeee",this.rooms1);
       console.log(error);
     })
        }
+       
         if(this.rooms1.length==0){
          this.selectedRoom1=false,
       this.selectedRoom2=true,

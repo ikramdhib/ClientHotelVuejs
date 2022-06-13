@@ -55,56 +55,61 @@
 	      			<h3 class="heading mb-4">Chercher les Disponibilite</h3>
 	      			<form action="#">
 	      				<div class="fields">
+							  
 		              <div class="form-group">
-		              
-                      <input placeholder="" type="date" id="example" class="form-control" :min="dateNow"  >
+		              	<label id="label">Date d'arriver</label>
+                      <input type="date" id="example" class="form-control" :min="dateNow" v-model="fetch.start"  >
                     </div>
 		             
 		              <div class="form-group">
-		                <input type="date" id="exemple" class="form-control " placeholder="" :min="dateNow" >
+						  	<label id="label">Date d'arriver</label>
+		                <input type="date" id="exemple" class="form-control " placeholder="" :min="fetch.start"  v-model="fetch.end">
 		              </div>
-		              <div class="form-group">
-		                <div class="select-wrap one-third">
-	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                   
-	                  </div>
-		              </div>
+		              
 		              <div class="form-group" >
+						  	<label id="label">Adult</label>
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                   <select name="" id="" class="form-control">
-	                    	<option value="0">0 Adult</option>
-	                    	<option value="1">1 Adult</option>
-							<option value="2">2 Adult</option>
-							<option value="3">3 Adult</option>
+	                   <select v-model="fetch.nbadult" name="" id="" class="form-control">
+	                    	<option value="1">1 </option>
+							<option value="2">2 </option>
+							<option value="3">3 </option>
+							<option value="1">4 </option>
+							<option value="2">5 </option>
+							<option value="3">6 </option>
 	                  </select>
 	                  </div>
 		              </div>
 		              <div class="form-group">
+						  	<label id="label">Enfant</label>
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                   <select name="" id="" class="form-control">
-	                    	<option value="0">0 Enfant</option>
-	                    	<option value="1">1 Enfant</option>
-							<option value="2">2 Enfant</option>
-							<option value="3">3 Enfant</option>
+	                   <select v-model="fetch.nbenfant" name="" id="" class="form-control">
+	                    	<option value="0">0 </option>
+	                    	<option value="1">1 </option>
+							<option value="2">2 </option>
+							<option value="3">3 </option>
+							<option value="3">4 </option>
+
 	                  </select>
 	                  </div>
 		              </div>
 					    <div class="form-group">
+								<label id="label">Bébé</label>
 		                <div class="select-wrap one-third">
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                   <select name="" id="" class="form-control">
-	                    	<option value="0">0 Bebe</option>
-	                    	<option value="1">1 Bebe</option>
-							<option value="2">2 Bebe</option>
-							<option value="3">3 Bebe</option>
+	                   <select v-model="fetch.nbbebe" name="" id="" class="form-control">
+	                    	<option value="0">0</option>
+	                    	<option value="1">1 </option>
+							<option value="2">2 </option>
+							<option value="3">3 </option>
+							<option value="3">4 </option>
 	                  </select>
 	                  </div>
 		              </div>
 		          
 		              <div class="form-group">
-		                <input type="submit" value="chercher" v-on:click="searchInput" class="btn btn-primary py-3 px-5">
+		                <input type="button" value="chercher" @click="getfetch()" class="btn btn-primary py-3 px-5">
 		              </div>
 		            </div>
 	            </form>
@@ -123,9 +128,18 @@ export default {
     return {
       rooms: [],
 	  types:[],
-	room_id:[],
+	  room_id:[],
 	     id:0,
 		 image:"",
+		  fetch:{
+       end:"",
+       start:"",
+       nbadult:2,
+       nbenfant:0,
+       nbbebe:0,
+      
+	 },
+	  isFetch:false,
     };
   },
   
@@ -134,12 +148,40 @@ export default {
    this.getRoom();
    // this.getType();
 // this.getPrice();
-
+   /********************************** */
+    let d = new Date();
+    let day =(d.getDate()+1)
+    let month =(d.getMonth()+1)
+    let year = d.getFullYear()
+    if(month<10){
+      month="0"+ month
+    }
+    if(day<10){
+      day="0"+ day
+    }
+    this.dateNow= year+"-"+month+"-"+day;
+        this.getType();
+     
+        /************************ */
+  this.fetch.start=this.dateNow;
+    /********************************** */
   },
 
    
 	  
-  methods: {       
+  methods: {  
+	   getfetch(){
+        if(this.fetch!=null){
+          this.isFetch=true,
+          localStorage.setItem('fetch',JSON.stringify(this.fetch));
+          localStorage.setItem('isFetch',this.isFetch)
+          this.$router.push('findroom')
+        }
+        else{
+          this.isFetch=false
+        }
+       
+      },     
   async getRoom(){
  await axios
   .get("http://localhost:8000/api/getRoom", 

@@ -7,7 +7,6 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Acceuil</a></span> <span>A propos</span></p>
 	            <h1 class="mb-4 bread">Details Salle de conference</h1>
             </div>
           </div>
@@ -91,7 +90,7 @@
         </label>  
       </div>
 
-    </div>
+    
 
    
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
@@ -99,22 +98,21 @@
     <path d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z"/>
   </symbol>
 </svg>
-
-  	<div class="col-md-12">
-<textarea class="form-control" placeholder="Ajouter commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6"></textarea></div>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-md-8">
+<textarea class="form-control"  placeholder="Ajouter un commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6"></textarea>
         <input type="button" value="Envoyer"  @click="addRatings" id="B" class="btn btn-primary py-3 px-3">
   </div>
-   </div></div>
-
-
+</div>
+          </div>
+          </div>
 
         
           
           <div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group">
-        
-             
-          		
                  <div class="box">
              <input type="button" value="Reserver" @click="gobook(room)" id="box" class="btn btn-primary py-3 px-5">
               </div>
@@ -194,15 +192,15 @@
             <div class="bg-white p-5">
                   <div class="row">
                   <div class="col-md-4"  v-for="ret in record" :key="ret.id"> 
-					  <div v-if="ret.id != room && ret.disponibilite==true">
+					  <div v-if=" ret.disponibilite==true">
                     <div class="card"  >
 						  <img  :src="'http://localhost:8000/storage'+ret.images.name"  alt="Card image cap">
                     <div class="card-body">
                       <h5 class="card-title"> {{ret.nom}} </h5>
 					  <hr/>
-                      <p class="card-text"> {{ ret.description }} </p>
+                      <p class="card-text"> {{ ret.description.substr(0 , 110)+',...' }} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(ret.id)"  >  </p>
        
- <p class="card-text"> <a :href="'http://localhost:8080/#/conferenceroom'+ret.id"   > plus de details </a></p>
+
                     
 					  <hr/>
                       <p class="card-text" id="pr">  {{ ret.prix }} DT   </p>
@@ -229,6 +227,7 @@ export default {
     tab3:[],
     tab4:[],
     record:[],
+    recordd:[],
     salles:[],
     equipement:[],
      types:[],
@@ -255,7 +254,8 @@ number4:0,
    
   mounted(){
  this.getRoom();
-    this.getal()
+    this.getal();
+    this.getall()
      this.isLogin=true;
       if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
@@ -303,12 +303,33 @@ number4:0,
           }
             })
           },
+            async getall(){
+          await axios.get('http://localhost:8000/api/getSallee').then(res=>{
+          
+					for(let i=0 ; i < res.data.salle.length ; i++){
+						this.recordd.push(res.data.salle[i]);
+					
+          }
+            })
+          },
+          	goDetail(id){
+              this.registre=this.recordd.filter(e=>e.id==id)[0]
+              console.log(this.registre);
+                this.images=this.registre.images
+              
+                  this.offres=this.registre.offres
+                
+                  this.types=this.registre.type_conference_rooms;
+                
+                  this.equipement=this.registre.equipements;
+                
+		},
 
           gobook(id){
             this.$router.push({name:"booking" , params:{id:id,catg:"salleConference"}})
           },
           
-          
+          /************************************** */
           isRating(event){
  if(event.target.checked==1){
  this.isRatingsExist=true;
@@ -578,4 +599,17 @@ body{
     margin-right: 3.5rem;
   }
 }
-      </style>
+#pr{
+	color: black;
+	font-family: monospace;
+	font-size: 20px;
+}
+#r{
+	margin-left: 80%;
+}
+#bt{
+	background-color: transparent;
+	border-color: transparent;
+	color: #8d703b;
+}
+ </style>

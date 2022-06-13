@@ -37,7 +37,6 @@
           <div class="col-md-10 heading-section text-center"> 
               <h1>
                   terminé</h1>
-                  <!---------------hhhhhhhhhhhhhhhhhhhhhhhhh--------------------->
           </div>
           </div>
           <div class="row justify-content-center mb-9 pb-2">

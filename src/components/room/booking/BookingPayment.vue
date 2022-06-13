@@ -30,11 +30,10 @@
       </div>
       <div class="modal-body">
        
-          <div>
+          <div v-if="doneRating==false">
          
              <div class="col-lg-4 sidebar ftco-animate">
-          <div class="form-group">
-                 
+          <div class="form-group" >
       <div class="rating" >
         <input type="radio" name="rating-star"  :v-model="number" :value="number=1" @click="isRating($event)" class="rating__control screen-reader"  id="rc1">
         <input type="radio" name="rating-star"  :v-model="number1" :value="number1=2"  @click="isRating1($event)" class="rating__control screen-reader" id="rc2">
@@ -87,6 +86,7 @@
 <input type="button" value="Envoyer"  id="btn" @click="addRatings" class="btn btn-primary py-3 px-4"></div></div>
        </div>
       </div>
+     
     </div>
   </div>
 </div>
@@ -132,9 +132,9 @@ export default {
       user_id:0,
       idus:0,
   rating:{
-             commentaire:"",
-                },
-
+   commentaire:"",
+     },
+     doneRating:false,
    isRatingsExist:false,
 totale:0,
 number:0,
@@ -154,8 +154,6 @@ localStorage.removeItem('bookgroom2')
 localStorage.removeItem('bookgroom3')
 localStorage.removeItem('fetch')
 localStorage.removeItem('isFetch')
-this.booking_id=JSON.parse(localStorage.getItem('booking_id'));
-console.log("eeeerr", JSON.parse(localStorage.getItem('booking_id')));
 document.getElementById("toggle").click();
   if(localStorage.getItem('client')){
                         this.user = JSON.parse(localStorage.getItem('client'));
@@ -242,13 +240,12 @@ console.log("fghhj",this.idus)
 				{         rate:this.totale,
                   commentaire:this.rating.commentaire,
                    booking_room_id:id,
-				},
-			
-				).then(response=>{
-					 	
-				     let res = response.data;
-					 console.log(res);
-    
+        },
+        ).then(response=>{
+             let res = response.data;
+           if(res.success==true){
+             this.doneRating=true;
+           }
 				})
 	
      }}

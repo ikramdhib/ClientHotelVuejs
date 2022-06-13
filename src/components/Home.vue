@@ -68,7 +68,7 @@
 	        				<div  id="date" class="form-group align-self-stretch  align-items-end">
 	        					<div class="wrap">
 				    					<label  id="label" for="#">Date de départ</label>
-				    					<input id="ee" v-model="fetch.end" type="date" :min="dateNow"   class="form-control checkout_date" >
+				    					<input id="ee" v-model="fetch.end" type="date" :min="fetch.start"   class="form-control checkout_date" >
 			    				</div>
 			    				</div>
 	        			</div>
@@ -113,12 +113,23 @@
            <p >  Age <span style="color:red;">*</span></p>
 		                <div class="select-wrap one-third">
 	                    <select v-model="age1"  id="sel" >
-	                    	<option value="1" >1 </option >
+	                   	<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
 	                      <option value="4">4 </option>
 	                      <option value="5">5 </option>
 	                      <option value="6">6 </option>
+                      	<option value="7" >7 </option >
+	                      <option value="8">8 </option>
+	                      <option value="9">9 </option>
+	                      <option value="10">10 </option>
+	                      <option value="11">11</option>
+	                      <option value="12">12 </option>
+                        	<option value="13" >13 </option >
+	                      <option value="14">14 </option>
+	                      <option value="15">15 </option>
+	                      <option value="16">16 </option>
+	                      <option value="17">17</option>
 	                    </select>
 	                  </div>
               </div>
@@ -126,12 +137,23 @@
                 <p >  Age <span style="color:red;">*</span></p>
 		                <div class="select-wrap one-third">
 	                    <select v-model="age2"  id="sel" >
-	                    	<option value="1" >1 </option >
+	                    		<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
 	                      <option value="4">4 </option>
 	                      <option value="5">5 </option>
 	                      <option value="6">6 </option>
+                      	<option value="7" >7 </option >
+	                      <option value="8">8 </option>
+	                      <option value="9">9 </option>
+	                      <option value="10">10 </option>
+	                      <option value="11">11</option>
+	                      <option value="12">12 </option>
+                        	<option value="13" >13 </option >
+	                      <option value="14">14 </option>
+	                      <option value="15">15 </option>
+	                      <option value="16">16 </option>
+	                      <option value="17">17</option>
 	                    </select>
 	                  </div>
               </div>
@@ -140,25 +162,47 @@
                 <p >  Age <span style="color:red;">*</span></p>
 		                <div class="select-wrap one-third">
 	                    <select v-model="age3"  id="sel" >
-	                    	<option value="1" >1 </option >
+	                  	<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
 	                      <option value="4">4 </option>
 	                      <option value="5">5 </option>
 	                      <option value="6">6 </option>
+                      	<option value="7" >7 </option >
+	                      <option value="8">8 </option>
+	                      <option value="9">9 </option>
+	                      <option value="10">10 </option>
+	                      <option value="11">11</option>
+	                      <option value="12">12 </option>
+                        	<option value="13" >13 </option >
+	                      <option value="14">14 </option>
+	                      <option value="15">15 </option>
+	                      <option value="16">16 </option>
+	                      <option value="17">17</option>
 	                    </select>
 	                  </div>
               </div>
                <div v-if="enfant4" class="col-md-4"> 
                <p >  Age <span style="color:red;">*</span></p>
 		                <div class="select-wrap one-third">
-	                    <select v-model="age4"  id="sel">
-	                    	<option value="1" >1 </option >
+                      <select>
+	                 	<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
 	                      <option value="4">4 </option>
 	                      <option value="5">5 </option>
 	                      <option value="6">6 </option>
+                      	<option value="7" >7 </option >
+	                      <option value="8">8 </option>
+	                      <option value="9">9 </option>
+	                      <option value="10">10 </option>
+	                      <option value="11">11</option>
+	                      <option value="12">12 </option>
+                        	<option value="13" >13 </option >
+	                      <option value="14">14 </option>
+	                      <option value="15">15 </option>
+	                      <option value="16">16 </option>
+	                      <option value="17">17</option>
 	                    </select>
 	                  </div>
               </div>
@@ -172,6 +216,17 @@
 	                      <option value="4">4 </option>
 	                      <option value="5">5 </option>
 	                      <option value="6">6 </option>
+                      	<option value="7" >7 </option >
+	                      <option value="8">8 </option>
+	                      <option value="9">9 </option>
+	                      <option value="10">10 </option>
+	                      <option value="11">11</option>
+	                      <option value="12">12 </option>
+                        	<option value="13" >13 </option >
+	                      <option value="14">14 </option>
+	                      <option value="15">15 </option>
+	                      <option value="16">16 </option>
+	                      <option value="17">17</option>
 	                    </select>
 	                  </div>
               </div>
@@ -179,12 +234,23 @@
                 <p >  Age <span style="color:red;">*</span></p>
 		                <div class="select-wrap one-third">
 	                    <select v-model="age6"  id="sel" >
-	                    	<option value="1" >1 </option >
+	                    		<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
 	                      <option value="4">4 </option>
 	                      <option value="5">5 </option>
 	                      <option value="6">6 </option>
+                      	<option value="7" >7 </option >
+	                      <option value="8">8 </option>
+	                      <option value="9">9 </option>
+	                      <option value="10">10 </option>
+	                      <option value="11">11</option>
+	                      <option value="12">12 </option>
+                        	<option value="13" >13 </option >
+	                      <option value="14">14 </option>
+	                      <option value="15">15 </option>
+	                      <option value="16">16 </option>
+	                      <option value="17">17</option>
 	                    </select>
 	                  </div>
               </div>
@@ -192,12 +258,23 @@
                <p >  Age <span style="color:red;">*</span></p>
 		                <div class="select-wrap one-third">
 	                    <select v-model="age7"  id="sel">
-	                    	<option value="1" >1 </option >
+	                    		<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
 	                      <option value="4">4 </option>
 	                      <option value="5">5 </option>
 	                      <option value="6">6 </option>
+                      	<option value="7" >7 </option >
+	                      <option value="8">8 </option>
+	                      <option value="9">9 </option>
+	                      <option value="10">10 </option>
+	                      <option value="11">11</option>
+	                      <option value="12">12 </option>
+                        	<option value="13" >13 </option >
+	                      <option value="14">14 </option>
+	                      <option value="15">15 </option>
+	                      <option value="16">16 </option>
+	                      <option value="17">17</option>
 	                    </select>
 	                  </div>
               </div>
@@ -205,12 +282,23 @@
                 <p >  Age <span style="color:red;">*</span></p>
 		                <div class="select-wrap one-third">
 	                    <select v-model="age8"  id="sel" >
-	                    	<option value="1" >1 </option >
+	                    		<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
 	                      <option value="4">4 </option>
 	                      <option value="5">5 </option>
 	                      <option value="6">6 </option>
+                      	<option value="7" >7 </option >
+	                      <option value="8">8 </option>
+	                      <option value="9">9 </option>
+	                      <option value="10">10 </option>
+	                      <option value="11">11</option>
+	                      <option value="12">12 </option>
+                        	<option value="13" >13 </option >
+	                      <option value="14">14 </option>
+	                      <option value="15">15 </option>
+	                      <option value="16">16 </option>
+	                      <option value="17">17</option>
 	                    </select>
 	                  </div>
               </div>
@@ -222,6 +310,7 @@
 				            </div>
 		              </div>
 	        			</div>
+               
 	        			<div class="col-md-3 d-flex">
 	        				<div class="form-group d-flex align-self-stretch">
 			              <input type="button" value="Vérifier les disponibilités" @click="getfetch()" class="btn btn-primary py-3 px-4 align-self-stretch">
@@ -535,7 +624,7 @@ export default {
     this.getResto();
     /********************************** */
     let d = new Date();
-    let day =(d.getDate())
+    let day =(d.getDate()+1)
     let month =(d.getMonth()+1)
     let year = d.getFullYear()
     if(month<10){

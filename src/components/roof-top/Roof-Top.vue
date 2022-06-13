@@ -266,6 +266,7 @@ console.log("fghhj",this.idus);
 	goBooking(id){
 		this.$router.push({name:'booking' , params:{id:id , catg:'roof'} })
 	},
+  /**************************************************** */
 	 isRating(event){
  if(event.target.checked==1){
  this.isRatingsExist=true;
@@ -357,7 +358,7 @@ console.log("fghhj",this.idus);
     }
 
 	}
-		
+		/**************************************************** */
     }
 
 

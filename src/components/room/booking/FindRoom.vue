@@ -507,8 +507,9 @@ export default {
      this.nuits=nuit
      },
       findRoom(){
-        if(!this.bookgroom1.nbenfant=='' && !this.bookgroom1.nbbebe=='' && !this.bookgroom1.nbadult==''){
+        if(!this.bookgroom1.nbadult=='' && !isNaN(this.bookgroom1.nbenfant) && !isNaN(this.bookgroom1.nbbebe)){
         localStorage.setItem('bookgroom1',JSON.stringify(this.bookgroom1))
+        console.log('rrrrrttyryyrry',this.bookgroom1);
         }
 
         if(!this.bookgroom2.nbenfant=='' && !this.bookgroom2.nbbebe=='' && !this.bookgroom2.nbadult==''){

@@ -157,7 +157,7 @@
                   </div>
                   <div >
                     
-                    <form class="bg-white p-5 contact-form" v-if="cpt==0">
+                    <form class="bg-white p-5 contact-form" v-if="cpt==0 && showPhoto==false">
                       <div class="form-group">
                         <input
                           type="text"
@@ -215,11 +215,11 @@
                   <div class="row justify-content-center mb-9 pb-2">
                   <div class="col-md-10 heading-section text-center"> 
                  <h1>
-                      terminé</h1>
+                      Vous étes connecter</h1>
                   </div>
                   </div>
                   <div class="row justify-content-center mb-9 pb-2">
-                  <img src="../../images/done.png">
+                  <img style="width:170px" src="../../images/done.png">
                   </div>
                   </div>
                     </form>
@@ -598,9 +598,8 @@ export default {
               )
               .then(res=>{this.$router.push({name:'finaleStep', params:{id:res.data.Booking.id}})
               this.booking_id.push(res.data.Booking.id);
-              console.log("booooooooooooooooooooooooooook",this.booking_id);
               });
-          }localStorage.setItem('booking_id' , JSON.stringify( this.booking_id));
+          }
           }
           else{
              for (let i = 0; i < this.rooms.length; i++) {
@@ -628,7 +627,7 @@ export default {
               ).then(res=>{this.$router.push({name:'finaleStep', params:{id:res.data.Booking.id}})
               this.booking_id.push(res.data.Booking.id);
               });
-          }localStorage.setItem('booking_id' , JSON.stringify( this.booking_id));
+          }
           }
          
         }
@@ -705,7 +704,7 @@ export default {
                               }
                             )
                             .then((res) => {
-                              localStorage.setItem('booking_id' , JSON.stringify( this.booking_id));
+                              ""
                               window.open(res.data.payUrl);
                               console.log("book", res.data.payUrl);
                             });
@@ -786,7 +785,7 @@ export default {
                               }
                             )
                             .then((res) => {
-                              localStorage.setItem('booking_id' , JSON.stringify( this.booking_id));
+                              ""
                               window.open(res.data.payUrl);
                               console.log("book", res.data.payUrl);
                             });
