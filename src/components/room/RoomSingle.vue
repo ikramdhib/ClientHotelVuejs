@@ -215,7 +215,7 @@
           </div>
 
         </div>
-          <div class="col-md-12 ">
+          <div class="col-md-12 " v-if="chambres.length>0">
             <div class="bg-white p-5">
                   <div class="row">
                   <div class="col-md-4"  v-for="chambre in chambres" :key="chambre.id"> 
@@ -263,7 +263,8 @@ calcul:{},
   chambres:[],
   per:{},
   pric:{},
-  type_id:{},
+  type_id:0,
+  tt:0,
   ro:{},
   user:{},
   idus:0,
@@ -286,7 +287,7 @@ comment:[],
    
   mounted(){
    this.getRoom();
-    this.getRooms();
+  
     this.getType();
     this.getcomment();
 
@@ -318,29 +319,19 @@ console.log("fghhj",this.idus);
           this.offres=res.data.rooms.offres;
           this.images=res.data.rooms.images;
           this.ro=res.data.rooms.id;
-
- 
- 
-
-
-
          console.log("option",this.type_id) 
            console.log("room",this.types)
-         
+        
 	  })
-
-	  },
-    async getRooms(){
  await axios
-  .get("http://localhost:8000/api/getRoom", 
+
+  .get("http://localhost:8000/api/memetype/"+this.type_id, 
        
       )
       .then((res) => {
 		   
-			   this.chambres= res.data.rooms;
-			 
-
-           console.log(this.chambres)
+			   this.chambres= res.data.types;
+			  console.log("ttttt",this.chambres)
 		   
    }
 	)
@@ -373,23 +364,7 @@ await axios .get("http://127.0.0.1:8000/api/gettee/"+id, {
             console.log(this.comment);
 
        })},
-       async getPrice(){
- await axios
-  .get("http://127.0.0.1:8000/api/price", 
-
-      )
-      .then((res) => {
-     
- 
-      this.prixs= res.data.price;
-	  
-
-        console.log(this.prixs);
-      })
-	
-    
-      },
-     
+      
 
 
 
