@@ -329,7 +329,7 @@
                         </div>
                       </div>
                       <div class="col-md-4">
-                        <label id="label"> Prénom :</label><span>*</span>
+                        <label id="label"> Prénom :</label><span :style="isFirstname==false ? 'color:red;':'color:black'" >*</span>
                         <input
                           type="text"
                           class="form-control"
@@ -337,7 +337,7 @@
                         />
                       </div>
                       <div class="col-md-4">
-                        <label id="label"> Nom :</label> <span>*</span>
+                        <label id="label"> Nom :</label> <span :style="isLastname==false ? 'color:red;':'color:black'">*</span>
                         <input
                           type="text"
                           class="form-control"
@@ -349,7 +349,7 @@
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-4">
-                        <label id="label"> Email :</label><span>*</span>
+                        <label id="label"> Email :</label><span :style="isEmail==false ? 'color:red;':'color:black'">*</span>
                         <input
                           type="email"
                           class="form-control"
@@ -357,7 +357,7 @@
                         />
                       </div>
                       <div class="col-md-4">
-                        <label id="label"> Téléphone :</label><span>*</span>
+                        <label id="label"> Téléphone :</label><span :style="isTel==false ? 'color:red;':'color:black'">*</span>
                         <input
                           type="text"
                           class="form-control"
@@ -365,8 +365,7 @@
                         />
                       </div>
                       <div class="col-md-4">
-                        <label id="label"> Pays de résidance :</label
-                        ><span>*</span>
+                        <label id="label"> Pays de résidance :</label><span :style="isPay==false ? 'color:red;':'color:black'">*</span>
                         <input
                           type="text"
                           class="form-control"
@@ -379,15 +378,15 @@
                     <div class="row">
                       <div class="col-md-4">
                         <label id="label"> CIN / Passport :</label
-                        ><span>*</span>
+                        ><span :style="isCin==false ? 'color:red;':'color:black'">*</span>
                         <input
                           type="text"
                           class="form-control"
                           v-model="user.cin"
                         />
                       </div>
-                      <div class="col-md-4 py-4">
-                        <div class="form-check">
+                      <div :style="isMode==false ? 'color:red;':'color:black'" class="col-md-4 py-4">
+                        <div class="form-check" >
                           <input
                             class="form-check-input"
                             type="radio"
@@ -487,12 +486,20 @@ export default {
       bookingDate: null,
       nuits: null,
       rooms: null,
-      isEnLigne: null,
+      isEnLigne:"o",
       booking: null,
       nb: 0,
       cpt:0,
       showPhoto:false,
       booking_id:[],
+      isFirstname:true,
+      isLastname:true,
+      isEmail:true,
+      isTel:true,
+      isPay:true,
+      isCin:true,
+      isMode:true,
+      ifVerif:true,
     };
   },
   mounted() {
@@ -572,6 +579,31 @@ export default {
     },
 
     BookNow() {
+      if(this.user.firstname==""){
+        this.isFirstname=false;
+      }
+      if(this.user.lastname==""){
+        this.isLastname=false;
+      }
+      if(this.user.phone==""){
+        this.isTel=false
+      }
+      if(this.user.cin==""){
+        this.isCin=false
+      }
+      if(this.user.email==""){
+        this.isEmail=false;
+      }
+      if(this.user.country==""){
+        this.isPay=false
+      }
+      if(this.isEnLigne!=0 && this.isEnLigne!=1){
+        this.isMode=false;
+      }
+      if( this.isFirstname==false || this.isLastname==false || this.isEmail==false 
+      || this.isTel==false || this.isPay==false || this.isCin==false || this.isMode==false){
+        this.ifVerif=false;
+      }else if(this.ifVerif==true){
         if (this.isEnLigne == 0) {
           if(this.user.id!=null){
           for (let i = 0; i < this.rooms.length; i++) {
@@ -797,8 +829,8 @@ export default {
           }
           
         }
+      }
     },
-    payNow() {},
   },
 };
 </script>

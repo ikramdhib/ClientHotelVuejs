@@ -45,7 +45,7 @@
     </div>
               
               </div>
-          		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
+          		<div class="col-md-9 room-single mt-4 mb-5 ftco-animate">
     						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.{{room.description}}</p>
     					<div class="d-md-flex mt-5 mb-5">
     							<ul class="list">
@@ -70,11 +70,8 @@
     					</div>
    
           </div> </div>
-           <div class="col-lg-4 sidebar ftco-animate">
+           <div class="col-md-4 sidebar ftco-animate">
           <div class="form-group">
-        
-             
-          		
                  <div class="box">
                  <router-link :to="'findroom'" > <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5"></router-link>
               </div>
@@ -92,8 +89,9 @@
               </ul>
               </div>
               </div></div>
-             <div v-if="offres.length>0">
-                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              
+             <div class="row" v-if="offres.length>0">
+                 <div id="carouselExampleIndicators" class="carousel slide"  data-ride="carousel">
 						<ol class="carousel-indicators">
 							<div v-for="(offre, index) in room.offres" :key="index">
 								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
@@ -115,11 +113,11 @@
 								</div>
             
 						</div>
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev" hidden>
 							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only"  id="plus">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next" hidden>
 							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only"  >Next</span>
 						</a>
@@ -229,7 +227,7 @@
                       <h5 class="card-title">{{ objet.nom_type }} </h5></div></div>
 					  <hr/>
                 
-                     <p class="card-text" id="pr"> {{chambre.description.substr(0 , 110)+',...'}} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(chambre.id)"  >  </p>
+                     <p class="card-text"> {{chambre.description.substr(0 , 110)+',...'}} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(chambre.id)"  >  </p>
                     
 					  <hr/>                    
                       <p class="card-text" id="pr"> {{ chambre.price_booking }} DT  </p>
@@ -541,6 +539,11 @@ await axios .get("http://127.0.0.1:8000/api/gettee/"+id, {
 #f{
   color:black;
 }
+#pr{
+	color: black;
+	font-family: monospace;
+	font-size: 20px;
+}
 div.c{
 
         margin: 0 auto; /* Added */
@@ -551,6 +554,14 @@ div.c{
 #p{
  color: #d1a44f;
  font-size: 22px;
+}
+#r{
+	margin-left: 80%;
+}
+#bt{
+	background-color: transparent;
+	border-color: transparent;
+	color: #8d703b;
 }
 #card{
 box-shadow: 10px 5px 5px #8d703b;}
