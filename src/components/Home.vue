@@ -57,18 +57,18 @@
     				<form action="#" class="booking-form">
 	        		<div class="row">
 	        			<div class="col-md-3 d-flex ">
-	        				<div  id="date" class="form-group p-6 align-self-stretch align-items-end">
+	        				<div  id="date" class="form-group p-6 align-self-stretch align-items-end" >
 	        					<div  class="wrap"  >
-				    					<label id="label">Date d'arriver</label>
-				    					<input id="ee"  v-model="fetch.start" type="date" @change="changedate()" :min="dateNow" class="form-control checkin_date" >
+				    					<label id="label" :style="isArr==false ? 'color:red;':'color:#7b6233'" >Date d'arriver <span style="color:red;" v-if="isArr==false" >*</span></label>
+				    					<input id="ee"  :style="isArr==false ? 'color:red;':'color:black'"  v-model="fetch.start" type="date" @change="changedate()" :min="dateNow" class="form-control checkin_date" >
 			    					</div>
 			    				</div>
 	        			</div>
 	        			<div class="col-md-3 d-flex"> 
 	        				<div  id="date" class="form-group align-self-stretch  align-items-end">
 	        					<div class="wrap">
-				    					<label  id="label" for="#">Date de départ</label>
-				    					<input id="ee" v-model="fetch.end" type="date" :min="fetch.start"   class="form-control checkout_date" >
+				    					<label  id="label"  :style="isDep==false ? 'color:red;':'color:#7b6233'" for="#">Date de départ <span style="color:red;" v-if="isDep==false" >*</span> </label>
+				    					<input id="ee"  :style="isDep==false ? 'color:red;':'color:#7b6233'" v-model="fetch.end" type="date" :min="fetch.start"   class="form-control checkout_date" >
 			    				</div>
 			    				</div>
 	        			</div>
@@ -604,6 +604,9 @@ export default {
     enfant6:false,
     enfant7:false,
     enfant8:false,
+    isArr:true,
+    isDep:true,
+    isEmpty:true,
     age1:"6",
     age2:"6",
     age3:"6",
@@ -644,7 +647,7 @@ export default {
 
 
   methods: {
-    changedate(){
+changedate(){
     let d=parseInt(this.fetch.start.slice(8, 10));
     let m=parseInt(this.fetch.start.slice(5, 7));
     let y =parseInt(this.fetch.start.slice(0, 4));
@@ -738,6 +741,7 @@ export default {
     console.log(date);
     
     },
+   
     clickPlussAdult(){
       this.nbadult++;
     },
@@ -812,6 +816,19 @@ export default {
     },
 
 		  getfetch(){
+         console.log(this.fetch.start  , " tt" , typeof(this.fetch.end));
+        if(this.fetch.start==""){
+          this.isArr=false;
+        }
+        if(this.fetch.end==""){
+          console.log(true);
+          this.isDep=false;
+        }
+        if(this.isDep==false || this.isArr==false){
+          console.log("fuck")
+        }
+        else if(this.isDep==true && this.isArr==true){
+          console.log(this.isArr  , " tt" , this.isDep);
         if(this.enfant1){
         if(this.age1>=6){
           this.fetch.nbenfant=(parseInt(this.fetch.nbenfant)+1)
@@ -887,7 +904,7 @@ export default {
         else{
           this.isFetch=false
         }
-       
+        }
       },
       async getspa(){
 await axios.get('http://127.0.0.1:8000/api/seul').then(res=>{

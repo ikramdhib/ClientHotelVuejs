@@ -40,6 +40,13 @@ const routes=[
         path:'/profile',
         name:'profile',
         component: () => import('./components/client/Profile.vue'),
+        beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem("token_client")) {
+              next("login");
+            } else {
+              next();
+            }
+          }
     },
     {
         path:'/forgetpassword',
@@ -93,16 +100,31 @@ const routes=[
         path:'/profileedite:id',
         name:'profileedite',
         component: () => import('./components/client/ProfileEdite.vue'),
+        beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem("token_client")) {
+              next("login");
+            } else {
+              next();
+            }
+          }
     },
     {
         path:'/offres',
         name:'offres',
         component: () => import('./components/client/Offres.vue'),
+
     },
     {
         path:'/notifications',
         name:'notifications',
         component: () => import('./components/client/Notifications.vue'),
+        beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem("token_client")) {
+              next("login");
+            } else {
+              next();
+            }
+          }
     },
     {
         path:'/restaurants',

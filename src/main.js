@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import router from './router';
 import moment from 'moment';
+
 //import fr from 'moment/locale/fr';
 import AppWrapper from './AppWrapper.vue';
 

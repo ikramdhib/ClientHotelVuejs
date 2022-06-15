@@ -33,6 +33,12 @@
         <div class="row block-9 slide-top" >
           <div class="col-md-6 order-md-last d-flex">
             <form  class="bg-white p-5 contact-form">
+                <ul style="list-style-type-center:none" >
+                      <li class="li" style="color:red" v-for="error in errors" :key="error"><InlineMessage>{{ error }}</InlineMessage> </li>
+                      </ul>
+                       <div class="li" v-if="auth">
+                        <li class="li" style="color:red"><InlineMessage>{{ auth }}</InlineMessage> </li>
+                        </div>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Adresse E-mail" v-model="user.email">
               </div>
@@ -79,20 +85,35 @@ export default {
            user:{
                email:"",
                password:""
-           }
+           },
+           errors:[],
+           auth:"",
        }
     },
     methods:{
-        async login(){
+     async login(){
+
+         if(this.user.email==""){
+				this.errors.push(" il doit saisir votre email")
+	               }
+            if(this.user.password==""){
+				this.errors.push(" il doit saisir votre mot de passe")
+	               }       
           await axios.post('http://localhost:8000/api/user/login',{
              email:this.user.email,
              password:this.user.password
          } ).then(response=>{
-             let res = response.data;
+             let res =response.data.error;
+              if(res=="UnAuthorised Access"){
+                 this.auth="Email ou Mot de Passe est incorrect, Ressez! "
+             }else{
              localStorage.setItem('token_client', response.data.token);
             console.log(res)
-			this.profile()
+			this.profile()}
+
 		})
+   
+                 
         },
           async profile(){
             await axios.get('http://localhost:8000/api/user/user-profile',

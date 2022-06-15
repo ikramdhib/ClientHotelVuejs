@@ -239,9 +239,6 @@
                 <div class="ml-md-0">
                   <div class="col-md-6 d-flex align-self-stretch">
                     <div class="media block-6 services py-6 text-center">
-                      <!--	<div class="icon d-flex align-items-center justify-content-center">
-              		<span class="flaticon-airplane49" ></span> 
-              	</div>-->
                       <h3 id="title" class="mb-4">3. Réserver !</h3>
                     </div>
                   </div>
@@ -250,10 +247,6 @@
                   <div class="ml-md-0">
                     <div class="col-md-6 d-flex align-self-stretch">
                       <div class="media block-6 services px-4 text-center">
-                        <!--	<div class="ic
-                        on d-flex align-items-center justify-content-center">
-              		<span class="flaticon-airplane49" ></span> 
-              	</div>-->
                         <h6 id="titre" class="mb-4">
                           Information personnelles
                         </h6>
@@ -266,10 +259,11 @@
                 <form class="bg-light p-5">
                   <div class="form-group">
                     <div class="row">
+                      <div class="col-md-8">
                       <table class="table table-borderless">
                         <tbody>
                           <tr>
-                            <td colspan="2" id="tit">
+                            <td colspan="2" id="tito">
                               Récapitulatif
                               <hr />
                             </td>
@@ -277,12 +271,15 @@
                               <p id="la">{{ nuits }} Nuits</p>
                             </td>
                           </tr>
-                          <tr v-for="room in rooms" :key="room">
+                          <tr id="trr" v-for="(room , index) in rooms" :key="index">
+                            <td>
+                              <p id="tit">Chambre({{ index+1 }}):</p>
+                            </td>
                             <td>
                               <p id="tit">{{ room.type }}</p>
                             </td>
                             <td>
-                              <p id="la">
+                              <p >
                                 <span v-for="i in room.nbadult" :key="i"
                                   ><i id="icone" class="icon icon-user"> </i>
                                 </span>
@@ -291,10 +288,12 @@
                               </p>
                             </td>
                             <td>
-                              <p id="la">{{ room.totale }} DT</p>
+                              <p id="laa">{{ room.totale }} DT</p>
                             </td>
                           </tr>
                           <tr>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td>
@@ -309,6 +308,7 @@
                           </tr>
                         </tbody>
                       </table>
+                      </div>
                     </div>
                   </div>
                 </form>
@@ -316,10 +316,13 @@
               <div class="row py-4">
                 <form class="bg-light p-5 contact-form">
                   <div class="form-group">
+                     <ul style="list-style-type-center:none" >
+                      <li class="li" style="color:red" v-for="error in errors" :key="error"><InlineMessage>{{ error }}</InlineMessage> </li>
+                      </ul>
                     <div class="row">
                       <div class="col-md-2">
                         <i class="icon-circle-arrow-right"></i>
-                        <label id="label"> Titre : </label><span>*</span>
+                        <label id="label"> Titre : </label>
                         <div class="select-wrap one-third">
                           <select name="" id="" class="form-control">
                             <option value="">M.</option>
@@ -486,7 +489,7 @@ export default {
       bookingDate: null,
       nuits: null,
       rooms: null,
-      isEnLigne:"o",
+      isEnLigne:1,
       booking: null,
       nb: 0,
       cpt:0,
@@ -500,6 +503,7 @@ export default {
       isCin:true,
       isMode:true,
       ifVerif:true,
+      errors:[],
     };
   },
   mounted() {
@@ -603,6 +607,7 @@ export default {
       if( this.isFirstname==false || this.isLastname==false || this.isEmail==false 
       || this.isTel==false || this.isPay==false || this.isCin==false || this.isMode==false){
         this.ifVerif=false;
+        this.errors.push(" Les champs qui contient (*) dans ces titres doit étre remplit")
       }else if(this.ifVerif==true){
         if (this.isEnLigne == 0) {
           if(this.user.id!=null){
@@ -914,5 +919,16 @@ export default {
   background-color: transparent;
   border-color: transparent;
   color: grey;
+}
+#tito{
+  font-family:'Times New Roman', Times, serif;
+  font-size: 20px;
+  font-weight: bolder;
+}
+#la{
+  padding-left:10px;
+}
+#laa{
+  padding: 5px;
 }
 </style>

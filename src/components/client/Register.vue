@@ -32,7 +32,11 @@
         </div>
         <div class="row block-9 slide-top">
           <div class="col-md-6 order-md-last d-flex">
+           
             <form class="bg-white p-5 contact-form">
+                <ul style="list-style-type-center:none" >
+                                <li class="li" style="color:red" v-for="error in errors" :key="error"><InlineMessage>{{ error }}</InlineMessage> </li>
+                      </ul>
               <div class="form-group">
                   <div class="row">
                   <div class="col-md-6"> <input type="text" class="form-control" placeholder="Nom" v-model="user.firstname"></div>
@@ -99,11 +103,36 @@ export default {
 				role:"",
 				email:"",
 				password:""
-			}
+			},
+      errors:[],
 		}
 	},
 	methods:{
 	async  addUser(){
+    if(this.user.firstname==""){
+				this.errors.push("le nom doit étre saisie")
+	               }
+                 if(this.user.lastname==""){
+				this.errors.push("le prenom doit étre saisie")
+	               }
+                 if(this.user.phone==""){
+				this.errors.push("le numero de telephone doit étre saisie")
+	               }
+                 if(this.user.country==""){
+				this.errors.push(" le pays doit étre saisie")
+	               }
+                 if(this.user.zipcode==""){
+				this.errors.push(" le code postal doit étre saisie")
+	               }
+                  if(this.user.cin==""){
+				this.errors.push("le numero de carte d'identité doit étre saisie")
+	               }
+                  if(this.user.email==""){
+				this.errors.push("l'email doit étre saisie")
+	               }
+                  if(this.user.password==""){
+				this.errors.push("le mot de passe doit étre saisie")
+	               }
 		 await axios.post("http://localhost:8000/api/user/register",{
 				firstname:this.user.firstname,
 				lastname:this.user.lastname,
@@ -113,7 +142,6 @@ export default {
 				cin:this.user.cin,
         email:this.user.email, 
          role:"user",
-         img:"images/bg1.png",
 				password:this.user.password
 		}).then((response)=>{
 			let res = response.data;

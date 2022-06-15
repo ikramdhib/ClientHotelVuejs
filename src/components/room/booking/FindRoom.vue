@@ -39,13 +39,13 @@
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
                   <div class="row">
-                  <div class="col-md-5"> 
-                  <i class="icon-circle-arrow-right"></i>  <label id="label">   Date d'arriver :</label>
-                      <input placeholder="Select date" type="date" id="example" class="form-control" :min="dateNow"  v-model="bookingdate.start">
+                  <div  class="col-md-5"> 
+                      <label id="label" >   Date d'arriver :</label>
+                      <input :style="isStart==true ? 'border: solid 1px red;':'border: solid 0.5px #DCDCDC'" placeholder="Select date" type="date" id="example" class="form-control" :min="dateNow"  v-model="bookingdate.start">
                     </div>
-                    <div class="col-md-5"> 
+                    <div   class="col-md-5"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Date de départ :</label>
-                      <input :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" v-model="bookingdate.end"  @change="nbNuit()">
+                      <input :style="isEnd==true ? 'border: solid 1px red;':'border: solid 0.5px #DCDCDC'" :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" v-model="bookingdate.end"  @change="nbNuit()">
                     </div>
                      <div class="col-md-2"> 
                        <h6 id="nuit" class="mb-4">{{ this.nuits }} : Ntuis .</h6>
@@ -58,7 +58,7 @@
                      <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >Nombre de chambre : </label>
 		                <div class="select-wrap one-third">
-	                    <select  id="" class="form-control" v-model="nbChambre"  @change="display($event)">
+	                    <select style="border: solid 0.5px #DCDCDC" id="" class="form-control" v-model="nbChambre"  @change="display($event)">
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
@@ -78,7 +78,7 @@
                      <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Adultes :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom1.nbadult">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom1.nbadult">
 	                    	<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
@@ -91,7 +91,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Enfants :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom1.nbenfant">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom1.nbenfant">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -103,7 +103,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Bébé :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom1.nbbebe">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom1.nbbebe">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -126,7 +126,7 @@
                      <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Adultes :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom2.nbadult">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom2.nbadult">
 	                    	<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
@@ -139,7 +139,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Enfants :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom2.nbenfant">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom2.nbenfant">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -151,7 +151,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Bébé :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom2.nbbebe">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom2.nbbebe">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -174,7 +174,7 @@
                      <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Adultes :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom3.nbadult">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom3.nbadult">
 	                    	<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
@@ -187,7 +187,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Enfants :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom3.nbenfant">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom3.nbenfant">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -199,7 +199,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Bébé :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom3.nbbebe">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom3.nbbebe">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -234,13 +234,13 @@
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
                   <div class="row">
-                  <div class="col-md-5"> 
+                  <div  class="col-md-5"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label">   Date d'arriver :</label>
-                      <input placeholder="Select date" type="date" id="example" class="form-control" :min="dateNow"  v-model="bookingdate.start">
+                      <input :style="isStart==true ? 'border: solid 1px red;':'border: solid 0.5px #DCDCDC'" placeholder="Select date" type="date" id="example" class="form-control" :min="dateNow"  v-model="bookingdate.start">
                     </div>
                     <div class="col-md-5"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Date de départ :</label>
-                      <input :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" @change="nbNuit()" v-model="bookingdate.end">
+                      <input :style="isEnd==true ? 'border: solid 1px red;':'border: solid 0.5px #DCDCDC'" :placeholder="dateNow" type="date" id="example"   :min="bookingdate.start" class="form-control" @change="nbNuit()" v-model="bookingdate.end">
                     </div>
                      <div class="col-md-2"> 
                        <h6 id="nuit" class="mb-4"> {{ nuits }} : Ntuis .</h6>
@@ -253,7 +253,7 @@
                      <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >Nombre de chambre : </label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="nbChambre"  @change="display($event)">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="nbChambre"  @change="display($event)">
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
@@ -273,7 +273,7 @@
                      <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Adultes :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom1.nbadult">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom1.nbadult">
 	                    	<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
@@ -286,7 +286,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Enfants :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom1.nbenfant">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom1.nbenfant">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -298,7 +298,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Bébé :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom1.nbbebe">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom1.nbbebe">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -321,7 +321,7 @@
                      <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Adultes :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom2.nbadult">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom2.nbadult">
 	                    	<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
@@ -334,7 +334,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Enfants :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom2.nbenfant">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom2.nbenfant">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -346,7 +346,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Bébé :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom2.nbbebe">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom2.nbbebe">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -369,7 +369,7 @@
                      <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Adultes :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom3.nbadult">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom3.nbadult">
 	                    	<option value="1" >1 </option >
 	                      <option value="2">2 </option>
 	                      <option value="3">3 </option>
@@ -382,7 +382,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Enfants :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom3.nbenfant">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom3.nbenfant">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -394,7 +394,7 @@
                     <div class="col-md-4"> 
                   <i class="icon-circle-arrow-right"></i>  <label id="label" >   Bébé :</label>
 		                <div class="select-wrap one-third">
-	                    <select name="" id="" class="form-control" v-model="bookgroom3.nbbebe">
+	                    <select style="border: solid 0.5px #DCDCDC" name="" id="" class="form-control" v-model="bookgroom3.nbbebe">
 	                    	<option value="0">0 </option>
 	                    	<option value="1">1 </option>
 	                      <option value="2">2 </option>
@@ -463,7 +463,9 @@ export default {
       isFetch:false,
       isNotFetch:true,
       fetch:null,
-      nuits:null
+      nuits:null,
+      isEnd: false,
+      isStart:false,
     }
   },
   mounted(){
@@ -507,6 +509,16 @@ export default {
      this.nuits=nuit
      },
       findRoom(){
+        if(this.bookingdate.start==""){
+          this.isStart=true;
+        }
+        if(this.bookingdate.end==""){
+          this.isEnd=true;
+        } 
+        console.log(this.isEnd ,"hgy", this.isStart);
+        if(this.isEnd==true || this.isStart==true){
+          console.log(true);
+        }else if (this.isEnd==false && this.isStart==false) {
         if(!this.bookgroom1.nbadult=='' && !isNaN(this.bookgroom1.nbenfant) && !isNaN(this.bookgroom1.nbbebe)){
         localStorage.setItem('bookgroom1',JSON.stringify(this.bookgroom1))
         console.log('rrrrrttyryyrry',this.bookgroom1);
@@ -521,7 +533,7 @@ export default {
         localStorage.setItem('bookingdate',JSON.stringify(this.bookingdate))
         localStorage.setItem('nbchambre', this.nbChambre);
         this.$router.push('selectroom');
-        
+        }
      },
 
      display(event){

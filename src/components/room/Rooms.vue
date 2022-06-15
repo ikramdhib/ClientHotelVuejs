@@ -184,65 +184,30 @@ export default {
       },     
   async getRoom(){
  await axios
-  .get("http://localhost:8000/api/getRoom", 
-       
-      )
-      .then((res) => {
-		   
-			   this.rooms = res.data.rooms;
-			   this.image=res.data.rooms.images.name;
-
-           console.log(this.table);
-		   
-   } 
-	) .then(this.getType())
-       
-
-	  },
-          
-		  
-	 
-	  async getType(){
+  .get("http://localhost:8000/api/getRoom",)
+.then((res) => {
+this.rooms = res.data.rooms;
+this.image=res.data.rooms.images.name;
+console.log(this.table);}).then(this.getType())},
+ async getType(){
  await axios
-  .get("http://127.0.0.1:8000/api/type", 
-
-      )
+  .get("http://127.0.0.1:8000/api/type", )
       .then((res) => {
-     
- 
-      this.types = res.data.type;
-	  
-
-        console.log(this.types);
-      })
-	
-    
-      },
-	  
-	
-	  
-  }}
-	  </script>
-	  <style >
-	div.box{
-	 font-size: 15px;
-	 color: black;
-
-	  }
-	  #c{
-		  color:#bb9245;
-	  }
-	  	.bo{
-	
-	 color:#bb9245;
-		font-size: 20px;
-    font-weight: bold;
-	  }
-	  	.b1{
-	font-size: 15px;
-	 color:grey;
-font-weight: lighter;
-
-	  }
-
-	  </style>
+ this.types = res.data.type;
+console.log(this.types); })},}}
+</script>
+ <style >
+div.box{
+font-size: 15px;
+color: black; }
+#c{
+color:#bb9245;
+}.bo{
+ color:#bb9245;
+font-size: 20px;
+font-weight: bold;}
+.b1{
+font-size: 15px;
+color:grey;
+font-weight: lighter}
+</style>

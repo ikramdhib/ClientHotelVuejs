@@ -518,7 +518,6 @@
               <div  class="row" v-for="room3 in rooms3" :key="room3.id">
                 <form class="bg-light p-5 contact-form">
               <div class="form-group">
-                
             <div class="col-md-9"> 
                 <table  class="table table-borderless ">
                  
@@ -551,7 +550,7 @@
                       <td colspan="2" id="label"> {{ room3.type }} </td>
                     </tr>
                     <tr>
-                      <td colspan="2" id="desc">  {{ room3.description }} </td>
+                      <td colspan="2" id="desc">  {{ room3.description.substr(0 , 110)+',...' }} </td>
                     </tr>
                       <tr v-if="room3.options.length==0 " >
                        <td  > <div class="heading-section text-center">
@@ -562,7 +561,7 @@
                   room3.type,
                  room3.nbAdult,
                     0
-                  )" :value="room3.price_booking" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+                  )" :value="room3.price_booking +' DT'" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
                     </div>
                     </td>
                     </tr>
@@ -685,7 +684,7 @@
                       <td> 
                          <div class="form-group">
           <div class="heading-section text-center">
-                <input type="button" :value="((room3.price_booking+option.price_option)*nuits)" v-on:click="bookNow3(
+                <input type="button" :value="((room3.price_booking+option.price_option)*nuits)+' DT'" v-on:click="bookNow3(
                   ((room3.price_booking+option.price_option)*nuits),
                   room3.id ,
                    option.nom_option,
@@ -711,7 +710,7 @@
                   <div class="row justify-content-center mb-9 pb-2 py-4">
           <div class="col-md-4 heading-section text-center"  >
                 <input type="button" value="Accueil" id="bb" v-on:click="goAcc()" class="btn btn-primary btn-md btn-block waves-effect text-center">
-              </div>
+              </div>-
                <div class="col-md-4 heading-section text-center" >
                 <input type="button" id="bb" value="Vos reservation" v-on:click="goProfile" class="btn btn-primary btn-md btn-block waves-effect text-center ">
               </div>
@@ -800,6 +799,7 @@ this.getBookinDates()
  this.selectTheFirstRoom().then(()=>{
    console.log("rrrrrrrrrrrrrrrrrrrrrom", this.rooms1);
 if(this.rooms1.length==0){
+  console.log("gggg");
   this.test()
 }
 })
@@ -816,13 +816,6 @@ if(this.rooms1.length==0){
   this.selectedRoom2=true;
   this.whichroom=2;
 }
-else if(this.size2==0){
-  console.log("effffffff");
-    this.selectTheThirdRoom();
-     this.selectedRoom3=true;
-    this.whichroom==3;
-}
-
   },
   goBack(){
     this.$router.push('findroom')
@@ -875,7 +868,8 @@ else if(this.size2==0){
     }   
   if(this.size2<=0 && this.size3==0){
     console.log("hieeeeeeeee");
-        this.$router.push('bookroom');
+        this.calculeTotale()
+         document.getElementById("btn").click();
       }
      else if(this.size2>0){
        console.log(true);
@@ -1054,8 +1048,15 @@ this.calculeTotale();
       console.log(error);
     })
      }
-        this.size2=this.rooms2.length;
-       console.log(this.size2);
+     this.size2=this.rooms2.length;
+     if(this.size2==0){
+    this.selectTheThirdRoom().then(()=>{
+      console.log(this.size3);
+       this.selectedRoom3=true;
+        this.whichroom=3;
+    })
+    
+}
   },
   async selectTheThirdRoom(){
  if(localStorage.getItem('bookgroom3') != null){
@@ -1074,56 +1075,43 @@ this.calculeTotale();
      
       if(this.tab13.length !=0){
          if(this.reservRoom.length!=0){
+           console.log();
            console.log("eetttt",this.reservRoom.length);
-            for(let f=0 ; f <this.reservRoom.length ; f++){
-              console.log("himem");
-            for(let j=0 ; j<res.data.rooms.length ;j++){
-          console.log("j :",j , "f :",f);
-            console.log("eee");
-          if(this.reservRoom[f].id_room != res.data.rooms[j].id){
-          this.rooms3.push(res.data.rooms[j])
-          }else if(this.reservRoom[f].id_room==res.data.rooms[j].id) { 
-            console.log("hyyyyyyyyyyyyyyyyyyyhooooooooooo**");
-            if(this.reservRoom.length<(f+1)){
-             console.log ("hooooo1")
-            f++;
-            }else{
-              console.log ("hooooo2");
-              j++;
-            }
-            }
-          
-        }
-        
-          }
-          
+           if(this.reservRoom.length==2){
+           let ob1=this.reservRoom[0];
+           let ob2=this.reservRoom[1];
+           this.rooms3=this.tab13.filter(e=>e.id!=ob1.id_room)
+            this.rooms3=this.rooms3.filter(e=>e.id!=ob2.id_room)
+           }else if(this.reservRoom.length==1){
+             console.log("eerrk,kf,nlk");
+             let ob1=this.reservRoom[0];
+             this.rooms3=this.tab13.filter(e=>e.id!=ob1.id_room)
+           }
          }
-         else if(this.reservRoom.length<=0){
-           for(let j=0 ; j<res.data.rooms.length ;j++){
-           console.log("geee");
-          this.rooms3.push(res.data.rooms[j])
+         else if(this.reservRoom.length==0){
+           for(let j=0 ; j<this.tab13.length ;j++){
+          this.rooms3.push(this.tab13[j])
         }
          }
       }
       this.tab23=res.data.bookings
       if(this.tab23.length !=0){
-         if(this.reservRoom.length!=0){
-          for(let j=0 ; j <this.reservRoom.length ; j++){
-        for(let i=0 ; i<res.data.bookings.length ; i++){
-          if(this.reservRoom[j].id_room != res.data.bookings[i].id){
-          this.rooms3.push(res.data.bookings[i]);
-        }else{
-            i++;
-          }
-        }
-      }
+         if(this.reservRoom.length==2){
+           let ob1=this.reservRoom[0];
+           let ob2=this.reservRoom[1];
+           this.rooms3=this.tab23.filter(e=>e.id!=ob1.id_room)
+            this.rooms3=this.rooms3.filter(e=>e.id!=ob2.id_room)
+           }else if(this.reservRoom.length==1){
+             console.log("eerrk,kf,nlk");
+             let ob1=this.reservRoom[0];
+             this.rooms3=this.tab23.filter(e=>e.id!=ob1.id_room)
+           }
          }
          else{
            for(let i=0 ; i<res.data.bookings.length ; i++){
           this.rooms3.push(res.data.bookings[i]);
         }
          }
-      }
        this.size3=this.rooms3.length;
        console.log("vvvvvvvvvvvvv",this.size3);
     }).catch(error=>{
@@ -1132,8 +1120,6 @@ this.calculeTotale();
      } 
      
   },
- 
-
   getBookinDates(){
     this.bookingDate = JSON.parse(localStorage.getItem('bookingdate'));
     let nuit = (Date.parse(this.bookingDate.end)-Date.parse(this.bookingDate.start))/86400000;

@@ -45,7 +45,7 @@
     </div>
               
               </div>
-          		<div class="col-md-9 room-single mt-4 mb-5 ftco-animate">
+          		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
     						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.{{room.description}}</p>
     					<div class="d-md-flex mt-5 mb-5">
     							<ul class="list">
@@ -70,8 +70,11 @@
     					</div>
    
           </div> </div>
-           <div class="col-md-4 sidebar ftco-animate">
+           <div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group">
+        
+             
+          		
                  <div class="box">
                  <router-link :to="'findroom'" > <input type="button" value="Reserver" id="box" class="btn btn-primary py-3 px-5"></router-link>
               </div>
@@ -89,9 +92,8 @@
               </ul>
               </div>
               </div></div>
-              
-             <div class="row" v-if="offres.length>0">
-                 <div id="carouselExampleIndicators" class="carousel slide"  data-ride="carousel">
+             <div v-if="offres.length>0">
+                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<div v-for="(offre, index) in room.offres" :key="index">
 								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
@@ -113,11 +115,11 @@
 								</div>
             
 						</div>
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev" hidden>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
 							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only"  id="plus">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next" hidden>
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
 							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only"  >Next</span>
 						</a>
@@ -191,20 +193,19 @@
         </label>  
       </div>
 
-  
+    </div>
 
    
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
   <symbol id="star" viewBox="0 0 26 28">
     <path d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z"/>
   </symbol>
-</svg></div>
-          </div>
-<div class="col-md-7">
+</svg>
+  <div class="col-md-12">
+
     <textarea class="form-control" placeholder="Ajouter commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6"></textarea>
-        <input type="button" value="Envoyer" id="B"  @click="addRatings" class="btn btn-primary py-3 px-3">
+        <input type="button" value="Envoyer" id="B"  @click="addRatings" class="btn btn-primary py-3 px-3"></div></div>
   </div>
-      </div>
    
 </section>
              <div class="container-fluid">
@@ -214,7 +215,7 @@
           </div>
 
         </div>
-          <div class="col-md-12 ">
+          <div class="col-md-12 " v-if="chambres.length>0">
             <div class="bg-white p-5">
                   <div class="row">
                   <div class="col-md-4"  v-for="chambre in chambres" :key="chambre.id"> 
@@ -227,7 +228,8 @@
                       <h5 class="card-title">{{ objet.nom_type }} </h5></div></div>
 					  <hr/>
                 
-                     <p class="card-text"> {{chambre.description.substr(0 , 110)+',...'}} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(chambre.id)"  >  </p>
+                     <p class="card-text" id="pr"> {{chambre.description.substr(0 , 110)+',...'}}</p>
+ <p class="card-text"> <a :href="'http://localhost:8080/#/Roomsingle'+chambre.id"   > plus de details </a></p>
                     
 					  <hr/>                    
                       <p class="card-text" id="pr"> {{ chambre.price_booking }} DT  </p>
@@ -261,7 +263,8 @@ calcul:{},
   chambres:[],
   per:{},
   pric:{},
-  type_id:{},
+  type_id:0,
+  tt:0,
   ro:{},
   user:{},
   idus:0,
@@ -277,16 +280,16 @@ number2:0,
 number3:0,
 number4:0,
 comment:[],
-chambress:[],
+
     };
   },
   
    
   mounted(){
    this.getRoom();
-    this.getRooms();
-    this.getRoomss();
+  
     this.getType();
+    this.getcomment();
 
      this.isLogin=true;
       if(localStorage.getItem('client')){
@@ -316,59 +319,24 @@ console.log("fghhj",this.idus);
           this.offres=res.data.rooms.offres;
           this.images=res.data.rooms.images;
           this.ro=res.data.rooms.id;
-this.getcomment(id);
- 
-
-
-
          console.log("option",this.type_id) 
            console.log("room",this.types)
-         
+        
 	  })
+ await axios
+
+  .get("http://localhost:8000/api/memetype/"+this.type_id, 
+       
+      )
+      .then((res) => {
+		   
+			   this.chambres= res.data.types;
+			  console.log("ttttt",this.chambres)
+		   
+   }
+	)
 
 	  },
-    async getRooms(){
- await axios
-  .get("http://localhost:8000/api/getRoom", 
-       
-      )
-      .then((res) => {
-		   
-			   this.chambres= res.data.rooms;
-			 
-
-           console.log(this.chambres)
-		   
-   }
-	)
-
-    },
-      async getRoomss(){
- await axios
-  .get("http://localhost:8000/api/getRoomm", 
-       
-      )
-      .then((res) => {
-		   
-			   this.chambress= res.data.rooms;
-		   
-   }
-	)
-
-    },
-    	goDetail(id){
-    this.room=this.chambress.filter(e=>e.id==id)[0]
-    console.log("hooo",this.room);
-         this.options=this.room.options;
-          this.type_nom=this.room.type.nom_type;
-          this.type_id=this.room.type.id;
-          this.typdesc=this.room.type.intitule;
-         this.price=this.room.price_booking;
-          this.offres=this.room.offres;
-          this.images=this.room.images;
-          this.ro=this.room.id;
-          this.getcomment(id)
-		},
       async getType(){
  await axios
   .get("http://127.0.0.1:8000/api/type", 
@@ -385,8 +353,8 @@ this.getcomment(id);
 	
     
       },
-      async getcomment(id){
-         
+      async getcomment(){
+         const id=this.$route.params.id;
 await axios .get("http://127.0.0.1:8000/api/gettee/"+id, {
       
       })
@@ -396,8 +364,7 @@ await axios .get("http://127.0.0.1:8000/api/gettee/"+id, {
             console.log(this.comment);
 
        })},
-       /******************************** */
-     
+      
 
 
 
@@ -539,11 +506,6 @@ await axios .get("http://127.0.0.1:8000/api/gettee/"+id, {
 #f{
   color:black;
 }
-#pr{
-	color: black;
-	font-family: monospace;
-	font-size: 20px;
-}
 div.c{
 
         margin: 0 auto; /* Added */
@@ -554,14 +516,6 @@ div.c{
 #p{
  color: #d1a44f;
  font-size: 22px;
-}
-#r{
-	margin-left: 80%;
-}
-#bt{
-	background-color: transparent;
-	border-color: transparent;
-	color: #8d703b;
 }
 #card{
 box-shadow: 10px 5px 5px #8d703b;}
@@ -614,11 +568,11 @@ CORE STYLES
   color: var(--uiRatingColor);
 }
     
-.rating__control:nth-of-type(1):focus ~ .rating__item:nth-of-type(1)::before,
-.rating__control:nth-of-type(2):focus ~ .rating__item:nth-of-type(2)::before,
-.rating__control:nth-of-type(3):focus ~ .rating__item:nth-of-type(3)::before,
-.rating__control:nth-of-type(4):focus ~ .rating__item:nth-of-type(4)::before,
-.rating__control:nth-of-type(5):focus ~ .rating__item:nth-of-type(5)::before{
+.rating_control:nth-of-type(1):focus ~ .rating_item:nth-of-type(1)::before,
+.rating_control:nth-of-type(2):focus ~ .rating_item:nth-of-type(2)::before,
+.rating_control:nth-of-type(3):focus ~ .rating_item:nth-of-type(3)::before,
+.rating_control:nth-of-type(4):focus ~ .rating_item:nth-of-type(4)::before,
+.rating_control:nth-of-type(5):focus ~ .rating_item:nth-of-type(5)::before{
   content: ""; 
   box-shadow: 0 0 0 var(--ratingOutlineWidth, 4px) var(--uiRatingColorActive);
 
@@ -651,15 +605,15 @@ CORE STYLES
 }
 
 .rating:hover,
-.rating__control:nth-of-type(1):checked ~ .rating__item:nth-of-type(1),
-.rating__control:nth-of-type(2):checked ~ .rating__item:nth-of-type(-n+2),
-.rating__control:nth-of-type(3):checked ~ .rating__item:nth-of-type(-n+3),
-.rating__control:nth-of-type(4):checked ~ .rating__item:nth-of-type(-n+4),
-.rating__control:nth-of-type(5):checked ~ .rating__item:nth-of-type(-n+5){
+.rating_control:nth-of-type(1):checked ~ .rating_item:nth-of-type(1),
+.rating_control:nth-of-type(2):checked ~ .rating_item:nth-of-type(-n+2),
+.rating_control:nth-of-type(3):checked ~ .rating_item:nth-of-type(-n+3),
+.rating_control:nth-of-type(4):checked ~ .rating_item:nth-of-type(-n+4),
+.rating_control:nth-of-type(5):checked ~ .rating_item:nth-of-type(-n+5){
   color: var(--uiRatingColorActive);
 }
 
-.rating__item:hover ~ .rating__item{
+.rating_item:hover ~ .rating_item{
   color: var(--uiRatingColor);
 }
 

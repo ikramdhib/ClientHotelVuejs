@@ -308,7 +308,7 @@ number4:0,
           
 					for(let i=0 ; i < res.data.salle.length ; i++){
 						this.recordd.push(res.data.salle[i]);
-					
+				
           }
             })
           },
