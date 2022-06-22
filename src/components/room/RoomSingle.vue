@@ -152,6 +152,7 @@
    </div></div></div>
            	
             </div>
+            <div v-if="cache==false">
                 <div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group">
                   <h4>Evaluation</h4>
@@ -201,12 +202,14 @@
     <path d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z"/>
   </symbol>
 </svg>
-  <div class="col-md-12">
+      </div>
+ <div class="row">
+          <div class="col-md-6">
 
-    <textarea class="form-control" placeholder="Ajouter commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6"></textarea>
+    <textarea class="form-control" placeholder="Ajouter un commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6"></textarea>
         <input type="button" value="Envoyer" id="B"  @click="addRatings" class="btn btn-primary py-3 px-3"></div></div>
-  </div>
-   
+      </div>
+   </div>
 </section>
              <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
@@ -228,8 +231,7 @@
                       <h5 class="card-title">{{ objet.nom_type }} </h5></div></div>
 					  <hr/>
                 
-                     <p class="card-text" id="pr"> {{chambre.description.substr(0 , 110)+',...'}}</p>
- <p class="card-text"> <a :href="'http://localhost:8080/#/Roomsingle'+chambre.id"   > plus de details </a></p>
+                     <p class="card-text"> {{chambre.description.substr(0 , 110)+',...'}} <input type="button" id="bt" value="plus details" class="btn btn-primary" @click="goDetail(chambre.id)"  > </p>
                     
 					  <hr/>                    
                       <p class="card-text" id="pr"> {{ chambre.price_booking }} DT  </p>
@@ -268,6 +270,7 @@ calcul:{},
   ro:{},
   user:{},
   idus:0,
+  cache:false,
   rating:{
              commentaire:"",
                 },
@@ -287,7 +290,7 @@ comment:[],
    
   mounted(){
    this.getRoom();
-  
+  this.getRoomss();
     this.getType();
     this.getcomment();
 
@@ -324,7 +327,6 @@ console.log("fghhj",this.idus);
         
 	  })
  await axios
-
   .get("http://localhost:8000/api/memetype/"+this.type_id, 
        
       )
@@ -336,7 +338,32 @@ console.log("fghhj",this.idus);
    }
 	)
 
-	  },
+    },
+       async getRoomss(){
+ await axios
+  .get("http://localhost:8000/api/getRoomm", 
+       
+      )
+      .then((res) => {
+		   
+			   this.chambress= res.data.rooms;
+		   
+   }
+	)
+    },
+    goDetail(id){
+    this.room=this.chambress.filter(e=>e.id==id)[0]
+    console.log("hooo",this.room);
+         this.options=this.room.options;
+          this.type_nom=this.room.type.nom_type;
+          this.type_id=this.room.type.id;
+          this.typdesc=this.room.type.intitule;
+         this.price=this.room.price_booking;
+          this.offres=this.room.offres;
+          this.images=this.room.images;
+          this.ro=this.room.id;
+          this.getcomment(id)
+		},
       async getType(){
  await axios
   .get("http://127.0.0.1:8000/api/type", 
@@ -448,8 +475,10 @@ await axios .get("http://127.0.0.1:8000/api/gettee/"+id, {
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{
 					 	
-				     let res = response.data;
-					 console.log(res);
+             let res = response.data;
+             if(res.success==true){
+               this.cache=true
+             }
     
 				})
 	
@@ -669,6 +698,19 @@ body{
     font-size: 20px;
     color: rgb(46, 36, 5);
   }
+  #pr{
+	color: black;
+	font-family: monospace;
+	font-size: 20px;
+}
+#r{
+	margin-left: 80%;
+}
+#bt{
+	background-color: transparent;
+	border-color: transparent;
+	color: #8d703b;
+}
  
 }
 </style>

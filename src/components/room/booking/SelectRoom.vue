@@ -256,6 +256,29 @@
                       <th scope="col">prix par {{ nuits }} jours</th>
                     </tr>
                   </thead>
+                   <tbody  >
+                         <tr>
+                      <th scope="row"  ><i class="icon-user" v-for="icon in room1.nbAdult" :key="icon.id"></i></th>
+                      <td > Aucune </td>
+                      <td> {{room1.price_booking  }} DT </td>
+                      <td>
+                         <div class="form-group">
+          <div class="heading-section text-center">
+                <input type="button" :value="((room1.price_booking)*nuits)+'DT'" v-on:click="bookNow1(
+                  ((room1.price_booking)*nuits),
+                  room1.id ,
+                   '',
+                  room1.type,
+                 room1.nbAdult, 
+                  0
+                  )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+              </div>
+
+                        
+              </div>
+                      </td>
+                    </tr>
+                  </tbody>
                   <tbody  v-for="option in room1.options" :key="option.id">
                          <tr v-if="room1.id==option.room_id">
                       <th scope="row"  ><i class="icon-user" v-for="icon in room1.nbAdult" :key="icon.id"></i></th>
@@ -301,7 +324,7 @@
                   <tbody>
                    
                     <tr>
-                      <td id="tbb"> Aucune disponibilité n'a pu être trouvée pour la période de séjour sélectionnée. Veuillez changer vos dates de séjour.   </td>
+                      <td id="tb"> Aucune disponibilité n'a pu être trouvée pour la période de séjour sélectionnée. Veuillez changer vos dates de séjour.   </td>
                     </tr>
                        <td >
                          <div class="col-md-3">
@@ -482,6 +505,29 @@
                       <th scope="col">prix pour {{ nuits }} jours</th>
                     </tr>
                   </thead>
+                       <tbody  >
+                         <tr>
+                      <th scope="row"  ><i class="icon-user" v-for="icon in room2.nbAdult" :key="icon.id"></i></th>
+                      <td > Aucune </td>
+                      <td> {{room2.price_booking  }} DT </td>
+                      <td>
+                         <div class="form-group">
+          <div class="heading-section text-center">
+                <input type="button" :value="((room2.price_booking)*nuits)+'DT'" v-on:click="bookNow1(
+                  ((room2.price_booking)*nuits),
+                  room2.id ,
+                   '',
+                  room2.type,
+                 room2.nbAdult, 
+                  0
+                  )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+              </div>
+
+                        
+              </div>
+                      </td>
+                    </tr>
+                  </tbody>
                   <tbody v-for="option2 in room2.options" :key="option2.id">
                       <tr v-if="room2.id==option2.room_id">
                       <th scope="row" ><i class="icon-user" v-for="icon in room2.nbAdult" :key="icon.id"></i></th>
@@ -676,6 +722,29 @@
                       <th scope="col">prix pour {{ nuits }} jours</th>
                     </tr>
                   </thead>
+                       <tbody  >
+                         <tr>
+                      <th scope="row"  ><i class="icon-user" v-for="icon in room3.nbAdult" :key="icon.id"></i></th>
+                      <td > Aucune </td>
+                      <td> {{room3.price_booking  }} DT </td>
+                      <td>
+                         <div class="form-group">
+          <div class="heading-section text-center">
+                <input type="button" :value="((room3.price_booking)*nuits)+'DT'" v-on:click="bookNow1(
+                  ((room3.price_booking)*nuits),
+                  room1.id ,
+                   '',
+                  room3.type,
+                 room3.nbAdult, 
+                  0
+                  )" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 py-2 px-2">
+              </div>
+
+                        
+              </div>
+                      </td>
+                    </tr>
+                  </tbody>
                   <tbody v-for="option in room3.options" :key="option">
                       <tr>
                       <th scope="row" ><i class="icon-user" v-for="icon in room3.nbAdult" :key="icon.id"></i></th>
@@ -1190,6 +1259,12 @@ font-size: 30px;
   border-color:transparent ;
   font-size: 22px;
   color: red;
+}
+#tb{
+  background-color: transparent;
+  border-color:transparent ;
+  font-size: 12px;
+  color: rgb(7, 7, 7);
 }
 #bg{
   font-size: 50px;

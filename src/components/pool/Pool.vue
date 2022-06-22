@@ -81,7 +81,7 @@
 							<span class="sr-only"  >Next</span>
 						</a>
 					</div>
-					
+					<div v-if="cache==false">
 				<div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group">
                   <h4>Evaluation</h4>
@@ -137,7 +137,7 @@
         <input type="button" value="Envoyer"  @click="addRatings" id="B" class="btn btn-primary py-3 px-3"></div>
 					</div></div>
 
-					
+			</div>
 				</div>		
 			
 		</section>
@@ -193,6 +193,7 @@ export default {
 			user:{},
 			
 totale:0,
+cache:false,
 number:0,
 number1:0,
 number2:0,
@@ -347,8 +348,10 @@ console.log("fghhj",this.idus)
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{
 					 	
-				     let res = response.data;
-					 console.log(res);
+					 let res = response.data;
+					 if(res.success==true){
+						 this.cache=true
+					 }
     
 				})
 	

@@ -48,42 +48,9 @@
 								<input id="btn" type="button" value="Résérver"  class="btn btn-primary py-3 px-4" @click="goBooking(rooftop.id)">
 	        			</div>
 					</div>
-					</div>
-					<div class="col-md-5  wrap-about pb-md-5 ftco-animate">
-	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
-	          </div>
-										  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<div v-for="(offre, index) in rooftop.offres" :key="index">
-								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
-							</div>
-						</ol>
-						<div class="carousel-inner">
-						<div v-for="(offre, index) in rooftop.offres" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
-									 <div class="card"  id="card" style="width: 18rem;">
-                    <div class="card-body">
-							<span class="badge badge-pill badge-danger" id="r">OFFRE</span>
-                      <h5 class="card-title"> {{ offre.titre}} </h5>
-                      <p class="card-text"> {{ offre.description }} </p>
-                      <p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
-					  <p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{ rooftop.prix}} DT </del>
-					   <span class="px-4" id="of"> {{ rooftop.prix-((rooftop.prix*offre.pourcentage)/100)}} </span> </p>
-                      
-                    </div>
-                  </div>
-								</div>
-							
-						</div>
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
-							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="sr-only"  id="plus">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
-							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only" >Next</span>
-						</a>
-					</div>
-					 <div class="col-lg-4 sidebar ftco-animate">
+          <div v-if="cache==false">
+             <div class="row">
+            	 <div class="col-lg-12 sidebar ftco-animate">
           <div class="form-group">
                   <h4>Evaluation</h4>
       <div class="rating" >
@@ -132,10 +99,46 @@
     <path d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z"/>
   </symbol>
 </svg>
-
-</div><div class="col-md-20">
     <textarea class="form-control" placeholder="Ajouter commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6" cols="8"></textarea>
         <input type="button" value="Envoyer" id="B"  @click="addRatings" class="btn btn-primary py-3 px-3"></div>
+</div>
+				</div>
+					</div>
+       
+					<div class="col-md-5  wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
+	          </div>
+										  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<div v-for="(offre, index) in rooftop.offres" :key="index">
+								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
+							</div>
+						</ol>
+						<div class="carousel-inner">
+						<div v-for="(offre, index) in rooftop.offres" :key="index" :class="index === 0 ? 'carousel-item active' : 'carousel-item'">
+									 <div class="card"  id="card" style="width: 18rem;">
+                    <div class="card-body">
+							<span class="badge badge-pill badge-danger" id="r">OFFRE</span>
+                      <h5 class="card-title"> {{ offre.titre}} </h5>
+                      <p class="card-text"> {{ offre.description }} </p>
+                      <p class="card-text" id="p" v-if="offre.pourcentage >0 "> {{ offre.pourcentage }} % </p>
+					  <p class="card-text" id="p" v-if="offre.pourcentage >0 "> <del id="pp"> {{ rooftop.prix}} DT </del>
+					   <span class="px-4" id="of"> {{ rooftop.prix-((rooftop.prix*offre.pourcentage)/100)}} </span> </p>
+                      
+                    </div>
+                  </div>
+								</div>
+							
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev" hidden>
+							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only"  id="plus">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next" hidden>
+							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only" >Next</span>
+						</a>
+					</div>
 					</div>		
 					</div>
 
@@ -201,6 +204,7 @@ number1:0,
 number2:0,
 number3:0,
 number4:0,
+cache:false,
 idus:0,
 		}
 	},
@@ -349,8 +353,10 @@ console.log("fghhj",this.idus);
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{
 					 	
-				     let res = response.data;
-					 console.log(res);
+             let res = response.data;
+             if(res.success==true){
+               this.cache=true
+             }
     
 				})
 	

@@ -32,9 +32,9 @@
       </div>
       <div class="modal-body">
        
-          <div>
+          <div v-if="done==false">
          
-             <div class="col-lg-4 sidebar ftco-animate" v-if="doneRating==false">
+             <div class="col-lg-4 sidebar ftco-animate" >
           <div class="form-group" >
                  
       <div class="rating" >
@@ -90,7 +90,11 @@
 <input type="button" value="Envoyer"  id="btn" @click="addRatings" class="btn btn-primary py-3 px-4"></div></div>
   
        </div>
-       <form action="#" class="bg-white p-5 contact-form" v-if="doneRating">
+      
+      </div>
+      
+       <div v-if="done ">
+       <form action="#" class="bg-white p-5 contact-form" >
                     <div class="form-group">
                   <div class="row justify-content-center mb-9 pb-2">
                   <div class="col-md-10 heading-section text-center"> 
@@ -98,16 +102,16 @@
                     Nous apprécions votre avis</h1>
                   </div>
                   </div>
-                  <div class="row justify-content-center mb-9 pb-2">
+                   <div class="row justify-content-center mb-9 pb-2">
                   <img style="width:170px" src="./images/done.png">
                   </div>
                   </div>
                  </form>
-      </div>
+       </div>
     </div>
     
   </div>
-  
+   
 </div>
  <section class="ftco-section contact-section bg-light">
       <div class="container">
@@ -144,6 +148,8 @@ import axios from "axios";
 export default {
    data() {
     return {
+       done:false,
+       doneRating:false,
      isLogin:false,
       id:0,
       user_id:0,
@@ -152,7 +158,7 @@ export default {
   commentaire:"",
   },
  isRatingsExist:false,
- doneRating:false,
+
 totale:0,
 number:0,
 number1:0,
@@ -254,7 +260,10 @@ console.log("fghhj",this.idus)
 				},).then(response=>{
            let res = response.data;
            if(res.success==true){
-             this.doneRating=true;
+             this.doneRating=true
+             this.done=true;
+             console.log(this.done);
+             console.log("tooooooooooooo" , this.doneRating);
            }
           console.log(res);
          }

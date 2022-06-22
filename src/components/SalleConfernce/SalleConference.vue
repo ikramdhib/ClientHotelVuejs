@@ -49,6 +49,7 @@
     						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.{{room.description}}</p>
     					
     					</div>
+              <div v-if="cache==false">
     <div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group">
                   <h4>Evaluation</h4>
@@ -106,6 +107,7 @@
         <input type="button" value="Envoyer"  @click="addRatings" id="B" class="btn btn-primary py-3 px-3">
   </div>
 </div>
+          	</div>
           </div>
           </div>
 
@@ -243,6 +245,7 @@ export default {
        user:{},
        idus:0,
 totale:0,
+cache:false,
 number:0,
 number1:0,
 number2:0,
@@ -406,8 +409,10 @@ number4:0,
                      user_id:this.idus,	},
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{
-					 	  let res = response.data;
-					 console.log(res);
+               let res = response.data;
+               if(res.success==true){
+                 this.cache=true
+               }
     
 				})
 	

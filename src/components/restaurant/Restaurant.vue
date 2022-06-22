@@ -46,7 +46,8 @@
 	          <div class="heading-section heading-section-wo-line pt-md-4 mb-5">
 	          </div>
 	          <div >
-					  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+					  <div  id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						  
 						<ol class="carousel-indicators">
 							<div v-for="(offre, index) in restaurant.offres" :key="index">
 								<li data-target="#carouselExampleIndicators" :data-slide-to="index" :class=" index === 0? 'active' : '' "></li>
@@ -68,18 +69,18 @@
 								</div>
 							
 						</div>
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev">
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" id="plus" role="button" data-slide="prev" hidden>
 							<span id="plus" class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only"  id="plus">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next">
+						<a class="carousel-control-next" href="#carouselExampleIndicators"  role="button" data-slide="next" hidden>
 							<span id="plus" class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only"  >Next</span>
 						</a>
 					</div>		
 					</div>
-					
-  <div class="col-lg-4 sidebar ftco-animate">
+					<div v-if="cache==false">
+  <div class="col-lg-4 sidebar ftco-animate" >
           <div class="form-group">
                   <h4>Evaluation</h4>
       <div class="rating" >
@@ -133,6 +134,7 @@
     <textarea class="form-control" placeholder="Ajouter commentaire"  v-model="rating.commentaire" id="exampleFormControlTextarea1" rows="6" cols="8"></textarea>
         <input type="button" value="Envoyer" id="B"  @click="addRatings" class="btn btn-primary py-3 px-3"></div>
 					</div>
+					</div>
 						</div>
 						</div>
 						</div>
@@ -177,7 +179,7 @@
             <div class="bg-white p-5">
                   <div class="row">
                   <div class="col-md-4"  v-for="ret in recard" :key="ret.id"> 
-					  <div v-if="ret.id != restaurant.id && ret.disponibilite==true">
+					  <div v-if=" ret.disponibilite==true">
                     <div class="card"  >
 						  <img  :src="'http://localhost:8000/storage'+ret.images.name"  alt="Card image cap">
                     <div class="card-body">
@@ -214,6 +216,7 @@ export default {
 			idus:0,
 			user:{},
 			isRatingsExist:false,
+			cache:false,
 			rating:{
              commentaire:"",
                 },
@@ -374,8 +377,10 @@ number4:0,
 				{ headers: { Authorization: 'Bearer ' + localStorage.getItem('token_client')}}
 				).then(response=>{
 					 	
-				     let res = response.data;
-					 console.log(res);
+					 let res = response.data;
+					 if(res.success==true){
+						 this.cache=true
+					 }
     
 				})
 	

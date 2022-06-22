@@ -30,7 +30,7 @@
       </div>
       <div class="modal-body">
        
-          <div v-if="doneRating==false">
+          <div v-if="done==false">
          
              <div class="col-lg-4 sidebar ftco-animate">
           <div class="form-group" >
@@ -85,6 +85,19 @@
  <hr/>
 <input type="button" value="Envoyer"  id="btn" @click="addRatings" class="btn btn-primary py-3 px-4"></div></div>
        </div>
+        <form action="#" class="bg-white p-5 contact-form" v-if="done==true">
+                    <div class="form-group">
+                  <div class="row justify-content-center mb-9 pb-2">
+                  <div class="col-md-10 heading-section text-center"> 
+                 <h1>
+                      Nous apprécions votre avis</h1>
+                  </div>
+                  </div>
+                  <div class="row justify-content-center mb-9 pb-2">
+                  <img style="width:170px" src="../../images/done.png">
+                  </div>
+                  </div>
+                    </form>
       </div>
      
     </div>
@@ -142,6 +155,7 @@ number1:0,
 number2:0,
 number3:0,
 number4:0,
+done:false,
 booking_id:null,
  };},
  mounted(){
@@ -245,6 +259,7 @@ console.log("fghhj",this.idus)
              let res = response.data;
            if(res.success==true){
              this.doneRating=true;
+             this.done=true;
            }
 				})
 	
